@@ -8,3 +8,12 @@ Thumbs.db
 
 .rbenv-version
 .rvmrc
+
+*.sublime-project
+*.sublime-workspace
+codekit-config.json
+node_modules
+.sass-cache
+
+# cache of vim
+.*~

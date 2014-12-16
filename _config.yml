@@ -1,0 +1,53 @@
+# Site wide configuration
+
+title: 盘子里的部落格
+locale: zh_CN
+description: Yet another Jekyll blog.
+logo: site-logo.png
+search: true
+url:
+
+
+# Jekyll configuration
+
+permalink:   /:categories/:title/
+markdown:    kramdown
+highlighter: pygments
+sass:
+  sass_dir: _sass
+  style: compressed
+gems:
+  - jekyll-sitemap
+
+kramdown:
+  auto_ids: true
+  footnote_nr: 1
+  entity_output: as_char
+  toc_levels: 1..2
+  use_coderay: false
+
+include: [".htaccess"]
+exclude: ["lib", "config.rb", "Capfile", "config", "log", "Rakefile", "Rakefile.rb", "tmp", "less", "*.sublime-project", "*.sublime-workspace", "test", "spec", "Gruntfile.js", "package.json", "node_modules", "Gemfile", "Gemfile.lock", "LICENSE", "README.md", "vendor"]
+
+
+# Site owner
+owner:
+  name: Cubarco
+  avatar: bio-photo.jpg
+  email: me at cubarco.org
+  disqus-shortname:
+  twitter: Cube_Lin
+  facebook: #username
+  github: cubarco
+  stackexchange: #http://stackoverflow.com/users/123456/username
+  linkedin: #username
+  instagram: cubarco
+  flickr: #username
+  tumblr: #username
+  google:
+    plus: #username
+    analytics:
+    verify:
+    ad-client:
+    ad-slot: 
+  bing-verify:
