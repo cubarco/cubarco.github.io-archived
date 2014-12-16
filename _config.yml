@@ -5,7 +5,7 @@ locale: zh_CN
 description: Yet another Jekyll blog.
 logo: site-logo.png
 search: true
-url:
+url: https://cubarco.org/blog/
 
 
 # Jekyll configuration
