@@ -3,7 +3,6 @@ title: 'Writeup-Training: Warchall &#8211; 7 Tropical Fruits'
 layout: post
 categories: blog
 tags: [Hack, Python, Writeup]
-comments: true
 share: true
 ---
 <p style="color: #000000;">

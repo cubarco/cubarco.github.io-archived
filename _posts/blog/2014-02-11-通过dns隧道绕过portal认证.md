@@ -9,7 +9,6 @@ tags:
   - iodine
   - Linux
   - Portal
-comment: true
 share: true
 ---
 
