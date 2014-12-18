@@ -58,6 +58,7 @@
 </script>
 {% endif %}
 
+<!-- Check whether the page is a post -->
 {% if page.categories or page.tags and page.comments != false %}
   {% include disqus_comments.html %}
 {% endif %}
