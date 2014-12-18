@@ -10,7 +10,7 @@ url: https://cubarco.org/blog
 
 # Jekyll configuration
 
-permalink:   /:categories/:title/
+permalink:   /category/:categories/:title/
 markdown:    kramdown
 highlighter: pygments
 sass:
