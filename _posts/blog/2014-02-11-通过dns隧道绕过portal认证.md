@@ -33,7 +33,7 @@ portal认证不同于pppoe，它已经通过DHCP对Client分发IP，但是在完
 
 ## Server端
 
-{% highlight sh %}
+{% highlight console %}
 $ git clone https://github.com/yarrick/iodine.git
 $ cd iodine
 $ make
@@ -63,7 +63,7 @@ topdomain is the FQDN that is delegated to this server.
 
 接下来执行以下命令：
 
-{% highlight sh %}
+{% highlight console %}
 # iodined -c -f -P yourpassword 192.168.99.1 a.yourdomain.com
 {% endhighlight %}
 
@@ -83,7 +83,7 @@ iodine的安装同Server端，不再赘述。
 
 需要连接server时只需要执行以下命令：
 
-{% highlight sh %}
+{% highlight console %}
 # iodine a.yourdomain.com
 {% endhighlight %}
 
