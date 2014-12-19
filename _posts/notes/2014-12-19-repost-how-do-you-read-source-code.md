@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: page
 title: "How do you read source code?"
 categories: notes
 ---

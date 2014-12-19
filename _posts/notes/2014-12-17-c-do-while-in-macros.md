@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: page
 title: "do {…} while (0) — What is it good for?"
 categories: notes
 ---
