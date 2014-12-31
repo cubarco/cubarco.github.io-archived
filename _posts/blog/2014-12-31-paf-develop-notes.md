@@ -6,6 +6,7 @@ tags:
   - Fifo
   - Linux
   - Pipe
+modified: 2015-01-01
 ---
 
 [Paf (Pipe as file)](https://github.com/cubarco/paf "Pipe as File Github Homepage") 并不是什么大项目，只是一时兴起为满足自己奇怪需求而开发的小工具。具体的介绍都摆在 Github 上了，这里就不赘述了。只是对开发过程中遇到的一些问题和技巧做一下总结。
@@ -26,6 +27,18 @@ mkfifo(filename, FIFO_MODE);
 
 #### 二阶指针
 二阶指针玩链表其实还是蛮有意思的嘛<s>(虽然只是少定义一个中间变量)</s>...
+
+#### stdin, stdout, stderr and tty
+`/dev/{stdin,stdout,stderr}`默认分别是`/proc/self/fd/{0,1,2}`的软链接，而`/proc/self/fd/{0,1,2}`默认都是`pts`或者`tty`的软链接，所以`stdin`, `stdout`, `stderr`默认就是终端设备。当`stdin`被 shell 用管道替换之后，可以用以下方式重新打开键盘输入(另外两个类似):
+{% highlight c %}
+#include <unistd.h> /* for dup2(), close() and STDIN_FILENO */
+#include <fcntl.h> /* for open() and O_RDONLY */
+
+int realstdin = open("/dev/tty", O_RDONLY);
+dup2(realstdin, STDIN_FILENO);
+close(realstdin);
+{% endhighlight %}
+`/dev/tty`总是当前终端设备
 
 #### More
 想到什么我再更新吧。
