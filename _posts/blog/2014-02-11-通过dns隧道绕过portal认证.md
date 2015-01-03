@@ -55,7 +55,7 @@ Usage: iodined [-v] [-h] [-c] [-s] [-f] [-D] [-u user] [-t chrootdir] [-d device
 
 tunnel_ip is the IP number of the local tunnel interface.
 #代码执行后，服务器会多出一个虚拟网卡，ip为此参数设定值
-   /netmask sets the size of the tunnel network.
+netmask sets the size of the tunnel network.
 topdomain is the FQDN that is delegated to this server.
 #上文提到的a.yourdomain.com
 {% endhighlight %}
