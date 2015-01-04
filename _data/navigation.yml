@@ -1,13 +1,16 @@
 # Site navigation links
 
-- title: About
-  url: /about/
-
 - title: Latest
   url: /
+
+- title: About
+  url: /about/
 
 - title: Blog
   url: /category/blog/
 
 - title: Notes
   url: /category/notes/
+
+- title: Tags
+  url: /tags/
