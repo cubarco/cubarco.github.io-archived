@@ -3,7 +3,7 @@ title: Paf 开发总结
 layout: post
 categories: blog
 tags:
-  - Fifo
+  - FIFO
   - Linux
   - Pipe
 modified: 2015-01-01

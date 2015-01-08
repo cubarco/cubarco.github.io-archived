@@ -5,6 +5,7 @@ categories: blog
 tags:
   - Linux
   - FileSystem
+  - btrfs
 ---
 
 刚把本来给`/home`和`/var`用的 btrfs 换回 ext4，po 一发记(tu)录(cao)一下。
