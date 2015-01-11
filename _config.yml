@@ -13,6 +13,7 @@ url: https://cubarco.org/blog
 permalink:   /category/:categories/:title/
 markdown:    kramdown
 highlighter: pygments
+excerpt_separator: ""
 sass:
   sass_dir: _sass
   style: compressed
