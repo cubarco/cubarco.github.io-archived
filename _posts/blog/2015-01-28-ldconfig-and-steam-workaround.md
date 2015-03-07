@@ -7,9 +7,10 @@ tags:
   - ldconfig
   - Steam
   - Graphics Card
+modified: 2015-03-07
 ---
 
-刚考完试，有点无聊，开 Steam 准备玩点游戏，结果发现之前的一个脚本不能用了。我的机器的情况是 Intel 集显 + NVIDIA 独显。两个显卡的切换一直是件很蛋疼的事情，optirun s什么的性能实在太差，如果一直独显直出，耗电也是个大问题。这个学期初和 @hyrathb juju 一起研究了一下，用 ldconfig 尽可能减少切换显卡带来的麻烦(就是先关X, 然后跑个脚本开独显直出的X, 如果需要这个解决方案我可以单独po文). 
+刚考完试，有点无聊，开 Steam 准备玩点游戏，结果发现之前的一个脚本不能用了。我的机器的情况是 Intel 集显 + NVIDIA 独显。两个显卡的切换一直是件很蛋疼的事情，optirun什么的性能实在太差，如果一直独显直出，耗电也是个大问题。这个学期初和 @hyrathb juju 一起研究了一下，用 ldconfig 尽可能减少切换显卡带来的麻烦(就是先关X, 然后跑个脚本开独显直出的X, 如果需要这个解决方案我可以单独po文). 
 
 #### Steam 的坑
 Steam 为了`Need to add /usr/lib32 to the library path to pick up libvdpau_nvidia.so on Ubuntu 12.04`把`/usr/lib32`加进了`LD_LIBRARY_PATH`变量，结果虽然在 ldconfig 中本来是 NVIDIA 的 libgl 库优先，但是`/usr/lib32`里面默认 mesa 的 libgl 库的链接却被优先加载了。导致 Steam 启动时会报`Not direct rendering`之类的错误。
