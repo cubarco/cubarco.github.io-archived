@@ -15,14 +15,14 @@
   });
 
   (function( $, window, undefined ) {
-    
+
      var bs = {
           close: $(".close-btn"),
           searchform: $(".search-form"),
           canvas: $(".js-menu-screen"),
           dothis: $('.dosearch')
       };
-    
+
     bs.dothis.on('click', function() {
       $('.search-wrapper').css({ display: "block" });
       $('body').toggleClass('no-scroll');
@@ -30,7 +30,7 @@
       bs.searchform.find('input').focus();
       bs.canvas.toggleClass('is-visible');
     });
-    
+
       bs.close.on('click', function() {
         $('.search-wrapper').removeAttr( 'style' );
         $('body').toggleClass('no-scroll');
@@ -44,7 +44,7 @@
 <!-- Asynchronous Google Analytics snippet -->
 <script>
   var _gaq = _gaq || [];
-  var pluginUrl = 
+  var pluginUrl =
  '//www.google-analytics.com/plugins/ga/inpage_linkid.js';
   _gaq.push(['_require', 'inpage_linkid', pluginUrl]);
   _gaq.push(['_setAccount', '{{ site.owner.google.analytics }}']);
@@ -59,6 +59,6 @@
 {% endif %}
 
 <!-- Check whether the page is a post -->
-{% if page.layout == "post" and page.comments != false %}
+{% if page.comments != false and page.layout == "post" or page.comments == true %}
   {% include disqus_comments.html %}
 {% endif %}
