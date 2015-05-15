@@ -13,7 +13,7 @@ modified: 2015-05-15
 
 不知道从什么时候开始，Linux 版本的 DotA2 中载入界面的 tips sentences 和 player name 中的中文会显示成方框，详见 [issue-1688](https://github.com/ValveSoftware/Dota-2/issues/1688)。V社基本没搭理这个 bug，只好自己动手修。
 
-猜想是游戏内直接使用了某个字体，或者该字体不存在时调用了默认字体，但是这个字体不支持 CJK 字符，所以显示成方块。因为 SteamFonts 给的全是`Arial`字体，所以我猜是`Arial`，开`FC_DEBUG`跑了一遍 DotA2 发现果然是`Arial`。那么我们要做的就是用`fontconfig`把`Arial`替换成支持中文的字体。
+猜想是游戏内直接使用了某个字体，或者该字体不存在时调用了默认字体，但是他们不支持 CJK 字符，所以显示成方块。因为 SteamFonts 给的全是`Arial`字体，我猜 DotA2 那些文本使用的字体可能是`Arial`，开`FC_DEBUG`跑了一遍发现猜的没错。那么我们要做的就是用`fontconfig`把`Arial`替换成支持中文的字体。
 
 ## 解决办法
 替换`Arial`的`fontconfig`配置是:
