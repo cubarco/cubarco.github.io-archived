@@ -3,7 +3,7 @@
 title: 盘子里的部落格
 locale: zh_CN
 description: Yet another Jekyll blog.
-logo: site-logo.png
+logo: #site-logo.png
 search: true
 url: https://cubarco.org/blog
 
