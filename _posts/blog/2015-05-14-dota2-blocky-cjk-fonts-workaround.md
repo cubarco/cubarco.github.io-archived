@@ -1,5 +1,5 @@
 ---
-title: 一个解决 Linux 版 DotA2 中 CJK字符显示成方块的 Workaround
+title: 一个解决 Linux 版 DotA2 中 CJK 字符显示成方块的 Workaround
 layout: post
 categories: blog
 tags:
