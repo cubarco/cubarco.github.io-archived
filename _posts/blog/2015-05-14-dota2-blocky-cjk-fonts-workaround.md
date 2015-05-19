@@ -8,7 +8,7 @@ tags:
   - Dota 2
   - Fonts
   - CJK
-modified: 2015-05-17
+modified: 2015-05-19
 ---
 
 不知道从什么时候开始，Linux 版本的 Dota 2 中载入界面的 tips sentences 和 player name 中的中文会显示成方框，详见 [issue-1688](https://github.com/ValveSoftware/Dota-2/issues/1688)。V社基本没搭理这个 bug，只好自己动手修。
@@ -64,6 +64,9 @@ steam
 另一个方法是直接把字体替换的配置写进`fonts.conf`，比如`~/.fonts.conf`或者`$XDG_CONFIG_HOME/fontconfig/fonts.conf`。
 
 当然这个方法并不推荐，因为会影响到其他程序。
+
+#### Update 2015-05-19
+可能每次都要用命令行启动 Steam 不太方便，下方[评论](https://cubarco.org/blog/2015/05/dota2-blocky-cjk-fonts-workaround/#comment-2029698638)里有解决办法。改完之后用 Launcher 就能打开修改过字体配置的 Steam.
 
 #### Reference
 [^1]: [fonts-conf](http://www.freedesktop.org/software/fontconfig/fontconfig-user.html)
