@@ -1,7 +1,7 @@
 <!-- Webfonts -->
 <script src="//use.edgefonts.net/source-sans-pro:n2,i2,n3,i3,n4,i4,n6,i6,n7,i7,n9,i9;source-code-pro:n4,n7;volkhov;cabin.js"></script>
 
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 <script>window.jQuery || document.write('<script src="{{ site.url }}/assets/js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
 <script src="{{ site.url }}/assets/js/scripts.min.js"></script>
 {% if site.search %}
@@ -44,6 +44,11 @@
 </script>
 {% endif %}
 
+<!-- Check whether the page is a post -->
+{% if page.comments != false and page.layout == "post" or page.comments == true %}
+  {% include disqus_comments.html %}
+{% endif %}
+
 {% if site.owner.google.analytics %}
 <!-- Asynchronous Google Analytics snippet -->
 <script>
@@ -60,9 +65,4 @@
     var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
   })();
 </script>
-{% endif %}
-
-<!-- Check whether the page is a post -->
-{% if page.comments != false and page.layout == "post" or page.comments == true %}
-  {% include disqus_comments.html %}
 {% endif %}
