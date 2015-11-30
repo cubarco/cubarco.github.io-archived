@@ -6,7 +6,7 @@ tags: [Hack, CTF, Writeup, Exploitation]
 share: true
 ---
 
-这是一道 ROP ，先看反汇编代码：
+先看反汇编代码：
 {% highlight asm %}
 ...
 8048460:	55                   	push   %ebp
