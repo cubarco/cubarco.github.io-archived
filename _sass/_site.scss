@@ -219,7 +219,7 @@ tt, code, kbd, samp, pre {
 p,
 li {
 	code {
-		@include font-size(12);
+		@include font-size(16);
 		font-family: $code-font;
 		white-space: nowrap;
 		margin: 0 2px;
