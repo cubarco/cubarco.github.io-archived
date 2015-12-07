@@ -20,6 +20,7 @@ sass:
 gems:
   - jekyll-sitemap
   - jekyll-mentions
+  - jekyll-gist
 
 kramdown:
   auto_ids: true

