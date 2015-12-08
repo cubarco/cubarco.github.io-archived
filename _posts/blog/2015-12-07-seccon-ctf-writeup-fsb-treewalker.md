@@ -11,7 +11,7 @@ share: true
 因为这题直接把 FSB 写在题名里，我一拿到题就直接跑去找能利用 FSB 的点了。
 
 利用点在这里：
-{% highlight asm %}
+{% highlight objdump %}
 400881:	0f 1f 80 00 00 00 00 	nopl   0x0(%rax)
 400888:	4c 8b 05 f9 09 20 00 	mov    0x2009f9(%rip),%r8        # 601288 <stdin@@GLIBC_2.2.5>
 40088f:	48 8d 7c 24 50       	lea    0x50(%rsp),%rdi
@@ -45,7 +45,7 @@ share: true
 ### Where's the flag?
 
 一开始找到 FSB，我想可能很简单，直接打印栈中的 flag 就好了。但是有这样一段代码把 flag 给覆盖了：
-{% highlight asm %}
+{% highlight objdump %}
 40084d:	48 b8 cc cc cc cc cc 	movabs $0xcccccccccccccccc,%rax
 400854:	cc cc cc
 400857:	48 89 44 24 10       	mov    %rax,0x10(%rsp)
