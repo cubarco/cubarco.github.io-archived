@@ -4,6 +4,7 @@ layout: post
 categories: blog
 tags: [Hack, CTF, Writeup, Exploitation]
 share: true
+modified: 2015-12-13
 ---
 
 ### printf()
@@ -140,7 +141,13 @@ struct s0* construct_tree(signed char* rdi) {
 
 其实 FSB 最严重的问题是用类似`%N$n`的 format string 能够实现将任意值写入指定 offset 的栈中。但是 Glibc 的 FORTIFY_SOURCE 解决(?)了这个问题。但是[这篇文章][1]好像还是有办法绕过<del>虽然我还没成功</del>。
 
+###### Update 2015-12-13
+
+phrack 上的那篇[文章][1]是 2010 年的，之后在 2012 年，glibc 打了一个 [patch][2], 用`width_arg`盖掉`stdout->_flags2`上`_IO_FLAGS2_FORTIFY`标志位的办法已经行不通了。
+
 ### References
 1. [A Eulogy for Format Strings][1]
+2. [glibc.git / commit / 7c1f4834d398163d1ac8101e35e9c36fc3176e6e][2]
 
 [1]: http://phrack.org/issues/67/9.html
+[2]: http://repo.or.cz/glibc.git/commit/7c1f4834d398163d1ac8101e35e9c36fc3176e6e
