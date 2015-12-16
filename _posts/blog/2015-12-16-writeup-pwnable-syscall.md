@@ -68,7 +68,7 @@ $ cat /proc/kallsyms | grep 'prepare_creds\|commit_creds'
 ...
 {% endhighlight %}
 
-我参考 @acama 的版本[^3]写了一个( @acama 的版本`prepare_creds()`之后直接就`commit_creds()`, 这估计只在老版本可以):
+我参考 @acama 的版本[^3]写了一个( @acama 的版本`prepare_creds()`之后直接就`commit_creds()`, 这估计只在老版本可以).`prepare_creds()`返回的结构体定义可以看参考[^4].
 
 {% gist cubarco/f582d787f04eca93f8eb cred.s %}
 
@@ -87,3 +87,4 @@ $ cat /proc/kallsyms | grep 'prepare_creds\|commit_creds'
 [^1]: [What is the relationship between root and kernel?](http://unix.stackexchange.com/questions/121715/what-is-the-relationship-between-root-and-kernel)
 [^2]: [Syscall Hijacking: Simple Rootkit (kernel 2.6.x)](https://memset.wordpress.com/2010/12/28/syscall-hijacking-simple-rootkit-kernel-2-6-x/)
 [^3]: [arm-evt/local_example/exploit/backdoor.asm](https://github.com/acama/arm-evt/blob/master/local_example/exploit/backdoor.asm)
+[^4]: [Linux/include/linux/cred.h](http://lxr.free-electrons.com/source/include/linux/cred.h?v=3.11#L102)
