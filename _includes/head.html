@@ -1,7 +1,7 @@
 <meta charset="utf-8">
 <meta name="theme-color" content="#000000">
 <title>{% if page.title %}{{ page.title }} &#8211; {% endif %}{{ site.title }}</title>
-{% if page.excerpt %}<meta name="description" content="{{ page.excerpt | strip_html }}">{% endif %}
+<meta name="description" content="{% if page.excerpt and page.excerpt != "" %}{{ page.excerpt | strip_html }}{% else %}{{ content | strip_html | truncatewords:75 }}{% endif %}">
 {% if page.tags %}<meta name="keywords" content="{{ page.tags | join: ', ' }}">{% endif %}
 {% if page.author %}
   {% assign author = site.data.authors[page.author] %}{% else %}{% assign author = site.owner %}
