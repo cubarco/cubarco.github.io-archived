@@ -2,7 +2,7 @@
 title: 'Writeup-Pwnable: tiny & tiny_easy'
 layout: post
 categories: blog
-tags: [Hack, CTF, Writeup, Exploitation]
+tags: [Hack, CTF, Writeup, Exploitation, ROP]
 share: true
 ---
 
