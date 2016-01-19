@@ -17,3 +17,6 @@ node_modules
 
 # cache of vim
 .*~
+
+.bundle
+vendor

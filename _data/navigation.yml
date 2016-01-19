@@ -1,16 +1,16 @@
 # Site navigation links
 
 - title: Latest
-  url: /
+  url: /blog/
 
 - title: About
-  url: /about/
+  url: /blog/about/
 
 - title: Blog
-  url: /category/blog/
+  url: /blog/category/blog/
 
 - title: Notes
-  url: /category/notes/
+  url: /blog/category/notes/
 
 - title: Tags
-  url: /tags/
+  url: /blog/tags/
