@@ -23,7 +23,7 @@ gems:
   - jekyll-gist
 
 gist:
-    noscript: true
+    noscript: false
 
 kramdown:
   auto_ids: true
