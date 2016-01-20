@@ -22,9 +22,6 @@ gems:
   - jekyll-mentions
   - jekyll-gist
 
-gist:
-    noscript: false
-
 kramdown:
   auto_ids: true
   footnote_nr: 1
