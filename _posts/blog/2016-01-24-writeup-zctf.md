@@ -4,6 +4,7 @@ layout: post
 categories: blog
 tags: [Hack, CTF, Writeup, Exploitation, PWN]
 share: true
+modified: 2016-01-27
 ---
 
 > 2016 年第一篇 blog!
@@ -22,6 +23,13 @@ share: true
 
 {% gist cubarco/30a44a61252f448964c4 %}
 
+## <del>note2</del>
+
+这题在赛时没找到漏洞，赛后看了 FlappyPig 的 Writeup[^2], 只是简单的 fastbin, 感觉好可惜... 360 安全播报给的代码没缩进根本不能看，自己重新写了个。
+
+{% gist cubarco/9752fbbe78a071b04b37 %}
+
 ## References
 
 [^1]: [write-ups-2015/32c3-ctf-2015/pwn/readme-200/ @ GitHub](https://github.com/ctfs/write-ups-2015/tree/master/32c3-ctf-2015/pwn/readme-200)
+[^2]: [ZCTF Writeup @ 360 安全播报](http://bobao.360.cn/ctf/detail/158.html)
