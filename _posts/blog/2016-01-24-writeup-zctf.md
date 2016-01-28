@@ -4,7 +4,7 @@ layout: post
 categories: blog
 tags: [Hack, CTF, Writeup, Exploitation, PWN]
 share: true
-modified: 2016-01-27
+modified: 2016-01-28
 ---
 
 > 2016 年第一篇 blog!
@@ -28,6 +28,12 @@ modified: 2016-01-27
 这题在赛时没找到漏洞，赛后看了 FlappyPig 的 Writeup[^2], 只是简单的 fastbin, 感觉好可惜... 360 安全播报给的代码没缩进根本不能看，自己重新写了个。
 
 {% gist cubarco/9752fbbe78a071b04b37 %}
+
+## <del>note3</del>
+
+这题同样是没有在赛时做出来，但是与 note2 相反，这题我是找到了两个可以利用的漏洞的(一个是 integer overflow, 另一个是可以增加第八个 note), 但是不知道如何利用。我在比赛的时候一直想着怎么 fastbin, 因为我觉得 unlink 这么古老的 exp 肯定已经不能用了... 没想到这题的环境刚好适合 unlink, 有点可惜。赛后看了 FlappyPig 的 Writeup[^2], 自己重新写了个 exp, 也算是复习一下 unlink.
+
+{% gist cubarco/ababdac123a4762c0180 %}
 
 ## References
 
