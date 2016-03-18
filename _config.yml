@@ -12,7 +12,7 @@ url: https://cubarco.org
 
 permalink:   /blog/:year/:month/:title/
 markdown:    kramdown
-highlighter: pygments
+highlighter: rouge
 excerpt_separator: ""
 sass:
   sass_dir: _sass

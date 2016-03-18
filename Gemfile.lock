@@ -65,6 +65,8 @@ GEM
     minitest (5.5.0)
     nokogiri (1.6.5)
       mini_portile (~> 0.6.0)
+    nokogiri (1.6.5-x64-mingw32)
+      mini_portile (~> 0.6.0)
     octopress (3.0.0.rc.15)
       jekyll (~> 2.0)
       mercenary (~> 0.3.2)
@@ -92,6 +94,7 @@ GEM
     rb-inotify (0.9.5)
       ffi (>= 0.5.0)
     redcarpet (3.2.0)
+    rouge (1.10.1)
     safe_yaml (1.0.4)
     sass (3.4.7)
     thread_safe (0.3.4)
@@ -113,3 +116,7 @@ DEPENDENCIES
   jekyll-mentions
   jekyll-sitemap
   octopress (~> 3.0.0.rc.12)
+  rouge
+
+BUNDLED WITH
+   1.11.2
