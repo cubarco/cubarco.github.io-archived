@@ -26,6 +26,7 @@
         color: #fff;
         font-size: 20px;
 		font-family: "SilkscreenNormal", Monaco, "Courier New", Courier, monospace;
+        overflow-x: hidden;
       }
 	a,a:visited {
 		color: #09F;
@@ -37,13 +38,25 @@
 	}
 
 
-      #feedme {
-        font-size: 50px;
-        font-weight: bold;
-      }
-      #feedme img {
+    #feedme {
+      font-size: 50px;
+      font-weight: bold;
+    }
+    #feedme img {
 	padding: 20px;
       }
+    #bloghref {
+        position: relative;
+        animation-name: bloghref;
+        animation-duration: 0.15s;
+        animation-timing-function: ease-in-out;
+        animation-iteration-count: infinite;
+        animation-direction: alternate;
+    }
+	@keyframes bloghref {
+	    0%   {left:-10px; top:0px;}
+	    100% {left:10px; top:0px;}
+	}
 </style>
 <link rel="icon" type="image/gif" href="nyan/favicon.gif">
 </head>
@@ -54,17 +67,18 @@
     <img src="nyan/nyan2.gif" width="500px" />
   </div>
   <p>(〜￣△￣)〜 Spam Away</p>
-  <p>
-    <a href="https://cubarco.org/blog">Blog</a>
-    |
-    <a href="https://plus.google.com/+%E6%9E%97%E5%AE%B6%E5%86%9BCube">Google+</a>
-    |
-    <a href="https://twitter.com/Cube_Lin">Twitter</a>
-    |
-    <a href="https://www.facebook.com/cubarco">Facebook</a>
-    |
-    <a href="https://github.com/cubarco">Github</a>
-  </p>
+  <p id="bloghref"><a href="https://cubarco.org/blog">-&gt;  Blog  &lt;-</a></p>
+  <!--
+     -<p>
+     -  <a href="https://plus.google.com/+%E6%9E%97%E5%AE%B6%E5%86%9BCube">Google+</a>
+     -  |
+     -  <a href="https://twitter.com/Cube_Lin">Twitter</a>
+     -  |
+     -  <a href="https://www.facebook.com/cubarco">Facebook</a>
+     -  |
+     -  <a href="https://github.com/cubarco">Github</a>
+     -</p>
+     -->
 
 </body>
 <script>
