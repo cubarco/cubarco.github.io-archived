@@ -18,6 +18,7 @@ tags:
 
 ### iptables
 将 dport 是 53 的包转发给 OpenDNS 443 端口，但是要避开 lo 的包。
+
 ```console
 # iptables -t nat -A OUTPUT ! -o lo -p udp --dport 53 \
     -j DNAT --to 208.67.222.222:443
@@ -25,6 +26,7 @@ tags:
 
 ### dnsmasq
 以下是采用 OpenDNS 443 端口的示例配置。
+
 ```conf
 port=53
 no-resolv
