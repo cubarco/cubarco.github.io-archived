@@ -8,6 +8,7 @@ tags:
   - GFW
   - Dnsmasq
   - OpenDNS
+modified: 2016-03-26
 ---
 
 > GFW的DNS劫持原理: 说起来挺简单,GFW对境外DNS的劫持,是在发现你请求敏感域名的DNS记录时,伪装成你请求的DNS返回一个污染的数据包给你的解析器,但并不会丢弃你向境外DNS的请求,也不会丢弃境外DNS返回的正确解析结果,他只是让错误的数据抢先回来欺骗了你的解析器而已,毕竟他直接从国内给你发污染数据怎么都比国外DNS返回正确数据要快.而解析器在先收到了欺骗数据包之后,就不会再管后面返回的正确数据了,这样你就被 DNS劫持了.[^1]
@@ -17,10 +18,10 @@ tags:
 前几天发现 GFW 没有劫持非标准端口的 DNS 服务器，于是想到了下面两种方法避免劫持。
 
 ### iptables
-将 dport 是 53 的包转发给 OpenDNS 443 端口，但是要避开 lo 的包。
+将外网网卡(我这是 enp8s0)发出的 dport 是 53 的包 DNAT 给 OpenDNS 443 端口。
 
 ```console
-# iptables -t nat -A OUTPUT ! -o lo -p udp --dport 53 \
+# iptables -t nat -A OUTPUT -o enp8s0 -p udp --dport 53 \
     -j DNAT --to 208.67.222.222:443
 ```
 
