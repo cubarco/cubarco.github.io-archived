@@ -26,6 +26,7 @@
         color: #fff;
         font-size: 20px;
 		font-family: "SilkscreenNormal", Monaco, "Courier New", Courier, monospace;
+        overflow-x: hidden;
       }
 	a,a:visited {
 		color: #09F;
@@ -42,19 +43,30 @@
       font-weight: bold;
     }
     #feedme img {
-	padding: 20px;
-      }
-    #bloghref {
-        position: relative;
-        animation-name: bloghref;
-        animation-duration: 0.15s;
-        animation-timing-function: ease-in-out;
-        animation-iteration-count: infinite;
-        animation-direction: alternate;
+	    padding: 20px;
     }
-	@keyframes bloghref {
-	    0%   {left:-10px; top:0px;}
-	    100% {left:10px; top:0px;}
+
+	@-webkit-keyframes spaceboots {
+		0% { -webkit-transform: translate(2px, 1px) rotate(0deg); }
+		10% { -webkit-transform: translate(-1px, -2px) rotate(-1deg); }
+		20% { -webkit-transform: translate(-3px, 0px) rotate(1deg); }
+		30% { -webkit-transform: translate(0px, 2px) rotate(0deg); }
+		40% { -webkit-transform: translate(1px, -1px) rotate(1deg); }
+		50% { -webkit-transform: translate(-1px, 2px) rotate(-1deg); }
+		60% { -webkit-transform: translate(-3px, 1px) rotate(0deg); }
+		70% { -webkit-transform: translate(2px, 1px) rotate(-1deg); }
+		80% { -webkit-transform: translate(-1px, -1px) rotate(1deg); }
+		90% { -webkit-transform: translate(2px, 2px) rotate(0deg); }
+		100% { -webkit-transform: translate(1px, -2px) rotate(-1deg); }
+	}
+	.shake {
+		display:block;
+		position:relative;
+		-webkit-animation-name: spaceboots;
+		-webkit-animation-duration: 0.8s;
+		-webkit-transform-origin:50% 50%;
+		-webkit-animation-iteration-count: infinite;
+		-webkit-animation-timing-function: linear;
 	}
 </style>
 <link rel="icon" type="image/gif" href="nyan/favicon.gif">
@@ -66,7 +78,7 @@
     <img src="nyan/nyan2.gif" width="500px" />
   </div>
   <p>(〜￣△￣)〜 Spam Away</p>
-  <p><a id="bloghref" href="https://cubarco.org/blog">-&gt;  Blog  &lt;-</a></p>
+  <p><a class="shake" href="https://cubarco.org/blog">-&gt;  Blog  &lt;-</a></p>
   <!--
      -<p>
      -  <a href="https://plus.google.com/+%E6%9E%97%E5%AE%B6%E5%86%9BCube">Google+</a>
