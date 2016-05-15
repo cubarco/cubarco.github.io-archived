@@ -8,7 +8,7 @@ tags:
   - GFW
   - Dnsmasq
   - OpenDNS
-modified: 2016-03-26
+modified: 2016-05-15
 ---
 
 > GFW的DNS劫持原理: 说起来挺简单,GFW对境外DNS的劫持,是在发现你请求敏感域名的DNS记录时,伪装成你请求的DNS返回一个污染的数据包给你的解析器,但并不会丢弃你向境外DNS的请求,也不会丢弃境外DNS返回的正确解析结果,他只是让错误的数据抢先回来欺骗了你的解析器而已,毕竟他直接从国内给你发污染数据怎么都比国外DNS返回正确数据要快.而解析器在先收到了欺骗数据包之后,就不会再管后面返回的正确数据了,这样你就被 DNS劫持了.[^1]
@@ -39,7 +39,8 @@ listen-address=127.0.0.1
 
 Dnsmasq 的具体使用，可以看 ArchWiki[^2].
 
-**用腾讯云的 vps 随便搭了个无污染的 DNS，IP 是`119.29.121.228`，随意用。**
+#### Update: 2016-05-15
+推荐结合 @felixonmars 的 [dnsmasq-china-list](https://github.com/felixonmars/dnsmasq-china-list) 使用。
 
 ### References
 [^1]: [无需VPN的OpenWRT DNS防污染方法](https://www.lifetyper.com/2014/06/anti-dns-poison-without-vpn.html)
