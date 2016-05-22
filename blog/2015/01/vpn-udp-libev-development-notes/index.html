@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]--><!--[if (IE 7)&!(IEMobile)]><html class="no-js lt-ie9 lt-ie8" lang="en"><![endif]--><!--[if (IE 8)&!(IEMobile)]><html class="no-js lt-ie9" lang="en"><![endif]--><!--[if gt IE 8]><!--><html class="no-js" lang="en">
+<!--<![endif]-->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="theme-color" content="#000000">
+<title>vpn-udp-libev 开发总结 – 盘子里的部落格</title>
+<meta name="description" content="最近又在看 UNIX 网络编程那本书，写了个 vpn 练手，代码和简单的介绍在 Github 上(好像效率还不错的样子)。这里照例做一下总结，便于以后查阅。 关于recvfrom() /* recvfrom() 的声明 */ ssize_t recvfrom(int sockfd, void *buf, size_t len, int flags, struct sockaddr *src_addr, socklen_t *addrlen); 这个函数比较诡异的是它的最后一个参数addrlen. If src_addr is not NULL, and the underlying protocol provides the source address of the message, that source address is placed in the buffer pointed to by src_addr. In this case, addrlen is a value-result argument. Before the call, it should be initialized to the size of the...">
+<meta name="keywords" content="Network, VPN, Linux">
+
+
+<!-- Twitter Cards -->
+<meta name="twitter:title" content="vpn-udp-libev 开发总结">
+<meta name="twitter:description" content="最近又在看 UNIX 网络编程那本书，写了个 vpn 练手，代码和简单的介绍在 Github 上(好像效率还不错的样子)。这里照例做一下总结，便于以后查阅。 关于recvfrom() /* recvfrom() 的声明 */ ssize_t recvfrom(int sockfd, void *buf, size_t len, int flags, struct sockaddr *src_addr, socklen_t *addrlen); 这个函数比较诡异的是它的最后一个参数addrlen. If src_addr is not NULL, and the underlying protocol provides the source address of the message, that source address is placed in the buffer pointed to by src_addr. In this case, addrlen is a value-result argument. Before the call, it should be initialized to the size of the...">
+<meta name="twitter:site" content="@Cube_Lin">
+<meta name="twitter:creator" content="@Cube_Lin">
+
+<meta name="twitter:card" content="summary">
+<!--
+   -<meta name="twitter:image" content="/images/">
+   -->
+
+<!-- Open Graph -->
+<meta property="og:locale" content="zh_CN">
+<meta property="og:type" content="article">
+<meta property="og:title" content="vpn-udp-libev 开发总结">
+<meta property="og:description" content="最近又在看 UNIX 网络编程那本书，写了个 vpn 练手，代码和简单的介绍在 Github 上(好像效率还不错的样子)。这里照例做一下总结，便于以后查阅。 关于recvfrom() /* recvfrom() 的声明 */ ssize_t recvfrom(int sockfd, void *buf, size_t len, int flags, struct sockaddr *src_addr, socklen_t *addrlen); 这个函数比较诡异的是它的最后一个参数addrlen. If src_addr is not NULL, and the underlying protocol provides the source address of the message, that source address is placed in the buffer pointed to by src_addr. In this case, addrlen is a value-result argument. Before the call, it should be initialized to the size of the...">
+<meta property="og:url" content="/blog/2015/01/vpn-udp-libev-development-notes/">
+<meta property="og:site_name" content="盘子里的部落格">
+
+
+
+
+
+
+<link rel="canonical" href="/blog/2015/01/vpn-udp-libev-development-notes/">
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="盘子里的部落格 Feed">
+<link rel="author" href="http://plus.google.com/+%E6%9E%97%E5%AE%B6%E5%86%9BCube?rel=author">
+
+<!-- http://t.co/dKP3o1e -->
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+
+<!--Webfonts-->
+<link href="//fonts.googleapis.com/css?family=Volkhov%7CCabin" rel="stylesheet" type="text/css">
+<!--
+   -[> Webfonts <]
+   -<script src="//use.edgefonts.net/source-sans-pro:n2,i2,n3,i3,n4,i4,n6,i6,n7,i7,n9,i9;source-code-pro:n4,n7;volkhov;cabin.js"></script>
+   -->
+
+<meta http-equiv="cleartype" content="on">
+
+<!-- HTML5 Shiv and Media Query Support -->
+<!--[if lt IE 9]>
+  <script src="/assets/js/vendor/html5shiv.min.js"></script>
+  <script src="/assets/js/vendor/respond.min.js"></script>
+<![endif]-->
+
+<!-- Modernizr -->
+<script src="/assets/js/vendor/modernizr-2.7.1.custom.min.js"></script>
+
+<!-- Icons -->
+<!--
+   -[> 16x16 <]
+   -<link rel="shortcut icon" href="/favicon-16x16.ico">
+   -[> 32x32 <]
+   -<link rel="shortcut icon" href="/favicon-32x32.ico">
+   -[> 57x57 (precomposed) for iPhone 3GS, pre-2011 iPod Touch and older Android devices <]
+   -<link rel="apple-touch-icon-precomposed" href="/images/apple-touch-icon-precomposed.png">
+   -[> 72x72 (precomposed) for 1st generation iPad, iPad 2 and iPad mini <]
+   -<link rel="apple-touch-icon-precomposed" sizes="72x72" href="/images/apple-touch-icon-72x72-precomposed.png">
+   -[> 114x114 (precomposed) for iPhone 4, 4S, 5 and post-2011 iPod Touch <]
+   -<link rel="apple-touch-icon-precomposed" sizes="114x114" href="/images/apple-touch-icon-114x114-precomposed.png">
+   -[> 144x144 (precomposed) for iPad 3rd and 4th generation <]
+   -<link rel="apple-touch-icon-precomposed" sizes="144x144" href="/images/apple-touch-icon-144x144-precomposed.png">
+   -->
+<link rel="shortcut icon" href="/favicon.ico">
+<link rel="apple-touch-icon" sizes="57x57" href="/images/favicons/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="/images/favicons/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="/images/favicons/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="/images/favicons/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="/images/favicons/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="/images/favicons/apple-touch-icon-120x120.png">
+<link rel="apple-touch-icon" sizes="144x144" href="/images/favicons/apple-touch-icon-144x144.png">
+<link rel="apple-touch-icon" sizes="152x152" href="/images/favicons/apple-touch-icon-152x152.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/images/favicons/apple-touch-icon-180x180.png">
+<link rel="icon" type="image/png" href="/images/favicons/android-chrome-192x192.png" sizes="192x192">
+<link rel="icon" type="image/png" href="/images/favicons/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="/images/favicons/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="/images/favicons/favicon-16x16.png" sizes="16x16">
+
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="/assets/js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
+<script src="/assets/js/gist-async.min.js"></script>
+
+</head>
+
+<body id="post">
+
+<div class="navigation-wrapper">
+	<nav role="navigation" id="site-nav" class="animated drop">
+	    <ul>
+      
+		    
+		    <li><a href="/blog/">Latest</a></li>
+		  
+		    
+		    <li><a href="/blog/about/">About</a></li>
+		  
+		    
+		    <li><a href="/blog/category/blog/">Blog</a></li>
+		  
+		    
+		    <li><a href="/blog/category/notes/">Notes</a></li>
+		  
+		    
+		    <li><a href="/blog/tags/">Tags</a></li>
+		  
+        <li class="dosearch"><span><i class="fa fa-search"></i> Search</span></li>
+	    </ul>
+	</nav>
+</div>
+<!-- /.navigation-wrapper -->
+
+<!--[if lt IE 9]><div class="upgrade"><strong><a href="http://whatbrowser.org/">Your browser is quite old!</strong> Why not upgrade to a different browser to better enjoy this site?</a></div><![endif]-->
+
+<div class="search-wrapper">
+  <div class="search-form">
+    <input type="text" class="search-field" placeholder="Search...">
+    <button class="close-btn"><i class="fa fa-times-circle fa-2x"></i></button>
+    <ul class="search-results post-list"></ul>
+<!-- /.search-results -->
+  </div>
+<!-- /.search-form -->
+</div>
+<!-- ./search-wrapper -->
+
+<header class="masthead">
+	<div class="wrap">
+        
+        <h1 class="site-title animated fadeIn"><a href="">盘子里的部落格</a></h1>
+		<h2 class="site-description animated fadeIn" itemprop="description">Yet another Jekyll blog.</h2>
+	</div>
+</header><!-- /.masthead -->
+
+<div class="js-menu-screen menu-screen"></div>
+
+<div id="main" role="main">
+  <article class="hentry">
+    
+    <div class="entry-wrapper">
+      <header class="entry-header">
+        <span class="entry-tags"><a href="/blog/tags/#Network" title="Pages tagged Network">Network</a> • <a href="/blog/tags/#VPN" title="Pages tagged VPN">VPN</a> • <a href="/blog/tags/#Linux" title="Pages tagged Linux">Linux</a></span>
+        
+          <h1 class="entry-title">vpn-udp-libev 开发总结</h1>
+        
+      </header>
+      <footer class="entry-meta">
+        
+        
+          <img src="/images/matrix.png" class="bio-photo" alt="Cubarco bio photo">
+        
+        <span class="author vcard">By <span class="fn">Cubarco</span></span>
+        <span class="entry-date date published"><time datetime="2015-01-09T00:00:00+08:00"><i class="fa fa-calendar-o"></i> January 09, 2015</time></span>
+        <span class="entry-date date modified"><time datetime="2015-01-10"><i class="fa fa-pencil"></i> January 10, 2015</time></span>
+        <span class="entry-comments"><i class="fa fa-comment-o"></i> <a href="#disqus_thread">Comment</a></span>
+        <span class="social-share-twitter">
+  <a href="https://twitter.com/intent/tweet?hashtags=Network,VPN,Linux&amp;text=vpn-udp-libev%20%E5%BC%80%E5%8F%91%E6%80%BB%E7%BB%93&amp;url=/blog/2015/01/vpn-udp-libev-development-notes/&amp;via=Cube_Lin" title="Share on Twitter" itemprop="Twitter"><i class="fa fa-twitter-square"></i> Tweet</a>
+</span>
+<span class="social-share-facebook">
+  <a href="https://www.facebook.com/sharer/sharer.php?u=/blog/2015/01/vpn-udp-libev-development-notes/" title="Share on Facebook" itemprop="Facebook"><i class="fa fa-facebook-square"></i> Like</a>
+</span>
+<span class="social-share-googleplus">
+  <a href="https://plus.google.com/share?url=/blog/2015/01/vpn-udp-libev-development-notes/" title="Share on Google Plus" itemprop="GooglePlus"><i class="fa fa-google-plus-square"></i> +1</a>
+</span>
+<!-- /.social-share -->
+        
+      </footer>
+      <div class="entry-content">
+        <p>最近又在看 UNIX 网络编程那本书，写了个 vpn 练手，代码和简单的介绍在 <a href="https://github.com/cubarco/network-programming-exp/tree/master/vpn-udp-libev" title="cubarco/network-programming-exp/vpn-udp-libev">Github</a> 上<s>(好像效率还不错的样子)</s>。这里照例做一下总结，便于以后查阅。</p>
+
+<h4 id="recvfrom">关于<code class="highlighter-rouge">recvfrom()</code>
+</h4>
+
+<figure class="highlight"><pre><code class="language-c" data-lang="c"><span class="cm">/* recvfrom() 的声明 */</span>
+<span class="kt">ssize_t</span> <span class="n">recvfrom</span><span class="p">(</span><span class="kt">int</span> <span class="n">sockfd</span><span class="p">,</span> <span class="kt">void</span> <span class="o">*</span><span class="n">buf</span><span class="p">,</span> <span class="kt">size_t</span> <span class="n">len</span><span class="p">,</span> <span class="kt">int</span> <span class="n">flags</span><span class="p">,</span>
+                 <span class="k">struct</span> <span class="n">sockaddr</span> <span class="o">*</span><span class="n">src_addr</span><span class="p">,</span> <span class="n">socklen_t</span> <span class="o">*</span><span class="n">addrlen</span><span class="p">);</span></code></pre></figure>
+
+<p>这个函数比较诡异的是它的最后一个参数<code class="highlighter-rouge">addrlen</code>.</p>
+
+<figure class="highlight"><pre><code class="language-console" data-lang="console">If  src_addr  is  not  NULL, and the underlying protocol provides the source
+address of the message, that source address is placed in the buffer  pointed
+to  by  src_addr.  In this case, addrlen is a value-result argument.  Before
+the call, it should be initialized to the size of the buffer associated with
+src_addr.  Upon return, addrlen is updated to contain the actual size of the
+source address.  The returned address is truncated if the buffer provided is
+too  small;  in this case, addrlen will return a value greater than was sup‐
+plied to the call.</code></pre></figure>
+
+<p>一开始用的时候没有仔细看 manpage，天真地以为既然传的是指针，它的用处应该就只储存返回值。但是昨天跟 <a href="https://github.com/hexchain" class="user-mention">@hexchain</a> juju讨论之后，发现这个函数还是会用到<code class="highlighter-rouge">addrlen</code>的初始值的,目的大概是为了防止给<code class="highlighter-rouge">src_addr</code>传值的时候溢出。以后用库函数还是先查清楚参数的具体用处再用吧…</p>
+
+<h4 id="ipv4--ipv6">同时兼容 IPv4 和 IPV6</h4>
+<p>服务器为了同时兼容两种协议，主要就是 addr 结构体的选择，<code class="highlighter-rouge">sockaddr_in</code>是为 IPv4 准备的，在我 x64 系统上它的结构体大小是 16B，而<code class="highlighter-rouge">sockaddr_in6</code>是为 IPv6 准备的，大小是28B，一开始我以为<code class="highlighter-rouge">sockaddr</code>是兼容二者的结构体，但是这货大小只有16B。在<a href="https://github.com/clowwindy/ShadowVPN" title="ShadowVPN">ShadowVPN</a>代码里找了找，发现<code class="highlighter-rouge">sockaddr_storage</code>这个结构体，据说是兼容了所有 addr 结构，包括最大的 UNIX 套接字，大小有 128B。然后具体到 IP 地址的转换，可以用<code class="highlighter-rouge">inet_pton()</code>这个兼容两种IP协议的函数。</p>
+
+<h4 id="mtu">关于 MTU</h4>
+<p>之前对 MTU 一直是云里雾里的，这次算是对它有了一点了解。<a href="http://en.wikipedia.org/wiki/Maximum_transmission_unit">MTU(Maximum transmission unit)</a>指的就是通讯协议的<code class="highlighter-rouge">DATA</code>块的最大容量。一个 link 的 MTU 决定了通过它的 IP 包的最大体积。所以设置一个 tunnel 设备的 MTU 可以确保这些 IP 包在套上另一层 UDP + IP 的 header 之后不会被超出 MTU 被 fragment.</p>
+
+<h4 id="section">关于压缩</h4>
+<p>最大(无损)压缩比例决定于信息熵。所以用<code class="highlighter-rouge">dd if=/dev/urandom bs=1M count=100 | gzip - | wc -c</code>这种方式测试压缩比例的结果往往是压缩比例大于1…</p>
+
+<h4 id="more">More</h4>
+<p>想到再写</p>
+
+        <div align="right">
+		    <span><a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc/4.0/88x31.png"></a></span>
+        </div>
+        <nav class="pagination" role="navigation">
+            
+              <a href="/blog/2015/01/btrfs-sucks/" class="btn" title="对 btrfs 的吐槽">Previous</a>
+            
+            
+              <a href="/blog/2015/01/vimscript-delpair/" class="btn" title="Vim 删除成对的字符">Next</a>
+            
+        </nav><!-- /.pagination -->
+        <div id="disqus_thread"></div>
+<!-- /#disqus_thread -->
+      </div>
+<!-- /.entry-content -->
+    </div>
+<!-- /.entry-wrapper -->
+
+  </article>
+</div>
+<!-- /#main -->
+
+<div class="footer-wrapper">
+  <footer role="contentinfo" class="entry-wrapper">
+    
+
+<span>Powered by <a href="http://jekyllrb.com" rel="nofollow">Jekyll</a> using the <a href="https://mademistakes.com/work/so-simple-jekyll-theme/" rel="nofollow">So Simple Theme</a>. Published with <a href="http://pages.github.com">GitHub Pages</a>.</span>
+<div class="social-icons">
+	<a href="http://twitter.com/Cube_Lin" title="Cubarco on Twitter" target="_blank"><i class="fa fa-twitter-square fa-2x"></i></a>
+	<a href="http://facebook.com/cubarco" title="Cubarco on Facebook" target="_blank"><i class="fa fa-facebook-square fa-2x"></i></a>
+	<a href="http://plus.google.com/+%E6%9E%97%E5%AE%B6%E5%86%9BCube" title="Cubarco on Google+" target="_blank"><i class="fa fa-google-plus-square fa-2x"></i></a>
+	
+	
+	<a href="http://instagram.com/cubarco" title="Cubarco on Instagram" target="_blank"><i class="fa fa-instagram fa-2x"></i></a>
+	
+	<a href="http://github.com/cubarco" title="Cubarco on Github" target="_blank"><i class="fa fa-github-square fa-2x"></i></a>
+	
+  <a href="/feed.xml" title="Atom/RSS feed"><i class="fa fa-rss-square fa-2x"></i></a>
+</div>
+<!-- /.social-icons -->
+
+  </footer>
+</div>
+<!-- /.footer-wrapper -->
+
+<script src="/assets/js/scripts.min.js"></script>
+
+<!-- Jekyll Simple Search option -->
+<script>
+  $(document).ready(function() {
+      $('.search-field').jekyllSearch({
+          jsonFile: '/search.json',
+          searchResults: '.search-results',
+          template: '<li><article><a href="{url}">{title} <span class="entry-date"><time datetime="{date}">{shortdate}</time></span></a></article></li>',
+          fuzzy: true,
+          noResults: '<p>Nothing found.</p>'
+        });
+  });
+
+  (function( $, window, undefined ) {
+
+     var bs = {
+          close: $(".close-btn"),
+          searchform: $(".search-form"),
+          canvas: $(".js-menu-screen"),
+          dothis: $('.dosearch')
+      };
+
+    bs.dothis.on('click', function() {
+      $('.search-wrapper').css({ display: "block" });
+      $('body').toggleClass('no-scroll');
+      bs.searchform.toggleClass('active');
+      bs.searchform.find('input').focus();
+      bs.canvas.toggleClass('is-visible');
+    });
+
+      bs.close.on('click', function() {
+        $('.search-wrapper').removeAttr( 'style' );
+        $('body').toggleClass('no-scroll');
+        bs.searchform.toggleClass('active');
+        bs.canvas.removeClass('is-visible');
+    });
+  })( jQuery, window );
+</script>
+
+
+<!-- Check whether the page is a post -->
+
+  
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+    var disqus_shortname = 'cubarco'; // required: replace example with your forum shortname
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function () {
+        var s = document.createElement('script'); s.async = true;
+        s.type = 'text/javascript';
+        s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+        (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+    }());
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+</noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+
+
+<!-- Asynchronous Google Analytics snippet -->
+<script>
+  var _gaq = _gaq || [];
+  var pluginUrl =
+ '//www.google-analytics.com/plugins/ga/inpage_linkid.js';
+  _gaq.push(['_require', 'inpage_linkid', pluginUrl]);
+  _gaq.push(['_setAccount', 'UA-54867602-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'stats.g.doubleclick.net/dc.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+
+
+</body>
+</html>

@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]--><!--[if (IE 7)&!(IEMobile)]><html class="no-js lt-ie9 lt-ie8" lang="en"><![endif]--><!--[if (IE 8)&!(IEMobile)]><html class="no-js lt-ie9" lang="en"><![endif]--><!--[if gt IE 8]><!--><html class="no-js" lang="en">
+<!--<![endif]-->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="theme-color" content="#000000">
+<title>Writeup-9447 CTF: calcpop – 盘子里的部落格</title>
+<meta name="description" content="先看反汇编代码： ... 8048460: 55 push %ebp 8048461: 89 e5 mov %esp,%ebp 8048463: 57 push %edi 8048464: 56 push %esi 8048465: be 00 01 00 00 mov $0x100,%esi 804846a: 53 push %ebx 804846b: 83 e4 f0 and $0xfffffff0,%esp 804846e: 81 ec 90 00 00 00 sub $0x90,%esp 8048474: a1 60 a0 04 08 mov 0x804a060,%eax 8048479: c7 44 24 0c 00 00 00 movl $0x0,0xc(%esp) 8048480: 00 8048481: 8d 5c 24 10 lea 0x10(%esp),%ebx 8048485: c7...">
+<meta name="keywords" content="Hack, CTF, Writeup, Exploitation">
+
+
+<!-- Twitter Cards -->
+<meta name="twitter:title" content="Writeup-9447 CTF: calcpop">
+<meta name="twitter:description" content="先看反汇编代码： ... 8048460: 55 push %ebp 8048461: 89 e5 mov %esp,%ebp 8048463: 57 push %edi 8048464: 56 push %esi 8048465: be 00 01 00 00 mov $0x100,%esi 804846a: 53 push %ebx 804846b: 83 e4 f0 and $0xfffffff0,%esp 804846e: 81 ec 90 00 00 00 sub $0x90,%esp 8048474: a1 60 a0 04 08 mov 0x804a060,%eax 8048479: c7 44 24 0c 00 00 00 movl $0x0,0xc(%esp) 8048480: 00 8048481: 8d 5c 24 10 lea 0x10(%esp),%ebx 8048485: c7...">
+<meta name="twitter:site" content="@Cube_Lin">
+<meta name="twitter:creator" content="@Cube_Lin">
+
+<meta name="twitter:card" content="summary">
+<!--
+   -<meta name="twitter:image" content="/images/">
+   -->
+
+<!-- Open Graph -->
+<meta property="og:locale" content="zh_CN">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Writeup-9447 CTF: calcpop">
+<meta property="og:description" content="先看反汇编代码： ... 8048460: 55 push %ebp 8048461: 89 e5 mov %esp,%ebp 8048463: 57 push %edi 8048464: 56 push %esi 8048465: be 00 01 00 00 mov $0x100,%esi 804846a: 53 push %ebx 804846b: 83 e4 f0 and $0xfffffff0,%esp 804846e: 81 ec 90 00 00 00 sub $0x90,%esp 8048474: a1 60 a0 04 08 mov 0x804a060,%eax 8048479: c7 44 24 0c 00 00 00 movl $0x0,0xc(%esp) 8048480: 00 8048481: 8d 5c 24 10 lea 0x10(%esp),%ebx 8048485: c7...">
+<meta property="og:url" content="/blog/2015/11/9477-calcpop-writeup/">
+<meta property="og:site_name" content="盘子里的部落格">
+
+
+
+
+
+
+<link rel="canonical" href="/blog/2015/11/9477-calcpop-writeup/">
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="盘子里的部落格 Feed">
+<link rel="author" href="http://plus.google.com/+%E6%9E%97%E5%AE%B6%E5%86%9BCube?rel=author">
+
+<!-- http://t.co/dKP3o1e -->
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+
+<!--Webfonts-->
+<link href="//fonts.googleapis.com/css?family=Volkhov%7CCabin" rel="stylesheet" type="text/css">
+<!--
+   -[> Webfonts <]
+   -<script src="//use.edgefonts.net/source-sans-pro:n2,i2,n3,i3,n4,i4,n6,i6,n7,i7,n9,i9;source-code-pro:n4,n7;volkhov;cabin.js"></script>
+   -->
+
+<meta http-equiv="cleartype" content="on">
+
+<!-- HTML5 Shiv and Media Query Support -->
+<!--[if lt IE 9]>
+  <script src="/assets/js/vendor/html5shiv.min.js"></script>
+  <script src="/assets/js/vendor/respond.min.js"></script>
+<![endif]-->
+
+<!-- Modernizr -->
+<script src="/assets/js/vendor/modernizr-2.7.1.custom.min.js"></script>
+
+<!-- Icons -->
+<!--
+   -[> 16x16 <]
+   -<link rel="shortcut icon" href="/favicon-16x16.ico">
+   -[> 32x32 <]
+   -<link rel="shortcut icon" href="/favicon-32x32.ico">
+   -[> 57x57 (precomposed) for iPhone 3GS, pre-2011 iPod Touch and older Android devices <]
+   -<link rel="apple-touch-icon-precomposed" href="/images/apple-touch-icon-precomposed.png">
+   -[> 72x72 (precomposed) for 1st generation iPad, iPad 2 and iPad mini <]
+   -<link rel="apple-touch-icon-precomposed" sizes="72x72" href="/images/apple-touch-icon-72x72-precomposed.png">
+   -[> 114x114 (precomposed) for iPhone 4, 4S, 5 and post-2011 iPod Touch <]
+   -<link rel="apple-touch-icon-precomposed" sizes="114x114" href="/images/apple-touch-icon-114x114-precomposed.png">
+   -[> 144x144 (precomposed) for iPad 3rd and 4th generation <]
+   -<link rel="apple-touch-icon-precomposed" sizes="144x144" href="/images/apple-touch-icon-144x144-precomposed.png">
+   -->
+<link rel="shortcut icon" href="/favicon.ico">
+<link rel="apple-touch-icon" sizes="57x57" href="/images/favicons/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="/images/favicons/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="/images/favicons/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="/images/favicons/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="/images/favicons/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="/images/favicons/apple-touch-icon-120x120.png">
+<link rel="apple-touch-icon" sizes="144x144" href="/images/favicons/apple-touch-icon-144x144.png">
+<link rel="apple-touch-icon" sizes="152x152" href="/images/favicons/apple-touch-icon-152x152.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/images/favicons/apple-touch-icon-180x180.png">
+<link rel="icon" type="image/png" href="/images/favicons/android-chrome-192x192.png" sizes="192x192">
+<link rel="icon" type="image/png" href="/images/favicons/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="/images/favicons/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="/images/favicons/favicon-16x16.png" sizes="16x16">
+
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="/assets/js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
+<script src="/assets/js/gist-async.min.js"></script>
+
+</head>
+
+<body id="post">
+
+<div class="navigation-wrapper">
+	<nav role="navigation" id="site-nav" class="animated drop">
+	    <ul>
+      
+		    
+		    <li><a href="/blog/">Latest</a></li>
+		  
+		    
+		    <li><a href="/blog/about/">About</a></li>
+		  
+		    
+		    <li><a href="/blog/category/blog/">Blog</a></li>
+		  
+		    
+		    <li><a href="/blog/category/notes/">Notes</a></li>
+		  
+		    
+		    <li><a href="/blog/tags/">Tags</a></li>
+		  
+        <li class="dosearch"><span><i class="fa fa-search"></i> Search</span></li>
+	    </ul>
+	</nav>
+</div>
+<!-- /.navigation-wrapper -->
+
+<!--[if lt IE 9]><div class="upgrade"><strong><a href="http://whatbrowser.org/">Your browser is quite old!</strong> Why not upgrade to a different browser to better enjoy this site?</a></div><![endif]-->
+
+<div class="search-wrapper">
+  <div class="search-form">
+    <input type="text" class="search-field" placeholder="Search...">
+    <button class="close-btn"><i class="fa fa-times-circle fa-2x"></i></button>
+    <ul class="search-results post-list"></ul>
+<!-- /.search-results -->
+  </div>
+<!-- /.search-form -->
+</div>
+<!-- ./search-wrapper -->
+
+<header class="masthead">
+	<div class="wrap">
+        
+        <h1 class="site-title animated fadeIn"><a href="">盘子里的部落格</a></h1>
+		<h2 class="site-description animated fadeIn" itemprop="description">Yet another Jekyll blog.</h2>
+	</div>
+</header><!-- /.masthead -->
+
+<div class="js-menu-screen menu-screen"></div>
+
+<div id="main" role="main">
+  <article class="hentry">
+    
+    <div class="entry-wrapper">
+      <header class="entry-header">
+        <span class="entry-tags"><a href="/blog/tags/#Hack" title="Pages tagged Hack">Hack</a> • <a href="/blog/tags/#CTF" title="Pages tagged CTF">CTF</a> • <a href="/blog/tags/#Writeup" title="Pages tagged Writeup">Writeup</a> • <a href="/blog/tags/#Exploitation" title="Pages tagged Exploitation">Exploitation</a></span>
+        
+          <h1 class="entry-title">Writeup-9447 CTF: calcpop</h1>
+        
+      </header>
+      <footer class="entry-meta">
+        
+        
+          <img src="/images/matrix.png" class="bio-photo" alt="Cubarco bio photo">
+        
+        <span class="author vcard">By <span class="fn">Cubarco</span></span>
+        <span class="entry-date date published"><time datetime="2015-11-30T00:00:00+08:00"><i class="fa fa-calendar-o"></i> November 30, 2015</time></span>
+        
+        <span class="entry-comments"><i class="fa fa-comment-o"></i> <a href="#disqus_thread">Comment</a></span>
+        <span class="social-share-twitter">
+  <a href="https://twitter.com/intent/tweet?hashtags=Hack,CTF,Writeup,Exploitation&amp;text=Writeup-9447%20CTF:%20calcpop&amp;url=/blog/2015/11/9477-calcpop-writeup/&amp;via=Cube_Lin" title="Share on Twitter" itemprop="Twitter"><i class="fa fa-twitter-square"></i> Tweet</a>
+</span>
+<span class="social-share-facebook">
+  <a href="https://www.facebook.com/sharer/sharer.php?u=/blog/2015/11/9477-calcpop-writeup/" title="Share on Facebook" itemprop="Facebook"><i class="fa fa-facebook-square"></i> Like</a>
+</span>
+<span class="social-share-googleplus">
+  <a href="https://plus.google.com/share?url=/blog/2015/11/9477-calcpop-writeup/" title="Share on Google Plus" itemprop="GooglePlus"><i class="fa fa-google-plus-square"></i> +1</a>
+</span>
+<!-- /.social-share -->
+        
+      </footer>
+      <div class="entry-content">
+        <p>先看反汇编代码：</p>
+
+<figure class="highlight"><pre><code class="language-objdump" data-lang="objdump">...
+8048460:	55                   	push   %ebp
+8048461:	89 e5                	mov    %esp,%ebp
+8048463:	57                   	push   %edi
+8048464:	56                   	push   %esi
+8048465:	be 00 01 00 00       	mov    $0x100,%esi
+804846a:	53                   	push   %ebx
+804846b:	83 e4 f0             	and    $0xfffffff0,%esp
+804846e:	81 ec 90 00 00 00    	sub    $0x90,%esp
+8048474:	a1 60 a0 04 08       	mov    0x804a060,%eax
+8048479:	c7 44 24 0c 00 00 00 	movl   $0x0,0xc(%esp)
+8048480:	00
+8048481:	8d 5c 24 10          	lea    0x10(%esp),%ebx
+8048485:	c7 44 24 08 02 00 00 	movl   $0x2,0x8(%esp)
+804848c:	00
+804848d:	89 df                	mov    %ebx,%edi
+804848f:	c7 44 24 04 00 00 00 	movl   $0x0,0x4(%esp)
+8048496:	00
+8048497:	89 04 24             	mov    %eax,(%esp)
+804849a:	e8 a1 ff ff ff       	call   8048440 &lt;setvbuf@plt&gt;
+804849f:	c7 04 24 10 88 04 08 	movl   $0x8048810,(%esp)
+80484a6:	e8 55 ff ff ff       	call   8048400 &lt;puts@plt&gt;
+80484ab:	eb 29                	jmp    80484d6 &lt;main+0x76&gt;
+80484ad:	8d 76 00             	lea    0x0(%esi),%esi
+80484b0:	a1 40 a0 04 08       	mov    0x804a040,%eax
+80484b5:	89 04 24             	mov    %eax,(%esp)
+80484b8:	e8 33 ff ff ff       	call   80483f0 &lt;_IO_getc@plt&gt;
+80484bd:	85 c0                	test   %eax,%eax
+80484bf:	0f 88 e3 00 00 00    	js     80485a8 &lt;main+0x148&gt;
+80484c5:	88 07                	mov    %al,(%edi)
+80484c7:	83 ee 01             	sub    $0x1,%esi
+80484ca:	83 c7 01             	add    $0x1,%edi
+80484cd:	83 f8 0a             	cmp    $0xa,%eax
+80484d0:	0f 84 ca 00 00 00    	je     80485a0 &lt;main+0x140&gt;
+80484d6:	83 fe 01             	cmp    $0x1,%esi
+80484d9:	77 d5                	ja     80484b0 &lt;main+0x50&gt;
+80484db:	85 f6                	test   %esi,%esi
+80484dd:	0f 85 bd 00 00 00    	jne    80485a0 &lt;main+0x140&gt;
+...</code></pre></figure>
+
+<p>这段代码是 main() 函数起始的位置，可以看到这里的工作是将终端输入的数据循环读入栈中。其中 esi 寄存器是循环计数器，初始值是 0x100, 而在栈中划分的空间只有 0x90 字节, 这里存在栈溢出。</p>
+
+<p>用 <code class="highlighter-rouge">pattern.py 256</code> 生成 pattern, 开 gdb 调试 calcpop.</p>
+
+<figure class="highlight"><pre><code class="language-console" data-lang="console">$ gdb calcpop
+Reading symbols from calcpop...done.
+(gdb) r
+Starting program: /home/cubelin/is/ctf/9447/pwn/calcpop/calcpop
+Welcome to calc.exe
+Aa0Aa1Aa2Aa3Aa4Aa5Aa6Aa7Aa8Aa9Ab0Ab1Ab2Ab3Ab4Ab5Ab6Ab7Ab8Ab9Ac0Ac1Ac2Ac3Ac4Ac5Ac6Ac7Ac8Ac9Ad0Ad1Ad2Ad3Ad4Ad5Ad6Ad7Ad8Ad9Ae0Ae1Ae2Ae3Ae4Ae5Ae6Ae7Ae8Ae9Af0Af1Af2Af3Af4Af5Af6Af7Af8Af9Ag0Ag1Ag2Ag3Ag4Ag5Ag6Ag7Ag8Ag9Ah0Ah1Ah2Ah3Ah4Ah5Ah6Ah7Ah8Ah9Ai0Ai1Ai2Ai3Ai4A
+Missing a space; your input was 0xffffd390
+Missing a space; your input was 0xffffd390
+exit
+Exiting...
+
+Program received signal SIGSEGV, Segmentation fault.
+0x41326641 in ?? ()
+(gdb) quit
+
+$ pattern.py 0x41326641
+Pattern 0x41326641 first occurrence at position 156 in pattern.</code></pre></figure>
+
+<p>main() 函数返回地址在 offset 为 156 的位置。然后借由程序返回的栈地址，可以直接执行栈中的 shellcode.</p>
+
+<p>exp 如下:</p>
+
+<div class="gist" data-gist="cubarco/ee054809d1643602b844">Loading gist...</div>
+
+        <div align="right">
+		    <span><a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc/4.0/88x31.png"></a></span>
+        </div>
+        <nav class="pagination" role="navigation">
+            
+              <a href="/blog/2015/05/dota2-blocky-cjk-fonts-workaround/" class="btn" title="一个解决 Linux 版 Dota 2 中 CJK 字符显示成方块的 Workaround">Previous</a>
+            
+            
+              <a href="/blog/2015/12/9477-calcpop-reloaded-writeup/" class="btn" title="Writeup-9447 CTF: calcpop-reloaded">Next</a>
+            
+        </nav><!-- /.pagination -->
+        <div id="disqus_thread"></div>
+<!-- /#disqus_thread -->
+      </div>
+<!-- /.entry-content -->
+    </div>
+<!-- /.entry-wrapper -->
+
+  </article>
+</div>
+<!-- /#main -->
+
+<div class="footer-wrapper">
+  <footer role="contentinfo" class="entry-wrapper">
+    
+
+<span>Powered by <a href="http://jekyllrb.com" rel="nofollow">Jekyll</a> using the <a href="https://mademistakes.com/work/so-simple-jekyll-theme/" rel="nofollow">So Simple Theme</a>. Published with <a href="http://pages.github.com">GitHub Pages</a>.</span>
+<div class="social-icons">
+	<a href="http://twitter.com/Cube_Lin" title="Cubarco on Twitter" target="_blank"><i class="fa fa-twitter-square fa-2x"></i></a>
+	<a href="http://facebook.com/cubarco" title="Cubarco on Facebook" target="_blank"><i class="fa fa-facebook-square fa-2x"></i></a>
+	<a href="http://plus.google.com/+%E6%9E%97%E5%AE%B6%E5%86%9BCube" title="Cubarco on Google+" target="_blank"><i class="fa fa-google-plus-square fa-2x"></i></a>
+	
+	
+	<a href="http://instagram.com/cubarco" title="Cubarco on Instagram" target="_blank"><i class="fa fa-instagram fa-2x"></i></a>
+	
+	<a href="http://github.com/cubarco" title="Cubarco on Github" target="_blank"><i class="fa fa-github-square fa-2x"></i></a>
+	
+  <a href="/feed.xml" title="Atom/RSS feed"><i class="fa fa-rss-square fa-2x"></i></a>
+</div>
+<!-- /.social-icons -->
+
+  </footer>
+</div>
+<!-- /.footer-wrapper -->
+
+<script src="/assets/js/scripts.min.js"></script>
+
+<!-- Jekyll Simple Search option -->
+<script>
+  $(document).ready(function() {
+      $('.search-field').jekyllSearch({
+          jsonFile: '/search.json',
+          searchResults: '.search-results',
+          template: '<li><article><a href="{url}">{title} <span class="entry-date"><time datetime="{date}">{shortdate}</time></span></a></article></li>',
+          fuzzy: true,
+          noResults: '<p>Nothing found.</p>'
+        });
+  });
+
+  (function( $, window, undefined ) {
+
+     var bs = {
+          close: $(".close-btn"),
+          searchform: $(".search-form"),
+          canvas: $(".js-menu-screen"),
+          dothis: $('.dosearch')
+      };
+
+    bs.dothis.on('click', function() {
+      $('.search-wrapper').css({ display: "block" });
+      $('body').toggleClass('no-scroll');
+      bs.searchform.toggleClass('active');
+      bs.searchform.find('input').focus();
+      bs.canvas.toggleClass('is-visible');
+    });
+
+      bs.close.on('click', function() {
+        $('.search-wrapper').removeAttr( 'style' );
+        $('body').toggleClass('no-scroll');
+        bs.searchform.toggleClass('active');
+        bs.canvas.removeClass('is-visible');
+    });
+  })( jQuery, window );
+</script>
+
+
+<!-- Check whether the page is a post -->
+
+  
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+    var disqus_shortname = 'cubarco'; // required: replace example with your forum shortname
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function () {
+        var s = document.createElement('script'); s.async = true;
+        s.type = 'text/javascript';
+        s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+        (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+    }());
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+</noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+
+
+<!-- Asynchronous Google Analytics snippet -->
+<script>
+  var _gaq = _gaq || [];
+  var pluginUrl =
+ '//www.google-analytics.com/plugins/ga/inpage_linkid.js';
+  _gaq.push(['_require', 'inpage_linkid', pluginUrl]);
+  _gaq.push(['_setAccount', 'UA-54867602-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'stats.g.doubleclick.net/dc.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+
+
+</body>
+</html>

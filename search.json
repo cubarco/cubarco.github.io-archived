@@ -1,0 +1,228 @@
+[
+	
+		{
+		  "title"      : "如何用 Nginx 搭建简单的 DuckDuckGo 代理站",
+		  "category"   : "",
+      "tags"       : "Linux, GFW, DuckDuckGo, and Proxy",
+		  "url"        : "/blog/2016/04/how-to-set-up-a-duckduckgo-proxy-site-with-nginx/",
+		  "date"       : "2016-04-09 00:00:00 +0800",
+		  "shortdate"  : "April 09, 2016"
+		} ,
+	
+		{
+		  "title"      : "利用非标准端口 DNS 服务器避免 DNS 劫持",
+		  "category"   : "",
+      "tags"       : "Linux, DNS, GFW, Dnsmasq, and OpenDNS",
+		  "url"        : "/blog/2016/03/avoid-dns-hijacking-with-non-standard-port-dns/",
+		  "date"       : "2016-03-23 00:00:00 +0800",
+		  "shortdate"  : "March 23, 2016"
+		} ,
+	
+		{
+		  "title"      : "Writeup: ZCTF",
+		  "category"   : "",
+      "tags"       : "Hack, CTF, Writeup, Exploitation, and PWN",
+		  "url"        : "/blog/2016/01/writeup-zctf/",
+		  "date"       : "2016-01-24 00:00:00 +0800",
+		  "shortdate"  : "January 24, 2016"
+		} ,
+	
+		{
+		  "title"      : "Writeup: 32c3ctf",
+		  "category"   : "",
+      "tags"       : "Hack, CTF, Writeup, Exploitation, PWN, and MISC",
+		  "url"        : "/blog/2015/12/writeup-32c3ctf/",
+		  "date"       : "2015-12-30 00:00:00 +0800",
+		  "shortdate"  : "December 30, 2015"
+		} ,
+	
+		{
+		  "title"      : "Writeup-Pwnable: unexploitable",
+		  "category"   : "",
+      "tags"       : "Hack, CTF, Writeup, Exploitation, ROP, and SROP",
+		  "url"        : "/blog/2015/12/writeup-pwnable-unexploitable/",
+		  "date"       : "2015-12-23 00:00:00 +0800",
+		  "shortdate"  : "December 23, 2015"
+		} ,
+	
+		{
+		  "title"      : "Writeup-Pwnable: syscall",
+		  "category"   : "",
+      "tags"       : "Hack, CTF, Writeup, Exploitation, and ARM",
+		  "url"        : "/blog/2015/12/writeup-pwnable-syscall/",
+		  "date"       : "2015-12-16 00:00:00 +0800",
+		  "shortdate"  : "December 16, 2015"
+		} ,
+	
+		{
+		  "title"      : "Writeup-Pwnable: tiny &amp; tiny_easy",
+		  "category"   : "",
+      "tags"       : "Hack, CTF, Writeup, Exploitation, and ROP",
+		  "url"        : "/blog/2015/12/writeup-pwnable-tiny-and-tiny-easy/",
+		  "date"       : "2015-12-11 00:00:00 +0800",
+		  "shortdate"  : "December 11, 2015"
+		} ,
+	
+		{
+		  "title"      : "Writeup-Seccon CTF: FSB:TreeWalker",
+		  "category"   : "",
+      "tags"       : "Hack, CTF, Writeup, Exploitation, and FSB",
+		  "url"        : "/blog/2015/12/seccon-ctf-writeup-fsb-treewalker/",
+		  "date"       : "2015-12-07 00:00:00 +0800",
+		  "shortdate"  : "December 07, 2015"
+		} ,
+	
+		{
+		  "title"      : "Writeup-9447 CTF: calcpop-reloaded",
+		  "category"   : "",
+      "tags"       : "Hack, CTF, Writeup, and Exploitation",
+		  "url"        : "/blog/2015/12/9477-calcpop-reloaded-writeup/",
+		  "date"       : "2015-12-04 00:00:00 +0800",
+		  "shortdate"  : "December 04, 2015"
+		} ,
+	
+		{
+		  "title"      : "Writeup-9447 CTF: calcpop",
+		  "category"   : "",
+      "tags"       : "Hack, CTF, Writeup, and Exploitation",
+		  "url"        : "/blog/2015/11/9477-calcpop-writeup/",
+		  "date"       : "2015-11-30 00:00:00 +0800",
+		  "shortdate"  : "November 30, 2015"
+		} ,
+	
+		{
+		  "title"      : "一个解决 Linux 版 Dota 2 中 CJK 字符显示成方块的 Workaround",
+		  "category"   : "",
+      "tags"       : "Linux, Steam, Dota 2, Fonts, and CJK",
+		  "url"        : "/blog/2015/05/dota2-blocky-cjk-fonts-workaround/",
+		  "date"       : "2015-05-14 00:00:00 +0800",
+		  "shortdate"  : "May 14, 2015"
+		} ,
+	
+		{
+		  "title"      : "C Programming Tricks",
+		  "category"   : "",
+      "tags"       : "C and GCC",
+		  "url"        : "/blog/2015/05/c-programming-tricks/",
+		  "date"       : "2015-05-02 00:00:00 +0800",
+		  "shortdate"  : "May 02, 2015"
+		} ,
+	
+		{
+		  "title"      : "解决用 ldconfig 指定 libgl 库时 Steam 的异常",
+		  "category"   : "",
+      "tags"       : "Linux, ldconfig, Steam, and Graphics Card",
+		  "url"        : "/blog/2015/01/ldconfig-and-steam-workaround/",
+		  "date"       : "2015-01-28 00:00:00 +0800",
+		  "shortdate"  : "January 28, 2015"
+		} ,
+	
+		{
+		  "title"      : "在社交平台上发布匹配一定规则的 Github commit message",
+		  "category"   : "",
+      "tags"       : "Blog, Python, and Github",
+		  "url"        : "/blog/2015/01/post-github-commits-to-social-platforms/",
+		  "date"       : "2015-01-15 00:00:00 +0800",
+		  "shortdate"  : "January 15, 2015"
+		} ,
+	
+		{
+		  "title"      : "Vim 删除成对的字符",
+		  "category"   : "",
+      "tags"       : "Linux, Vim, Vim Script, Trick, and VimL",
+		  "url"        : "/blog/2015/01/vimscript-delpair/",
+		  "date"       : "2015-01-11 00:00:00 +0800",
+		  "shortdate"  : "January 11, 2015"
+		} ,
+	
+		{
+		  "title"      : "vpn-udp-libev 开发总结",
+		  "category"   : "",
+      "tags"       : "Network, VPN, and Linux",
+		  "url"        : "/blog/2015/01/vpn-udp-libev-development-notes/",
+		  "date"       : "2015-01-09 00:00:00 +0800",
+		  "shortdate"  : "January 09, 2015"
+		} ,
+	
+		{
+		  "title"      : "对 btrfs 的吐槽",
+		  "category"   : "",
+      "tags"       : "Linux, FileSystem, and btrfs",
+		  "url"        : "/blog/2015/01/btrfs-sucks/",
+		  "date"       : "2015-01-02 00:00:00 +0800",
+		  "shortdate"  : "January 02, 2015"
+		} ,
+	
+		{
+		  "title"      : "Paf 开发总结",
+		  "category"   : "",
+      "tags"       : "FIFO, Linux, and Pipe",
+		  "url"        : "/blog/2014/12/paf-develop-notes/",
+		  "date"       : "2014-12-31 00:00:00 +0800",
+		  "shortdate"  : "December 31, 2014"
+		} ,
+	
+		{
+		  "title"      : "How do you read source code?",
+		  "category"   : "",
+      "tags"       : "",
+		  "url"        : "/blog/2014/12/repost-how-do-you-read-source-code/",
+		  "date"       : "2014-12-19 00:00:00 +0800",
+		  "shortdate"  : "December 19, 2014"
+		} ,
+	
+		{
+		  "title"      : "do {…} while (0) — What is it good for?",
+		  "category"   : "",
+      "tags"       : "",
+		  "url"        : "/blog/2014/12/c-do-while-in-macros/",
+		  "date"       : "2014-12-17 00:00:00 +0800",
+		  "shortdate"  : "December 17, 2014"
+		} ,
+	
+		{
+		  "title"      : "Hello World",
+		  "category"   : "",
+      "tags"       : "",
+		  "url"        : "/blog/2014/12/hello-world/",
+		  "date"       : "2014-12-16 00:00:00 +0800",
+		  "shortdate"  : "December 16, 2014"
+		} ,
+	
+		{
+		  "title"      : "Writeup-Training: Warchall &amp;#8211; 7 Tropical Fruits",
+		  "category"   : "",
+      "tags"       : "Hack, Python, and Writeup",
+		  "url"        : "/blog/2014/05/wechall-tropic-writeup/",
+		  "date"       : "2014-05-14 00:00:00 +0800",
+		  "shortdate"  : "May 14, 2014"
+		} ,
+	
+		{
+		  "title"      : "KDE窗口撕裂的解决办法",
+		  "category"   : "",
+      "tags"       : "intel, Note, Xorg, Linux, and kde",
+		  "url"        : "/blog/2014/03/kde%E7%AA%97%E5%8F%A3%E6%92%95%E8%A3%82%E7%9A%84%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95/",
+		  "date"       : "2014-03-22 00:00:00 +0800",
+		  "shortdate"  : "March 22, 2014"
+		} ,
+	
+		{
+		  "title"      : "[转] C中的可变参数研究",
+		  "category"   : "",
+      "tags"       : "C",
+		  "url"        : "/blog/2014/02/C%E8%AF%AD%E8%A8%80%E4%B8%AD%E5%8F%AF%E5%8F%98%E5%8F%82%E6%95%B0%E7%9A%84%E7%A0%94%E7%A9%B6/",
+		  "date"       : "2014-02-25 00:00:00 +0800",
+		  "shortdate"  : "February 25, 2014"
+		} ,
+	
+		{
+		  "title"      : "通过DNS隧道绕过portal认证",
+		  "category"   : "",
+      "tags"       : "Amazing, Android, HustWireless, iodine, Linux, and Portal",
+		  "url"        : "/blog/2014/02/%E9%80%9A%E8%BF%87dns%E9%9A%A7%E9%81%93%E7%BB%95%E8%BF%87portal%E8%AE%A4%E8%AF%81/",
+		  "date"       : "2014-02-11 00:00:00 +0800",
+		  "shortdate"  : "February 11, 2014"
+		} 
+	
+]
