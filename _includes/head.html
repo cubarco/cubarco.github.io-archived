@@ -77,26 +77,4 @@
 
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 <script>window.jQuery || document.write('<script src="{{ site.url }}/assets/js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
-<!--asynchronously document.write-->
-<script>
-document.write = function(content) {
-  if (document.currentScript) {
-      var src = document.currentScript.src
-          .replace(/\#.*$/, '')
-          .replace(/\?.*$/, '')
-          .replace(/^.*\/\//, '');
-      setTimeout(function() {
-            var script = $('script').filter(function() {
-                    var scriptSrc = $(this).attr('src');
-                    return scriptSrc && scriptSrc.indexOf(src) !== -1;
-                  });
-            $('<div></div>')
-                .addClass('doc-write')
-                .html(content)
-                .insertAfter(script);
-          }, 0);
-    } else {
-        HTMLDocument.prototype.write.apply(document, arguments);
-      }
-};
-</script>
+<script src="/assets/js/gist-async.min.js"></script>

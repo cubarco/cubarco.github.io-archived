@@ -482,3 +482,15 @@ span + .entry-title {
 #goog-wm-sb {
 	@extend .btn;
 }
+
+// gist async tag
+// ----------------------------
+.gist.loading::after {
+  content: "(loading)";
+  color: #99cc00;
+}
+
+.gist.loading-failed::after {
+  content: "(loading failed)";
+  color: #cc0000;
+}
