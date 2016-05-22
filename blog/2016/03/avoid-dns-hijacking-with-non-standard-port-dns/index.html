@@ -18,7 +18,7 @@
 
 <meta name="twitter:card" content="summary">
 <!--
-   -<meta name="twitter:image" content="/images/">
+   -<meta name="twitter:image" content="https://cubarco.org/images/">
    -->
 
 <!-- Open Graph -->
@@ -26,7 +26,7 @@
 <meta property="og:type" content="article">
 <meta property="og:title" content="利用非标准端口 DNS 服务器避免 DNS 劫持">
 <meta property="og:description" content="GFW的DNS劫持原理: 说起来挺简单,GFW对境外DNS的劫持,是在发现你请求敏感域名的DNS记录时,伪装成你请求的DNS返回一个污染的数据包给你的解析器,但并不会丢弃你向境外DNS的请求,也不会丢弃境外DNS返回的正确解析结果,他只是让错误的数据抢先回来欺骗了你的解析器而已,毕竟他直接从国内给你发污染数据怎么都比国外DNS返回正确数据要快.而解析器在先收到了欺骗数据包之后,就不会再管后面返回的正确数据了,这样你就被 DNS劫持了.1 很久以前我是用这篇 blog1提供的方法，就是用 iptables drop 掉 GFW 的假 DNS 解析包。但是 2015 年 GFW 开始采用随机 IP 污染的方式，这种黑名单的解决方案已经不可用了。后来换了 dnscrypt-proxy，还算是比较好用的。但是最近不明原因，dnscrypt-proxy 在使用一段时间之后老是卡住。尝试解决无果，就想办法找替代的方案。 前几天发现 GFW 没有劫持非标准端口的 DNS 服务器，于是想到了下面两种方法避免劫持。 iptables 将外网网卡(我这是 enp8s0)发出的 dport 是 53 的包 DNAT 给 OpenDNS 443 端口。 # iptables -t nat -A OUTPUT -o enp8s0 -p udp --dport 53 \ -j DNAT --to 208.67.222.222:443 dnsmasq 以下是采用 OpenDNS 443 端口的示例配置。 port=53 no-resolv # For IPv6 # server=2620:0:ccc::2#443 server=208.67.222.222#443 listen-address=127.0.0.1 Dnsmasq 的具体使用，可以看 ArchWiki2. Update: 2016-05-15 推荐结合 @felixonmars...">
-<meta property="og:url" content="/blog/2016/03/avoid-dns-hijacking-with-non-standard-port-dns/">
+<meta property="og:url" content="https://cubarco.org/blog/2016/03/avoid-dns-hijacking-with-non-standard-port-dns/">
 <meta property="og:site_name" content="盘子里的部落格">
 
 
@@ -34,8 +34,8 @@
 
 
 
-<link rel="canonical" href="/blog/2016/03/avoid-dns-hijacking-with-non-standard-port-dns/">
-<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="盘子里的部落格 Feed">
+<link rel="canonical" href="https://cubarco.org/blog/2016/03/avoid-dns-hijacking-with-non-standard-port-dns/">
+<link href="https://cubarco.org/feed.xml" type="application/atom+xml" rel="alternate" title="盘子里的部落格 Feed">
 <link rel="author" href="http://plus.google.com/+%E6%9E%97%E5%AE%B6%E5%86%9BCube?rel=author">
 
 <!-- http://t.co/dKP3o1e -->
@@ -44,7 +44,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <!-- For all browsers -->
-<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="stylesheet" href="https://cubarco.org/assets/css/main.css">
 
 <!--Webfonts-->
 <link href="//fonts.googleapis.com/css?family=Volkhov%7CCabin" rel="stylesheet" type="text/css">
@@ -57,8 +57,8 @@
 
 <!-- HTML5 Shiv and Media Query Support -->
 <!--[if lt IE 9]>
-  <script src="/assets/js/vendor/html5shiv.min.js"></script>
-  <script src="/assets/js/vendor/respond.min.js"></script>
+  <script src="https://cubarco.org/assets/js/vendor/html5shiv.min.js"></script>
+  <script src="https://cubarco.org/assets/js/vendor/respond.min.js"></script>
 <![endif]-->
 
 <!-- Modernizr -->
@@ -67,36 +67,36 @@
 <!-- Icons -->
 <!--
    -[> 16x16 <]
-   -<link rel="shortcut icon" href="/favicon-16x16.ico">
+   -<link rel="shortcut icon" href="https://cubarco.org/favicon-16x16.ico">
    -[> 32x32 <]
-   -<link rel="shortcut icon" href="/favicon-32x32.ico">
+   -<link rel="shortcut icon" href="https://cubarco.org/favicon-32x32.ico">
    -[> 57x57 (precomposed) for iPhone 3GS, pre-2011 iPod Touch and older Android devices <]
-   -<link rel="apple-touch-icon-precomposed" href="/images/apple-touch-icon-precomposed.png">
+   -<link rel="apple-touch-icon-precomposed" href="https://cubarco.org/images/apple-touch-icon-precomposed.png">
    -[> 72x72 (precomposed) for 1st generation iPad, iPad 2 and iPad mini <]
-   -<link rel="apple-touch-icon-precomposed" sizes="72x72" href="/images/apple-touch-icon-72x72-precomposed.png">
+   -<link rel="apple-touch-icon-precomposed" sizes="72x72" href="https://cubarco.org/images/apple-touch-icon-72x72-precomposed.png">
    -[> 114x114 (precomposed) for iPhone 4, 4S, 5 and post-2011 iPod Touch <]
-   -<link rel="apple-touch-icon-precomposed" sizes="114x114" href="/images/apple-touch-icon-114x114-precomposed.png">
+   -<link rel="apple-touch-icon-precomposed" sizes="114x114" href="https://cubarco.org/images/apple-touch-icon-114x114-precomposed.png">
    -[> 144x144 (precomposed) for iPad 3rd and 4th generation <]
-   -<link rel="apple-touch-icon-precomposed" sizes="144x144" href="/images/apple-touch-icon-144x144-precomposed.png">
+   -<link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://cubarco.org/images/apple-touch-icon-144x144-precomposed.png">
    -->
-<link rel="shortcut icon" href="/favicon.ico">
-<link rel="apple-touch-icon" sizes="57x57" href="/images/favicons/apple-touch-icon-57x57.png">
-<link rel="apple-touch-icon" sizes="60x60" href="/images/favicons/apple-touch-icon-60x60.png">
-<link rel="apple-touch-icon" sizes="72x72" href="/images/favicons/apple-touch-icon-72x72.png">
-<link rel="apple-touch-icon" sizes="76x76" href="/images/favicons/apple-touch-icon-76x76.png">
-<link rel="apple-touch-icon" sizes="114x114" href="/images/favicons/apple-touch-icon-114x114.png">
-<link rel="apple-touch-icon" sizes="120x120" href="/images/favicons/apple-touch-icon-120x120.png">
-<link rel="apple-touch-icon" sizes="144x144" href="/images/favicons/apple-touch-icon-144x144.png">
-<link rel="apple-touch-icon" sizes="152x152" href="/images/favicons/apple-touch-icon-152x152.png">
-<link rel="apple-touch-icon" sizes="180x180" href="/images/favicons/apple-touch-icon-180x180.png">
-<link rel="icon" type="image/png" href="/images/favicons/android-chrome-192x192.png" sizes="192x192">
-<link rel="icon" type="image/png" href="/images/favicons/favicon-32x32.png" sizes="32x32">
-<link rel="icon" type="image/png" href="/images/favicons/favicon-96x96.png" sizes="96x96">
-<link rel="icon" type="image/png" href="/images/favicons/favicon-16x16.png" sizes="16x16">
+<link rel="shortcut icon" href="https://cubarco.org/favicon.ico">
+<link rel="apple-touch-icon" sizes="57x57" href="https://cubarco.org/images/favicons/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="https://cubarco.org/images/favicons/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="https://cubarco.org/images/favicons/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="https://cubarco.org/images/favicons/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="https://cubarco.org/images/favicons/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="https://cubarco.org/images/favicons/apple-touch-icon-120x120.png">
+<link rel="apple-touch-icon" sizes="144x144" href="https://cubarco.org/images/favicons/apple-touch-icon-144x144.png">
+<link rel="apple-touch-icon" sizes="152x152" href="https://cubarco.org/images/favicons/apple-touch-icon-152x152.png">
+<link rel="apple-touch-icon" sizes="180x180" href="https://cubarco.org/images/favicons/apple-touch-icon-180x180.png">
+<link rel="icon" type="image/png" href="https://cubarco.org/images/favicons/android-chrome-192x192.png" sizes="192x192">
+<link rel="icon" type="image/png" href="https://cubarco.org/images/favicons/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="https://cubarco.org/images/favicons/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="https://cubarco.org/images/favicons/favicon-16x16.png" sizes="16x16">
 
 
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-<script>window.jQuery || document.write('<script src="/assets/js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
+<script>window.jQuery || document.write('<script src="https://cubarco.org/assets/js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
 <script src="/assets/js/gist-async.min.js"></script>
 
 </head>
@@ -108,19 +108,19 @@
 	    <ul>
       
 		    
-		    <li><a href="/blog/">Latest</a></li>
+		    <li><a href="https://cubarco.org/blog/">Latest</a></li>
 		  
 		    
-		    <li><a href="/blog/about/">About</a></li>
+		    <li><a href="https://cubarco.org/blog/about/">About</a></li>
 		  
 		    
-		    <li><a href="/blog/category/blog/">Blog</a></li>
+		    <li><a href="https://cubarco.org/blog/category/blog/">Blog</a></li>
 		  
 		    
-		    <li><a href="/blog/category/notes/">Notes</a></li>
+		    <li><a href="https://cubarco.org/blog/category/notes/">Notes</a></li>
 		  
 		    
-		    <li><a href="/blog/tags/">Tags</a></li>
+		    <li><a href="https://cubarco.org/blog/tags/">Tags</a></li>
 		  
         <li class="dosearch"><span><i class="fa fa-search"></i> Search</span></li>
 	    </ul>
@@ -144,7 +144,7 @@
 <header class="masthead">
 	<div class="wrap">
         
-        <h1 class="site-title animated fadeIn"><a href="">盘子里的部落格</a></h1>
+        <h1 class="site-title animated fadeIn"><a href="https://cubarco.org">盘子里的部落格</a></h1>
 		<h2 class="site-description animated fadeIn" itemprop="description">Yet another Jekyll blog.</h2>
 	</div>
 </header><!-- /.masthead -->
@@ -156,7 +156,7 @@
     
     <div class="entry-wrapper">
       <header class="entry-header">
-        <span class="entry-tags"><a href="/blog/tags/#Linux" title="Pages tagged Linux">Linux</a> • <a href="/blog/tags/#DNS" title="Pages tagged DNS">DNS</a> • <a href="/blog/tags/#GFW" title="Pages tagged GFW">GFW</a> • <a href="/blog/tags/#Dnsmasq" title="Pages tagged Dnsmasq">Dnsmasq</a> • <a href="/blog/tags/#OpenDNS" title="Pages tagged OpenDNS">OpenDNS</a></span>
+        <span class="entry-tags"><a href="https://cubarco.org/blog/tags/#Linux" title="Pages tagged Linux">Linux</a> • <a href="https://cubarco.org/blog/tags/#DNS" title="Pages tagged DNS">DNS</a> • <a href="https://cubarco.org/blog/tags/#GFW" title="Pages tagged GFW">GFW</a> • <a href="https://cubarco.org/blog/tags/#Dnsmasq" title="Pages tagged Dnsmasq">Dnsmasq</a> • <a href="https://cubarco.org/blog/tags/#OpenDNS" title="Pages tagged OpenDNS">OpenDNS</a></span>
         
           <h1 class="entry-title">利用非标准端口 DNS 服务器避免 DNS 劫持</h1>
         
@@ -164,20 +164,20 @@
       <footer class="entry-meta">
         
         
-          <img src="/images/matrix.png" class="bio-photo" alt="Cubarco bio photo">
+          <img src="https://cubarco.org/images/matrix.png" class="bio-photo" alt="Cubarco bio photo">
         
         <span class="author vcard">By <span class="fn">Cubarco</span></span>
         <span class="entry-date date published"><time datetime="2016-03-23T00:00:00+08:00"><i class="fa fa-calendar-o"></i> March 23, 2016</time></span>
         <span class="entry-date date modified"><time datetime="2016-05-15"><i class="fa fa-pencil"></i> May 15, 2016</time></span>
         <span class="entry-comments"><i class="fa fa-comment-o"></i> <a href="#disqus_thread">Comment</a></span>
         <span class="social-share-twitter">
-  <a href="https://twitter.com/intent/tweet?hashtags=Linux,DNS,GFW,Dnsmasq,OpenDNS&amp;text=%E5%88%A9%E7%94%A8%E9%9D%9E%E6%A0%87%E5%87%86%E7%AB%AF%E5%8F%A3%20DNS%20%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%81%BF%E5%85%8D%20DNS%20%E5%8A%AB%E6%8C%81&amp;url=/blog/2016/03/avoid-dns-hijacking-with-non-standard-port-dns/&amp;via=Cube_Lin" title="Share on Twitter" itemprop="Twitter"><i class="fa fa-twitter-square"></i> Tweet</a>
+  <a href="https://twitter.com/intent/tweet?hashtags=Linux,DNS,GFW,Dnsmasq,OpenDNS&amp;text=%E5%88%A9%E7%94%A8%E9%9D%9E%E6%A0%87%E5%87%86%E7%AB%AF%E5%8F%A3%20DNS%20%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%81%BF%E5%85%8D%20DNS%20%E5%8A%AB%E6%8C%81&amp;url=https://cubarco.org/blog/2016/03/avoid-dns-hijacking-with-non-standard-port-dns/&amp;via=Cube_Lin" title="Share on Twitter" itemprop="Twitter"><i class="fa fa-twitter-square"></i> Tweet</a>
 </span>
 <span class="social-share-facebook">
-  <a href="https://www.facebook.com/sharer/sharer.php?u=/blog/2016/03/avoid-dns-hijacking-with-non-standard-port-dns/" title="Share on Facebook" itemprop="Facebook"><i class="fa fa-facebook-square"></i> Like</a>
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https://cubarco.org/blog/2016/03/avoid-dns-hijacking-with-non-standard-port-dns/" title="Share on Facebook" itemprop="Facebook"><i class="fa fa-facebook-square"></i> Like</a>
 </span>
 <span class="social-share-googleplus">
-  <a href="https://plus.google.com/share?url=/blog/2016/03/avoid-dns-hijacking-with-non-standard-port-dns/" title="Share on Google Plus" itemprop="GooglePlus"><i class="fa fa-google-plus-square"></i> +1</a>
+  <a href="https://plus.google.com/share?url=https://cubarco.org/blog/2016/03/avoid-dns-hijacking-with-non-standard-port-dns/" title="Share on Google Plus" itemprop="GooglePlus"><i class="fa fa-google-plus-square"></i> +1</a>
 </span>
 <!-- /.social-share -->
         
@@ -233,10 +233,10 @@
         </div>
         <nav class="pagination" role="navigation">
             
-              <a href="/blog/2016/01/writeup-zctf/" class="btn" title="Writeup: ZCTF">Previous</a>
+              <a href="https://cubarco.org/blog/2016/01/writeup-zctf/" class="btn" title="Writeup: ZCTF">Previous</a>
             
             
-              <a href="/blog/2016/04/how-to-set-up-a-duckduckgo-proxy-site-with-nginx/" class="btn" title="如何用 Nginx 搭建简单的 DuckDuckGo 代理站">Next</a>
+              <a href="https://cubarco.org/blog/2016/04/how-to-set-up-a-duckduckgo-proxy-site-with-nginx/" class="btn" title="如何用 Nginx 搭建简单的 DuckDuckGo 代理站">Next</a>
             
         </nav><!-- /.pagination -->
         <div id="disqus_thread"></div>
@@ -265,7 +265,7 @@
 	
 	<a href="http://github.com/cubarco" title="Cubarco on Github" target="_blank"><i class="fa fa-github-square fa-2x"></i></a>
 	
-  <a href="/feed.xml" title="Atom/RSS feed"><i class="fa fa-rss-square fa-2x"></i></a>
+  <a href="https://cubarco.org/feed.xml" title="Atom/RSS feed"><i class="fa fa-rss-square fa-2x"></i></a>
 </div>
 <!-- /.social-icons -->
 
@@ -273,13 +273,13 @@
 </div>
 <!-- /.footer-wrapper -->
 
-<script src="/assets/js/scripts.min.js"></script>
+<script src="https://cubarco.org/assets/js/scripts.min.js"></script>
 
 <!-- Jekyll Simple Search option -->
 <script>
   $(document).ready(function() {
       $('.search-field').jekyllSearch({
-          jsonFile: '/search.json',
+          jsonFile: 'https://cubarco.org/search.json',
           searchResults: '.search-results',
           template: '<li><article><a href="{url}">{title} <span class="entry-date"><time datetime="{date}">{shortdate}</time></span></a></article></li>',
           fuzzy: true,

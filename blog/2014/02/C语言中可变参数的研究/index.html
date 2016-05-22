@@ -18,7 +18,7 @@
 
 <meta name="twitter:card" content="summary">
 <!--
-   -<meta name="twitter:image" content="/images/">
+   -<meta name="twitter:image" content="https://cubarco.org/images/">
    -->
 
 <!-- Open Graph -->
@@ -26,7 +26,7 @@
 <meta property="og:type" content="article">
 <meta property="og:title" content="[转] C中的可变参数研究">
 <meta property="og:description" content="初学C，感觉可变参数挺好玩的，转载一发做个mark。本想注明来源，发现来源也是转载的，找不到根源，就不贴链接了。 一. 何谓可变参数 int printf(const char* format, ...); 这是使用过C语言的人所再熟悉不过的printf函数原型，它的参数中就有固定参数format和可变参数（用”…”表示）.   而我们又可以用各种方式来调用printf,如: printf(" printf number is is: value str c typedef char _intsizeof sizeof va_start v va_arg va_end>
-<meta property="og:url" content="/blog/2014/02/C%E8%AF%AD%E8%A8%80%E4%B8%AD%E5%8F%AF%E5%8F%98%E5%8F%82%E6%95%B0%E7%9A%84%E7%A0%94%E7%A9%B6/">
+<meta property="og:url" content="https://cubarco.org/blog/2014/02/C%E8%AF%AD%E8%A8%80%E4%B8%AD%E5%8F%AF%E5%8F%98%E5%8F%82%E6%95%B0%E7%9A%84%E7%A0%94%E7%A9%B6/">
 <meta property="og:site_name" content="盘子里的部落格">
 
 
@@ -34,8 +34,8 @@
 
 
 
-<link rel="canonical" href="/blog/2014/02/C%E8%AF%AD%E8%A8%80%E4%B8%AD%E5%8F%AF%E5%8F%98%E5%8F%82%E6%95%B0%E7%9A%84%E7%A0%94%E7%A9%B6/">
-<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="盘子里的部落格 Feed">
+<link rel="canonical" href="https://cubarco.org/blog/2014/02/C%E8%AF%AD%E8%A8%80%E4%B8%AD%E5%8F%AF%E5%8F%98%E5%8F%82%E6%95%B0%E7%9A%84%E7%A0%94%E7%A9%B6/">
+<link href="https://cubarco.org/feed.xml" type="application/atom+xml" rel="alternate" title="盘子里的部落格 Feed">
 <link rel="author" href="http://plus.google.com/+%E6%9E%97%E5%AE%B6%E5%86%9BCube?rel=author">
 
 <!-- http://t.co/dKP3o1e -->
@@ -44,7 +44,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <!-- For all browsers -->
-<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="stylesheet" href="https://cubarco.org/assets/css/main.css">
 
 <!--Webfonts-->
 <link href="//fonts.googleapis.com/css?family=Volkhov%7CCabin" rel="stylesheet" type="text/css">
@@ -57,8 +57,8 @@
 
 <!-- HTML5 Shiv and Media Query Support -->
 <!--[if lt IE 9]>
-  <script src="/assets/js/vendor/html5shiv.min.js"></script>
-  <script src="/assets/js/vendor/respond.min.js"></script>
+  <script src="https://cubarco.org/assets/js/vendor/html5shiv.min.js"></script>
+  <script src="https://cubarco.org/assets/js/vendor/respond.min.js"></script>
 <![endif]-->
 
 <!-- Modernizr -->
@@ -67,36 +67,36 @@
 <!-- Icons -->
 <!--
    -[> 16x16 <]
-   -<link rel="shortcut icon" href="/favicon-16x16.ico">
+   -<link rel="shortcut icon" href="https://cubarco.org/favicon-16x16.ico">
    -[> 32x32 <]
-   -<link rel="shortcut icon" href="/favicon-32x32.ico">
+   -<link rel="shortcut icon" href="https://cubarco.org/favicon-32x32.ico">
    -[> 57x57 (precomposed) for iPhone 3GS, pre-2011 iPod Touch and older Android devices <]
-   -<link rel="apple-touch-icon-precomposed" href="/images/apple-touch-icon-precomposed.png">
+   -<link rel="apple-touch-icon-precomposed" href="https://cubarco.org/images/apple-touch-icon-precomposed.png">
    -[> 72x72 (precomposed) for 1st generation iPad, iPad 2 and iPad mini <]
-   -<link rel="apple-touch-icon-precomposed" sizes="72x72" href="/images/apple-touch-icon-72x72-precomposed.png">
+   -<link rel="apple-touch-icon-precomposed" sizes="72x72" href="https://cubarco.org/images/apple-touch-icon-72x72-precomposed.png">
    -[> 114x114 (precomposed) for iPhone 4, 4S, 5 and post-2011 iPod Touch <]
-   -<link rel="apple-touch-icon-precomposed" sizes="114x114" href="/images/apple-touch-icon-114x114-precomposed.png">
+   -<link rel="apple-touch-icon-precomposed" sizes="114x114" href="https://cubarco.org/images/apple-touch-icon-114x114-precomposed.png">
    -[> 144x144 (precomposed) for iPad 3rd and 4th generation <]
-   -<link rel="apple-touch-icon-precomposed" sizes="144x144" href="/images/apple-touch-icon-144x144-precomposed.png">
+   -<link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://cubarco.org/images/apple-touch-icon-144x144-precomposed.png">
    -->
-<link rel="shortcut icon" href="/favicon.ico">
-<link rel="apple-touch-icon" sizes="57x57" href="/images/favicons/apple-touch-icon-57x57.png">
-<link rel="apple-touch-icon" sizes="60x60" href="/images/favicons/apple-touch-icon-60x60.png">
-<link rel="apple-touch-icon" sizes="72x72" href="/images/favicons/apple-touch-icon-72x72.png">
-<link rel="apple-touch-icon" sizes="76x76" href="/images/favicons/apple-touch-icon-76x76.png">
-<link rel="apple-touch-icon" sizes="114x114" href="/images/favicons/apple-touch-icon-114x114.png">
-<link rel="apple-touch-icon" sizes="120x120" href="/images/favicons/apple-touch-icon-120x120.png">
-<link rel="apple-touch-icon" sizes="144x144" href="/images/favicons/apple-touch-icon-144x144.png">
-<link rel="apple-touch-icon" sizes="152x152" href="/images/favicons/apple-touch-icon-152x152.png">
-<link rel="apple-touch-icon" sizes="180x180" href="/images/favicons/apple-touch-icon-180x180.png">
-<link rel="icon" type="image/png" href="/images/favicons/android-chrome-192x192.png" sizes="192x192">
-<link rel="icon" type="image/png" href="/images/favicons/favicon-32x32.png" sizes="32x32">
-<link rel="icon" type="image/png" href="/images/favicons/favicon-96x96.png" sizes="96x96">
-<link rel="icon" type="image/png" href="/images/favicons/favicon-16x16.png" sizes="16x16">
+<link rel="shortcut icon" href="https://cubarco.org/favicon.ico">
+<link rel="apple-touch-icon" sizes="57x57" href="https://cubarco.org/images/favicons/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="https://cubarco.org/images/favicons/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="https://cubarco.org/images/favicons/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="https://cubarco.org/images/favicons/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="https://cubarco.org/images/favicons/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="https://cubarco.org/images/favicons/apple-touch-icon-120x120.png">
+<link rel="apple-touch-icon" sizes="144x144" href="https://cubarco.org/images/favicons/apple-touch-icon-144x144.png">
+<link rel="apple-touch-icon" sizes="152x152" href="https://cubarco.org/images/favicons/apple-touch-icon-152x152.png">
+<link rel="apple-touch-icon" sizes="180x180" href="https://cubarco.org/images/favicons/apple-touch-icon-180x180.png">
+<link rel="icon" type="image/png" href="https://cubarco.org/images/favicons/android-chrome-192x192.png" sizes="192x192">
+<link rel="icon" type="image/png" href="https://cubarco.org/images/favicons/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="https://cubarco.org/images/favicons/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="https://cubarco.org/images/favicons/favicon-16x16.png" sizes="16x16">
 
 
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-<script>window.jQuery || document.write('<script src="/assets/js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
+<script>window.jQuery || document.write('<script src="https://cubarco.org/assets/js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
 <script src="/assets/js/gist-async.min.js"></script>
 
 </head>
@@ -108,19 +108,19 @@
 	    <ul>
       
 		    
-		    <li><a href="/blog/">Latest</a></li>
+		    <li><a href="https://cubarco.org/blog/">Latest</a></li>
 		  
 		    
-		    <li><a href="/blog/about/">About</a></li>
+		    <li><a href="https://cubarco.org/blog/about/">About</a></li>
 		  
 		    
-		    <li><a href="/blog/category/blog/">Blog</a></li>
+		    <li><a href="https://cubarco.org/blog/category/blog/">Blog</a></li>
 		  
 		    
-		    <li><a href="/blog/category/notes/">Notes</a></li>
+		    <li><a href="https://cubarco.org/blog/category/notes/">Notes</a></li>
 		  
 		    
-		    <li><a href="/blog/tags/">Tags</a></li>
+		    <li><a href="https://cubarco.org/blog/tags/">Tags</a></li>
 		  
         <li class="dosearch"><span><i class="fa fa-search"></i> Search</span></li>
 	    </ul>
@@ -144,7 +144,7 @@
 <header class="masthead">
 	<div class="wrap">
         
-        <h1 class="site-title animated fadeIn"><a href="">盘子里的部落格</a></h1>
+        <h1 class="site-title animated fadeIn"><a href="https://cubarco.org">盘子里的部落格</a></h1>
 		<h2 class="site-description animated fadeIn" itemprop="description">Yet another Jekyll blog.</h2>
 	</div>
 </header><!-- /.masthead -->
@@ -156,7 +156,7 @@
     
     <div class="entry-wrapper">
       <header class="entry-header">
-        <span class="entry-tags"><a href="/blog/tags/#C" title="Pages tagged C">C</a></span>
+        <span class="entry-tags"><a href="https://cubarco.org/blog/tags/#C" title="Pages tagged C">C</a></span>
         
           <h1 class="entry-title">[转] C中的可变参数研究</h1>
         
@@ -164,20 +164,20 @@
       <footer class="entry-meta">
         
         
-          <img src="/images/matrix.png" class="bio-photo" alt="Cubarco bio photo">
+          <img src="https://cubarco.org/images/matrix.png" class="bio-photo" alt="Cubarco bio photo">
         
         <span class="author vcard">By <span class="fn">Cubarco</span></span>
         <span class="entry-date date published"><time datetime="2014-02-25T00:00:00+08:00"><i class="fa fa-calendar-o"></i> February 25, 2014</time></span>
         
         <span class="entry-comments"><i class="fa fa-comment-o"></i> <a href="#disqus_thread">Comment</a></span>
         <span class="social-share-twitter">
-  <a href="https://twitter.com/intent/tweet?hashtags=C&amp;text=%5B%E8%BD%AC%5D%20C%E4%B8%AD%E7%9A%84%E5%8F%AF%E5%8F%98%E5%8F%82%E6%95%B0%E7%A0%94%E7%A9%B6&amp;url=/blog/2014/02/C%E8%AF%AD%E8%A8%80%E4%B8%AD%E5%8F%AF%E5%8F%98%E5%8F%82%E6%95%B0%E7%9A%84%E7%A0%94%E7%A9%B6/&amp;via=Cube_Lin" title="Share on Twitter" itemprop="Twitter"><i class="fa fa-twitter-square"></i> Tweet</a>
+  <a href="https://twitter.com/intent/tweet?hashtags=C&amp;text=%5B%E8%BD%AC%5D%20C%E4%B8%AD%E7%9A%84%E5%8F%AF%E5%8F%98%E5%8F%82%E6%95%B0%E7%A0%94%E7%A9%B6&amp;url=https://cubarco.org/blog/2014/02/C%E8%AF%AD%E8%A8%80%E4%B8%AD%E5%8F%AF%E5%8F%98%E5%8F%82%E6%95%B0%E7%9A%84%E7%A0%94%E7%A9%B6/&amp;via=Cube_Lin" title="Share on Twitter" itemprop="Twitter"><i class="fa fa-twitter-square"></i> Tweet</a>
 </span>
 <span class="social-share-facebook">
-  <a href="https://www.facebook.com/sharer/sharer.php?u=/blog/2014/02/C%E8%AF%AD%E8%A8%80%E4%B8%AD%E5%8F%AF%E5%8F%98%E5%8F%82%E6%95%B0%E7%9A%84%E7%A0%94%E7%A9%B6/" title="Share on Facebook" itemprop="Facebook"><i class="fa fa-facebook-square"></i> Like</a>
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https://cubarco.org/blog/2014/02/C%E8%AF%AD%E8%A8%80%E4%B8%AD%E5%8F%AF%E5%8F%98%E5%8F%82%E6%95%B0%E7%9A%84%E7%A0%94%E7%A9%B6/" title="Share on Facebook" itemprop="Facebook"><i class="fa fa-facebook-square"></i> Like</a>
 </span>
 <span class="social-share-googleplus">
-  <a href="https://plus.google.com/share?url=/blog/2014/02/C%E8%AF%AD%E8%A8%80%E4%B8%AD%E5%8F%AF%E5%8F%98%E5%8F%82%E6%95%B0%E7%9A%84%E7%A0%94%E7%A9%B6/" title="Share on Google Plus" itemprop="GooglePlus"><i class="fa fa-google-plus-square"></i> +1</a>
+  <a href="https://plus.google.com/share?url=https://cubarco.org/blog/2014/02/C%E8%AF%AD%E8%A8%80%E4%B8%AD%E5%8F%AF%E5%8F%98%E5%8F%82%E6%95%B0%E7%9A%84%E7%A0%94%E7%A9%B6/" title="Share on Google Plus" itemprop="GooglePlus"><i class="fa fa-google-plus-square"></i> +1</a>
 </span>
 <!-- /.social-share -->
         
@@ -336,10 +336,10 @@ the secend test:i=1234; 0xabcd;j=5678;
         </div>
         <nav class="pagination" role="navigation">
             
-              <a href="/blog/2014/02/%E9%80%9A%E8%BF%87dns%E9%9A%A7%E9%81%93%E7%BB%95%E8%BF%87portal%E8%AE%A4%E8%AF%81/" class="btn" title="通过DNS隧道绕过portal认证">Previous</a>
+              <a href="https://cubarco.org/blog/2014/02/%E9%80%9A%E8%BF%87dns%E9%9A%A7%E9%81%93%E7%BB%95%E8%BF%87portal%E8%AE%A4%E8%AF%81/" class="btn" title="通过DNS隧道绕过portal认证">Previous</a>
             
             
-              <a href="/blog/2014/03/kde%E7%AA%97%E5%8F%A3%E6%92%95%E8%A3%82%E7%9A%84%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95/" class="btn" title="KDE窗口撕裂的解决办法">Next</a>
+              <a href="https://cubarco.org/blog/2014/03/kde%E7%AA%97%E5%8F%A3%E6%92%95%E8%A3%82%E7%9A%84%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95/" class="btn" title="KDE窗口撕裂的解决办法">Next</a>
             
         </nav><!-- /.pagination -->
         <div id="disqus_thread"></div>
@@ -368,7 +368,7 @@ the secend test:i=1234; 0xabcd;j=5678;
 	
 	<a href="http://github.com/cubarco" title="Cubarco on Github" target="_blank"><i class="fa fa-github-square fa-2x"></i></a>
 	
-  <a href="/feed.xml" title="Atom/RSS feed"><i class="fa fa-rss-square fa-2x"></i></a>
+  <a href="https://cubarco.org/feed.xml" title="Atom/RSS feed"><i class="fa fa-rss-square fa-2x"></i></a>
 </div>
 <!-- /.social-icons -->
 
@@ -376,13 +376,13 @@ the secend test:i=1234; 0xabcd;j=5678;
 </div>
 <!-- /.footer-wrapper -->
 
-<script src="/assets/js/scripts.min.js"></script>
+<script src="https://cubarco.org/assets/js/scripts.min.js"></script>
 
 <!-- Jekyll Simple Search option -->
 <script>
   $(document).ready(function() {
       $('.search-field').jekyllSearch({
-          jsonFile: '/search.json',
+          jsonFile: 'https://cubarco.org/search.json',
           searchResults: '.search-results',
           template: '<li><article><a href="{url}">{title} <span class="entry-date"><time datetime="{date}">{shortdate}</time></span></a></article></li>',
           fuzzy: true,

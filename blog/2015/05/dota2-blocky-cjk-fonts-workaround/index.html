@@ -18,7 +18,7 @@
 
 <meta name="twitter:card" content="summary">
 <!--
-   -<meta name="twitter:image" content="/images/">
+   -<meta name="twitter:image" content="https://cubarco.org/images/">
    -->
 
 <!-- Open Graph -->
@@ -26,7 +26,7 @@
 <meta property="og:type" content="article">
 <meta property="og:title" content="一个解决 Linux 版 Dota 2 中 CJK 字符显示成方块的 Workaround">
 <meta property="og:description" content="不知道从什么时候开始，Linux 版本的 Dota 2 中载入界面的 tips sentences 和 player name 中的中文会显示成方框，详见 issue-1688。V社基本没搭理这个 bug，只好自己动手修。 猜想是游戏内直接使用了某个字体，或者该字体不存在时调用了默认字体，但是他们不支持 CJK 字符，所以显示成方块。因为 SteamFonts 给的全是Arial字体，我猜 Dota 2 那些文本使用的字体可能是Arial，开FC_DEBUG跑了一遍发现猜的没错。那么我们要做的就是用fontconfig把Arial替换成支持中文的字体。 解决办法 替换Arial的fontconfig配置是: &lt;match target=" pattern qual="any" name="family" mode="assign" binding="same" sans s chinese zen hei fontconfig_file dota version="1.0" fontconfig system ignore_missing="no" target="pattern">
-<meta property="og:url" content="/blog/2015/05/dota2-blocky-cjk-fonts-workaround/">
+<meta property="og:url" content="https://cubarco.org/blog/2015/05/dota2-blocky-cjk-fonts-workaround/">
 <meta property="og:site_name" content="盘子里的部落格">
 
 
@@ -34,8 +34,8 @@
 
 
 
-<link rel="canonical" href="/blog/2015/05/dota2-blocky-cjk-fonts-workaround/">
-<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="盘子里的部落格 Feed">
+<link rel="canonical" href="https://cubarco.org/blog/2015/05/dota2-blocky-cjk-fonts-workaround/">
+<link href="https://cubarco.org/feed.xml" type="application/atom+xml" rel="alternate" title="盘子里的部落格 Feed">
 <link rel="author" href="http://plus.google.com/+%E6%9E%97%E5%AE%B6%E5%86%9BCube?rel=author">
 
 <!-- http://t.co/dKP3o1e -->
@@ -44,7 +44,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <!-- For all browsers -->
-<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="stylesheet" href="https://cubarco.org/assets/css/main.css">
 
 <!--Webfonts-->
 <link href="//fonts.googleapis.com/css?family=Volkhov%7CCabin" rel="stylesheet" type="text/css">
@@ -57,8 +57,8 @@
 
 <!-- HTML5 Shiv and Media Query Support -->
 <!--[if lt IE 9]>
-  <script src="/assets/js/vendor/html5shiv.min.js"></script>
-  <script src="/assets/js/vendor/respond.min.js"></script>
+  <script src="https://cubarco.org/assets/js/vendor/html5shiv.min.js"></script>
+  <script src="https://cubarco.org/assets/js/vendor/respond.min.js"></script>
 <![endif]-->
 
 <!-- Modernizr -->
@@ -67,36 +67,36 @@
 <!-- Icons -->
 <!--
    -[> 16x16 <]
-   -<link rel="shortcut icon" href="/favicon-16x16.ico">
+   -<link rel="shortcut icon" href="https://cubarco.org/favicon-16x16.ico">
    -[> 32x32 <]
-   -<link rel="shortcut icon" href="/favicon-32x32.ico">
+   -<link rel="shortcut icon" href="https://cubarco.org/favicon-32x32.ico">
    -[> 57x57 (precomposed) for iPhone 3GS, pre-2011 iPod Touch and older Android devices <]
-   -<link rel="apple-touch-icon-precomposed" href="/images/apple-touch-icon-precomposed.png">
+   -<link rel="apple-touch-icon-precomposed" href="https://cubarco.org/images/apple-touch-icon-precomposed.png">
    -[> 72x72 (precomposed) for 1st generation iPad, iPad 2 and iPad mini <]
-   -<link rel="apple-touch-icon-precomposed" sizes="72x72" href="/images/apple-touch-icon-72x72-precomposed.png">
+   -<link rel="apple-touch-icon-precomposed" sizes="72x72" href="https://cubarco.org/images/apple-touch-icon-72x72-precomposed.png">
    -[> 114x114 (precomposed) for iPhone 4, 4S, 5 and post-2011 iPod Touch <]
-   -<link rel="apple-touch-icon-precomposed" sizes="114x114" href="/images/apple-touch-icon-114x114-precomposed.png">
+   -<link rel="apple-touch-icon-precomposed" sizes="114x114" href="https://cubarco.org/images/apple-touch-icon-114x114-precomposed.png">
    -[> 144x144 (precomposed) for iPad 3rd and 4th generation <]
-   -<link rel="apple-touch-icon-precomposed" sizes="144x144" href="/images/apple-touch-icon-144x144-precomposed.png">
+   -<link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://cubarco.org/images/apple-touch-icon-144x144-precomposed.png">
    -->
-<link rel="shortcut icon" href="/favicon.ico">
-<link rel="apple-touch-icon" sizes="57x57" href="/images/favicons/apple-touch-icon-57x57.png">
-<link rel="apple-touch-icon" sizes="60x60" href="/images/favicons/apple-touch-icon-60x60.png">
-<link rel="apple-touch-icon" sizes="72x72" href="/images/favicons/apple-touch-icon-72x72.png">
-<link rel="apple-touch-icon" sizes="76x76" href="/images/favicons/apple-touch-icon-76x76.png">
-<link rel="apple-touch-icon" sizes="114x114" href="/images/favicons/apple-touch-icon-114x114.png">
-<link rel="apple-touch-icon" sizes="120x120" href="/images/favicons/apple-touch-icon-120x120.png">
-<link rel="apple-touch-icon" sizes="144x144" href="/images/favicons/apple-touch-icon-144x144.png">
-<link rel="apple-touch-icon" sizes="152x152" href="/images/favicons/apple-touch-icon-152x152.png">
-<link rel="apple-touch-icon" sizes="180x180" href="/images/favicons/apple-touch-icon-180x180.png">
-<link rel="icon" type="image/png" href="/images/favicons/android-chrome-192x192.png" sizes="192x192">
-<link rel="icon" type="image/png" href="/images/favicons/favicon-32x32.png" sizes="32x32">
-<link rel="icon" type="image/png" href="/images/favicons/favicon-96x96.png" sizes="96x96">
-<link rel="icon" type="image/png" href="/images/favicons/favicon-16x16.png" sizes="16x16">
+<link rel="shortcut icon" href="https://cubarco.org/favicon.ico">
+<link rel="apple-touch-icon" sizes="57x57" href="https://cubarco.org/images/favicons/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="https://cubarco.org/images/favicons/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="https://cubarco.org/images/favicons/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="https://cubarco.org/images/favicons/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="https://cubarco.org/images/favicons/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="https://cubarco.org/images/favicons/apple-touch-icon-120x120.png">
+<link rel="apple-touch-icon" sizes="144x144" href="https://cubarco.org/images/favicons/apple-touch-icon-144x144.png">
+<link rel="apple-touch-icon" sizes="152x152" href="https://cubarco.org/images/favicons/apple-touch-icon-152x152.png">
+<link rel="apple-touch-icon" sizes="180x180" href="https://cubarco.org/images/favicons/apple-touch-icon-180x180.png">
+<link rel="icon" type="image/png" href="https://cubarco.org/images/favicons/android-chrome-192x192.png" sizes="192x192">
+<link rel="icon" type="image/png" href="https://cubarco.org/images/favicons/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="https://cubarco.org/images/favicons/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="https://cubarco.org/images/favicons/favicon-16x16.png" sizes="16x16">
 
 
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-<script>window.jQuery || document.write('<script src="/assets/js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
+<script>window.jQuery || document.write('<script src="https://cubarco.org/assets/js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
 <script src="/assets/js/gist-async.min.js"></script>
 
 </head>
@@ -108,19 +108,19 @@
 	    <ul>
       
 		    
-		    <li><a href="/blog/">Latest</a></li>
+		    <li><a href="https://cubarco.org/blog/">Latest</a></li>
 		  
 		    
-		    <li><a href="/blog/about/">About</a></li>
+		    <li><a href="https://cubarco.org/blog/about/">About</a></li>
 		  
 		    
-		    <li><a href="/blog/category/blog/">Blog</a></li>
+		    <li><a href="https://cubarco.org/blog/category/blog/">Blog</a></li>
 		  
 		    
-		    <li><a href="/blog/category/notes/">Notes</a></li>
+		    <li><a href="https://cubarco.org/blog/category/notes/">Notes</a></li>
 		  
 		    
-		    <li><a href="/blog/tags/">Tags</a></li>
+		    <li><a href="https://cubarco.org/blog/tags/">Tags</a></li>
 		  
         <li class="dosearch"><span><i class="fa fa-search"></i> Search</span></li>
 	    </ul>
@@ -144,7 +144,7 @@
 <header class="masthead">
 	<div class="wrap">
         
-        <h1 class="site-title animated fadeIn"><a href="">盘子里的部落格</a></h1>
+        <h1 class="site-title animated fadeIn"><a href="https://cubarco.org">盘子里的部落格</a></h1>
 		<h2 class="site-description animated fadeIn" itemprop="description">Yet another Jekyll blog.</h2>
 	</div>
 </header><!-- /.masthead -->
@@ -156,7 +156,7 @@
     
     <div class="entry-wrapper">
       <header class="entry-header">
-        <span class="entry-tags"><a href="/blog/tags/#Linux" title="Pages tagged Linux">Linux</a> • <a href="/blog/tags/#Steam" title="Pages tagged Steam">Steam</a> • <a href="/blog/tags/#Dota%202" title="Pages tagged Dota 2">Dota 2</a> • <a href="/blog/tags/#Fonts" title="Pages tagged Fonts">Fonts</a> • <a href="/blog/tags/#CJK" title="Pages tagged CJK">CJK</a></span>
+        <span class="entry-tags"><a href="https://cubarco.org/blog/tags/#Linux" title="Pages tagged Linux">Linux</a> • <a href="https://cubarco.org/blog/tags/#Steam" title="Pages tagged Steam">Steam</a> • <a href="https://cubarco.org/blog/tags/#Dota%202" title="Pages tagged Dota 2">Dota 2</a> • <a href="https://cubarco.org/blog/tags/#Fonts" title="Pages tagged Fonts">Fonts</a> • <a href="https://cubarco.org/blog/tags/#CJK" title="Pages tagged CJK">CJK</a></span>
         
           <h1 class="entry-title">一个解决 Linux 版 Dota 2 中 CJK 字符显示成方块的 Workaround</h1>
         
@@ -164,20 +164,20 @@
       <footer class="entry-meta">
         
         
-          <img src="/images/matrix.png" class="bio-photo" alt="Cubarco bio photo">
+          <img src="https://cubarco.org/images/matrix.png" class="bio-photo" alt="Cubarco bio photo">
         
         <span class="author vcard">By <span class="fn">Cubarco</span></span>
         <span class="entry-date date published"><time datetime="2015-05-14T00:00:00+08:00"><i class="fa fa-calendar-o"></i> May 14, 2015</time></span>
         <span class="entry-date date modified"><time datetime="2015-05-29"><i class="fa fa-pencil"></i> May 29, 2015</time></span>
         <span class="entry-comments"><i class="fa fa-comment-o"></i> <a href="#disqus_thread">Comment</a></span>
         <span class="social-share-twitter">
-  <a href="https://twitter.com/intent/tweet?hashtags=Linux,Steam,Dota2,Fonts,CJK&amp;text=%E4%B8%80%E4%B8%AA%E8%A7%A3%E5%86%B3%20Linux%20%E7%89%88%20Dota%202%20%E4%B8%AD%20CJK%20%E5%AD%97%E7%AC%A6%E6%98%BE%E7%A4%BA%E6%88%90%E6%96%B9%E5%9D%97%E7%9A%84%20Workaround&amp;url=/blog/2015/05/dota2-blocky-cjk-fonts-workaround/&amp;via=Cube_Lin" title="Share on Twitter" itemprop="Twitter"><i class="fa fa-twitter-square"></i> Tweet</a>
+  <a href="https://twitter.com/intent/tweet?hashtags=Linux,Steam,Dota2,Fonts,CJK&amp;text=%E4%B8%80%E4%B8%AA%E8%A7%A3%E5%86%B3%20Linux%20%E7%89%88%20Dota%202%20%E4%B8%AD%20CJK%20%E5%AD%97%E7%AC%A6%E6%98%BE%E7%A4%BA%E6%88%90%E6%96%B9%E5%9D%97%E7%9A%84%20Workaround&amp;url=https://cubarco.org/blog/2015/05/dota2-blocky-cjk-fonts-workaround/&amp;via=Cube_Lin" title="Share on Twitter" itemprop="Twitter"><i class="fa fa-twitter-square"></i> Tweet</a>
 </span>
 <span class="social-share-facebook">
-  <a href="https://www.facebook.com/sharer/sharer.php?u=/blog/2015/05/dota2-blocky-cjk-fonts-workaround/" title="Share on Facebook" itemprop="Facebook"><i class="fa fa-facebook-square"></i> Like</a>
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https://cubarco.org/blog/2015/05/dota2-blocky-cjk-fonts-workaround/" title="Share on Facebook" itemprop="Facebook"><i class="fa fa-facebook-square"></i> Like</a>
 </span>
 <span class="social-share-googleplus">
-  <a href="https://plus.google.com/share?url=/blog/2015/05/dota2-blocky-cjk-fonts-workaround/" title="Share on Google Plus" itemprop="GooglePlus"><i class="fa fa-google-plus-square"></i> +1</a>
+  <a href="https://plus.google.com/share?url=https://cubarco.org/blog/2015/05/dota2-blocky-cjk-fonts-workaround/" title="Share on Google Plus" itemprop="GooglePlus"><i class="fa fa-google-plus-square"></i> +1</a>
 </span>
 <!-- /.social-share -->
         
@@ -255,10 +255,10 @@ steam</code></pre></figure>
         </div>
         <nav class="pagination" role="navigation">
             
-              <a href="/blog/2015/05/c-programming-tricks/" class="btn" title="C Programming Tricks">Previous</a>
+              <a href="https://cubarco.org/blog/2015/05/c-programming-tricks/" class="btn" title="C Programming Tricks">Previous</a>
             
             
-              <a href="/blog/2015/11/9477-calcpop-writeup/" class="btn" title="Writeup-9447 CTF: calcpop">Next</a>
+              <a href="https://cubarco.org/blog/2015/11/9477-calcpop-writeup/" class="btn" title="Writeup-9447 CTF: calcpop">Next</a>
             
         </nav><!-- /.pagination -->
         <div id="disqus_thread"></div>
@@ -287,7 +287,7 @@ steam</code></pre></figure>
 	
 	<a href="http://github.com/cubarco" title="Cubarco on Github" target="_blank"><i class="fa fa-github-square fa-2x"></i></a>
 	
-  <a href="/feed.xml" title="Atom/RSS feed"><i class="fa fa-rss-square fa-2x"></i></a>
+  <a href="https://cubarco.org/feed.xml" title="Atom/RSS feed"><i class="fa fa-rss-square fa-2x"></i></a>
 </div>
 <!-- /.social-icons -->
 
@@ -295,13 +295,13 @@ steam</code></pre></figure>
 </div>
 <!-- /.footer-wrapper -->
 
-<script src="/assets/js/scripts.min.js"></script>
+<script src="https://cubarco.org/assets/js/scripts.min.js"></script>
 
 <!-- Jekyll Simple Search option -->
 <script>
   $(document).ready(function() {
       $('.search-field').jekyllSearch({
-          jsonFile: '/search.json',
+          jsonFile: 'https://cubarco.org/search.json',
           searchResults: '.search-results',
           template: '<li><article><a href="{url}">{title} <span class="entry-date"><time datetime="{date}">{shortdate}</time></span></a></article></li>',
           fuzzy: true,

