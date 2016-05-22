@@ -2,6 +2,10 @@ language: ruby
 rvm:
   - 2.1
 
+branches:
+  only:
+    - source
+
 env:
   global:
     - secure: "CpTJ0+CL4UNzkOT+t4rLeH0RK7p9kSlfOwMKCFdNMHFXVLBujKHPUiGlw3xqFJj4ok90TQyRjxnbgOgh2xaYUqfV8tWxr9nhhlD4Vbb9N8R7ZxBrfWXpt06g1jx3WjViEJJJawK4WMVFUABzpq71RVdqCM147knmXk1B8rRM93M/oiPn1hRUAvm7+U+IglIACFPVy/A1hEod8cjxeWFIxUtcxVLshAqmhVtDT2Ffiw8/wXog2CQYypuMxNbpntmqW8AxSi25ttfOOsSnqMKLOYAtReii95RChZBjSveYWDITIeK/sPA4t6yqL7MMU31VMaQ4wgtta5otvu69kg5WC8EkG7VLL8oyg7Bul0sReDcFSV4Z7zTIq/t1jz1iMjC9gNBtsN9GhJFiPGe+9xWo+M7ZaFXiuT9ceWJae5Hnya5SFpJGvMavGypqlv5CU9k+sBJ0prVd1cGbLyXc6CEkp6XRlgZWD9eaoGLHgUoI4woLL/JqLQWcgh8puhu/m0nb+ARfNMItt0XTMvJMMVsaIpJuS8OTYvHKeIZRoS42jafojBMreIUcVV8v8eOW7QiejEnx6Qcjo0TyX2ilcE/GNYWrsHOCzpBzNbTZpoQ3h7K5bKffQIbTmZtV84BQvOUZXRfyTvNK6lo/01l9GnSlhkSpzQvgwZgXeOyj8aO7atY="
