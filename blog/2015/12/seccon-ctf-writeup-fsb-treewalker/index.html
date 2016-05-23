@@ -1,71 +1,41 @@
 <!DOCTYPE html>
 <!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]--><!--[if (IE 7)&!(IEMobile)]><html class="no-js lt-ie9 lt-ie8" lang="en"><![endif]--><!--[if (IE 8)&!(IEMobile)]><html class="no-js lt-ie9" lang="en"><![endif]--><!--[if gt IE 8]><!--><html class="no-js" lang="en">
-<!--<![endif]-->
-<head>
+<!--<![endif]--><head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="theme-color" content="#000000">
 <title>Writeup-Seccon CTF: FSB:TreeWalker – 盘子里的部落格</title>
 <meta name="description" content="printf() 因为这题直接把 FSB 写在题名里，我一拿到题就直接跑去找能利用 FSB 的点了。 利用点在这里： 400881: 0f 1f 80 00 00 00 00 nopl 0x0(%rax) 400888: 4c 8b 05 f9 09 20 00 mov 0x2009f9(%rip),%r8 # 601288 &lt;stdin@@GLIBC_2.2.5&gt; 40088f: 48 8d 7c 24 50 lea 0x50(%rsp),%rdi 400894: ba 01 00 00 00 mov $0x1,%edx 400899: be 00 10 00 00 mov $0x1000,%esi 40089e: e8 fd fe ff ff callq 4007a0 &lt;__fread_chk@plt&gt; 4008a3: 48 39 44 24 08 cmp %rax,0x8(%rsp) 4008a8: 0f 85 81...">
 <meta name="keywords" content="Hack, CTF, Writeup, Exploitation, FSB">
-
-
-<!-- Twitter Cards -->
-<meta name="twitter:title" content="Writeup-Seccon CTF: FSB:TreeWalker">
+<!-- Twitter Cards --><meta name="twitter:title" content="Writeup-Seccon CTF: FSB:TreeWalker">
 <meta name="twitter:description" content="printf() 因为这题直接把 FSB 写在题名里，我一拿到题就直接跑去找能利用 FSB 的点了。 利用点在这里： 400881: 0f 1f 80 00 00 00 00 nopl 0x0(%rax) 400888: 4c 8b 05 f9 09 20 00 mov 0x2009f9(%rip),%r8 # 601288 &lt;stdin@@GLIBC_2.2.5&gt; 40088f: 48 8d 7c 24 50 lea 0x50(%rsp),%rdi 400894: ba 01 00 00 00 mov $0x1,%edx 400899: be 00 10 00 00 mov $0x1000,%esi 40089e: e8 fd fe ff ff callq 4007a0 &lt;__fread_chk@plt&gt; 4008a3: 48 39 44 24 08 cmp %rax,0x8(%rsp) 4008a8: 0f 85 81...">
 <meta name="twitter:site" content="@Cube_Lin">
 <meta name="twitter:creator" content="@Cube_Lin">
-
 <meta name="twitter:card" content="summary">
 <!--
    -<meta name="twitter:image" content="https://cubarco.org/images/">
-   -->
-
-<!-- Open Graph -->
-<meta property="og:locale" content="zh_CN">
+   --><!-- Open Graph --><meta property="og:locale" content="zh_CN">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Writeup-Seccon CTF: FSB:TreeWalker">
 <meta property="og:description" content="printf() 因为这题直接把 FSB 写在题名里，我一拿到题就直接跑去找能利用 FSB 的点了。 利用点在这里： 400881: 0f 1f 80 00 00 00 00 nopl 0x0(%rax) 400888: 4c 8b 05 f9 09 20 00 mov 0x2009f9(%rip),%r8 # 601288 &lt;stdin@@GLIBC_2.2.5&gt; 40088f: 48 8d 7c 24 50 lea 0x50(%rsp),%rdi 400894: ba 01 00 00 00 mov $0x1,%edx 400899: be 00 10 00 00 mov $0x1000,%esi 40089e: e8 fd fe ff ff callq 4007a0 &lt;__fread_chk@plt&gt; 4008a3: 48 39 44 24 08 cmp %rax,0x8(%rsp) 4008a8: 0f 85 81...">
 <meta property="og:url" content="https://cubarco.org/blog/2015/12/seccon-ctf-writeup-fsb-treewalker/">
 <meta property="og:site_name" content="盘子里的部落格">
-
-
-
-
-
-
 <link rel="canonical" href="https://cubarco.org/blog/2015/12/seccon-ctf-writeup-fsb-treewalker/">
 <link href="https://cubarco.org/feed.xml" type="application/atom+xml" rel="alternate" title="盘子里的部落格 Feed">
 <link rel="author" href="http://plus.google.com/+%E6%9E%97%E5%AE%B6%E5%86%9BCube?rel=author">
-
-<!-- http://t.co/dKP3o1e -->
-<meta name="HandheldFriendly" content="True">
+<!-- http://t.co/dKP3o1e --><meta name="HandheldFriendly" content="True">
 <meta name="MobileOptimized" content="320">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<!-- For all browsers -->
-<link rel="stylesheet" href="https://cubarco.org/assets/css/main.css">
-
-<!--Webfonts-->
-<link href="//fonts.googleapis.com/css?family=Volkhov%7CCabin" rel="stylesheet" type="text/css">
+<!-- For all browsers --><link rel="stylesheet" href="https://cubarco.org/assets/css/main.css">
+<!--Webfonts--><link href="//fonts.googleapis.com/css?family=Volkhov%7CCabin" rel="stylesheet" type="text/css">
 <!--
    -[> Webfonts <]
    -<script src="//use.edgefonts.net/source-sans-pro:n2,i2,n3,i3,n4,i4,n6,i6,n7,i7,n9,i9;source-code-pro:n4,n7;volkhov;cabin.js"></script>
-   -->
-
-<meta http-equiv="cleartype" content="on">
-
-<!-- HTML5 Shiv and Media Query Support -->
-<!--[if lt IE 9]>
+   --><meta http-equiv="cleartype" content="on">
+<!-- HTML5 Shiv and Media Query Support --><!--[if lt IE 9]>
   <script src="https://cubarco.org/assets/js/vendor/html5shiv.min.js"></script>
   <script src="https://cubarco.org/assets/js/vendor/respond.min.js"></script>
-<![endif]-->
-
-<!-- Modernizr -->
-<script src="/assets/js/vendor/modernizr-2.7.1.custom.min.js"></script>
-
-<!-- Icons -->
-<!--
+<![endif]--><!-- Modernizr --><script src="/assets/js/vendor/modernizr-2.7.1.custom.min.js"></script><!-- Icons --><!--
    -[> 16x16 <]
    -<link rel="shortcut icon" href="https://cubarco.org/favicon-16x16.ico">
    -[> 32x32 <]
@@ -78,8 +48,7 @@
    -<link rel="apple-touch-icon-precomposed" sizes="114x114" href="https://cubarco.org/images/apple-touch-icon-114x114-precomposed.png">
    -[> 144x144 (precomposed) for iPad 3rd and 4th generation <]
    -<link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://cubarco.org/images/apple-touch-icon-144x144-precomposed.png">
-   -->
-<link rel="shortcut icon" href="https://cubarco.org/favicon.ico">
+   --><link rel="shortcut icon" href="https://cubarco.org/favicon.ico">
 <link rel="apple-touch-icon" sizes="57x57" href="https://cubarco.org/images/favicons/apple-touch-icon-57x57.png">
 <link rel="apple-touch-icon" sizes="60x60" href="https://cubarco.org/images/favicons/apple-touch-icon-60x60.png">
 <link rel="apple-touch-icon" sizes="72x72" href="https://cubarco.org/images/favicons/apple-touch-icon-72x72.png">
@@ -93,22 +62,13 @@
 <link rel="icon" type="image/png" href="https://cubarco.org/images/favicons/favicon-32x32.png" sizes="32x32">
 <link rel="icon" type="image/png" href="https://cubarco.org/images/favicons/favicon-96x96.png" sizes="96x96">
 <link rel="icon" type="image/png" href="https://cubarco.org/images/favicons/favicon-16x16.png" sizes="16x16">
-
-
-<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-<script>window.jQuery || document.write('<script src="https://cubarco.org/assets/js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
-<script src="/assets/js/gist-async.min.js"></script>
-
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script><script>window.jQuery || document.write('<script src="https://cubarco.org/assets/js/vendor/jquery-1.9.1.min.js"><\/script>')</script><script src="/assets/js/gist-async.min.js"></script>
 </head>
-
 <body id="post">
 
 <div class="navigation-wrapper">
-	<nav role="navigation" id="site-nav" class="animated drop">
-	    <ul>
-      
-		    
-		    <li><a href="https://cubarco.org/blog/">Latest</a></li>
+	<nav role="navigation" id="site-nav" class="animated drop"><ul>
+<li><a href="https://cubarco.org/blog/">Latest</a></li>
 		  
 		    
 		    <li><a href="https://cubarco.org/blog/about/">About</a></li>
@@ -123,8 +83,7 @@
 		    <li><a href="https://cubarco.org/blog/tags/">Tags</a></li>
 		  
         <li class="dosearch"><span><i class="fa fa-search"></i> Search</span></li>
-	    </ul>
-	</nav>
+	    </ul></nav>
 </div>
 <!-- /.navigation-wrapper -->
 
@@ -132,42 +91,29 @@
 
 <div class="search-wrapper">
   <div class="search-form">
-    <input type="text" class="search-field" placeholder="Search...">
-    <button class="close-btn"><i class="fa fa-times-circle fa-2x"></i></button>
+    <input type="text" class="search-field" placeholder="Search..."><button class="close-btn"><i class="fa fa-times-circle fa-2x"></i></button>
     <ul class="search-results post-list"></ul>
 <!-- /.search-results -->
-  </div>
+</div>
 <!-- /.search-form -->
 </div>
 <!-- ./search-wrapper -->
 
-<header class="masthead">
-	<div class="wrap">
+<header class="masthead"><div class="wrap">
         
         <h1 class="site-title animated fadeIn"><a href="https://cubarco.org">盘子里的部落格</a></h1>
 		<h2 class="site-description animated fadeIn" itemprop="description">Yet another Jekyll blog.</h2>
 	</div>
-</header><!-- /.masthead -->
-
-<div class="js-menu-screen menu-screen"></div>
+</header><!-- /.masthead --><div class="js-menu-screen menu-screen"></div>
 
 <div id="main" role="main">
-  <article class="hentry">
-    
-    <div class="entry-wrapper">
-      <header class="entry-header">
-        <span class="entry-tags"><a href="https://cubarco.org/blog/tags/#Hack" title="Pages tagged Hack">Hack</a> • <a href="https://cubarco.org/blog/tags/#CTF" title="Pages tagged CTF">CTF</a> • <a href="https://cubarco.org/blog/tags/#Writeup" title="Pages tagged Writeup">Writeup</a> • <a href="https://cubarco.org/blog/tags/#Exploitation" title="Pages tagged Exploitation">Exploitation</a> • <a href="https://cubarco.org/blog/tags/#FSB" title="Pages tagged FSB">FSB</a></span>
+  <article class="hentry"><div class="entry-wrapper">
+      <header class="entry-header"><span class="entry-tags"><a href="https://cubarco.org/blog/tags/#Hack" title="Pages tagged Hack">Hack</a> • <a href="https://cubarco.org/blog/tags/#CTF" title="Pages tagged CTF">CTF</a> • <a href="https://cubarco.org/blog/tags/#Writeup" title="Pages tagged Writeup">Writeup</a> • <a href="https://cubarco.org/blog/tags/#Exploitation" title="Pages tagged Exploitation">Exploitation</a> • <a href="https://cubarco.org/blog/tags/#FSB" title="Pages tagged FSB">FSB</a></span>
         
           <h1 class="entry-title">Writeup-Seccon CTF: FSB:TreeWalker</h1>
         
-      </header>
-      <footer class="entry-meta">
-        
-        
-          <img src="https://cubarco.org/images/matrix.png" class="bio-photo" alt="Cubarco bio photo">
-        
-        <span class="author vcard">By <span class="fn">Cubarco</span></span>
-        <span class="entry-date date published"><time datetime="2015-12-07T00:00:00+08:00"><i class="fa fa-calendar-o"></i> December 07, 2015</time></span>
+      </header><footer class="entry-meta"><img src="https://cubarco.org/images/matrix.png" class="bio-photo" alt="Cubarco bio photo"><span class="author vcard">By <span class="fn">Cubarco</span></span>
+        <span class="entry-date date published"><time datetime="2015-12-07T00:00:00+00:00"><i class="fa fa-calendar-o"></i> December 07, 2015</time></span>
         <span class="entry-date date modified"><time datetime="2015-12-13"><i class="fa fa-pencil"></i> December 13, 2015</time></span>
         <span class="entry-comments"><i class="fa fa-comment-o"></i> <a href="#disqus_thread">Comment</a></span>
         <span class="social-share-twitter">
@@ -181,8 +127,7 @@
 </span>
 <!-- /.social-share -->
         
-      </footer>
-      <div class="entry-content">
+      </footer><div class="entry-content">
         <h3 id="printf">printf()</h3>
 
 <p>因为这题直接把 FSB 写在题名里，我一拿到题就直接跑去找能利用 FSB 的点了。</p>
@@ -212,9 +157,7 @@
 4008e5:	48 81 f9 00 10 00 00 	cmp    $0x1000,%rcx
 4008ec:	77 10                	ja     4008fe &lt;main+0x11e&gt;
 4008ee:	48 85 c9             	test   %rcx,%rcx
-4008f1:	75 95                	jne    400888 &lt;main+0xa8&gt;</code></pre></figure>
-
-<p>在 0x4008ba 会有 printf 输出缓冲区，其内容来自用户输入，此处可以构造 format string 来 leak 内存或者是其他非法操作(利用%n)。</p>
+4008f1:	75 95                	jne    400888 &lt;main+0xa8&gt;</code></pre></figure><p>在 0x4008ba 会有 printf 输出缓冲区，其内容来自用户输入，此处可以构造 format string 来 leak 内存或者是其他非法操作(利用%n)。</p>
 
 <p>这一部分的具体输入规则是，先输入<code class="highlighter-rouge">'\x00\x10\x00\x00'</code>，然后输入 0x1000 个字符(format string)… 两步循环。</p>
 
@@ -231,9 +174,7 @@
 40086b:	48 89 44 24 30       	mov    %rax,0x30(%rsp)
 400870:	48 89 44 24 38       	mov    %rax,0x38(%rsp)
 400875:	48 89 44 24 40       	mov    %rax,0x40(%rsp)
-40087a:	48 89 44 24 48       	mov    %rax,0x48(%rsp)</code></pre></figure>
-
-<p>还是老老实实看 construct_tree() 吧。</p>
+40087a:	48 89 44 24 48       	mov    %rax,0x48(%rsp)</code></pre></figure><p>还是老老实实看 construct_tree() 吧。</p>
 
 <h3 id="constructtree">construct_tree()</h3>
 
@@ -298,9 +239,7 @@
     <span class="p">}</span>
     <span class="n">rbp6</span><span class="o">-&gt;</span><span class="n">f0</span> <span class="o">=</span> <span class="mi">76</span><span class="p">;</span>
     <span class="k">return</span> <span class="n">r15_5</span><span class="p">;</span>
-<span class="p">}</span></code></pre></figure>
-
-<p>这段代码很简单，就是依据 flag 中各个字符每个 bit 的值构造一个二叉树。然后这个树的根的的地址会在 main 函数中打印出来。</p>
+<span class="p">}</span></code></pre></figure><p>这段代码很简单，就是依据 flag 中各个字符每个 bit 的值构造一个二叉树。然后这个树的根的的地址会在 main 函数中打印出来。</p>
 
 <h3 id="exppy">exp.py</h3>
 
@@ -320,23 +259,18 @@
 
 <h3 id="references">References</h3>
 <ol>
-  <li><a href="http://phrack.org/issues/67/9.html">A Eulogy for Format Strings</a></li>
+<li><a href="http://phrack.org/issues/67/9.html">A Eulogy for Format Strings</a></li>
   <li><a href="http://repo.or.cz/glibc.git/commit/7c1f4834d398163d1ac8101e35e9c36fc3176e6e">glibc.git / commit / 7c1f4834d398163d1ac8101e35e9c36fc3176e6e</a></li>
 </ol>
-
-
-        <div align="right">
+<div align="right">
 		    <span><a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc/4.0/88x31.png"></a></span>
         </div>
-        <nav class="pagination" role="navigation">
-            
-              <a href="https://cubarco.org/blog/2015/12/9477-calcpop-reloaded-writeup/" class="btn" title="Writeup-9447 CTF: calcpop-reloaded">Previous</a>
+        <nav class="pagination" role="navigation"><a href="https://cubarco.org/blog/2015/12/9477-calcpop-reloaded-writeup/" class="btn" title="Writeup-9447 CTF: calcpop-reloaded">Previous</a>
             
             
               <a href="https://cubarco.org/blog/2015/12/writeup-pwnable-tiny-and-tiny-easy/" class="btn" title="Writeup-Pwnable: tiny &amp; tiny_easy">Next</a>
             
-        </nav><!-- /.pagination -->
-        <div id="disqus_thread"></div>
+        </nav><!-- /.pagination --><div id="disqus_thread"></div>
 <!-- /#disqus_thread -->
       </div>
 <!-- /.entry-content -->
@@ -348,10 +282,7 @@
 <!-- /#main -->
 
 <div class="footer-wrapper">
-  <footer role="contentinfo" class="entry-wrapper">
-    
-
-<span>Powered by <a href="http://jekyllrb.com" rel="nofollow">Jekyll</a> using the <a href="https://mademistakes.com/work/so-simple-jekyll-theme/" rel="nofollow">So Simple Theme</a>. Published with <a href="http://pages.github.com">GitHub Pages</a>.</span>
+  <footer role="contentinfo" class="entry-wrapper"><span>Powered by <a href="http://jekyllrb.com" rel="nofollow">Jekyll</a> using the <a href="https://mademistakes.com/work/so-simple-jekyll-theme/" rel="nofollow">So Simple Theme</a>. Published with <a href="http://pages.github.com">GitHub Pages</a>.</span>
 <div class="social-icons">
 	<a href="http://twitter.com/Cube_Lin" title="Cubarco on Twitter" target="_blank"><i class="fa fa-twitter-square fa-2x"></i></a>
 	<a href="http://facebook.com/cubarco" title="Cubarco on Facebook" target="_blank"><i class="fa fa-facebook-square fa-2x"></i></a>
@@ -370,10 +301,7 @@
 </div>
 <!-- /.footer-wrapper -->
 
-<script src="https://cubarco.org/assets/js/scripts.min.js"></script>
-
-<!-- Jekyll Simple Search option -->
-<script>
+<script src="https://cubarco.org/assets/js/scripts.min.js"></script><!-- Jekyll Simple Search option --><script>
   $(document).ready(function() {
       $('.search-field').jekyllSearch({
           jsonFile: 'https://cubarco.org/search.json',
@@ -408,13 +336,7 @@
         bs.canvas.removeClass('is-visible');
     });
   })( jQuery, window );
-</script>
-
-
-<!-- Check whether the page is a post -->
-
-  
-<script type="text/javascript">
+</script><!-- Check whether the page is a post --><script type="text/javascript">
     /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
     var disqus_shortname = 'cubarco'; // required: replace example with your forum shortname
 
@@ -432,8 +354,7 @@
         s.src = '//' + disqus_shortname + '.disqus.com/count.js';
         (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
     }());
-</script>
-<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+</script><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a>
 </noscript>
 <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
 
@@ -455,8 +376,5 @@
     var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
   })();
 </script>
-
-
-
 </body>
 </html>

@@ -1,71 +1,41 @@
 <!DOCTYPE html>
 <!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]--><!--[if (IE 7)&!(IEMobile)]><html class="no-js lt-ie9 lt-ie8" lang="en"><![endif]--><!--[if (IE 8)&!(IEMobile)]><html class="no-js lt-ie9" lang="en"><![endif]--><!--[if gt IE 8]><!--><html class="no-js" lang="en">
-<!--<![endif]-->
-<head>
+<!--<![endif]--><head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="theme-color" content="#000000">
 <title>在社交平台上发布匹配一定规则的 Github commit message – 盘子里的部落格</title>
 <meta name="description" content="之前看到了 @fqj1994 juju 的这篇 blog: 用 Google App Script 實現博客更新時自動在社交網絡上發狀態分享, 也感觉自己的 blog 根本没人访问，需要一个类似的东西。因为我的 blog 是用的 jekyll, 挂在 Github 上的，Github 又提供了一个叫 Webhook 的东西，就准备自己实现一种更加优雅的方式。 项目放在 Github 上，遵循 GPLv2 协议。整个流程很简单，就是接受 Webhook 发来的 json, 然后从中提取 commits message, 用一定的正则表达式取出标题，之后再发往各个社交平台。 昨天实现了 twitter 的部分(twitter 可以拿到不会过期的 access token)，看了下 OAuth 感觉要维护那些 token 的状态好麻烦，懒得弄… 我正在用的主要就是 twitter, Google+, 和 Facebook. Google+ 据说没给发 post 的 api, 所以作罢。接下来尽可能支持 Facebook. 如果腳本正常的話，理論上這則文章會很快被發佈到我常用的社交網絡。 嗯，就是这样。 Update 2015-01-15: 这个 blog 发出去之后发现 log 报错了(UnicodeEncodeError)，但是没时间修了(出去玩了)。晚上回来处理完各种事情之后才开始修。发现是 urllib.urlencode() 不支持 unicode, fix 已经推到 Github 上了… 感觉 python 还是学的不好啊。其实我一开始学...">
 <meta name="keywords" content="Blog, Python, Github">
-
-
-<!-- Twitter Cards -->
-<meta name="twitter:title" content="在社交平台上发布匹配一定规则的 Github commit message">
+<!-- Twitter Cards --><meta name="twitter:title" content="在社交平台上发布匹配一定规则的 Github commit message">
 <meta name="twitter:description" content="之前看到了 @fqj1994 juju 的这篇 blog: 用 Google App Script 實現博客更新時自動在社交網絡上發狀態分享, 也感觉自己的 blog 根本没人访问，需要一个类似的东西。因为我的 blog 是用的 jekyll, 挂在 Github 上的，Github 又提供了一个叫 Webhook 的东西，就准备自己实现一种更加优雅的方式。 项目放在 Github 上，遵循 GPLv2 协议。整个流程很简单，就是接受 Webhook 发来的 json, 然后从中提取 commits message, 用一定的正则表达式取出标题，之后再发往各个社交平台。 昨天实现了 twitter 的部分(twitter 可以拿到不会过期的 access token)，看了下 OAuth 感觉要维护那些 token 的状态好麻烦，懒得弄… 我正在用的主要就是 twitter, Google+, 和 Facebook. Google+ 据说没给发 post 的 api, 所以作罢。接下来尽可能支持 Facebook. 如果腳本正常的話，理論上這則文章會很快被發佈到我常用的社交網絡。 嗯，就是这样。 Update 2015-01-15: 这个 blog 发出去之后发现 log 报错了(UnicodeEncodeError)，但是没时间修了(出去玩了)。晚上回来处理完各种事情之后才开始修。发现是 urllib.urlencode() 不支持 unicode, fix 已经推到 Github 上了… 感觉 python 还是学的不好啊。其实我一开始学...">
 <meta name="twitter:site" content="@Cube_Lin">
 <meta name="twitter:creator" content="@Cube_Lin">
-
 <meta name="twitter:card" content="summary">
 <!--
    -<meta name="twitter:image" content="https://cubarco.org/images/">
-   -->
-
-<!-- Open Graph -->
-<meta property="og:locale" content="zh_CN">
+   --><!-- Open Graph --><meta property="og:locale" content="zh_CN">
 <meta property="og:type" content="article">
 <meta property="og:title" content="在社交平台上发布匹配一定规则的 Github commit message">
 <meta property="og:description" content="之前看到了 @fqj1994 juju 的这篇 blog: 用 Google App Script 實現博客更新時自動在社交網絡上發狀態分享, 也感觉自己的 blog 根本没人访问，需要一个类似的东西。因为我的 blog 是用的 jekyll, 挂在 Github 上的，Github 又提供了一个叫 Webhook 的东西，就准备自己实现一种更加优雅的方式。 项目放在 Github 上，遵循 GPLv2 协议。整个流程很简单，就是接受 Webhook 发来的 json, 然后从中提取 commits message, 用一定的正则表达式取出标题，之后再发往各个社交平台。 昨天实现了 twitter 的部分(twitter 可以拿到不会过期的 access token)，看了下 OAuth 感觉要维护那些 token 的状态好麻烦，懒得弄… 我正在用的主要就是 twitter, Google+, 和 Facebook. Google+ 据说没给发 post 的 api, 所以作罢。接下来尽可能支持 Facebook. 如果腳本正常的話，理論上這則文章會很快被發佈到我常用的社交網絡。 嗯，就是这样。 Update 2015-01-15: 这个 blog 发出去之后发现 log 报错了(UnicodeEncodeError)，但是没时间修了(出去玩了)。晚上回来处理完各种事情之后才开始修。发现是 urllib.urlencode() 不支持 unicode, fix 已经推到 Github 上了… 感觉 python 还是学的不好啊。其实我一开始学...">
 <meta property="og:url" content="https://cubarco.org/blog/2015/01/post-github-commits-to-social-platforms/">
 <meta property="og:site_name" content="盘子里的部落格">
-
-
-
-
-
-
 <link rel="canonical" href="https://cubarco.org/blog/2015/01/post-github-commits-to-social-platforms/">
 <link href="https://cubarco.org/feed.xml" type="application/atom+xml" rel="alternate" title="盘子里的部落格 Feed">
 <link rel="author" href="http://plus.google.com/+%E6%9E%97%E5%AE%B6%E5%86%9BCube?rel=author">
-
-<!-- http://t.co/dKP3o1e -->
-<meta name="HandheldFriendly" content="True">
+<!-- http://t.co/dKP3o1e --><meta name="HandheldFriendly" content="True">
 <meta name="MobileOptimized" content="320">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<!-- For all browsers -->
-<link rel="stylesheet" href="https://cubarco.org/assets/css/main.css">
-
-<!--Webfonts-->
-<link href="//fonts.googleapis.com/css?family=Volkhov%7CCabin" rel="stylesheet" type="text/css">
+<!-- For all browsers --><link rel="stylesheet" href="https://cubarco.org/assets/css/main.css">
+<!--Webfonts--><link href="//fonts.googleapis.com/css?family=Volkhov%7CCabin" rel="stylesheet" type="text/css">
 <!--
    -[> Webfonts <]
    -<script src="//use.edgefonts.net/source-sans-pro:n2,i2,n3,i3,n4,i4,n6,i6,n7,i7,n9,i9;source-code-pro:n4,n7;volkhov;cabin.js"></script>
-   -->
-
-<meta http-equiv="cleartype" content="on">
-
-<!-- HTML5 Shiv and Media Query Support -->
-<!--[if lt IE 9]>
+   --><meta http-equiv="cleartype" content="on">
+<!-- HTML5 Shiv and Media Query Support --><!--[if lt IE 9]>
   <script src="https://cubarco.org/assets/js/vendor/html5shiv.min.js"></script>
   <script src="https://cubarco.org/assets/js/vendor/respond.min.js"></script>
-<![endif]-->
-
-<!-- Modernizr -->
-<script src="/assets/js/vendor/modernizr-2.7.1.custom.min.js"></script>
-
-<!-- Icons -->
-<!--
+<![endif]--><!-- Modernizr --><script src="/assets/js/vendor/modernizr-2.7.1.custom.min.js"></script><!-- Icons --><!--
    -[> 16x16 <]
    -<link rel="shortcut icon" href="https://cubarco.org/favicon-16x16.ico">
    -[> 32x32 <]
@@ -78,8 +48,7 @@
    -<link rel="apple-touch-icon-precomposed" sizes="114x114" href="https://cubarco.org/images/apple-touch-icon-114x114-precomposed.png">
    -[> 144x144 (precomposed) for iPad 3rd and 4th generation <]
    -<link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://cubarco.org/images/apple-touch-icon-144x144-precomposed.png">
-   -->
-<link rel="shortcut icon" href="https://cubarco.org/favicon.ico">
+   --><link rel="shortcut icon" href="https://cubarco.org/favicon.ico">
 <link rel="apple-touch-icon" sizes="57x57" href="https://cubarco.org/images/favicons/apple-touch-icon-57x57.png">
 <link rel="apple-touch-icon" sizes="60x60" href="https://cubarco.org/images/favicons/apple-touch-icon-60x60.png">
 <link rel="apple-touch-icon" sizes="72x72" href="https://cubarco.org/images/favicons/apple-touch-icon-72x72.png">
@@ -93,22 +62,13 @@
 <link rel="icon" type="image/png" href="https://cubarco.org/images/favicons/favicon-32x32.png" sizes="32x32">
 <link rel="icon" type="image/png" href="https://cubarco.org/images/favicons/favicon-96x96.png" sizes="96x96">
 <link rel="icon" type="image/png" href="https://cubarco.org/images/favicons/favicon-16x16.png" sizes="16x16">
-
-
-<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-<script>window.jQuery || document.write('<script src="https://cubarco.org/assets/js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
-<script src="/assets/js/gist-async.min.js"></script>
-
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script><script>window.jQuery || document.write('<script src="https://cubarco.org/assets/js/vendor/jquery-1.9.1.min.js"><\/script>')</script><script src="/assets/js/gist-async.min.js"></script>
 </head>
-
 <body id="post">
 
 <div class="navigation-wrapper">
-	<nav role="navigation" id="site-nav" class="animated drop">
-	    <ul>
-      
-		    
-		    <li><a href="https://cubarco.org/blog/">Latest</a></li>
+	<nav role="navigation" id="site-nav" class="animated drop"><ul>
+<li><a href="https://cubarco.org/blog/">Latest</a></li>
 		  
 		    
 		    <li><a href="https://cubarco.org/blog/about/">About</a></li>
@@ -123,8 +83,7 @@
 		    <li><a href="https://cubarco.org/blog/tags/">Tags</a></li>
 		  
         <li class="dosearch"><span><i class="fa fa-search"></i> Search</span></li>
-	    </ul>
-	</nav>
+	    </ul></nav>
 </div>
 <!-- /.navigation-wrapper -->
 
@@ -132,42 +91,29 @@
 
 <div class="search-wrapper">
   <div class="search-form">
-    <input type="text" class="search-field" placeholder="Search...">
-    <button class="close-btn"><i class="fa fa-times-circle fa-2x"></i></button>
+    <input type="text" class="search-field" placeholder="Search..."><button class="close-btn"><i class="fa fa-times-circle fa-2x"></i></button>
     <ul class="search-results post-list"></ul>
 <!-- /.search-results -->
-  </div>
+</div>
 <!-- /.search-form -->
 </div>
 <!-- ./search-wrapper -->
 
-<header class="masthead">
-	<div class="wrap">
+<header class="masthead"><div class="wrap">
         
         <h1 class="site-title animated fadeIn"><a href="https://cubarco.org">盘子里的部落格</a></h1>
 		<h2 class="site-description animated fadeIn" itemprop="description">Yet another Jekyll blog.</h2>
 	</div>
-</header><!-- /.masthead -->
-
-<div class="js-menu-screen menu-screen"></div>
+</header><!-- /.masthead --><div class="js-menu-screen menu-screen"></div>
 
 <div id="main" role="main">
-  <article class="hentry">
-    
-    <div class="entry-wrapper">
-      <header class="entry-header">
-        <span class="entry-tags"><a href="https://cubarco.org/blog/tags/#Blog" title="Pages tagged Blog">Blog</a> • <a href="https://cubarco.org/blog/tags/#Python" title="Pages tagged Python">Python</a> • <a href="https://cubarco.org/blog/tags/#Github" title="Pages tagged Github">Github</a></span>
+  <article class="hentry"><div class="entry-wrapper">
+      <header class="entry-header"><span class="entry-tags"><a href="https://cubarco.org/blog/tags/#Blog" title="Pages tagged Blog">Blog</a> • <a href="https://cubarco.org/blog/tags/#Python" title="Pages tagged Python">Python</a> • <a href="https://cubarco.org/blog/tags/#Github" title="Pages tagged Github">Github</a></span>
         
           <h1 class="entry-title">在社交平台上发布匹配一定规则的 Github commit message</h1>
         
-      </header>
-      <footer class="entry-meta">
-        
-        
-          <img src="https://cubarco.org/images/matrix.png" class="bio-photo" alt="Cubarco bio photo">
-        
-        <span class="author vcard">By <span class="fn">Cubarco</span></span>
-        <span class="entry-date date published"><time datetime="2015-01-15T00:00:00+08:00"><i class="fa fa-calendar-o"></i> January 15, 2015</time></span>
+      </header><footer class="entry-meta"><img src="https://cubarco.org/images/matrix.png" class="bio-photo" alt="Cubarco bio photo"><span class="author vcard">By <span class="fn">Cubarco</span></span>
+        <span class="entry-date date published"><time datetime="2015-01-15T00:00:00+00:00"><i class="fa fa-calendar-o"></i> January 15, 2015</time></span>
         <span class="entry-date date modified"><time datetime="2015-01-15"><i class="fa fa-pencil"></i> January 15, 2015</time></span>
         <span class="entry-comments"><i class="fa fa-comment-o"></i> <a href="#disqus_thread">Comment</a></span>
         <span class="social-share-twitter">
@@ -181,8 +127,7 @@
 </span>
 <!-- /.social-share -->
         
-      </footer>
-      <div class="entry-content">
+      </footer><div class="entry-content">
         <p>之前看到了 <a href="https://github.com/fqj1994" class="user-mention">@fqj1994</a> juju 的这篇 blog: <a href="https://blog.fqj.me/posts/2013/08/google-app-script-share-blog-updates-with-social-network">用 Google App Script 實現博客更新時自動在社交網絡上發狀態分享</a>, 也感觉自己的 blog 根本没人访问，需要一个类似的东西。因为我的 blog 是用的 jekyll, 挂在 <a href="https://github.com/cubarco/cubarco.github.io">Github</a> 上的，Github 又提供了一个叫 Webhook 的东西，就准备自己实现一种更加<s>优雅</s>的方式。</p>
 
 <p>项目放在 <a href="https://github.com/cubarco/post-github-commits">Github</a> 上，遵循 <a href="http://www.gnu.org/licenses/gpl-2.0.html">GPLv2</a> 协议。整个流程很简单，就是接受 Webhook 发来的 json, 然后从中提取 commits message, 用一定的正则表达式取出标题，之后再发往各个社交平台。</p>
@@ -201,15 +146,12 @@
         <div align="right">
 		    <span><a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc/4.0/88x31.png"></a></span>
         </div>
-        <nav class="pagination" role="navigation">
-            
-              <a href="https://cubarco.org/blog/2015/01/vimscript-delpair/" class="btn" title="Vim 删除成对的字符">Previous</a>
+        <nav class="pagination" role="navigation"><a href="https://cubarco.org/blog/2015/01/vimscript-delpair/" class="btn" title="Vim 删除成对的字符">Previous</a>
             
             
               <a href="https://cubarco.org/blog/2015/01/ldconfig-and-steam-workaround/" class="btn" title="解决用 ldconfig 指定 libgl 库时 Steam 的异常">Next</a>
             
-        </nav><!-- /.pagination -->
-        <div id="disqus_thread"></div>
+        </nav><!-- /.pagination --><div id="disqus_thread"></div>
 <!-- /#disqus_thread -->
       </div>
 <!-- /.entry-content -->
@@ -221,10 +163,7 @@
 <!-- /#main -->
 
 <div class="footer-wrapper">
-  <footer role="contentinfo" class="entry-wrapper">
-    
-
-<span>Powered by <a href="http://jekyllrb.com" rel="nofollow">Jekyll</a> using the <a href="https://mademistakes.com/work/so-simple-jekyll-theme/" rel="nofollow">So Simple Theme</a>. Published with <a href="http://pages.github.com">GitHub Pages</a>.</span>
+  <footer role="contentinfo" class="entry-wrapper"><span>Powered by <a href="http://jekyllrb.com" rel="nofollow">Jekyll</a> using the <a href="https://mademistakes.com/work/so-simple-jekyll-theme/" rel="nofollow">So Simple Theme</a>. Published with <a href="http://pages.github.com">GitHub Pages</a>.</span>
 <div class="social-icons">
 	<a href="http://twitter.com/Cube_Lin" title="Cubarco on Twitter" target="_blank"><i class="fa fa-twitter-square fa-2x"></i></a>
 	<a href="http://facebook.com/cubarco" title="Cubarco on Facebook" target="_blank"><i class="fa fa-facebook-square fa-2x"></i></a>
@@ -243,10 +182,7 @@
 </div>
 <!-- /.footer-wrapper -->
 
-<script src="https://cubarco.org/assets/js/scripts.min.js"></script>
-
-<!-- Jekyll Simple Search option -->
-<script>
+<script src="https://cubarco.org/assets/js/scripts.min.js"></script><!-- Jekyll Simple Search option --><script>
   $(document).ready(function() {
       $('.search-field').jekyllSearch({
           jsonFile: 'https://cubarco.org/search.json',
@@ -281,13 +217,7 @@
         bs.canvas.removeClass('is-visible');
     });
   })( jQuery, window );
-</script>
-
-
-<!-- Check whether the page is a post -->
-
-  
-<script type="text/javascript">
+</script><!-- Check whether the page is a post --><script type="text/javascript">
     /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
     var disqus_shortname = 'cubarco'; // required: replace example with your forum shortname
 
@@ -305,8 +235,7 @@
         s.src = '//' + disqus_shortname + '.disqus.com/count.js';
         (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
     }());
-</script>
-<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+</script><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a>
 </noscript>
 <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
 
@@ -328,8 +257,5 @@
     var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
   })();
 </script>
-
-
-
 </body>
 </html>
