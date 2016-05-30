@@ -485,12 +485,12 @@ span + .entry-title {
 
 // gist async tag
 // ----------------------------
-.gist.loading::after {
+.gist.loading p::after {
   content: " (loading)";
   color: #99cc00;
 }
 
-.gist.loading-failed::after {
+.gist.loading-failed p::after {
   content: " (loading failed)";
   color: #cc0000;
 }

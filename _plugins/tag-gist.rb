@@ -13,7 +13,7 @@ module Jekyll
         file_data_attr = filename.empty? ? '' : %Q{ data-gist-file="#{filename}"}
 
         # Append additional markup to this string that will be replaced on gist load.
-        inner = "Gist: #{gist_id}"
+        inner = "<p>Gist: <a href=\"https://gist.github.com/#{gist_id}\">#{gist_id}</a></p>"
 
         %Q{<div class="gist" data-gist="#{gist_id}"#{file_data_attr}>#{inner}</div>}
       end
