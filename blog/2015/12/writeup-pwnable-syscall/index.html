@@ -185,17 +185,17 @@
 8003f56c T commit_creds
 ...</code></pre></figure><p>我参考 <a href="https://github.com/acama" class="user-mention">@acama</a> 的版本<sup id="fnref:3"><a href="#fn:3" class="footnote">3</a></sup>写了一个( <a href="https://github.com/acama" class="user-mention">@acama</a> 的版本<code class="highlighter-rouge">prepare_creds()</code>之后直接就<code class="highlighter-rouge">commit_creds()</code>, 这估计只在老版本可以).<code class="highlighter-rouge">prepare_creds()</code>返回的结构体定义可以看参考<sup id="fnref:4"><a href="#fn:4" class="footnote">4</a></sup>.</p>
 
-<div class="gist" data-gist="cubarco/f582d787f04eca93f8eb" data-gist-file="cred.s">Gist: cubarco/f582d787f04eca93f8eb</div>
+<div class="gist" data-gist="cubarco/f582d787f04eca93f8eb" data-gist-file="cred.s"><p>Gist: <a href="https://gist.github.com/cubarco/f582d787f04eca93f8eb">cubarco/f582d787f04eca93f8eb</a></p></div>
 
 <p>这个生成的指令是不能用原先的 223 号系统调用直接写进内存的，所以我准备了一个真正的<code class="highlighter-rouge">write-anything-anywhere</code>的跳板:</p>
 
-<div class="gist" data-gist="cubarco/f582d787f04eca93f8eb" data-gist-file="waa.s">Gist: cubarco/f582d787f04eca93f8eb</div>
+<div class="gist" data-gist="cubarco/f582d787f04eca93f8eb" data-gist-file="waa.s"><p>Gist: <a href="https://gist.github.com/cubarco/f582d787f04eca93f8eb">cubarco/f582d787f04eca93f8eb</a></p></div>
 
 <p>先把 waa 写进内存，然后把 cred 写进内存。至于写到哪里，我随手写了两个地址: 0x83f5cafe, 0x83f6beee.</p>
 
 <h3 id="expc">exp.c</h3>
 
-<div class="gist" data-gist="cubarco/f582d787f04eca93f8eb" data-gist-file="1-pwnable-rookiss-syscall.c">Gist: cubarco/f582d787f04eca93f8eb</div>
+<div class="gist" data-gist="cubarco/f582d787f04eca93f8eb" data-gist-file="1-pwnable-rookiss-syscall.c"><p>Gist: <a href="https://gist.github.com/cubarco/f582d787f04eca93f8eb">cubarco/f582d787f04eca93f8eb</a></p></div>
 
 <h3 id="references">References</h3>
 

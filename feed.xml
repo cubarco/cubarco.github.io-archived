@@ -4,7 +4,7 @@
 <generator uri="https://github.com/jekyll/jekyll">Jekyll</generator>
 <link rel="self" type="application/atom+xml" href="https://cubarco.org/feed.xml" />
 <link rel="alternate" type="text/html" href="https://cubarco.org" />
-<updated>2016-05-30T16:35:15+00:00</updated>
+<updated>2016-05-30T16:56:32+00:00</updated>
 <id>https://cubarco.org/</id>
 <author>
   <name>Cubarco</name>
@@ -30,7 +30,7 @@
 
 &lt;p&gt;nginx 的配置文件如下。&lt;code class=&quot;highlighter-rouge&quot;&gt;domain.com&lt;/code&gt; 改成具体的域名，&lt;code class=&quot;highlighter-rouge&quot;&gt;/path/to/&lt;/code&gt;要改成 duck.domain.com 的证书路径。&lt;code class=&quot;highlighter-rouge&quot;&gt;/etc/letsencrypt/live/images.duck.domain.com/&lt;/code&gt;是 Let’s encrypt 生成证书的默认目录，稍后会提到。&lt;/p&gt;
 
-&lt;div class=&quot;gist&quot; data-gist=&quot;cubarco/08e99fbf316a435b7935727810e40458&quot;&gt;Gist: cubarco/08e99fbf316a435b7935727810e40458&lt;/div&gt;
+&lt;div class=&quot;gist&quot; data-gist=&quot;cubarco/08e99fbf316a435b7935727810e40458&quot;&gt;&lt;p&gt;Gist: &lt;a href=&quot;https://gist.github.com/cubarco/08e99fbf316a435b7935727810e40458&quot;&gt;cubarco/08e99fbf316a435b7935727810e40458&lt;/a&gt;&lt;/p&gt;&lt;/div&gt;
 
 &lt;h3 id=&quot;cloudflare&quot;&gt;Cloudflare&lt;/h3&gt;
 
@@ -145,25 +145,25 @@
 
 &lt;p&gt;在最近的 32c3ctf 中出现过一道类似的 readme&lt;sup id=&quot;fnref:1&quot;&gt;&lt;a href=&quot;#fn:1&quot; class=&quot;footnote&quot;&gt;1&lt;/a&gt;&lt;/sup&gt;. 就是把&lt;code class=&quot;highlighter-rouge&quot;&gt;argv[1]&lt;/code&gt;改成目的字符串位置，可以在 libc 打出错误信息的时候，被当作文件名打印出来。&lt;/p&gt;
 
-&lt;div class=&quot;gist&quot; data-gist=&quot;cubarco/cbbd4ab5462c2f0f287b&quot;&gt;Gist: cubarco/cbbd4ab5462c2f0f287b&lt;/div&gt;
+&lt;div class=&quot;gist&quot; data-gist=&quot;cubarco/cbbd4ab5462c2f0f287b&quot;&gt;&lt;p&gt;Gist: &lt;a href=&quot;https://gist.github.com/cubarco/cbbd4ab5462c2f0f287b&quot;&gt;cubarco/cbbd4ab5462c2f0f287b&lt;/a&gt;&lt;/p&gt;&lt;/div&gt;
 
 &lt;h2 id=&quot;note1&quot;&gt;note1&lt;/h2&gt;
 
 &lt;p&gt;这题的 note 是以链表形式储存的，堆溢出（edit 存在溢出漏洞）之后可以覆盖地址更改链表结构。我的 exp 思路就是先把一个 note 指向&lt;code class=&quot;highlighter-rouge&quot;&gt;setvbuf()&lt;/code&gt;的 got, 然后用 show 把地址 leak 出来，这样可以 offset 到&lt;code class=&quot;highlighter-rouge&quot;&gt;system()&lt;/code&gt;. 然后再将另一个 note 地址改到&lt;code class=&quot;highlighter-rouge&quot;&gt;strcmp()&lt;/code&gt;的 got, 通过 edit 把内容改成&lt;code class=&quot;highlighter-rouge&quot;&gt;system()&lt;/code&gt;的地址。最后调用&lt;code class=&quot;highlighter-rouge&quot;&gt;strcmp()&lt;/code&gt;, title 填&lt;code class=&quot;highlighter-rouge&quot;&gt;/bin/sh&lt;/code&gt;就可以了。&lt;/p&gt;
 
-&lt;div class=&quot;gist&quot; data-gist=&quot;cubarco/30a44a61252f448964c4&quot;&gt;Gist: cubarco/30a44a61252f448964c4&lt;/div&gt;
+&lt;div class=&quot;gist&quot; data-gist=&quot;cubarco/30a44a61252f448964c4&quot;&gt;&lt;p&gt;Gist: &lt;a href=&quot;https://gist.github.com/cubarco/30a44a61252f448964c4&quot;&gt;cubarco/30a44a61252f448964c4&lt;/a&gt;&lt;/p&gt;&lt;/div&gt;
 
 &lt;h2 id=&quot;delnote2del&quot;&gt;&lt;del&gt;note2&lt;/del&gt;&lt;/h2&gt;
 
 &lt;p&gt;这题在赛时没找到漏洞，赛后看了 FlappyPig 的 Writeup&lt;sup id=&quot;fnref:2&quot;&gt;&lt;a href=&quot;#fn:2&quot; class=&quot;footnote&quot;&gt;2&lt;/a&gt;&lt;/sup&gt;, 只是简单的 fastbin, 感觉好可惜… 360 安全播报给的代码没缩进根本不能看，自己重新写了个。&lt;/p&gt;
 
-&lt;div class=&quot;gist&quot; data-gist=&quot;cubarco/9752fbbe78a071b04b37&quot;&gt;Gist: cubarco/9752fbbe78a071b04b37&lt;/div&gt;
+&lt;div class=&quot;gist&quot; data-gist=&quot;cubarco/9752fbbe78a071b04b37&quot;&gt;&lt;p&gt;Gist: &lt;a href=&quot;https://gist.github.com/cubarco/9752fbbe78a071b04b37&quot;&gt;cubarco/9752fbbe78a071b04b37&lt;/a&gt;&lt;/p&gt;&lt;/div&gt;
 
 &lt;h2 id=&quot;delnote3del&quot;&gt;&lt;del&gt;note3&lt;/del&gt;&lt;/h2&gt;
 
 &lt;p&gt;这题同样是没有在赛时做出来，但是与 note2 相反，这题我是找到了两个可以利用的漏洞的(一个是 integer overflow, 另一个是可以增加第八个 note), 但是不知道如何利用。我在比赛的时候一直想着怎么 fastbin, 因为我觉得 unlink 这么古老的 exp 肯定已经不能用了… 没想到这题的环境刚好适合 unlink, 有点可惜。赛后看了 FlappyPig 的 Writeup&lt;sup id=&quot;fnref:2:1&quot;&gt;&lt;a href=&quot;#fn:2&quot; class=&quot;footnote&quot;&gt;2&lt;/a&gt;&lt;/sup&gt;, 自己重新写了个 exp, 也算是复习一下 unlink.&lt;/p&gt;
 
-&lt;div class=&quot;gist&quot; data-gist=&quot;cubarco/ababdac123a4762c0180&quot;&gt;Gist: cubarco/ababdac123a4762c0180&lt;/div&gt;
+&lt;div class=&quot;gist&quot; data-gist=&quot;cubarco/ababdac123a4762c0180&quot;&gt;&lt;p&gt;Gist: &lt;a href=&quot;https://gist.github.com/cubarco/ababdac123a4762c0180&quot;&gt;cubarco/ababdac123a4762c0180&lt;/a&gt;&lt;/p&gt;&lt;/div&gt;
 
 &lt;h2 id=&quot;references&quot;&gt;References&lt;/h2&gt;
 
@@ -204,7 +204,7 @@
 
 &lt;p&gt;pickle 在 unpickle 的时候会执行对象的 &lt;code class=&quot;highlighter-rouge&quot;&gt;__reduce__&lt;/code&gt; 方法&lt;sup id=&quot;fnref:2&quot;&gt;&lt;a href=&quot;#fn:2&quot; class=&quot;footnote&quot;&gt;2&lt;/a&gt;&lt;/sup&gt;。用 eval 把 &lt;code class=&quot;highlighter-rouge&quot;&gt;__main__.flag.flag&lt;/code&gt; 打进 stderr 就行了。&lt;/p&gt;
 
-&lt;div class=&quot;gist&quot; data-gist=&quot;cubarco/e46eb03e1cd06046d130&quot;&gt;Gist: cubarco/e46eb03e1cd06046d130&lt;/div&gt;
+&lt;div class=&quot;gist&quot; data-gist=&quot;cubarco/e46eb03e1cd06046d130&quot;&gt;&lt;p&gt;Gist: &lt;a href=&quot;https://gist.github.com/cubarco/e46eb03e1cd06046d130&quot;&gt;cubarco/e46eb03e1cd06046d130&lt;/a&gt;&lt;/p&gt;&lt;/div&gt;
 
 &lt;h2 id=&quot;teufel&quot;&gt;teufel&lt;/h2&gt;
 
@@ -214,11 +214,11 @@
 
 &lt;h6 id=&quot;offsetpy&quot;&gt;offset.py&lt;/h6&gt;
 
-&lt;div class=&quot;gist&quot; data-gist=&quot;cubarco/569fd814a29d8ef988e1&quot; data-gist-file=&quot;32c3ctf-teufel-offset.py&quot;&gt;Gist: cubarco/569fd814a29d8ef988e1&lt;/div&gt;
+&lt;div class=&quot;gist&quot; data-gist=&quot;cubarco/569fd814a29d8ef988e1&quot; data-gist-file=&quot;32c3ctf-teufel-offset.py&quot;&gt;&lt;p&gt;Gist: &lt;a href=&quot;https://gist.github.com/cubarco/569fd814a29d8ef988e1&quot;&gt;cubarco/569fd814a29d8ef988e1&lt;/a&gt;&lt;/p&gt;&lt;/div&gt;
 
 &lt;h6 id=&quot;exppy&quot;&gt;exp.py&lt;/h6&gt;
 
-&lt;div class=&quot;gist&quot; data-gist=&quot;cubarco/569fd814a29d8ef988e1&quot; data-gist-file=&quot;32c3ctf-teufel-exp.py&quot;&gt;Gist: cubarco/569fd814a29d8ef988e1&lt;/div&gt;
+&lt;div class=&quot;gist&quot; data-gist=&quot;cubarco/569fd814a29d8ef988e1&quot; data-gist-file=&quot;32c3ctf-teufel-exp.py&quot;&gt;&lt;p&gt;Gist: &lt;a href=&quot;https://gist.github.com/cubarco/569fd814a29d8ef988e1&quot;&gt;cubarco/569fd814a29d8ef988e1&lt;/a&gt;&lt;/p&gt;&lt;/div&gt;
 
 &lt;h2 id=&quot;deldel&quot;&gt;&lt;del&gt;吐槽&lt;/del&gt;&lt;/h2&gt;
 
@@ -271,7 +271,7 @@
 
 &lt;h6 id=&quot;exp-roppy&quot;&gt;exp-rop.py&lt;/h6&gt;
 
-&lt;div class=&quot;gist&quot; data-gist=&quot;cubarco/23b04edc7e79b1c71547&quot; data-gist-file=&quot;pwnable-hackerssecret-unexploitable-rop.py&quot;&gt;Gist: cubarco/23b04edc7e79b1c71547&lt;/div&gt;
+&lt;div class=&quot;gist&quot; data-gist=&quot;cubarco/23b04edc7e79b1c71547&quot; data-gist-file=&quot;pwnable-hackerssecret-unexploitable-rop.py&quot;&gt;&lt;p&gt;Gist: &lt;a href=&quot;https://gist.github.com/cubarco/23b04edc7e79b1c71547&quot;&gt;cubarco/23b04edc7e79b1c71547&lt;/a&gt;&lt;/p&gt;&lt;/div&gt;
 
 &lt;h3 id=&quot;srop&quot;&gt;SROP&lt;/h3&gt;
 
@@ -279,7 +279,7 @@
 
 &lt;h6 id=&quot;exp-sroppy&quot;&gt;exp-srop.py&lt;/h6&gt;
 
-&lt;div class=&quot;gist&quot; data-gist=&quot;cubarco/23b04edc7e79b1c71547&quot; data-gist-file=&quot;pwnable-hackerssecret-unexploitable-srop.py&quot;&gt;Gist: cubarco/23b04edc7e79b1c71547&lt;/div&gt;
+&lt;div class=&quot;gist&quot; data-gist=&quot;cubarco/23b04edc7e79b1c71547&quot; data-gist-file=&quot;pwnable-hackerssecret-unexploitable-srop.py&quot;&gt;&lt;p&gt;Gist: &lt;a href=&quot;https://gist.github.com/cubarco/23b04edc7e79b1c71547&quot;&gt;cubarco/23b04edc7e79b1c71547&lt;/a&gt;&lt;/p&gt;&lt;/div&gt;
 
 &lt;h3 id=&quot;references&quot;&gt;References&lt;/h3&gt;
 
@@ -370,17 +370,17 @@
 
 &lt;p&gt;我参考 @acama 的版本&lt;sup id=&quot;fnref:3&quot;&gt;&lt;a href=&quot;#fn:3&quot; class=&quot;footnote&quot;&gt;3&lt;/a&gt;&lt;/sup&gt;写了一个( @acama 的版本&lt;code class=&quot;highlighter-rouge&quot;&gt;prepare_creds()&lt;/code&gt;之后直接就&lt;code class=&quot;highlighter-rouge&quot;&gt;commit_creds()&lt;/code&gt;, 这估计只在老版本可以).&lt;code class=&quot;highlighter-rouge&quot;&gt;prepare_creds()&lt;/code&gt;返回的结构体定义可以看参考&lt;sup id=&quot;fnref:4&quot;&gt;&lt;a href=&quot;#fn:4&quot; class=&quot;footnote&quot;&gt;4&lt;/a&gt;&lt;/sup&gt;.&lt;/p&gt;
 
-&lt;div class=&quot;gist&quot; data-gist=&quot;cubarco/f582d787f04eca93f8eb&quot; data-gist-file=&quot;cred.s&quot;&gt;Gist: cubarco/f582d787f04eca93f8eb&lt;/div&gt;
+&lt;div class=&quot;gist&quot; data-gist=&quot;cubarco/f582d787f04eca93f8eb&quot; data-gist-file=&quot;cred.s&quot;&gt;&lt;p&gt;Gist: &lt;a href=&quot;https://gist.github.com/cubarco/f582d787f04eca93f8eb&quot;&gt;cubarco/f582d787f04eca93f8eb&lt;/a&gt;&lt;/p&gt;&lt;/div&gt;
 
 &lt;p&gt;这个生成的指令是不能用原先的 223 号系统调用直接写进内存的，所以我准备了一个真正的&lt;code class=&quot;highlighter-rouge&quot;&gt;write-anything-anywhere&lt;/code&gt;的跳板:&lt;/p&gt;
 
-&lt;div class=&quot;gist&quot; data-gist=&quot;cubarco/f582d787f04eca93f8eb&quot; data-gist-file=&quot;waa.s&quot;&gt;Gist: cubarco/f582d787f04eca93f8eb&lt;/div&gt;
+&lt;div class=&quot;gist&quot; data-gist=&quot;cubarco/f582d787f04eca93f8eb&quot; data-gist-file=&quot;waa.s&quot;&gt;&lt;p&gt;Gist: &lt;a href=&quot;https://gist.github.com/cubarco/f582d787f04eca93f8eb&quot;&gt;cubarco/f582d787f04eca93f8eb&lt;/a&gt;&lt;/p&gt;&lt;/div&gt;
 
 &lt;p&gt;先把 waa 写进内存，然后把 cred 写进内存。至于写到哪里，我随手写了两个地址: 0x83f5cafe, 0x83f6beee.&lt;/p&gt;
 
 &lt;h3 id=&quot;expc&quot;&gt;exp.c&lt;/h3&gt;
 
-&lt;div class=&quot;gist&quot; data-gist=&quot;cubarco/f582d787f04eca93f8eb&quot; data-gist-file=&quot;1-pwnable-rookiss-syscall.c&quot;&gt;Gist: cubarco/f582d787f04eca93f8eb&lt;/div&gt;
+&lt;div class=&quot;gist&quot; data-gist=&quot;cubarco/f582d787f04eca93f8eb&quot; data-gist-file=&quot;1-pwnable-rookiss-syscall.c&quot;&gt;&lt;p&gt;Gist: &lt;a href=&quot;https://gist.github.com/cubarco/f582d787f04eca93f8eb&quot;&gt;cubarco/f582d787f04eca93f8eb&lt;/a&gt;&lt;/p&gt;&lt;/div&gt;
 
 &lt;h3 id=&quot;references&quot;&gt;References&lt;/h3&gt;
 
@@ -453,7 +453,7 @@ Breakpoint 1, 0x08048054 in ?? ()
 
 &lt;h6 id=&quot;exptinyeasyc&quot;&gt;exp.tiny_easy.c&lt;/h6&gt;
 
-&lt;div class=&quot;gist&quot; data-gist=&quot;cubarco/03fb090852a3303f58db&quot; data-gist-file=&quot;pwnable-rookiss-tiny-easy.c&quot;&gt;Gist: cubarco/03fb090852a3303f58db&lt;/div&gt;
+&lt;div class=&quot;gist&quot; data-gist=&quot;cubarco/03fb090852a3303f58db&quot; data-gist-file=&quot;pwnable-rookiss-tiny-easy.c&quot;&gt;&lt;p&gt;Gist: &lt;a href=&quot;https://gist.github.com/cubarco/03fb090852a3303f58db&quot;&gt;cubarco/03fb090852a3303f58db&lt;/a&gt;&lt;/p&gt;&lt;/div&gt;
 
 &lt;h4 id=&quot;vdso2&quot;&gt;2. vDSO&lt;sup id=&quot;fnref:2&quot;&gt;&lt;a href=&quot;#fn:2&quot; class=&quot;footnote&quot;&gt;2&lt;/a&gt;&lt;/sup&gt;&lt;/h4&gt;
 
@@ -463,7 +463,7 @@ Breakpoint 1, 0x08048054 in ?? ()
 
 &lt;h6 id=&quot;exptinyeasypy&quot;&gt;exp.tiny_easy.py&lt;/h6&gt;
 
-&lt;div class=&quot;gist&quot; data-gist=&quot;cubarco/03fb090852a3303f58db&quot; data-gist-file=&quot;pwnable-rookiss-tiny-easy.py&quot;&gt;Gist: cubarco/03fb090852a3303f58db&lt;/div&gt;
+&lt;div class=&quot;gist&quot; data-gist=&quot;cubarco/03fb090852a3303f58db&quot; data-gist-file=&quot;pwnable-rookiss-tiny-easy.py&quot;&gt;&lt;p&gt;Gist: &lt;a href=&quot;https://gist.github.com/cubarco/03fb090852a3303f58db&quot;&gt;cubarco/03fb090852a3303f58db&lt;/a&gt;&lt;/p&gt;&lt;/div&gt;
 
 &lt;h2 id=&quot;tiny&quot;&gt;tiny&lt;/h2&gt;
 
@@ -495,7 +495,7 @@ Breakpoint 1, 0x08048054 in ?? ()
 &lt;h6 id=&quot;exptinysh&quot;&gt;exp.tiny.sh&lt;/h6&gt;
 &lt;p&gt;这个 exp 的核心是 C (其实就是一句&lt;code class=&quot;highlighter-rouge&quot;&gt;execle()&lt;/code&gt;的事情), 用 shell 写只是为了方便，可以把&lt;code class=&quot;highlighter-rouge&quot;&gt;ulimit -s unlimited&lt;/code&gt;这些命令放在一起(调试过程中还用到了其他命令，最后删的只剩 ulimit…)，而且用一个脚本解题本身是一件很酷的事情XD.&lt;/p&gt;
 
-&lt;div class=&quot;gist&quot; data-gist=&quot;cubarco/d379e31c9487c8ee07f2&quot; data-gist-file=&quot;pwnable-hackerssecret-tiny.sh&quot;&gt;Gist: cubarco/d379e31c9487c8ee07f2&lt;/div&gt;
+&lt;div class=&quot;gist&quot; data-gist=&quot;cubarco/d379e31c9487c8ee07f2&quot; data-gist-file=&quot;pwnable-hackerssecret-tiny.sh&quot;&gt;&lt;p&gt;Gist: &lt;a href=&quot;https://gist.github.com/cubarco/d379e31c9487c8ee07f2&quot;&gt;cubarco/d379e31c9487c8ee07f2&lt;/a&gt;&lt;/p&gt;&lt;/div&gt;
 
 &lt;h2 id=&quot;references&quot;&gt;References&lt;/h2&gt;
 
@@ -655,7 +655,7 @@ Breakpoint 1, 0x08048054 in ?? ()
 
 &lt;p&gt;我在比赛中用的 leak 一次只能 leak 一个字符，赛后重写改进了一下，能 leak 4 个字符，稍微加快一点。&lt;/p&gt;
 
-&lt;div class=&quot;gist&quot; data-gist=&quot;cubarco/a3ce8d93cb4860500090&quot;&gt;Gist: cubarco/a3ce8d93cb4860500090&lt;/div&gt;
+&lt;div class=&quot;gist&quot; data-gist=&quot;cubarco/a3ce8d93cb4860500090&quot;&gt;&lt;p&gt;Gist: &lt;a href=&quot;https://gist.github.com/cubarco/a3ce8d93cb4860500090&quot;&gt;cubarco/a3ce8d93cb4860500090&lt;/a&gt;&lt;/p&gt;&lt;/div&gt;
 
 &lt;p&gt;一开始我准备用&lt;code class=&quot;highlighter-rouge&quot;&gt;&quot;%31$s&quot;&lt;/code&gt;直接 printf, 但是会报&lt;code class=&quot;highlighter-rouge&quot;&gt;*** invalid %N$ use detected ***&lt;/code&gt;. 这是由于 Glibc 的 FORTIFY_SOURCE, 可以绕过，具体方法看&lt;a href=&quot;http://phrack.org/issues/67/9.html&quot;&gt;这篇文章&lt;/a&gt;。&lt;/p&gt;
 
@@ -752,7 +752,7 @@ call ebx  ; spawn(%x, %x, %d)&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;p&gt;可以用 redos 中的 level1 本地调试。&lt;/p&gt;
 
-&lt;div class=&quot;gist&quot; data-gist=&quot;cubarco/b4aee1ac22f1b3039d30&quot;&gt;Gist: cubarco/b4aee1ac22f1b3039d30&lt;/div&gt;
+&lt;div class=&quot;gist&quot; data-gist=&quot;cubarco/b4aee1ac22f1b3039d30&quot;&gt;&lt;p&gt;Gist: &lt;a href=&quot;https://gist.github.com/cubarco/b4aee1ac22f1b3039d30&quot;&gt;cubarco/b4aee1ac22f1b3039d30&lt;/a&gt;&lt;/p&gt;&lt;/div&gt;
 
   &lt;p&gt;&lt;a href=&quot;https://cubarco.org/blog/2015/12/9477-calcpop-reloaded-writeup/&quot;&gt;Writeup-9447 CTF: calcpop-reloaded&lt;/a&gt; was originally published by Cubarco at &lt;a href=&quot;https://cubarco.org&quot;&gt;盘子里的部落格&lt;/a&gt; on December 04, 2015.&lt;/p&gt;</content>
 </entry>
@@ -837,7 +837,7 @@ Pattern 0x41326641 first occurrence at position 156 in pattern.&lt;/code&gt;&lt;
 
 &lt;p&gt;exp 如下:&lt;/p&gt;
 
-&lt;div class=&quot;gist&quot; data-gist=&quot;cubarco/ee054809d1643602b844&quot;&gt;Gist: cubarco/ee054809d1643602b844&lt;/div&gt;
+&lt;div class=&quot;gist&quot; data-gist=&quot;cubarco/ee054809d1643602b844&quot;&gt;&lt;p&gt;Gist: &lt;a href=&quot;https://gist.github.com/cubarco/ee054809d1643602b844&quot;&gt;cubarco/ee054809d1643602b844&lt;/a&gt;&lt;/p&gt;&lt;/div&gt;
 
   &lt;p&gt;&lt;a href=&quot;https://cubarco.org/blog/2015/11/9477-calcpop-writeup/&quot;&gt;Writeup-9447 CTF: calcpop&lt;/a&gt; was originally published by Cubarco at &lt;a href=&quot;https://cubarco.org&quot;&gt;盘子里的部落格&lt;/a&gt; on November 30, 2015.&lt;/p&gt;</content>
 </entry>

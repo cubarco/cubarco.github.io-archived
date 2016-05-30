@@ -245,7 +245,7 @@
 
 <p>我在比赛中用的 leak 一次只能 leak 一个字符，赛后重写改进了一下，能 leak 4 个字符，稍微加快一点。</p>
 
-<div class="gist" data-gist="cubarco/a3ce8d93cb4860500090">Gist: cubarco/a3ce8d93cb4860500090</div>
+<div class="gist" data-gist="cubarco/a3ce8d93cb4860500090"><p>Gist: <a href="https://gist.github.com/cubarco/a3ce8d93cb4860500090">cubarco/a3ce8d93cb4860500090</a></p></div>
 
 <p>一开始我准备用<code class="highlighter-rouge">"%31$s"</code>直接 printf, 但是会报<code class="highlighter-rouge">*** invalid %N$ use detected ***</code>. 这是由于 Glibc 的 FORTIFY_SOURCE, 可以绕过，具体方法看<a href="http://phrack.org/issues/67/9.html">这篇文章</a>。</p>
 
