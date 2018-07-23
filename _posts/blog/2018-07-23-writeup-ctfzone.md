@@ -13,7 +13,7 @@ modified: 2018-07-24
 
 ### 问题
 
-You can try to use very interesting and strange string functions ;) Good luck. `nc pwn-03.v7frkwrfyhsjtbpfcppnu.ctfz.one 1234` And yes, there is no binary here
+> You can try to use very interesting and strange string functions ;) Good luck. `nc pwn-03.v7frkwrfyhsjtbpfcppnu.ctfz.one 1234` And yes, there is no binary here
 
 这是一道**盲pwn**类型的题，没有提供二进制<del>(名义上的)</del>。
 
