@@ -4,7 +4,7 @@
 <generator uri="https://github.com/jekyll/jekyll">Jekyll</generator>
 <link rel="self" type="application/atom+xml" href="https://cubarco.org/feed.xml" />
 <link rel="alternate" type="text/html" href="https://cubarco.org" />
-<updated>2018-07-23T17:12:52+00:00</updated>
+<updated>2018-07-23T17:19:42+00:00</updated>
 <id>https://cubarco.org/</id>
 <author>
   <name>Cubarco</name>
@@ -31,7 +31,9 @@
 
 &lt;h3 id=&quot;section&quot;&gt;问题&lt;/h3&gt;
 
-&lt;p&gt;You can try to use very interesting and strange string functions ;) Good luck. &lt;code class=&quot;highlighter-rouge&quot;&gt;nc pwn-03.v7frkwrfyhsjtbpfcppnu.ctfz.one 1234&lt;/code&gt; And yes, there is no binary here&lt;/p&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;You can try to use very interesting and strange string functions ;) Good luck. &lt;code class=&quot;highlighter-rouge&quot;&gt;nc pwn-03.v7frkwrfyhsjtbpfcppnu.ctfz.one 1234&lt;/code&gt; And yes, there is no binary here&lt;/p&gt;
+&lt;/blockquote&gt;
 
 &lt;p&gt;这是一道&lt;strong&gt;盲pwn&lt;/strong&gt;类型的题，没有提供二进制&lt;del&gt;(名义上的)&lt;/del&gt;。&lt;/p&gt;
 
