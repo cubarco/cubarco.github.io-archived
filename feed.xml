@@ -4,13 +4,212 @@
 <generator uri="https://github.com/jekyll/jekyll">Jekyll</generator>
 <link rel="self" type="application/atom+xml" href="https://cubarco.org/feed.xml" />
 <link rel="alternate" type="text/html" href="https://cubarco.org" />
-<updated>2016-06-04T08:56:25+00:00</updated>
+<updated>2018-07-23T13:32:21+00:00</updated>
 <id>https://cubarco.org/</id>
 <author>
   <name>Cubarco</name>
   <uri>https://cubarco.org/</uri>
   <email>me at cubarco.org</email>
 </author>
+
+
+<entry>
+  <title type="html"><![CDATA[Writeup: CTFZone 2018 Quals]]></title>
+  <link rel="alternate" type="text/html" href="https://cubarco.org/blog/2018/07/writeup-ctfzone/" />
+  <id>https://cubarco.org/blog/2018/07/writeup-ctfzone</id>
+  <updated>2018-07-23T00:00:00-00:00</updated>
+  <published>2018-07-23T00:00:00+00:00</published>
+  
+  <author>
+    <name>Cubarco</name>
+    <uri>https://cubarco.org</uri>
+    <email>me at cubarco.org</email>
+  </author>
+  <content type="html">&lt;p&gt;两道PWN题, 一个easypwn_strings, 一个Mobile Bank.&lt;/p&gt;
+
+&lt;h1 id=&quot;easypwnstrings&quot;&gt;easypwn_strings&lt;/h1&gt;
+
+&lt;h3 id=&quot;section&quot;&gt;问题&lt;/h3&gt;
+
+&lt;p&gt;You can try to use very interesting and strange string functions ;) Good luck. &lt;code class=&quot;highlighter-rouge&quot;&gt;nc pwn-03.v7frkwrfyhsjtbpfcppnu.ctfz.one 1234&lt;/code&gt; And yes, there is no binary here&lt;/p&gt;
+
+&lt;p&gt;这是一道&lt;strong&gt;盲pwn&lt;/strong&gt;类型的题，没有提供二进制&lt;del&gt;(名义上的)&lt;/del&gt;。&lt;/p&gt;
+
+&lt;p&gt;nc连上之后回显：&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Let&#39;s choose string operation!
+	1. StrLen
+	2. SubStrRemove
+	3. StrRemoveLastSymbols
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;第一个选项：输入一个字符串，回显字符串长度。&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;You choise - 1
+	Use str
+	good choise
+123
+	Result: 3
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;第二个选项显示未实现。&lt;/p&gt;
+
+&lt;p&gt;第三个选项：输入一个字符串，和一个数字，服务端移除末尾指定长度的字符串后打印出来。&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;You choise - 3
+	Use str int
+	good choise
+	Set string:
+1234567
+	Set number:
+3
+	Delete 3 ending symbols
+	Result:
+1234
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h3 id=&quot;section-1&quot;&gt;思路&lt;/h3&gt;
+
+&lt;p&gt;既然是无ELF文件的盲pwn，那只能摸着石头过河。做题时有以下几个尝试：&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;&lt;del&gt;三个选项的输入是否有溢出；&lt;/del&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;del&gt;未实现的选项2是否有隐藏功能；&lt;/del&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;del&gt;选项3输入的数字是否可以为负数，可能造成字符串拷贝时的溢出或者泄密问题；&lt;/del&gt;&lt;/li&gt;
+  &lt;li&gt;…&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;很多尝试以失败告终。最终找到的漏洞是功能3的&lt;strong&gt;格式化字符串漏洞&lt;/strong&gt;：&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;You choise - 3
+	Use str int
+	good choise
+	Set string:
+%p %p %p
+	Set number:
+0
+	Delete 3 ending symbols
+	Result:
+0xffe96350 0x8 0xf75fc1a4
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;我们可以利用这个格式化字符串漏洞构造一个任意地址读，然后把内存中的ELF dump下来。&lt;/p&gt;
+
+&lt;p&gt;怎么dump？可以参考YouTube上一个视频：&lt;a href=&quot;https://www.youtube.com/watch?v=XuzuFUGuQv0&quot;&gt;Format String to dump binary and gain RCE - 33c3ctf ESPR (pwn 150)&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;这道题和ESPR有两点区别：&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;ESPR的输入只限制了&lt;code class=&quot;highlighter-rouge&quot;&gt;\n&lt;/code&gt;字符，但是这题的输入不能包含&lt;code class=&quot;highlighter-rouge&quot;&gt;\n&lt;/code&gt;和&lt;code class=&quot;highlighter-rouge&quot;&gt;\x00&lt;/code&gt;，猜测是用了&lt;code class=&quot;highlighter-rouge&quot;&gt;fgets&lt;/code&gt;和&lt;code class=&quot;highlighter-rouge&quot;&gt;strcpy&lt;/code&gt;。所以在dump下来的二进制中会有一些遗漏位，不过对这道题来说无伤大雅；&lt;/li&gt;
+  &lt;li&gt;ESPR一个进程循环不断调用&lt;code class=&quot;highlighter-rouge&quot;&gt;printf&lt;/code&gt;，但是这题进程只有一个流程，没有循环，所以需要不断与服务器创建连接，十分耗时。好在需要dump的是ELF，内容是固定的。&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;dump脚本：&lt;/p&gt;
+
+&lt;div class=&quot;gist&quot; data-gist=&quot;cubarco/9bfafbc77dd2c0330e3c0ef87013c6fa&quot; data-gist-file=&quot;strings-dump.py&quot;&gt;&lt;p&gt;Gist: &lt;a href=&quot;https://gist.github.com/cubarco/9bfafbc77dd2c0330e3c0ef87013c6fa&quot;&gt;cubarco/9bfafbc77dd2c0330e3c0ef87013c6fa&lt;/a&gt;&lt;/p&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;gets&quot;&gt;漏洞（gets溢出）&lt;/h3&gt;
+
+&lt;p&gt;把ELF dump下来之后跑一下&lt;code class=&quot;highlighter-rouge&quot;&gt;strings dump.raw&lt;/code&gt;，看到一些有意思的字符串：&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;gp&quot;&gt;$ &lt;/span&gt;strings dump.raw
+...
+	Delete %i ending symbols
+	Result:
+https://ctf.bi.zone/files/babypwn
+https://ctf.bi.zone/files/babylibc
+main.c
+Have a nice day!
+ctfzone&lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;1t_1s_&lt;span class=&quot;nv&quot;&gt;$uP6r_F4k6_4H4H&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+ctfzone&lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$uP6r_F4k6_4H4H4H_t00&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+...
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;&lt;del&gt;除了有两行假装是flag的信息，还&lt;/del&gt;有两行URL，看来是提供了二进制和libc的：&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;https://ctf.bi.zone/files/babypwn&lt;/li&gt;
+  &lt;li&gt;https://ctf.bi.zone/files/babylibc&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;IDA打开babypwn，发现main函数还藏了两个菜单选项：&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  &lt;span class=&quot;n&quot;&gt;v3&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;_IO_getc&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;stdin&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;_IO_getc&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;stdin&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;v3&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;sc&quot;&gt;&#39;1&#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;||&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;v3&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;sc&quot;&gt;&#39;2&#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;||&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;v3&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;sc&quot;&gt;&#39;3&#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;||&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;v3&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;sc&quot;&gt;&#39;X&#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;||&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;v3&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;sc&quot;&gt;&#39;T&#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;||&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;v3&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;sc&quot;&gt;&#39;S&#39;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;printf&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;You choise - %c&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\r\n&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;v3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;...&lt;/span&gt;
+  	&lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;v3&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;!=&lt;/span&gt; &lt;span class=&quot;sc&quot;&gt;&#39;X&#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;v3&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;!=&lt;/span&gt; &lt;span class=&quot;sc&quot;&gt;&#39;T&#39;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+	  &lt;span class=&quot;p&quot;&gt;...&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+      &lt;span class=&quot;n&quot;&gt;puts&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\t&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;Are you surprised?? (y or n)&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\r&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+      &lt;span class=&quot;n&quot;&gt;gets&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;gets_buf&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+      &lt;span class=&quot;n&quot;&gt;v1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;strchr&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;gets_buf&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;sc&quot;&gt;&#39;y&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+      &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;v1&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;func_ptr&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;v1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;v2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;gets&lt;/code&gt;是明显的危险函数，&lt;code class=&quot;highlighter-rouge&quot;&gt;gets_buf&lt;/code&gt;上存在溢出，再看溢出到哪：&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;.bss:080492E0 ; char gets_buf[256]
+.bss:080492E0 gets_buf        db 100h dup(0)          ; DATA XREF: main+62↑o
+.bss:080492E0                                         ; main+245↑o ...
+.bss:080493E0 ; int (__cdecl *func_ptr)(_DWORD, _DWORD, _DWORD)
+.bss:080493E0 func_ptr        dd 0                    ; DATA XREF: main+18F↑w
+.bss:080493E0                                         ; main+1AE↑w ...
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;可以盖到&lt;code class=&quot;highlighter-rouge&quot;&gt;func_ptr&lt;/code&gt;这个函数指针，所以这个溢出已经可以用来&lt;strong&gt;劫持控制流&lt;/strong&gt;了。&lt;/p&gt;
+
+&lt;h3 id=&quot;exp&quot;&gt;EXP&lt;/h3&gt;
+
+&lt;p&gt;checksec一下babypwn文件:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;[*] &#39;/tmp/babypwn&#39;
+    Arch:     i386-32-little
+    RELRO:    No RELRO
+    Stack:    No canary found
+    NX:       NX enabled
+    PIE:      No PIE (0x8048000)
+    RWX:      Has RWX segments
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;有RWX的段，用GDB挂上ELF看一下map:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;gef&amp;gt; vmmap
+Start      End        Offset     Perm Path
+0x08048000 0x0804c000 0x00000000 rwx /tmp/babypwn
+0x0804c000 0x0804d000 0x00000000 rw- [heap]
+0xf7dbf000 0xf7f93000 0x00000000 r-x /usr/lib32/libc-2.27.so
+0xf7f93000 0xf7f94000 0x001d4000 --- /usr/lib32/libc-2.27.so
+...
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;整个ELF都是RWX的&lt;del&gt;(这题有毒…)&lt;/del&gt;，那很简单了，之前溢出的&lt;code class=&quot;highlighter-rouge&quot;&gt;gets_buf&lt;/code&gt;就在bss段上，可写可执行，还知道地址。只要把shellcode写到&lt;code class=&quot;highlighter-rouge&quot;&gt;gets_buf&lt;/code&gt;上，然后溢出到&lt;code class=&quot;highlighter-rouge&quot;&gt;func_ptr&lt;/code&gt;，指向&lt;code class=&quot;highlighter-rouge&quot;&gt;gets_buf&lt;/code&gt;，就执行shellcode了。&lt;/p&gt;
+
+&lt;p&gt;利用脚本：&lt;/p&gt;
+
+&lt;div class=&quot;gist&quot; data-gist=&quot;cubarco/9bfafbc77dd2c0330e3c0ef87013c6fa&quot; data-gist-file=&quot;strings-exp.py&quot;&gt;&lt;p&gt;Gist: &lt;a href=&quot;https://gist.github.com/cubarco/9bfafbc77dd2c0330e3c0ef87013c6fa&quot;&gt;cubarco/9bfafbc77dd2c0330e3c0ef87013c6fa&lt;/a&gt;&lt;/p&gt;&lt;/div&gt;
+
+&lt;hr /&gt;
+
+&lt;h1 id=&quot;mobile-bank&quot;&gt;Mobile Bank&lt;/h1&gt;
+
+&lt;p&gt;&lt;del&gt;在写&lt;/del&gt;&lt;/p&gt;
+
+  &lt;p&gt;&lt;a href=&quot;https://cubarco.org/blog/2018/07/writeup-ctfzone/&quot;&gt;Writeup: CTFZone 2018 Quals&lt;/a&gt; was originally published by Cubarco at &lt;a href=&quot;https://cubarco.org&quot;&gt;盘子里的部落格&lt;/a&gt; on July 23, 2018.&lt;/p&gt;</content>
+</entry>
 
 
 <entry>
@@ -1402,57 +1601,6 @@ plied to the call.&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 &lt;/ul&gt;
 
   &lt;p&gt;&lt;a href=&quot;https://cubarco.org/blog/2014/12/repost-how-do-you-read-source-code/&quot;&gt;How do you read source code?&lt;/a&gt; was originally published by Cubarco at &lt;a href=&quot;https://cubarco.org&quot;&gt;盘子里的部落格&lt;/a&gt; on December 19, 2014.&lt;/p&gt;</content>
-</entry>
-
-
-<entry>
-  <title type="html"><![CDATA[do {…} while (0) — What is it good for?]]></title>
-  <link rel="alternate" type="text/html" href="https://cubarco.org/blog/2014/12/c-do-while-in-macros/" />
-  <id>https://cubarco.org/blog/2014/12/c-do-while-in-macros</id>
-  <published>2014-12-17T00:00:00+00:00</published>
-  <updated>2014-12-17T00:00:00+00:00</updated>
-  <author>
-    <name>Cubarco</name>
-    <uri>https://cubarco.org</uri>
-    <email>me at cubarco.org</email>
-  </author>
-  <content type="html">&lt;blockquote&gt;
-  &lt;p&gt;Originally posted in &lt;a href=&quot;http://stackoverflow.com/questions/257418/do-while-0-what-is-it-good-for&quot;&gt;stackoverflow&lt;/a&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;It’s the only construct in C that you can use to &lt;code class=&quot;highlighter-rouge&quot;&gt;#define&lt;/code&gt; a multistatement operation, put a semicolon after, and still use within an &lt;code class=&quot;highlighter-rouge&quot;&gt;if&lt;/code&gt; statement. An example might help:&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-c&quot; data-lang=&quot;c&quot;&gt;&lt;span class=&quot;cp&quot;&gt;#define FOO(x) foo(x); bar(x)
-&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;condition&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;FOO&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;else&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// syntax error here
-&lt;/span&gt;    &lt;span class=&quot;p&quot;&gt;...;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;Even using braces doesn’t help:&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-c&quot; data-lang=&quot;c&quot;&gt;&lt;span class=&quot;cp&quot;&gt;#define FOO(x) { foo(x); bar(x); }&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;Using this in an &lt;code class=&quot;highlighter-rouge&quot;&gt;if&lt;/code&gt; statement would require that you omit the semicolon, which is counterintuitive:&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-c&quot; data-lang=&quot;c&quot;&gt;&lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;condition&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;FOO&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;else&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;...&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;If you define FOO like this:&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-c&quot; data-lang=&quot;c&quot;&gt;&lt;span class=&quot;cp&quot;&gt;#define FOO(x) do { foo(x); bar(x); } while (0)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;Then the following is syntactically correct:&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-c&quot; data-lang=&quot;c&quot;&gt;&lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;condition&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;FOO&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;else&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;....&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-
-  &lt;p&gt;&lt;a href=&quot;https://cubarco.org/blog/2014/12/c-do-while-in-macros/&quot;&gt;do {…} while (0) — What is it good for?&lt;/a&gt; was originally published by Cubarco at &lt;a href=&quot;https://cubarco.org&quot;&gt;盘子里的部落格&lt;/a&gt; on December 17, 2014.&lt;/p&gt;</content>
 </entry>
 
 </feed>

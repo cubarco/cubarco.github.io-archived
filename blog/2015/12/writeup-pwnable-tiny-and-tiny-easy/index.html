@@ -1,42 +1,73 @@
 <!DOCTYPE html>
 <!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]--><!--[if (IE 7)&!(IEMobile)]><html class="no-js lt-ie9 lt-ie8" lang="en"><![endif]--><!--[if (IE 8)&!(IEMobile)]><html class="no-js lt-ie9" lang="en"><![endif]--><!--[if gt IE 8]><!--><html class="no-js" lang="en">
-<!--<![endif]--><head>
+<!--<![endif]-->
+<head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="theme-color" content="#000000">
 <title>Writeup-Pwnable: tiny &amp; tiny_easy – 盘子里的部落格</title>
 <meta name="description" content="tiny_easy 1. Brute force 这题的 bin 拿到之后开 gdb 看了一下 mapping, 发现 stack 是可执行的(如果 ELF 没有 GNU_STACK 这个 header, 则默认 stack 可执行1)。所以思路很明显了。 看一下反汇编: 8048054: 58 pop %eax 8048055: 5a pop %edx 8048056: 8b12 mov (%edx),%edx 8048058: ffd2 call *%edx 然后用 gdb 断在 entry point, 观察一下栈: $ gdb tiny_easy (gdb) b *0x8048054 Breakpoint 1 at 0x8048054 (gdb) r Starting program: /home/tiny_easy/tiny_easy Breakpoint 1, 0x08048054 in ?? () (gdb) x/32wx $esp 0xffd82d70: 0x00000001 0xffd84df5 0x00000000 0xffd84e0f 0xffd82d80: 0xffd84e1f...">
 <meta name="keywords" content="Hack, CTF, Writeup, Exploitation, ROP">
-<!-- Twitter Cards --><meta name="twitter:title" content="Writeup-Pwnable: tiny &amp; tiny_easy">
+
+
+<!-- Twitter Cards -->
+<meta name="twitter:title" content="Writeup-Pwnable: tiny &amp; tiny_easy">
 <meta name="twitter:description" content="tiny_easy 1. Brute force 这题的 bin 拿到之后开 gdb 看了一下 mapping, 发现 stack 是可执行的(如果 ELF 没有 GNU_STACK 这个 header, 则默认 stack 可执行1)。所以思路很明显了。 看一下反汇编: 8048054: 58 pop %eax 8048055: 5a pop %edx 8048056: 8b12 mov (%edx),%edx 8048058: ffd2 call *%edx 然后用 gdb 断在 entry point, 观察一下栈: $ gdb tiny_easy (gdb) b *0x8048054 Breakpoint 1 at 0x8048054 (gdb) r Starting program: /home/tiny_easy/tiny_easy Breakpoint 1, 0x08048054 in ?? () (gdb) x/32wx $esp 0xffd82d70: 0x00000001 0xffd84df5 0x00000000 0xffd84e0f 0xffd82d80: 0xffd84e1f...">
 <meta name="twitter:site" content="@Cube_Lin">
 <meta name="twitter:creator" content="@Cube_Lin">
+
 <meta name="twitter:card" content="summary">
 <!--
    -<meta name="twitter:image" content="https://cubarco.org/images/">
-   --><!-- Open Graph --><meta property="og:locale" content="zh_CN">
+   -->
+
+<!-- Open Graph -->
+<meta property="og:locale" content="zh_CN">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Writeup-Pwnable: tiny &amp; tiny_easy">
 <meta property="og:description" content="tiny_easy 1. Brute force 这题的 bin 拿到之后开 gdb 看了一下 mapping, 发现 stack 是可执行的(如果 ELF 没有 GNU_STACK 这个 header, 则默认 stack 可执行1)。所以思路很明显了。 看一下反汇编: 8048054: 58 pop %eax 8048055: 5a pop %edx 8048056: 8b12 mov (%edx),%edx 8048058: ffd2 call *%edx 然后用 gdb 断在 entry point, 观察一下栈: $ gdb tiny_easy (gdb) b *0x8048054 Breakpoint 1 at 0x8048054 (gdb) r Starting program: /home/tiny_easy/tiny_easy Breakpoint 1, 0x08048054 in ?? () (gdb) x/32wx $esp 0xffd82d70: 0x00000001 0xffd84df5 0x00000000 0xffd84e0f 0xffd82d80: 0xffd84e1f...">
 <meta property="og:url" content="https://cubarco.org/blog/2015/12/writeup-pwnable-tiny-and-tiny-easy/">
 <meta property="og:site_name" content="盘子里的部落格">
+
+
+
+
+
+
 <link rel="canonical" href="https://cubarco.org/blog/2015/12/writeup-pwnable-tiny-and-tiny-easy/">
 <link href="https://cubarco.org/feed.xml" type="application/atom+xml" rel="alternate" title="盘子里的部落格 Feed">
 <link rel="author" href="http://plus.google.com/+%E6%9E%97%E5%AE%B6%E5%86%9BCube?rel=author">
-<!-- http://t.co/dKP3o1e --><meta name="HandheldFriendly" content="True">
+
+<!-- http://t.co/dKP3o1e -->
+<meta name="HandheldFriendly" content="True">
 <meta name="MobileOptimized" content="320">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<!-- For all browsers --><link rel="stylesheet" href="https://cubarco.org/assets/css/main.css">
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="https://cubarco.org/assets/css/main.css">
 <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.2.0/css/font-awesome.min.css">
-<!--Webfonts--><link href="//fonts.googleapis.com/css?family=Volkhov%7CCabin" rel="stylesheet" type="text/css">
+
+<!--Webfonts-->
+<link href="//fonts.googleapis.com/css?family=Volkhov%7CCabin" rel="stylesheet" type="text/css">
 <!--
    -[> Webfonts <]
    -<script src="//use.edgefonts.net/source-sans-pro:n2,i2,n3,i3,n4,i4,n6,i6,n7,i7,n9,i9;source-code-pro:n4,n7;volkhov;cabin.js"></script>
-   --><meta http-equiv="cleartype" content="on">
-<!-- HTML5 Shiv and Media Query Support --><!--[if lt IE 9]>
+   -->
+
+<meta http-equiv="cleartype" content="on">
+
+<!-- HTML5 Shiv and Media Query Support -->
+<!--[if lt IE 9]>
   <script src="https://cubarco.org/assets/js/vendor/html5shiv.min.js"></script>
   <script src="https://cubarco.org/assets/js/vendor/respond.min.js"></script>
-<![endif]--><!-- Modernizr --><!--<script src="/assets/js/vendor/modernizr-2.7.1.custom.min.js"></script>--><script src="//cdn.bootcss.com/modernizr/2.7.1/modernizr.min.js"></script><!-- Icons --><!--
+<![endif]-->
+
+<!-- Modernizr -->
+<!--<script src="/assets/js/vendor/modernizr-2.7.1.custom.min.js"></script>-->
+<script src="//cdn.bootcss.com/modernizr/2.7.1/modernizr.min.js"></script>
+
+<!-- Icons -->
+<!--
    -[> 16x16 <]
    -<link rel="shortcut icon" href="https://cubarco.org/favicon-16x16.ico">
    -[> 32x32 <]
@@ -49,7 +80,8 @@
    -<link rel="apple-touch-icon-precomposed" sizes="114x114" href="https://cubarco.org/images/apple-touch-icon-114x114-precomposed.png">
    -[> 144x144 (precomposed) for iPad 3rd and 4th generation <]
    -<link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://cubarco.org/images/apple-touch-icon-144x144-precomposed.png">
-   --><link rel="shortcut icon" href="https://cubarco.org/favicon.ico">
+   -->
+<link rel="shortcut icon" href="https://cubarco.org/favicon.ico">
 <link rel="apple-touch-icon" sizes="57x57" href="https://cubarco.org/images/favicons/apple-touch-icon-57x57.png">
 <link rel="apple-touch-icon" sizes="60x60" href="https://cubarco.org/images/favicons/apple-touch-icon-60x60.png">
 <link rel="apple-touch-icon" sizes="72x72" href="https://cubarco.org/images/favicons/apple-touch-icon-72x72.png">
@@ -63,12 +95,17 @@
 <link rel="icon" type="image/png" href="https://cubarco.org/images/favicons/favicon-32x32.png" sizes="32x32">
 <link rel="icon" type="image/png" href="https://cubarco.org/images/favicons/favicon-96x96.png" sizes="96x96">
 <link rel="icon" type="image/png" href="https://cubarco.org/images/favicons/favicon-16x16.png" sizes="16x16">
+
 </head>
+
 <body id="post">
 
 <div class="navigation-wrapper">
-	<nav role="navigation" id="site-nav" class="animated drop"><ul>
-<li><a href="https://cubarco.org/blog/">Latest</a></li>
+	<nav role="navigation" id="site-nav" class="animated drop">
+	    <ul>
+      
+		    
+		    <li><a href="https://cubarco.org/blog/">Latest</a></li>
 		  
 		    
 		    <li><a href="https://cubarco.org/blog/about/">About</a></li>
@@ -83,7 +120,8 @@
 		    <li><a href="https://cubarco.org/blog/tags/">Tags</a></li>
 		  
         <li class="dosearch"><span><i class="fa fa-search"></i> Search</span></li>
-	    </ul></nav>
+	    </ul>
+	</nav>
 </div>
 <!-- /.navigation-wrapper -->
 
@@ -91,28 +129,41 @@
 
 <div class="search-wrapper">
   <div class="search-form">
-    <input type="text" class="search-field" placeholder="Search..."><button class="close-btn"><i class="fa fa-times-circle fa-2x"></i></button>
+    <input type="text" class="search-field" placeholder="Search...">
+    <button class="close-btn"><i class="fa fa-times-circle fa-2x"></i></button>
     <ul class="search-results post-list"></ul>
 <!-- /.search-results -->
-</div>
+  </div>
 <!-- /.search-form -->
 </div>
 <!-- ./search-wrapper -->
 
-<header class="masthead"><div class="wrap">
+<header class="masthead">
+	<div class="wrap">
         
         <h1 class="site-title animated fadeIn"><a href="https://cubarco.org">盘子里的部落格</a></h1>
 		<h2 class="site-description animated fadeIn" itemprop="description">Yet another Jekyll blog.</h2>
 	</div>
-</header><!-- /.masthead --><div class="js-menu-screen menu-screen"></div>
+</header><!-- /.masthead -->
+
+<div class="js-menu-screen menu-screen"></div>
 
 <div id="main" role="main">
-  <article class="hentry"><div class="entry-wrapper">
-      <header class="entry-header"><span class="entry-tags"><a href="https://cubarco.org/blog/tags/#Hack" title="Pages tagged Hack">Hack</a> • <a href="https://cubarco.org/blog/tags/#CTF" title="Pages tagged CTF">CTF</a> • <a href="https://cubarco.org/blog/tags/#Writeup" title="Pages tagged Writeup">Writeup</a> • <a href="https://cubarco.org/blog/tags/#Exploitation" title="Pages tagged Exploitation">Exploitation</a> • <a href="https://cubarco.org/blog/tags/#ROP" title="Pages tagged ROP">ROP</a></span>
+  <article class="hentry">
+    
+    <div class="entry-wrapper">
+      <header class="entry-header">
+        <span class="entry-tags"><a href="https://cubarco.org/blog/tags/#Hack" title="Pages tagged Hack">Hack</a> • <a href="https://cubarco.org/blog/tags/#CTF" title="Pages tagged CTF">CTF</a> • <a href="https://cubarco.org/blog/tags/#Writeup" title="Pages tagged Writeup">Writeup</a> • <a href="https://cubarco.org/blog/tags/#Exploitation" title="Pages tagged Exploitation">Exploitation</a> • <a href="https://cubarco.org/blog/tags/#ROP" title="Pages tagged ROP">ROP</a></span>
         
           <h1 class="entry-title">Writeup-Pwnable: tiny &amp; tiny_easy</h1>
         
-      </header><footer class="entry-meta"><img src="https://cubarco.org/images/matrix.png" class="bio-photo" alt="Cubarco bio photo"><span class="author vcard">By <span class="fn">Cubarco</span></span>
+      </header>
+      <footer class="entry-meta">
+        
+        
+          <img src="https://cubarco.org/images/matrix.png" class="bio-photo" alt="Cubarco bio photo">
+        
+        <span class="author vcard">By <span class="fn">Cubarco</span></span>
         <span class="entry-date date published"><time datetime="2015-12-11T00:00:00+00:00"><i class="fa fa-calendar-o"></i> December 11, 2015</time></span>
         
         <span class="entry-comments"><i class="fa fa-comment-o"></i> <a href="#disqus_thread">Comment</a></span>
@@ -127,7 +178,8 @@
 </span>
 <!-- /.social-share -->
         
-      </footer><div class="entry-content">
+      </footer>
+      <div class="entry-content">
         <h2 id="tinyeasy">tiny_easy</h2>
 
 <h4 id="brute-force">1. Brute force</h4>
@@ -138,7 +190,9 @@
 <figure class="highlight"><pre><code class="language-objdump" data-lang="objdump">8048054:	58             pop %eax
 8048055:	5a             pop %edx
 8048056:	8b12           mov (%edx),%edx
-8048058:	ffd2           call *%edx</code></pre></figure><p>然后用 gdb 断在 entry point, 观察一下栈:</p>
+8048058:	ffd2           call *%edx</code></pre></figure>
+
+<p>然后用 gdb 断在 entry point, 观察一下栈:</p>
 
 <figure class="highlight"><pre><code class="language-console" data-lang="console">$ gdb tiny_easy
 (gdb) b *0x8048054
@@ -155,7 +209,9 @@ Breakpoint 1, 0x08048054 in ?? ()
 0xffd82db0: 0xffd84f6c  0xffd84f81  0xffd84f89  0xffd84f99
 0xffd82dc0: 0xffd84fab  0x00000000  0x00000020  0xf776bb50
 0xffd82dd0: 0x00000021  0xf776b000  0x00000010  0x0fabfbff
-0xffd82de0: 0x00000006  0x00001000  0x00000011  0x00000064</code></pre></figure><p>发现 $esp 位置是命令行参数的个数(即 argc)，后面借着的都是 argv[i], 以 NULL 结尾，再之后都是环境变量(即 envp)。</p>
+0xffd82de0: 0x00000006  0x00001000  0x00000011  0x00000064</code></pre></figure>
+
+<p>发现 $esp 位置是命令行参数的个数(即 argc)，后面借着的都是 argv[i], 以 NULL 结尾，再之后都是环境变量(即 envp)。</p>
 
 <p>观察到这里，这题就有了一个很明显的解法，即在 argv[0] 里面放猜测的栈中的某个地址，然后跳到存在 argv[1…n] 里面的 shellcode. 但是由于 ASLR, 需要用很多 nop 来填充 stack, 来增加 bruteforce 的命中率。</p>
 
@@ -186,7 +242,9 @@ Breakpoint 1, 0x08048054 in ?? ()
 ...
 0xffd82dc0: 0xffd84fab  0x00000000  0x00000020  0xf776bb50
 0xffd82dd0: 0x00000021  0xf776b000  0x00000010  0x0fabfbff
-...</code></pre></figure><p>截取了上文中的一部分 stack 数据，可以发现在 0xffd82dec 的位置有个 0xf776bb50, 看了一下，是 vdso 中<code class="highlighter-rouge">__kernel_vsyscall</code>的起始位置，如果可以 ret 到这里，就能调用系统调用了。</p>
+...</code></pre></figure>
+
+<p>截取了上文中的一部分 stack 数据，可以发现在 0xffd82dec 的位置有个 0xf776bb50, 看了一下，是 vdso 中<code class="highlighter-rouge">__kernel_vsyscall</code>的起始位置，如果可以 ret 到这里，就能调用系统调用了。</p>
 
 <p>然后开始找 gadgets.</p>
 
@@ -195,7 +253,9 @@ Breakpoint 1, 0x08048054 in ?? ()
 5cc:	5e                   	pop    %esi
 5cd:	5f                   	pop    %edi
 5ce:	5d                   	pop    %ebp
-5cf:	c3                   	ret</code></pre></figure><p>GOTCHA!!! 这里将栈指针增加了 0x3c, 然后<code class="highlighter-rouge">pop %ebx</code>顺便满足了 execv 系统调用的第二个要求。仔细观察了栈的内容，只要保证有 11 个命令行参数，5 个环境变量就能完成 execv 的调用，其中第四个环境变量的字符串是执行路径。</p>
+5cf:	c3                   	ret</code></pre></figure>
+
+<p>GOTCHA!!! 这里将栈指针增加了 0x3c, 然后<code class="highlighter-rouge">pop %ebx</code>顺便满足了 execv 系统调用的第二个要求。仔细观察了栈的内容，只要保证有 11 个命令行参数，5 个环境变量就能完成 execv 的调用，其中第四个环境变量的字符串是执行路径。</p>
 
 <h6 id="exptinysh">exp.tiny.sh</h6>
 <p>这个 exp 的核心是 C (其实就是一句<code class="highlighter-rouge">execle()</code>的事情), 用 shell 写只是为了方便，可以把<code class="highlighter-rouge">ulimit -s unlimited</code>这些命令放在一起(调试过程中还用到了其他命令，最后删的只剩 ulimit…)，而且用一个脚本解题本身是一件很酷的事情XD.</p>
@@ -206,7 +266,7 @@ Breakpoint 1, 0x08048054 in ?? ()
 
 <div class="footnotes">
   <ol>
-<li id="fn:1">
+    <li id="fn:1">
       <p><a href="https://wiki.gentoo.org/wiki/Hardened/GNU_stack_quickstart#Causes_of_executable_stack_markings">Causes of executable stack markings</a> <a href="#fnref:1" class="reversefootnote">↩</a></p>
     </li>
     <li id="fn:2">
@@ -224,12 +284,15 @@ Breakpoint 1, 0x08048054 in ?? ()
         <div align="right">
 		    <span><a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc/4.0/88x31.png"></a></span>
         </div>
-        <nav class="pagination" role="navigation"><a href="https://cubarco.org/blog/2015/12/seccon-ctf-writeup-fsb-treewalker/" class="btn" title="Writeup-Seccon CTF: FSB:TreeWalker">Previous</a>
+        <nav class="pagination" role="navigation">
+            
+              <a href="https://cubarco.org/blog/2015/12/seccon-ctf-writeup-fsb-treewalker/" class="btn" title="Writeup-Seccon CTF: FSB:TreeWalker">Previous</a>
             
             
               <a href="https://cubarco.org/blog/2015/12/writeup-pwnable-syscall/" class="btn" title="Writeup-Pwnable: syscall">Next</a>
             
-        </nav><!-- /.pagination --><div id="disqus_thread"></div>
+        </nav><!-- /.pagination -->
+        <div id="disqus_thread"></div>
 <!-- /#disqus_thread -->
       </div>
 <!-- /.entry-content -->
@@ -241,7 +304,10 @@ Breakpoint 1, 0x08048054 in ?? ()
 <!-- /#main -->
 
 <div class="footer-wrapper">
-  <footer role="contentinfo" class="entry-wrapper"><span>Powered by <a href="http://jekyllrb.com" rel="nofollow">Jekyll</a> using the <a href="https://mademistakes.com/work/so-simple-jekyll-theme/" rel="nofollow">So Simple Theme</a>. Published with <a href="https://github.com/cubarco/cubarco.github.io">GitHub Pages</a>.</span>
+  <footer role="contentinfo" class="entry-wrapper">
+    
+
+<span>Powered by <a href="http://jekyllrb.com" rel="nofollow">Jekyll</a> using the <a href="https://mademistakes.com/work/so-simple-jekyll-theme/" rel="nofollow">So Simple Theme</a>. Published with <a href="https://github.com/cubarco/cubarco.github.io">GitHub Pages</a>.</span>
 <div class="social-icons">
 	<a href="https://twitter.com/Cube_Lin" title="Cubarco on Twitter" target="_blank"><i class="fa fa-twitter-square fa-2x"></i></a>
 	<a href="https://www.facebook.com/cubarco" title="Cubarco on Facebook" target="_blank"><i class="fa fa-facebook-square fa-2x"></i></a>
@@ -260,7 +326,13 @@ Breakpoint 1, 0x08048054 in ?? ()
 </div>
 <!-- /.footer-wrapper -->
 
-<script src="//cdn.bootcss.com/jquery/2.1.4/jquery.min.js"></script><script>window.jQuery || document.write('<script src="https://cubarco.org/assets/js/vendor/jquery-1.9.1.min.js"><\/script>')</script><script src="https://cubarco.org/assets/js/gist-async.min.js"></script><script src="https://cubarco.org/assets/js/scripts.min.js"></script><!-- Jekyll Simple Search option --><script>
+<script src="//cdn.bootcss.com/jquery/2.1.4/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="https://cubarco.org/assets/js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
+<script src="https://cubarco.org/assets/js/gist-async.min.js"></script>
+<script src="https://cubarco.org/assets/js/scripts.min.js"></script>
+
+<!-- Jekyll Simple Search option -->
+<script>
   $(document).ready(function() {
       $('.search-field').jekyllSearch({
           jsonFile: 'https://cubarco.org/search.json',
@@ -295,7 +367,13 @@ Breakpoint 1, 0x08048054 in ?? ()
         bs.canvas.removeClass('is-visible');
     });
   })( jQuery, window );
-</script><!-- Check whether the page is a post --><script type="text/javascript">
+</script>
+
+
+<!-- Check whether the page is a post -->
+
+  
+<script type="text/javascript">
     /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
     var disqus_shortname = 'cubarco'; // required: replace example with your forum shortname
 
@@ -313,7 +391,8 @@ Breakpoint 1, 0x08048054 in ?? ()
         s.src = '//' + disqus_shortname + '.disqus.com/count.js';
         (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
     }());
-</script><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a>
 </noscript>
 <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
 
@@ -335,5 +414,8 @@ Breakpoint 1, 0x08048054 in ?? ()
     var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
   })();
 </script>
+
+
+
 </body>
 </html>

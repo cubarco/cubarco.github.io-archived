@@ -1,42 +1,73 @@
 <!DOCTYPE html>
 <!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]--><!--[if (IE 7)&!(IEMobile)]><html class="no-js lt-ie9 lt-ie8" lang="en"><![endif]--><!--[if (IE 8)&!(IEMobile)]><html class="no-js lt-ie9" lang="en"><![endif]--><!--[if gt IE 8]><!--><html class="no-js" lang="en">
-<!--<![endif]--><head>
+<!--<![endif]-->
+<head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="theme-color" content="#000000">
 <title>一个解决 Linux 版 Dota 2 中 CJK 字符显示成方块的 Workaround – 盘子里的部落格</title>
 <meta name="description" content="不知道从什么时候开始，Linux 版本的 Dota 2 中载入界面的 tips sentences 和 player name 中的中文会显示成方框，详见 issue-1688。V社基本没搭理这个 bug，只好自己动手修。 猜想是游戏内直接使用了某个字体，或者该字体不存在时调用了默认字体，但是他们不支持 CJK 字符，所以显示成方块。因为 SteamFonts 给的全是Arial字体，我猜 Dota 2 那些文本使用的字体可能是Arial，开FC_DEBUG跑了一遍发现猜的没错。那么我们要做的就是用fontconfig把Arial替换成支持中文的字体。 解决办法 替换Arial的fontconfig配置是: &lt;match target=" pattern qual="any" mode="assign" binding="same" sans s chinese zen hei fontconfig_file dota version="1.0" fontconfig system ignore_missing="no" target="pattern">
 <meta name="keywords" content="Linux, Steam, Dota 2, Fonts, CJK">
-<!-- Twitter Cards --><meta name="twitter:title" content="一个解决 Linux 版 Dota 2 中 CJK 字符显示成方块的 Workaround">
+
+
+<!-- Twitter Cards -->
+<meta name="twitter:title" content="一个解决 Linux 版 Dota 2 中 CJK 字符显示成方块的 Workaround">
 <meta name="twitter:description" content="不知道从什么时候开始，Linux 版本的 Dota 2 中载入界面的 tips sentences 和 player name 中的中文会显示成方框，详见 issue-1688。V社基本没搭理这个 bug，只好自己动手修。 猜想是游戏内直接使用了某个字体，或者该字体不存在时调用了默认字体，但是他们不支持 CJK 字符，所以显示成方块。因为 SteamFonts 给的全是Arial字体，我猜 Dota 2 那些文本使用的字体可能是Arial，开FC_DEBUG跑了一遍发现猜的没错。那么我们要做的就是用fontconfig把Arial替换成支持中文的字体。 解决办法 替换Arial的fontconfig配置是: &lt;match target=" pattern qual="any" mode="assign" binding="same" sans s chinese zen hei fontconfig_file dota version="1.0" fontconfig system ignore_missing="no" target="pattern">
 <meta name="twitter:site" content="@Cube_Lin">
 <meta name="twitter:creator" content="@Cube_Lin">
+
 <meta name="twitter:card" content="summary">
 <!--
    -<meta name="twitter:image" content="https://cubarco.org/images/">
-   --><!-- Open Graph --><meta property="og:locale" content="zh_CN">
+   -->
+
+<!-- Open Graph -->
+<meta property="og:locale" content="zh_CN">
 <meta property="og:type" content="article">
 <meta property="og:title" content="一个解决 Linux 版 Dota 2 中 CJK 字符显示成方块的 Workaround">
 <meta property="og:description" content="不知道从什么时候开始，Linux 版本的 Dota 2 中载入界面的 tips sentences 和 player name 中的中文会显示成方框，详见 issue-1688。V社基本没搭理这个 bug，只好自己动手修。 猜想是游戏内直接使用了某个字体，或者该字体不存在时调用了默认字体，但是他们不支持 CJK 字符，所以显示成方块。因为 SteamFonts 给的全是Arial字体，我猜 Dota 2 那些文本使用的字体可能是Arial，开FC_DEBUG跑了一遍发现猜的没错。那么我们要做的就是用fontconfig把Arial替换成支持中文的字体。 解决办法 替换Arial的fontconfig配置是: &lt;match target=" pattern qual="any" name="family" mode="assign" binding="same" sans s chinese zen hei fontconfig_file dota version="1.0" fontconfig system ignore_missing="no" target="pattern">
 <meta property="og:url" content="https://cubarco.org/blog/2015/05/dota2-blocky-cjk-fonts-workaround/">
 <meta property="og:site_name" content="盘子里的部落格">
+
+
+
+
+
+
 <link rel="canonical" href="https://cubarco.org/blog/2015/05/dota2-blocky-cjk-fonts-workaround/">
 <link href="https://cubarco.org/feed.xml" type="application/atom+xml" rel="alternate" title="盘子里的部落格 Feed">
 <link rel="author" href="http://plus.google.com/+%E6%9E%97%E5%AE%B6%E5%86%9BCube?rel=author">
-<!-- http://t.co/dKP3o1e --><meta name="HandheldFriendly" content="True">
+
+<!-- http://t.co/dKP3o1e -->
+<meta name="HandheldFriendly" content="True">
 <meta name="MobileOptimized" content="320">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<!-- For all browsers --><link rel="stylesheet" href="https://cubarco.org/assets/css/main.css">
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="https://cubarco.org/assets/css/main.css">
 <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.2.0/css/font-awesome.min.css">
-<!--Webfonts--><link href="//fonts.googleapis.com/css?family=Volkhov%7CCabin" rel="stylesheet" type="text/css">
+
+<!--Webfonts-->
+<link href="//fonts.googleapis.com/css?family=Volkhov%7CCabin" rel="stylesheet" type="text/css">
 <!--
    -[> Webfonts <]
    -<script src="//use.edgefonts.net/source-sans-pro:n2,i2,n3,i3,n4,i4,n6,i6,n7,i7,n9,i9;source-code-pro:n4,n7;volkhov;cabin.js"></script>
-   --><meta http-equiv="cleartype" content="on">
-<!-- HTML5 Shiv and Media Query Support --><!--[if lt IE 9]>
+   -->
+
+<meta http-equiv="cleartype" content="on">
+
+<!-- HTML5 Shiv and Media Query Support -->
+<!--[if lt IE 9]>
   <script src="https://cubarco.org/assets/js/vendor/html5shiv.min.js"></script>
   <script src="https://cubarco.org/assets/js/vendor/respond.min.js"></script>
-<![endif]--><!-- Modernizr --><!--<script src="/assets/js/vendor/modernizr-2.7.1.custom.min.js"></script>--><script src="//cdn.bootcss.com/modernizr/2.7.1/modernizr.min.js"></script><!-- Icons --><!--
+<![endif]-->
+
+<!-- Modernizr -->
+<!--<script src="/assets/js/vendor/modernizr-2.7.1.custom.min.js"></script>-->
+<script src="//cdn.bootcss.com/modernizr/2.7.1/modernizr.min.js"></script>
+
+<!-- Icons -->
+<!--
    -[> 16x16 <]
    -<link rel="shortcut icon" href="https://cubarco.org/favicon-16x16.ico">
    -[> 32x32 <]
@@ -49,7 +80,8 @@
    -<link rel="apple-touch-icon-precomposed" sizes="114x114" href="https://cubarco.org/images/apple-touch-icon-114x114-precomposed.png">
    -[> 144x144 (precomposed) for iPad 3rd and 4th generation <]
    -<link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://cubarco.org/images/apple-touch-icon-144x144-precomposed.png">
-   --><link rel="shortcut icon" href="https://cubarco.org/favicon.ico">
+   -->
+<link rel="shortcut icon" href="https://cubarco.org/favicon.ico">
 <link rel="apple-touch-icon" sizes="57x57" href="https://cubarco.org/images/favicons/apple-touch-icon-57x57.png">
 <link rel="apple-touch-icon" sizes="60x60" href="https://cubarco.org/images/favicons/apple-touch-icon-60x60.png">
 <link rel="apple-touch-icon" sizes="72x72" href="https://cubarco.org/images/favicons/apple-touch-icon-72x72.png">
@@ -63,12 +95,17 @@
 <link rel="icon" type="image/png" href="https://cubarco.org/images/favicons/favicon-32x32.png" sizes="32x32">
 <link rel="icon" type="image/png" href="https://cubarco.org/images/favicons/favicon-96x96.png" sizes="96x96">
 <link rel="icon" type="image/png" href="https://cubarco.org/images/favicons/favicon-16x16.png" sizes="16x16">
+
 </head>
+
 <body id="post">
 
 <div class="navigation-wrapper">
-	<nav role="navigation" id="site-nav" class="animated drop"><ul>
-<li><a href="https://cubarco.org/blog/">Latest</a></li>
+	<nav role="navigation" id="site-nav" class="animated drop">
+	    <ul>
+      
+		    
+		    <li><a href="https://cubarco.org/blog/">Latest</a></li>
 		  
 		    
 		    <li><a href="https://cubarco.org/blog/about/">About</a></li>
@@ -83,7 +120,8 @@
 		    <li><a href="https://cubarco.org/blog/tags/">Tags</a></li>
 		  
         <li class="dosearch"><span><i class="fa fa-search"></i> Search</span></li>
-	    </ul></nav>
+	    </ul>
+	</nav>
 </div>
 <!-- /.navigation-wrapper -->
 
@@ -91,28 +129,41 @@
 
 <div class="search-wrapper">
   <div class="search-form">
-    <input type="text" class="search-field" placeholder="Search..."><button class="close-btn"><i class="fa fa-times-circle fa-2x"></i></button>
+    <input type="text" class="search-field" placeholder="Search...">
+    <button class="close-btn"><i class="fa fa-times-circle fa-2x"></i></button>
     <ul class="search-results post-list"></ul>
 <!-- /.search-results -->
-</div>
+  </div>
 <!-- /.search-form -->
 </div>
 <!-- ./search-wrapper -->
 
-<header class="masthead"><div class="wrap">
+<header class="masthead">
+	<div class="wrap">
         
         <h1 class="site-title animated fadeIn"><a href="https://cubarco.org">盘子里的部落格</a></h1>
 		<h2 class="site-description animated fadeIn" itemprop="description">Yet another Jekyll blog.</h2>
 	</div>
-</header><!-- /.masthead --><div class="js-menu-screen menu-screen"></div>
+</header><!-- /.masthead -->
+
+<div class="js-menu-screen menu-screen"></div>
 
 <div id="main" role="main">
-  <article class="hentry"><div class="entry-wrapper">
-      <header class="entry-header"><span class="entry-tags"><a href="https://cubarco.org/blog/tags/#Linux" title="Pages tagged Linux">Linux</a> • <a href="https://cubarco.org/blog/tags/#Steam" title="Pages tagged Steam">Steam</a> • <a href="https://cubarco.org/blog/tags/#Dota%202" title="Pages tagged Dota 2">Dota 2</a> • <a href="https://cubarco.org/blog/tags/#Fonts" title="Pages tagged Fonts">Fonts</a> • <a href="https://cubarco.org/blog/tags/#CJK" title="Pages tagged CJK">CJK</a></span>
+  <article class="hentry">
+    
+    <div class="entry-wrapper">
+      <header class="entry-header">
+        <span class="entry-tags"><a href="https://cubarco.org/blog/tags/#Linux" title="Pages tagged Linux">Linux</a> • <a href="https://cubarco.org/blog/tags/#Steam" title="Pages tagged Steam">Steam</a> • <a href="https://cubarco.org/blog/tags/#Dota%202" title="Pages tagged Dota 2">Dota 2</a> • <a href="https://cubarco.org/blog/tags/#Fonts" title="Pages tagged Fonts">Fonts</a> • <a href="https://cubarco.org/blog/tags/#CJK" title="Pages tagged CJK">CJK</a></span>
         
           <h1 class="entry-title">一个解决 Linux 版 Dota 2 中 CJK 字符显示成方块的 Workaround</h1>
         
-      </header><footer class="entry-meta"><img src="https://cubarco.org/images/matrix.png" class="bio-photo" alt="Cubarco bio photo"><span class="author vcard">By <span class="fn">Cubarco</span></span>
+      </header>
+      <footer class="entry-meta">
+        
+        
+          <img src="https://cubarco.org/images/matrix.png" class="bio-photo" alt="Cubarco bio photo">
+        
+        <span class="author vcard">By <span class="fn">Cubarco</span></span>
         <span class="entry-date date published"><time datetime="2015-05-14T00:00:00+00:00"><i class="fa fa-calendar-o"></i> May 14, 2015</time></span>
         <span class="entry-date date modified"><time datetime="2015-05-29"><i class="fa fa-pencil"></i> May 29, 2015</time></span>
         <span class="entry-comments"><i class="fa fa-comment-o"></i> <a href="#disqus_thread">Comment</a></span>
@@ -127,7 +178,8 @@
 </span>
 <!-- /.social-share -->
         
-      </footer><div class="entry-content">
+      </footer>
+      <div class="entry-content">
         <p>不知道从什么时候开始，Linux 版本的 Dota 2 中载入界面的 tips sentences 和 player name 中的中文会显示成方框，详见 <a href="https://github.com/ValveSoftware/Dota-2/issues/1688">issue-1688</a>。V社基本没搭理这个 bug，只好自己动手修。</p>
 
 <p>猜想是游戏内直接使用了某个字体，或者该字体不存在时调用了默认字体，但是他们不支持 CJK 字符，所以显示成方块。因为 SteamFonts 给的全是<code class="highlighter-rouge">Arial</code>字体，我猜 Dota 2 那些文本使用的字体可能是<code class="highlighter-rouge">Arial</code>，开<code class="highlighter-rouge">FC_DEBUG</code>跑了一遍发现猜的没错。那么我们要做的就是用<code class="highlighter-rouge">fontconfig</code>把<code class="highlighter-rouge">Arial</code>替换成支持中文的字体。</p>
@@ -142,7 +194,9 @@
   <span class="nt">&lt;edit</span> <span class="na">name=</span><span class="s">"family"</span> <span class="na">mode=</span><span class="s">"assign"</span> <span class="na">binding=</span><span class="s">"same"</span><span class="nt">&gt;</span>
     <span class="nt">&lt;string&gt;</span>Noto Sans S Chinese<span class="nt">&lt;/string&gt;</span>
   <span class="nt">&lt;/edit&gt;</span>
-<span class="nt">&lt;/match&gt;</span></code></pre></figure><p>我用的是<code class="highlighter-rouge">Noto Sans S Chinese</code>，如果用文泉驿正黑就改成<code class="highlighter-rouge">WenQuanYi Zen Hei</code>。</p>
+<span class="nt">&lt;/match&gt;</span></code></pre></figure>
+
+<p>我用的是<code class="highlighter-rouge">Noto Sans S Chinese</code>，如果用文泉驿正黑就改成<code class="highlighter-rouge">WenQuanYi Zen Hei</code>。</p>
 
 <p>怎么使这个配置生效？有两个方法。</p>
 
@@ -164,12 +218,16 @@
       <span class="nt">&lt;string&gt;</span>Noto Sans S Chinese<span class="nt">&lt;/string&gt;</span>
     <span class="nt">&lt;/edit&gt;</span>
   <span class="nt">&lt;/match&gt;</span>
-<span class="nt">&lt;/fontconfig&gt;</span></code></pre></figure><p>然后用<code class="highlighter-rouge">FONTCONFIG_FILE</code>环境变量来传递。但是使用这个环境变量之后，<code class="highlighter-rouge">fontconfig</code>不会再加载<code class="highlighter-rouge">/etc/fonts/fonts.conf</code>，所以这里把这个文件也包含进来。<sup id="fnref:1"><a href="#fn:1" class="footnote">1</a></sup></p>
+<span class="nt">&lt;/fontconfig&gt;</span></code></pre></figure>
+
+<p>然后用<code class="highlighter-rouge">FONTCONFIG_FILE</code>环境变量来传递。但是使用这个环境变量之后，<code class="highlighter-rouge">fontconfig</code>不会再加载<code class="highlighter-rouge">/etc/fonts/fonts.conf</code>，所以这里把这个文件也包含进来。<sup id="fnref:1"><a href="#fn:1" class="footnote">1</a></sup></p>
 
 <p>然后这样打开 Steam:</p>
 
 <figure class="highlight"><pre><code class="language-sh" data-lang="sh"><span class="nb">export </span><span class="nv">FONTCONFIG_FILE</span><span class="o">=</span>/path/to/dota2-fontconfig.conf
-steam</code></pre></figure><p>再运行 Dota 2 就不会有方块的困扰了。</p>
+steam</code></pre></figure>
+
+<p>再运行 Dota 2 就不会有方块的困扰了。</p>
 
 <h6 id="fontsconf">写进<code class="highlighter-rouge">fonts.conf</code>
 </h6>
@@ -183,7 +241,7 @@ steam</code></pre></figure><p>再运行 Dota 2 就不会有方块的困扰了。
 <h4 id="reference">Reference</h4>
 <div class="footnotes">
   <ol>
-<li id="fn:1">
+    <li id="fn:1">
       <p><a href="http://www.freedesktop.org/software/fontconfig/fontconfig-user.html">fonts-conf</a> <a href="#fnref:1" class="reversefootnote">↩</a></p>
     </li>
   </ol>
@@ -192,12 +250,15 @@ steam</code></pre></figure><p>再运行 Dota 2 就不会有方块的困扰了。
         <div align="right">
 		    <span><a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc/4.0/88x31.png"></a></span>
         </div>
-        <nav class="pagination" role="navigation"><a href="https://cubarco.org/blog/2015/05/c-programming-tricks/" class="btn" title="C Programming Tricks">Previous</a>
+        <nav class="pagination" role="navigation">
+            
+              <a href="https://cubarco.org/blog/2015/05/c-programming-tricks/" class="btn" title="C Programming Tricks">Previous</a>
             
             
               <a href="https://cubarco.org/blog/2015/11/9477-calcpop-writeup/" class="btn" title="Writeup-9447 CTF: calcpop">Next</a>
             
-        </nav><!-- /.pagination --><div id="disqus_thread"></div>
+        </nav><!-- /.pagination -->
+        <div id="disqus_thread"></div>
 <!-- /#disqus_thread -->
       </div>
 <!-- /.entry-content -->
@@ -209,7 +270,10 @@ steam</code></pre></figure><p>再运行 Dota 2 就不会有方块的困扰了。
 <!-- /#main -->
 
 <div class="footer-wrapper">
-  <footer role="contentinfo" class="entry-wrapper"><span>Powered by <a href="http://jekyllrb.com" rel="nofollow">Jekyll</a> using the <a href="https://mademistakes.com/work/so-simple-jekyll-theme/" rel="nofollow">So Simple Theme</a>. Published with <a href="https://github.com/cubarco/cubarco.github.io">GitHub Pages</a>.</span>
+  <footer role="contentinfo" class="entry-wrapper">
+    
+
+<span>Powered by <a href="http://jekyllrb.com" rel="nofollow">Jekyll</a> using the <a href="https://mademistakes.com/work/so-simple-jekyll-theme/" rel="nofollow">So Simple Theme</a>. Published with <a href="https://github.com/cubarco/cubarco.github.io">GitHub Pages</a>.</span>
 <div class="social-icons">
 	<a href="https://twitter.com/Cube_Lin" title="Cubarco on Twitter" target="_blank"><i class="fa fa-twitter-square fa-2x"></i></a>
 	<a href="https://www.facebook.com/cubarco" title="Cubarco on Facebook" target="_blank"><i class="fa fa-facebook-square fa-2x"></i></a>
@@ -228,7 +292,13 @@ steam</code></pre></figure><p>再运行 Dota 2 就不会有方块的困扰了。
 </div>
 <!-- /.footer-wrapper -->
 
-<script src="//cdn.bootcss.com/jquery/2.1.4/jquery.min.js"></script><script>window.jQuery || document.write('<script src="https://cubarco.org/assets/js/vendor/jquery-1.9.1.min.js"><\/script>')</script><script src="https://cubarco.org/assets/js/gist-async.min.js"></script><script src="https://cubarco.org/assets/js/scripts.min.js"></script><!-- Jekyll Simple Search option --><script>
+<script src="//cdn.bootcss.com/jquery/2.1.4/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="https://cubarco.org/assets/js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
+<script src="https://cubarco.org/assets/js/gist-async.min.js"></script>
+<script src="https://cubarco.org/assets/js/scripts.min.js"></script>
+
+<!-- Jekyll Simple Search option -->
+<script>
   $(document).ready(function() {
       $('.search-field').jekyllSearch({
           jsonFile: 'https://cubarco.org/search.json',
@@ -263,7 +333,13 @@ steam</code></pre></figure><p>再运行 Dota 2 就不会有方块的困扰了。
         bs.canvas.removeClass('is-visible');
     });
   })( jQuery, window );
-</script><!-- Check whether the page is a post --><script type="text/javascript">
+</script>
+
+
+<!-- Check whether the page is a post -->
+
+  
+<script type="text/javascript">
     /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
     var disqus_shortname = 'cubarco'; // required: replace example with your forum shortname
 
@@ -281,7 +357,8 @@ steam</code></pre></figure><p>再运行 Dota 2 就不会有方块的困扰了。
         s.src = '//' + disqus_shortname + '.disqus.com/count.js';
         (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
     }());
-</script><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a>
 </noscript>
 <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
 
@@ -303,5 +380,8 @@ steam</code></pre></figure><p>再运行 Dota 2 就不会有方块的困扰了。
     var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
   })();
 </script>
+
+
+
 </body>
 </html>

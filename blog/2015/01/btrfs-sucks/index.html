@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]--><!--[if (IE 7)&!(IEMobile)]><html class="no-js lt-ie9 lt-ie8" lang="en"><![endif]--><!--[if (IE 8)&!(IEMobile)]><html class="no-js lt-ie9" lang="en"><![endif]--><!--[if gt IE 8]><!--><html class="no-js" lang="en">
-<!--<![endif]--><head>
+<!--<![endif]-->
+<head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="theme-color" content="#000000">
@@ -22,7 +23,10 @@ subvolume可以实现一个分区挂载到多个目录，这样就省去了分�
 所以呢，总的来说， btrfs 的问题还是有点多，一些有意思的功能日常也起不到必不可少的作用。想入 btrfs 坑的还是再观望一段时间吧，已经入 btrfs 坑的话我只能祝你好运了。
 ">
 <meta name="keywords" content="Linux, FileSystem, btrfs">
-<!-- Twitter Cards --><meta name="twitter:title" content="对 btrfs 的吐槽">
+
+
+<!-- Twitter Cards -->
+<meta name="twitter:title" content="对 btrfs 的吐槽">
 <meta name="twitter:description" content="刚把本来给/home和/var用的 btrfs 换回 ext4，po 一发记(tu)录(cao)一下。
 
 一开始换 btrfs 呢，是感觉这个文件系统各种功能、各种酷炫啊，比如subvolume, snapshot什么的。我主要看中的其实是他的透明压缩，不仅节省硬盘空间，还能提高io的速率，这对我 5400转的 500G 硬盘还是有点作用的。不过当时年少不懂事，不知道有C这个文件属性，直接在/etc/fstab里用了全局压缩选项，结果导致虚拟机这种从单文件随机读取数据的场景速度慢到可怕。
@@ -41,10 +45,14 @@ subvolume可以实现一个分区挂载到多个目录，这样就省去了分�
 ">
 <meta name="twitter:site" content="@Cube_Lin">
 <meta name="twitter:creator" content="@Cube_Lin">
+
 <meta name="twitter:card" content="summary">
 <!--
    -<meta name="twitter:image" content="https://cubarco.org/images/">
-   --><!-- Open Graph --><meta property="og:locale" content="zh_CN">
+   -->
+
+<!-- Open Graph -->
+<meta property="og:locale" content="zh_CN">
 <meta property="og:type" content="article">
 <meta property="og:title" content="对 btrfs 的吐槽">
 <meta property="og:description" content="刚把本来给/home和/var用的 btrfs 换回 ext4，po 一发记(tu)录(cao)一下。
@@ -65,23 +73,46 @@ subvolume可以实现一个分区挂载到多个目录，这样就省去了分�
 ">
 <meta property="og:url" content="https://cubarco.org/blog/2015/01/btrfs-sucks/">
 <meta property="og:site_name" content="盘子里的部落格">
+
+
+
+
+
+
 <link rel="canonical" href="https://cubarco.org/blog/2015/01/btrfs-sucks/">
 <link href="https://cubarco.org/feed.xml" type="application/atom+xml" rel="alternate" title="盘子里的部落格 Feed">
 <link rel="author" href="http://plus.google.com/+%E6%9E%97%E5%AE%B6%E5%86%9BCube?rel=author">
-<!-- http://t.co/dKP3o1e --><meta name="HandheldFriendly" content="True">
+
+<!-- http://t.co/dKP3o1e -->
+<meta name="HandheldFriendly" content="True">
 <meta name="MobileOptimized" content="320">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<!-- For all browsers --><link rel="stylesheet" href="https://cubarco.org/assets/css/main.css">
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="https://cubarco.org/assets/css/main.css">
 <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.2.0/css/font-awesome.min.css">
-<!--Webfonts--><link href="//fonts.googleapis.com/css?family=Volkhov%7CCabin" rel="stylesheet" type="text/css">
+
+<!--Webfonts-->
+<link href="//fonts.googleapis.com/css?family=Volkhov%7CCabin" rel="stylesheet" type="text/css">
 <!--
    -[> Webfonts <]
    -<script src="//use.edgefonts.net/source-sans-pro:n2,i2,n3,i3,n4,i4,n6,i6,n7,i7,n9,i9;source-code-pro:n4,n7;volkhov;cabin.js"></script>
-   --><meta http-equiv="cleartype" content="on">
-<!-- HTML5 Shiv and Media Query Support --><!--[if lt IE 9]>
+   -->
+
+<meta http-equiv="cleartype" content="on">
+
+<!-- HTML5 Shiv and Media Query Support -->
+<!--[if lt IE 9]>
   <script src="https://cubarco.org/assets/js/vendor/html5shiv.min.js"></script>
   <script src="https://cubarco.org/assets/js/vendor/respond.min.js"></script>
-<![endif]--><!-- Modernizr --><!--<script src="/assets/js/vendor/modernizr-2.7.1.custom.min.js"></script>--><script src="//cdn.bootcss.com/modernizr/2.7.1/modernizr.min.js"></script><!-- Icons --><!--
+<![endif]-->
+
+<!-- Modernizr -->
+<!--<script src="/assets/js/vendor/modernizr-2.7.1.custom.min.js"></script>-->
+<script src="//cdn.bootcss.com/modernizr/2.7.1/modernizr.min.js"></script>
+
+<!-- Icons -->
+<!--
    -[> 16x16 <]
    -<link rel="shortcut icon" href="https://cubarco.org/favicon-16x16.ico">
    -[> 32x32 <]
@@ -94,7 +125,8 @@ subvolume可以实现一个分区挂载到多个目录，这样就省去了分�
    -<link rel="apple-touch-icon-precomposed" sizes="114x114" href="https://cubarco.org/images/apple-touch-icon-114x114-precomposed.png">
    -[> 144x144 (precomposed) for iPad 3rd and 4th generation <]
    -<link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://cubarco.org/images/apple-touch-icon-144x144-precomposed.png">
-   --><link rel="shortcut icon" href="https://cubarco.org/favicon.ico">
+   -->
+<link rel="shortcut icon" href="https://cubarco.org/favicon.ico">
 <link rel="apple-touch-icon" sizes="57x57" href="https://cubarco.org/images/favicons/apple-touch-icon-57x57.png">
 <link rel="apple-touch-icon" sizes="60x60" href="https://cubarco.org/images/favicons/apple-touch-icon-60x60.png">
 <link rel="apple-touch-icon" sizes="72x72" href="https://cubarco.org/images/favicons/apple-touch-icon-72x72.png">
@@ -108,12 +140,17 @@ subvolume可以实现一个分区挂载到多个目录，这样就省去了分�
 <link rel="icon" type="image/png" href="https://cubarco.org/images/favicons/favicon-32x32.png" sizes="32x32">
 <link rel="icon" type="image/png" href="https://cubarco.org/images/favicons/favicon-96x96.png" sizes="96x96">
 <link rel="icon" type="image/png" href="https://cubarco.org/images/favicons/favicon-16x16.png" sizes="16x16">
+
 </head>
+
 <body id="post">
 
 <div class="navigation-wrapper">
-	<nav role="navigation" id="site-nav" class="animated drop"><ul>
-<li><a href="https://cubarco.org/blog/">Latest</a></li>
+	<nav role="navigation" id="site-nav" class="animated drop">
+	    <ul>
+      
+		    
+		    <li><a href="https://cubarco.org/blog/">Latest</a></li>
 		  
 		    
 		    <li><a href="https://cubarco.org/blog/about/">About</a></li>
@@ -128,7 +165,8 @@ subvolume可以实现一个分区挂载到多个目录，这样就省去了分�
 		    <li><a href="https://cubarco.org/blog/tags/">Tags</a></li>
 		  
         <li class="dosearch"><span><i class="fa fa-search"></i> Search</span></li>
-	    </ul></nav>
+	    </ul>
+	</nav>
 </div>
 <!-- /.navigation-wrapper -->
 
@@ -136,28 +174,41 @@ subvolume可以实现一个分区挂载到多个目录，这样就省去了分�
 
 <div class="search-wrapper">
   <div class="search-form">
-    <input type="text" class="search-field" placeholder="Search..."><button class="close-btn"><i class="fa fa-times-circle fa-2x"></i></button>
+    <input type="text" class="search-field" placeholder="Search...">
+    <button class="close-btn"><i class="fa fa-times-circle fa-2x"></i></button>
     <ul class="search-results post-list"></ul>
 <!-- /.search-results -->
-</div>
+  </div>
 <!-- /.search-form -->
 </div>
 <!-- ./search-wrapper -->
 
-<header class="masthead"><div class="wrap">
+<header class="masthead">
+	<div class="wrap">
         
         <h1 class="site-title animated fadeIn"><a href="https://cubarco.org">盘子里的部落格</a></h1>
 		<h2 class="site-description animated fadeIn" itemprop="description">Yet another Jekyll blog.</h2>
 	</div>
-</header><!-- /.masthead --><div class="js-menu-screen menu-screen"></div>
+</header><!-- /.masthead -->
+
+<div class="js-menu-screen menu-screen"></div>
 
 <div id="main" role="main">
-  <article class="hentry"><div class="entry-wrapper">
-      <header class="entry-header"><span class="entry-tags"><a href="https://cubarco.org/blog/tags/#Linux" title="Pages tagged Linux">Linux</a> • <a href="https://cubarco.org/blog/tags/#FileSystem" title="Pages tagged FileSystem">FileSystem</a> • <a href="https://cubarco.org/blog/tags/#btrfs" title="Pages tagged btrfs">btrfs</a></span>
+  <article class="hentry">
+    
+    <div class="entry-wrapper">
+      <header class="entry-header">
+        <span class="entry-tags"><a href="https://cubarco.org/blog/tags/#Linux" title="Pages tagged Linux">Linux</a> • <a href="https://cubarco.org/blog/tags/#FileSystem" title="Pages tagged FileSystem">FileSystem</a> • <a href="https://cubarco.org/blog/tags/#btrfs" title="Pages tagged btrfs">btrfs</a></span>
         
           <h1 class="entry-title">对 btrfs 的吐槽</h1>
         
-      </header><footer class="entry-meta"><img src="https://cubarco.org/images/matrix.png" class="bio-photo" alt="Cubarco bio photo"><span class="author vcard">By <span class="fn">Cubarco</span></span>
+      </header>
+      <footer class="entry-meta">
+        
+        
+          <img src="https://cubarco.org/images/matrix.png" class="bio-photo" alt="Cubarco bio photo">
+        
+        <span class="author vcard">By <span class="fn">Cubarco</span></span>
         <span class="entry-date date published"><time datetime="2015-01-02T00:00:00+00:00"><i class="fa fa-calendar-o"></i> January 02, 2015</time></span>
         
         <span class="entry-comments"><i class="fa fa-comment-o"></i> <a href="#disqus_thread">Comment</a></span>
@@ -172,7 +223,8 @@ subvolume可以实现一个分区挂载到多个目录，这样就省去了分�
 </span>
 <!-- /.social-share -->
         
-      </footer><div class="entry-content">
+      </footer>
+      <div class="entry-content">
         <p>刚把本来给<code class="highlighter-rouge">/home</code>和<code class="highlighter-rouge">/var</code>用的 btrfs 换回 ext4，po 一发记(tu)录(cao)一下。</p>
 
 <p>一开始换 btrfs 呢，是感觉这个文件系统各种功能、各种酷炫啊，比如<code class="highlighter-rouge">subvolume</code>, <code class="highlighter-rouge">snapshot</code>什么的。我主要看中的其实是他的透明压缩，不仅节省硬盘空间，还能提高io的速率，这对我 5400转的 500G 硬盘还是有点作用的。不过当时年少不懂事，不知道有<code class="highlighter-rouge">C</code>这个文件属性，直接在<code class="highlighter-rouge">/etc/fstab</code>里用了全局压缩选项，结果导致虚拟机这种从单文件随机读取数据的场景速度慢到可怕。</p>
@@ -192,12 +244,15 @@ subvolume可以实现一个分区挂载到多个目录，这样就省去了分�
         <div align="right">
 		    <span><a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc/4.0/88x31.png"></a></span>
         </div>
-        <nav class="pagination" role="navigation"><a href="https://cubarco.org/blog/2014/12/paf-develop-notes/" class="btn" title="Paf 开发总结">Previous</a>
+        <nav class="pagination" role="navigation">
+            
+              <a href="https://cubarco.org/blog/2014/12/paf-develop-notes/" class="btn" title="Paf 开发总结">Previous</a>
             
             
               <a href="https://cubarco.org/blog/2015/01/vpn-udp-libev-development-notes/" class="btn" title="vpn-udp-libev 开发总结">Next</a>
             
-        </nav><!-- /.pagination --><div id="disqus_thread"></div>
+        </nav><!-- /.pagination -->
+        <div id="disqus_thread"></div>
 <!-- /#disqus_thread -->
       </div>
 <!-- /.entry-content -->
@@ -209,7 +264,10 @@ subvolume可以实现一个分区挂载到多个目录，这样就省去了分�
 <!-- /#main -->
 
 <div class="footer-wrapper">
-  <footer role="contentinfo" class="entry-wrapper"><span>Powered by <a href="http://jekyllrb.com" rel="nofollow">Jekyll</a> using the <a href="https://mademistakes.com/work/so-simple-jekyll-theme/" rel="nofollow">So Simple Theme</a>. Published with <a href="https://github.com/cubarco/cubarco.github.io">GitHub Pages</a>.</span>
+  <footer role="contentinfo" class="entry-wrapper">
+    
+
+<span>Powered by <a href="http://jekyllrb.com" rel="nofollow">Jekyll</a> using the <a href="https://mademistakes.com/work/so-simple-jekyll-theme/" rel="nofollow">So Simple Theme</a>. Published with <a href="https://github.com/cubarco/cubarco.github.io">GitHub Pages</a>.</span>
 <div class="social-icons">
 	<a href="https://twitter.com/Cube_Lin" title="Cubarco on Twitter" target="_blank"><i class="fa fa-twitter-square fa-2x"></i></a>
 	<a href="https://www.facebook.com/cubarco" title="Cubarco on Facebook" target="_blank"><i class="fa fa-facebook-square fa-2x"></i></a>
@@ -228,7 +286,13 @@ subvolume可以实现一个分区挂载到多个目录，这样就省去了分�
 </div>
 <!-- /.footer-wrapper -->
 
-<script src="//cdn.bootcss.com/jquery/2.1.4/jquery.min.js"></script><script>window.jQuery || document.write('<script src="https://cubarco.org/assets/js/vendor/jquery-1.9.1.min.js"><\/script>')</script><script src="https://cubarco.org/assets/js/gist-async.min.js"></script><script src="https://cubarco.org/assets/js/scripts.min.js"></script><!-- Jekyll Simple Search option --><script>
+<script src="//cdn.bootcss.com/jquery/2.1.4/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="https://cubarco.org/assets/js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
+<script src="https://cubarco.org/assets/js/gist-async.min.js"></script>
+<script src="https://cubarco.org/assets/js/scripts.min.js"></script>
+
+<!-- Jekyll Simple Search option -->
+<script>
   $(document).ready(function() {
       $('.search-field').jekyllSearch({
           jsonFile: 'https://cubarco.org/search.json',
@@ -263,7 +327,13 @@ subvolume可以实现一个分区挂载到多个目录，这样就省去了分�
         bs.canvas.removeClass('is-visible');
     });
   })( jQuery, window );
-</script><!-- Check whether the page is a post --><script type="text/javascript">
+</script>
+
+
+<!-- Check whether the page is a post -->
+
+  
+<script type="text/javascript">
     /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
     var disqus_shortname = 'cubarco'; // required: replace example with your forum shortname
 
@@ -281,7 +351,8 @@ subvolume可以实现一个分区挂载到多个目录，这样就省去了分�
         s.src = '//' + disqus_shortname + '.disqus.com/count.js';
         (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
     }());
-</script><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a>
 </noscript>
 <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
 
@@ -303,5 +374,8 @@ subvolume可以实现一个分区挂载到多个目录，这样就省去了分�
     var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
   })();
 </script>
+
+
+
 </body>
 </html>

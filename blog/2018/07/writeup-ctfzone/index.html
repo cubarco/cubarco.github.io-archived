@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]--><!--[if (IE 7)&!(IEMobile)]><html class="no-js lt-ie9 lt-ie8" lang="en"><![endif]--><!--[if (IE 8)&!(IEMobile)]><html class="no-js lt-ie9" lang="en"><![endif]--><!--[if gt IE 8]><!--><html class="no-js" lang="en">
+<!--<![endif]-->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="theme-color" content="#000000">
+<title>Writeup: CTFZone 2018 Quals – 盘子里的部落格</title>
+<meta name="description" content="两道PWN题, 一个easypwn_strings, 一个Mobile Bank. easypwn_strings 问题 You can try to use very interesting and strange string functions ;) Good luck. nc pwn-03.v7frkwrfyhsjtbpfcppnu.ctfz.one 1234 And yes, there is no binary here 这是一道盲pwn类型的题，没有提供二进制(名义上的)。 nc连上之后回显： Let's choose string operation! 1. StrLen 2. SubStrRemove 3. StrRemoveLastSymbols 第一个选项：输入一个字符串，回显字符串长度。 You choise - 1 Use str good choise 123 Result: 3 第二个选项显示未实现。 第三个选项：输入一个字符串，和一个数字，服务端移除末尾指定长度的字符串后打印出来。 You choise - 3 Use str int good choise Set string: 1234567 Set number: 3 Delete 3 ending symbols...">
+<meta name="keywords" content="Hack, CTF, Writeup, Exploitation, PWN">
+
+
+<!-- Twitter Cards -->
+<meta name="twitter:title" content="Writeup: CTFZone 2018 Quals">
+<meta name="twitter:description" content="两道PWN题, 一个easypwn_strings, 一个Mobile Bank. easypwn_strings 问题 You can try to use very interesting and strange string functions ;) Good luck. nc pwn-03.v7frkwrfyhsjtbpfcppnu.ctfz.one 1234 And yes, there is no binary here 这是一道盲pwn类型的题，没有提供二进制(名义上的)。 nc连上之后回显： Let's choose string operation! 1. StrLen 2. SubStrRemove 3. StrRemoveLastSymbols 第一个选项：输入一个字符串，回显字符串长度。 You choise - 1 Use str good choise 123 Result: 3 第二个选项显示未实现。 第三个选项：输入一个字符串，和一个数字，服务端移除末尾指定长度的字符串后打印出来。 You choise - 3 Use str int good choise Set string: 1234567 Set number: 3 Delete 3 ending symbols...">
+<meta name="twitter:site" content="@Cube_Lin">
+<meta name="twitter:creator" content="@Cube_Lin">
+
+<meta name="twitter:card" content="summary">
+<!--
+   -<meta name="twitter:image" content="https://cubarco.org/images/">
+   -->
+
+<!-- Open Graph -->
+<meta property="og:locale" content="zh_CN">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Writeup: CTFZone 2018 Quals">
+<meta property="og:description" content="两道PWN题, 一个easypwn_strings, 一个Mobile Bank. easypwn_strings 问题 You can try to use very interesting and strange string functions ;) Good luck. nc pwn-03.v7frkwrfyhsjtbpfcppnu.ctfz.one 1234 And yes, there is no binary here 这是一道盲pwn类型的题，没有提供二进制(名义上的)。 nc连上之后回显： Let's choose string operation! 1. StrLen 2. SubStrRemove 3. StrRemoveLastSymbols 第一个选项：输入一个字符串，回显字符串长度。 You choise - 1 Use str good choise 123 Result: 3 第二个选项显示未实现。 第三个选项：输入一个字符串，和一个数字，服务端移除末尾指定长度的字符串后打印出来。 You choise - 3 Use str int good choise Set string: 1234567 Set number: 3 Delete 3 ending symbols...">
+<meta property="og:url" content="https://cubarco.org/blog/2018/07/writeup-ctfzone/">
+<meta property="og:site_name" content="盘子里的部落格">
+
+
+
+
+
+
+<link rel="canonical" href="https://cubarco.org/blog/2018/07/writeup-ctfzone/">
+<link href="https://cubarco.org/feed.xml" type="application/atom+xml" rel="alternate" title="盘子里的部落格 Feed">
+<link rel="author" href="http://plus.google.com/+%E6%9E%97%E5%AE%B6%E5%86%9BCube?rel=author">
+
+<!-- http://t.co/dKP3o1e -->
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="https://cubarco.org/assets/css/main.css">
+<link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.2.0/css/font-awesome.min.css">
+
+<!--Webfonts-->
+<link href="//fonts.googleapis.com/css?family=Volkhov%7CCabin" rel="stylesheet" type="text/css">
+<!--
+   -[> Webfonts <]
+   -<script src="//use.edgefonts.net/source-sans-pro:n2,i2,n3,i3,n4,i4,n6,i6,n7,i7,n9,i9;source-code-pro:n4,n7;volkhov;cabin.js"></script>
+   -->
+
+<meta http-equiv="cleartype" content="on">
+
+<!-- HTML5 Shiv and Media Query Support -->
+<!--[if lt IE 9]>
+  <script src="https://cubarco.org/assets/js/vendor/html5shiv.min.js"></script>
+  <script src="https://cubarco.org/assets/js/vendor/respond.min.js"></script>
+<![endif]-->
+
+<!-- Modernizr -->
+<!--<script src="/assets/js/vendor/modernizr-2.7.1.custom.min.js"></script>-->
+<script src="//cdn.bootcss.com/modernizr/2.7.1/modernizr.min.js"></script>
+
+<!-- Icons -->
+<!--
+   -[> 16x16 <]
+   -<link rel="shortcut icon" href="https://cubarco.org/favicon-16x16.ico">
+   -[> 32x32 <]
+   -<link rel="shortcut icon" href="https://cubarco.org/favicon-32x32.ico">
+   -[> 57x57 (precomposed) for iPhone 3GS, pre-2011 iPod Touch and older Android devices <]
+   -<link rel="apple-touch-icon-precomposed" href="https://cubarco.org/images/apple-touch-icon-precomposed.png">
+   -[> 72x72 (precomposed) for 1st generation iPad, iPad 2 and iPad mini <]
+   -<link rel="apple-touch-icon-precomposed" sizes="72x72" href="https://cubarco.org/images/apple-touch-icon-72x72-precomposed.png">
+   -[> 114x114 (precomposed) for iPhone 4, 4S, 5 and post-2011 iPod Touch <]
+   -<link rel="apple-touch-icon-precomposed" sizes="114x114" href="https://cubarco.org/images/apple-touch-icon-114x114-precomposed.png">
+   -[> 144x144 (precomposed) for iPad 3rd and 4th generation <]
+   -<link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://cubarco.org/images/apple-touch-icon-144x144-precomposed.png">
+   -->
+<link rel="shortcut icon" href="https://cubarco.org/favicon.ico">
+<link rel="apple-touch-icon" sizes="57x57" href="https://cubarco.org/images/favicons/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="https://cubarco.org/images/favicons/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="https://cubarco.org/images/favicons/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="https://cubarco.org/images/favicons/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="https://cubarco.org/images/favicons/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="https://cubarco.org/images/favicons/apple-touch-icon-120x120.png">
+<link rel="apple-touch-icon" sizes="144x144" href="https://cubarco.org/images/favicons/apple-touch-icon-144x144.png">
+<link rel="apple-touch-icon" sizes="152x152" href="https://cubarco.org/images/favicons/apple-touch-icon-152x152.png">
+<link rel="apple-touch-icon" sizes="180x180" href="https://cubarco.org/images/favicons/apple-touch-icon-180x180.png">
+<link rel="icon" type="image/png" href="https://cubarco.org/images/favicons/android-chrome-192x192.png" sizes="192x192">
+<link rel="icon" type="image/png" href="https://cubarco.org/images/favicons/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="https://cubarco.org/images/favicons/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="https://cubarco.org/images/favicons/favicon-16x16.png" sizes="16x16">
+
+</head>
+
+<body id="post">
+
+<div class="navigation-wrapper">
+	<nav role="navigation" id="site-nav" class="animated drop">
+	    <ul>
+      
+		    
+		    <li><a href="https://cubarco.org/blog/">Latest</a></li>
+		  
+		    
+		    <li><a href="https://cubarco.org/blog/about/">About</a></li>
+		  
+		    
+		    <li><a href="https://cubarco.org/blog/category/blog/">Blog</a></li>
+		  
+		    
+		    <li><a href="https://cubarco.org/blog/category/notes/">Notes</a></li>
+		  
+		    
+		    <li><a href="https://cubarco.org/blog/tags/">Tags</a></li>
+		  
+        <li class="dosearch"><span><i class="fa fa-search"></i> Search</span></li>
+	    </ul>
+	</nav>
+</div>
+<!-- /.navigation-wrapper -->
+
+<!--[if lt IE 9]><div class="upgrade"><strong><a href="http://whatbrowser.org/">Your browser is quite old!</strong> Why not upgrade to a different browser to better enjoy this site?</a></div><![endif]-->
+
+<div class="search-wrapper">
+  <div class="search-form">
+    <input type="text" class="search-field" placeholder="Search...">
+    <button class="close-btn"><i class="fa fa-times-circle fa-2x"></i></button>
+    <ul class="search-results post-list"></ul>
+<!-- /.search-results -->
+  </div>
+<!-- /.search-form -->
+</div>
+<!-- ./search-wrapper -->
+
+<header class="masthead">
+	<div class="wrap">
+        
+        <h1 class="site-title animated fadeIn"><a href="https://cubarco.org">盘子里的部落格</a></h1>
+		<h2 class="site-description animated fadeIn" itemprop="description">Yet another Jekyll blog.</h2>
+	</div>
+</header><!-- /.masthead -->
+
+<div class="js-menu-screen menu-screen"></div>
+
+<div id="main" role="main">
+  <article class="hentry">
+    
+    <div class="entry-wrapper">
+      <header class="entry-header">
+        <span class="entry-tags"><a href="https://cubarco.org/blog/tags/#Hack" title="Pages tagged Hack">Hack</a> • <a href="https://cubarco.org/blog/tags/#CTF" title="Pages tagged CTF">CTF</a> • <a href="https://cubarco.org/blog/tags/#Writeup" title="Pages tagged Writeup">Writeup</a> • <a href="https://cubarco.org/blog/tags/#Exploitation" title="Pages tagged Exploitation">Exploitation</a> • <a href="https://cubarco.org/blog/tags/#PWN" title="Pages tagged PWN">PWN</a></span>
+        
+          <h1 class="entry-title">Writeup: CTFZone 2018 Quals</h1>
+        
+      </header>
+      <footer class="entry-meta">
+        
+        
+          <img src="https://cubarco.org/images/matrix.png" class="bio-photo" alt="Cubarco bio photo">
+        
+        <span class="author vcard">By <span class="fn">Cubarco</span></span>
+        <span class="entry-date date published"><time datetime="2018-07-23T00:00:00+00:00"><i class="fa fa-calendar-o"></i> July 23, 2018</time></span>
+        <span class="entry-date date modified"><time datetime="2018-07-23"><i class="fa fa-pencil"></i> July 23, 2018</time></span>
+        <span class="entry-comments"><i class="fa fa-comment-o"></i> <a href="#disqus_thread">Comment</a></span>
+        <span class="social-share-twitter">
+  <a href="https://twitter.com/intent/tweet?hashtags=Hack,CTF,Writeup,Exploitation,PWN&amp;text=Writeup:%20CTFZone%202018%20Quals&amp;url=https://cubarco.org/blog/2018/07/writeup-ctfzone/&amp;via=Cube_Lin" title="Share on Twitter" itemprop="Twitter"><i class="fa fa-twitter-square"></i> Tweet</a>
+</span>
+<span class="social-share-facebook">
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https://cubarco.org/blog/2018/07/writeup-ctfzone/" title="Share on Facebook" itemprop="Facebook"><i class="fa fa-facebook-square"></i> Like</a>
+</span>
+<span class="social-share-googleplus">
+  <a href="https://plus.google.com/share?url=https://cubarco.org/blog/2018/07/writeup-ctfzone/" title="Share on Google Plus" itemprop="GooglePlus"><i class="fa fa-google-plus-square"></i> +1</a>
+</span>
+<!-- /.social-share -->
+        
+      </footer>
+      <div class="entry-content">
+        <p>两道PWN题, 一个easypwn_strings, 一个Mobile Bank.</p>
+
+<h1 id="easypwnstrings">easypwn_strings</h1>
+
+<h3 id="section">问题</h3>
+
+<p>You can try to use very interesting and strange string functions ;) Good luck. <code class="highlighter-rouge">nc pwn-03.v7frkwrfyhsjtbpfcppnu.ctfz.one 1234</code> And yes, there is no binary here</p>
+
+<p>这是一道<strong>盲pwn</strong>类型的题，没有提供二进制<del>(名义上的)</del>。</p>
+
+<p>nc连上之后回显：</p>
+
+<div class="highlighter-rouge">
+<pre class="highlight"><code>Let's choose string operation!
+	1. StrLen
+	2. SubStrRemove
+	3. StrRemoveLastSymbols
+</code></pre>
+</div>
+
+<p>第一个选项：输入一个字符串，回显字符串长度。</p>
+
+<div class="highlighter-rouge">
+<pre class="highlight"><code>You choise - 1
+	Use str
+	good choise
+123
+	Result: 3
+</code></pre>
+</div>
+
+<p>第二个选项显示未实现。</p>
+
+<p>第三个选项：输入一个字符串，和一个数字，服务端移除末尾指定长度的字符串后打印出来。</p>
+
+<div class="highlighter-rouge">
+<pre class="highlight"><code>You choise - 3
+	Use str int
+	good choise
+	Set string:
+1234567
+	Set number:
+3
+	Delete 3 ending symbols
+	Result:
+1234
+</code></pre>
+</div>
+
+<h3 id="section-1">思路</h3>
+
+<p>既然是无ELF文件的盲pwn，那只能摸着石头过河。做题时有以下几个尝试：</p>
+
+<ol>
+  <li><del>三个选项的输入是否有溢出；</del></li>
+  <li><del>未实现的选项2是否有隐藏功能；</del></li>
+  <li><del>选项3输入的数字是否可以为负数，可能造成字符串拷贝时的溢出或者泄密问题；</del></li>
+  <li>…</li>
+</ol>
+
+<p>很多尝试以失败告终。最终找到的漏洞是功能3的<strong>格式化字符串漏洞</strong>：</p>
+
+<div class="highlighter-rouge">
+<pre class="highlight"><code>You choise - 3
+	Use str int
+	good choise
+	Set string:
+%p %p %p
+	Set number:
+0
+	Delete 3 ending symbols
+	Result:
+0xffe96350 0x8 0xf75fc1a4
+</code></pre>
+</div>
+
+<p>我们可以利用这个格式化字符串漏洞构造一个任意地址读，然后把内存中的ELF dump下来。</p>
+
+<p>怎么dump？可以参考YouTube上一个视频：<a href="https://www.youtube.com/watch?v=XuzuFUGuQv0">Format String to dump binary and gain RCE - 33c3ctf ESPR (pwn 150)</a>.</p>
+
+<p>这道题和ESPR有两点区别：</p>
+
+<ol>
+  <li>ESPR的输入只限制了<code class="highlighter-rouge">\n</code>字符，但是这题的输入不能包含<code class="highlighter-rouge">\n</code>和<code class="highlighter-rouge">\x00</code>，猜测是用了<code class="highlighter-rouge">fgets</code>和<code class="highlighter-rouge">strcpy</code>。所以在dump下来的二进制中会有一些遗漏位，不过对这道题来说无伤大雅；</li>
+  <li>ESPR一个进程循环不断调用<code class="highlighter-rouge">printf</code>，但是这题进程只有一个流程，没有循环，所以需要不断与服务器创建连接，十分耗时。好在需要dump的是ELF，内容是固定的。</li>
+</ol>
+
+<p>dump脚本：</p>
+
+<div class="gist" data-gist="cubarco/9bfafbc77dd2c0330e3c0ef87013c6fa" data-gist-file="strings-dump.py"><p>Gist: <a href="https://gist.github.com/cubarco/9bfafbc77dd2c0330e3c0ef87013c6fa">cubarco/9bfafbc77dd2c0330e3c0ef87013c6fa</a></p></div>
+
+<h3 id="gets">漏洞（gets溢出）</h3>
+
+<p>把ELF dump下来之后跑一下<code class="highlighter-rouge">strings dump.raw</code>，看到一些有意思的字符串：</p>
+
+<div class="highlighter-rouge">
+<pre class="highlight"><code><span class="gp">$ </span>strings dump.raw
+...
+	Delete %i ending symbols
+	Result:
+https://ctf.bi.zone/files/babypwn
+https://ctf.bi.zone/files/babylibc
+main.c
+Have a nice day!
+ctfzone<span class="o">{</span>1t_1s_<span class="nv">$uP6r_F4k6_4H4H</span><span class="o">}</span>
+ctfzone<span class="o">{</span><span class="nv">$uP6r_F4k6_4H4H4H_t00</span><span class="o">}</span>
+...
+</code></pre>
+</div>
+
+<p><del>除了有两行假装是flag的信息，还</del>有两行URL，看来是提供了二进制和libc的：</p>
+
+<ol>
+  <li>https://ctf.bi.zone/files/babypwn</li>
+  <li>https://ctf.bi.zone/files/babylibc</li>
+</ol>
+
+<p>IDA打开babypwn，发现main函数还藏了两个菜单选项：</p>
+
+<div class="highlighter-rouge">
+<pre class="highlight"><code>  <span class="n">v3</span> <span class="o">=</span> <span class="n">_IO_getc</span><span class="p">(</span><span class="n">stdin</span><span class="p">);</span>
+  <span class="n">_IO_getc</span><span class="p">(</span><span class="n">stdin</span><span class="p">);</span>
+  <span class="k">if</span> <span class="p">(</span> <span class="n">v3</span> <span class="o">==</span> <span class="sc">'1'</span> <span class="o">||</span> <span class="n">v3</span> <span class="o">==</span> <span class="sc">'2'</span> <span class="o">||</span> <span class="n">v3</span> <span class="o">==</span> <span class="sc">'3'</span> <span class="o">||</span> <span class="n">v3</span> <span class="o">==</span> <span class="sc">'X'</span> <span class="o">||</span> <span class="n">v3</span> <span class="o">==</span> <span class="sc">'T'</span> <span class="o">||</span> <span class="n">v3</span> <span class="o">==</span> <span class="sc">'S'</span> <span class="p">)</span>
+  <span class="p">{</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">"You choise - %c</span><span class="se">\r\n</span><span class="s">"</span><span class="p">,</span> <span class="n">v3</span><span class="p">);</span>
+    <span class="p">...</span>
+  	<span class="k">if</span> <span class="p">(</span> <span class="n">v3</span> <span class="o">!=</span> <span class="sc">'X'</span> <span class="o">&amp;&amp;</span> <span class="n">v3</span> <span class="o">!=</span> <span class="sc">'T'</span> <span class="p">)</span>
+	  <span class="p">...</span>
+    <span class="k">else</span>
+    <span class="p">{</span>
+      <span class="n">puts</span><span class="p">(</span><span class="s">"</span><span class="se">\t</span><span class="s">Are you surprised?? (y or n)</span><span class="se">\r</span><span class="s">"</span><span class="p">);</span>
+      <span class="n">gets</span><span class="p">(</span><span class="n">gets_buf</span><span class="p">);</span>
+      <span class="n">v1</span> <span class="o">=</span> <span class="n">strchr</span><span class="p">(</span><span class="n">gets_buf</span><span class="p">,</span> <span class="sc">'y'</span><span class="p">);</span>
+      <span class="k">if</span> <span class="p">(</span> <span class="n">v1</span> <span class="p">)</span>
+        <span class="n">func_ptr</span><span class="p">(</span><span class="n">v1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">v2</span><span class="p">);</span>
+</code></pre>
+</div>
+
+<p><code class="highlighter-rouge">gets</code>是明显的危险函数，<code class="highlighter-rouge">gets_buf</code>上存在溢出，再看溢出到哪：</p>
+
+<div class="highlighter-rouge">
+<pre class="highlight"><code>.bss:080492E0 ; char gets_buf[256]
+.bss:080492E0 gets_buf        db 100h dup(0)          ; DATA XREF: main+62↑o
+.bss:080492E0                                         ; main+245↑o ...
+.bss:080493E0 ; int (__cdecl *func_ptr)(_DWORD, _DWORD, _DWORD)
+.bss:080493E0 func_ptr        dd 0                    ; DATA XREF: main+18F↑w
+.bss:080493E0                                         ; main+1AE↑w ...
+</code></pre>
+</div>
+
+<p>可以盖到<code class="highlighter-rouge">func_ptr</code>这个函数指针，所以这个溢出已经可以用来<strong>劫持控制流</strong>了。</p>
+
+<h3 id="exp">EXP</h3>
+
+<p>checksec一下babypwn文件:</p>
+
+<div class="highlighter-rouge">
+<pre class="highlight"><code>[*] '/tmp/babypwn'
+    Arch:     i386-32-little
+    RELRO:    No RELRO
+    Stack:    No canary found
+    NX:       NX enabled
+    PIE:      No PIE (0x8048000)
+    RWX:      Has RWX segments
+</code></pre>
+</div>
+
+<p>有RWX的段，用GDB挂上ELF看一下map:</p>
+
+<div class="highlighter-rouge">
+<pre class="highlight"><code>gef&gt; vmmap
+Start      End        Offset     Perm Path
+0x08048000 0x0804c000 0x00000000 rwx /tmp/babypwn
+0x0804c000 0x0804d000 0x00000000 rw- [heap]
+0xf7dbf000 0xf7f93000 0x00000000 r-x /usr/lib32/libc-2.27.so
+0xf7f93000 0xf7f94000 0x001d4000 --- /usr/lib32/libc-2.27.so
+...
+</code></pre>
+</div>
+
+<p>整个ELF都是RWX的<del>(这题有毒…)</del>，那很简单了，之前溢出的<code class="highlighter-rouge">gets_buf</code>就在bss段上，可写可执行，还知道地址。只要把shellcode写到<code class="highlighter-rouge">gets_buf</code>上，然后溢出到<code class="highlighter-rouge">func_ptr</code>，指向<code class="highlighter-rouge">gets_buf</code>，就执行shellcode了。</p>
+
+<p>利用脚本：</p>
+
+<div class="gist" data-gist="cubarco/9bfafbc77dd2c0330e3c0ef87013c6fa" data-gist-file="strings-exp.py"><p>Gist: <a href="https://gist.github.com/cubarco/9bfafbc77dd2c0330e3c0ef87013c6fa">cubarco/9bfafbc77dd2c0330e3c0ef87013c6fa</a></p></div>
+
+<hr>
+
+<h1 id="mobile-bank">Mobile Bank</h1>
+
+<p><del>在写</del></p>
+
+        <div align="right">
+		    <span><a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc/4.0/88x31.png"></a></span>
+        </div>
+        <nav class="pagination" role="navigation">
+            
+              <a href="https://cubarco.org/blog/2016/04/how-to-set-up-a-duckduckgo-proxy-site-with-nginx/" class="btn" title="如何用 Nginx 搭建简单的 DuckDuckGo 代理站">Previous</a>
+            
+            
+        </nav><!-- /.pagination -->
+        <div id="disqus_thread"></div>
+<!-- /#disqus_thread -->
+      </div>
+<!-- /.entry-content -->
+    </div>
+<!-- /.entry-wrapper -->
+
+  </article>
+</div>
+<!-- /#main -->
+
+<div class="footer-wrapper">
+  <footer role="contentinfo" class="entry-wrapper">
+    
+
+<span>Powered by <a href="http://jekyllrb.com" rel="nofollow">Jekyll</a> using the <a href="https://mademistakes.com/work/so-simple-jekyll-theme/" rel="nofollow">So Simple Theme</a>. Published with <a href="https://github.com/cubarco/cubarco.github.io">GitHub Pages</a>.</span>
+<div class="social-icons">
+	<a href="https://twitter.com/Cube_Lin" title="Cubarco on Twitter" target="_blank"><i class="fa fa-twitter-square fa-2x"></i></a>
+	<a href="https://www.facebook.com/cubarco" title="Cubarco on Facebook" target="_blank"><i class="fa fa-facebook-square fa-2x"></i></a>
+	<a href="https://plus.google.com/+%E6%9E%97%E5%AE%B6%E5%86%9BCube" title="Cubarco on Google+" target="_blank"><i class="fa fa-google-plus-square fa-2x"></i></a>
+	
+	
+	<a href="https://www.instagram.com/cubarco/" title="Cubarco on Instagram" target="_blank"><i class="fa fa-instagram fa-2x"></i></a>
+	
+	<a href="https://github.com/cubarco" title="Cubarco on Github" target="_blank"><i class="fa fa-github-square fa-2x"></i></a>
+	
+  <a href="https://cubarco.org/feed.xml" title="Atom/RSS feed"><i class="fa fa-rss-square fa-2x"></i></a>
+</div>
+<!-- /.social-icons -->
+
+  </footer>
+</div>
+<!-- /.footer-wrapper -->
+
+<script src="//cdn.bootcss.com/jquery/2.1.4/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="https://cubarco.org/assets/js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
+<script src="https://cubarco.org/assets/js/gist-async.min.js"></script>
+<script src="https://cubarco.org/assets/js/scripts.min.js"></script>
+
+<!-- Jekyll Simple Search option -->
+<script>
+  $(document).ready(function() {
+      $('.search-field').jekyllSearch({
+          jsonFile: 'https://cubarco.org/search.json',
+          searchResults: '.search-results',
+          template: '<li><article><a href="{url}">{title} <span class="entry-date"><time datetime="{date}">{shortdate}</time></span></a></article></li>',
+          fuzzy: true,
+          noResults: '<p>Nothing found.</p>'
+        });
+  });
+
+  (function( $, window, undefined ) {
+
+     var bs = {
+          close: $(".close-btn"),
+          searchform: $(".search-form"),
+          canvas: $(".js-menu-screen"),
+          dothis: $('.dosearch')
+      };
+
+    bs.dothis.on('click', function() {
+      $('.search-wrapper').css({ display: "block" });
+      $('body').toggleClass('no-scroll');
+      bs.searchform.toggleClass('active');
+      bs.searchform.find('input').focus();
+      bs.canvas.toggleClass('is-visible');
+    });
+
+      bs.close.on('click', function() {
+        $('.search-wrapper').removeAttr( 'style' );
+        $('body').toggleClass('no-scroll');
+        bs.searchform.toggleClass('active');
+        bs.canvas.removeClass('is-visible');
+    });
+  })( jQuery, window );
+</script>
+
+
+<!-- Check whether the page is a post -->
+
+  
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+    var disqus_shortname = 'cubarco'; // required: replace example with your forum shortname
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function () {
+        var s = document.createElement('script'); s.async = true;
+        s.type = 'text/javascript';
+        s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+        (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+    }());
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+</noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+
+
+<!-- Asynchronous Google Analytics snippet -->
+<script>
+  var _gaq = _gaq || [];
+  var pluginUrl =
+ '//www.google-analytics.com/plugins/ga/inpage_linkid.js';
+  _gaq.push(['_require', 'inpage_linkid', pluginUrl]);
+  _gaq.push(['_setAccount', 'UA-54867602-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'stats.g.doubleclick.net/dc.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+
+
+</body>
+</html>

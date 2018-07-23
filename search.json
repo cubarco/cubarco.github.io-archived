@@ -1,6 +1,15 @@
 [
 	
 		{
+		  "title"      : "Writeup: CTFZone 2018 Quals",
+		  "category"   : "",
+      "tags"       : "Hack, CTF, Writeup, Exploitation, and PWN",
+		  "url"        : "https://cubarco.org/blog/2018/07/writeup-ctfzone/",
+		  "date"       : "2018-07-23 00:00:00 +0000",
+		  "shortdate"  : "July 23, 2018"
+		} ,
+	
+		{
 		  "title"      : "如何用 Nginx 搭建简单的 DuckDuckGo 代理站",
 		  "category"   : "",
       "tags"       : "Linux, GFW, DuckDuckGo, and Proxy",
