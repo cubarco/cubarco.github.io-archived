@@ -5,7 +5,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="theme-color" content="#000000">
-<title>Writeup-Training: Warchall – 7 Tropical Fruits – 盘子里的部落格</title>
+<title>Writeup-Training: Warchall – 7 Tropical Fruits – /home/cubarco</title>
 <meta name="description" content="Challenge URL：Training: Warchall – 7 Tropical Fruits Wechall的tropic这道题真是撸得我考试周复(yu)习(xi)都没心思了，花了两天半终于搞定了，才63人做出来的题目居然是training！！！ 做这题的时候也是我第一次写shellcode，不过这道题难点不在于shellcode怎么写，而在于坑爹的ASLR。不说stack的地址一直在变，居然连linux-gate.so都在变！ 一开始查了好久，发现个思路叫ret2libc，然后我gdb了一下，发现system()的地址虽然是随机的，但是有6位是不变的。然后我就撸啊撸，撸了个shell脚本，速度不错，居然半分钟之内就能把system(“sh”)跑出来。看到”sh-4.2$”的时候我那叫一个激动啊。坑爹的是system()这货执行的时候居然会丢掉suid的权限(man system#NOTES)。 所以忙活了一天，我的成果就是，在一个shell下面，再开一个shell…… 然后第二天我不甘心啊，就找啊找找啊找，找到了exec函数族。 #include &lt;unistd.h&gt; extern char **environ; int execl(const char *path, const char *arg, ...); int execlp(const char *file, const char *arg, ...); int execle(const char *path, const char *arg, ..., char * const envp[]); int execv(const char *path, char *const argv[]); int execvp(const char *file, char *const argv[]); int execve(const char *path, char *const argv[], char *const envp[]); //其中只有execve是真正意义上的系统调用，其它都是在此基础上经过包装的库函数。 这货厉害，suid会传递下去，但是悲催的是每个函数的参数不止一个，而且大多都要求最后一个参数为NULL(直接无视)，但是execv之类的函数又不方便构造后面的那些二阶指针，所以我昨天就是在满屏的Segmentation Fault中度过的，偶尔出现的Invalid Instruction能让人高兴好一阵。 第二天无果，不过我cat了一下compile7.sh，发现了好玩的东西 #!/bin/bash...">
 <meta name="keywords" content="Hack, Python, Writeup">
 
@@ -27,7 +27,7 @@
 <meta property="og:title" content="Writeup-Training: Warchall – 7 Tropical Fruits">
 <meta property="og:description" content="Challenge URL：Training: Warchall – 7 Tropical Fruits Wechall的tropic这道题真是撸得我考试周复(yu)习(xi)都没心思了，花了两天半终于搞定了，才63人做出来的题目居然是training！！！ 做这题的时候也是我第一次写shellcode，不过这道题难点不在于shellcode怎么写，而在于坑爹的ASLR。不说stack的地址一直在变，居然连linux-gate.so都在变！ 一开始查了好久，发现个思路叫ret2libc，然后我gdb了一下，发现system()的地址虽然是随机的，但是有6位是不变的。然后我就撸啊撸，撸了个shell脚本，速度不错，居然半分钟之内就能把system(“sh”)跑出来。看到”sh-4.2$”的时候我那叫一个激动啊。坑爹的是system()这货执行的时候居然会丢掉suid的权限(man system#NOTES)。 所以忙活了一天，我的成果就是，在一个shell下面，再开一个shell…… 然后第二天我不甘心啊，就找啊找找啊找，找到了exec函数族。 #include &lt;unistd.h&gt; extern char **environ; int execl(const char *path, const char *arg, ...); int execlp(const char *file, const char *arg, ...); int execle(const char *path, const char *arg, ..., char * const envp[]); int execv(const char *path, char *const argv[]); int execvp(const char *file, char *const argv[]); int execve(const char *path, char *const argv[], char *const envp[]); //其中只有execve是真正意义上的系统调用，其它都是在此基础上经过包装的库函数。 这货厉害，suid会传递下去，但是悲催的是每个函数的参数不止一个，而且大多都要求最后一个参数为NULL(直接无视)，但是execv之类的函数又不方便构造后面的那些二阶指针，所以我昨天就是在满屏的Segmentation Fault中度过的，偶尔出现的Invalid Instruction能让人高兴好一阵。 第二天无果，不过我cat了一下compile7.sh，发现了好玩的东西 #!/bin/bash...">
 <meta property="og:url" content="https://cub4r.co/blog/2014/05/wechall-tropic-writeup/">
-<meta property="og:site_name" content="盘子里的部落格">
+<meta property="og:site_name" content="/home/cubarco">
 
 
 
@@ -35,7 +35,7 @@
 
 
 <link rel="canonical" href="https://cub4r.co/blog/2014/05/wechall-tropic-writeup/">
-<link href="https://cub4r.co/feed.xml" type="application/atom+xml" rel="alternate" title="盘子里的部落格 Feed">
+<link href="https://cub4r.co/feed.xml" type="application/atom+xml" rel="alternate" title="/home/cubarco Feed">
 <link rel="author" href="http://plus.google.com/+%E6%9E%97%E5%AE%B6%E5%86%9BCube?rel=author">
 
 <!-- http://t.co/dKP3o1e -->
@@ -138,15 +138,8 @@
 </div>
 <!-- ./search-wrapper -->
 
-<header class="masthead">
-	<div class="wrap">
-        
-        <h1 class="site-title animated fadeIn"><a href="https://cub4r.co">盘子里的部落格</a></h1>
-		<h2 class="site-description animated fadeIn" itemprop="description">Yet another Jekyll blog.</h2>
-	</div>
-</header><!-- /.masthead -->
-
 <div class="js-menu-screen menu-screen"></div>
+
 
 <div id="main" role="main">
   <article class="hentry">

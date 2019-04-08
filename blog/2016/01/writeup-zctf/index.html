@@ -5,7 +5,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="theme-color" content="#000000">
-<title>Writeup: ZCTF – 盘子里的部落格</title>
+<title>Writeup: ZCTF – /home/cubarco</title>
 <meta name="description" content="2016 年第一篇 blog! 这次只做出两道 pwn, 好忧伤… guess 在最近的 32c3ctf 中出现过一道类似的 readme1. 就是把argv[1]改成目的字符串位置，可以在 libc 打出错误信息的时候，被当作文件名打印出来。 Gist: cubarco/cbbd4ab5462c2f0f287b note1 这题的 note 是以链表形式储存的，堆溢出（edit 存在溢出漏洞）之后可以覆盖地址更改链表结构。我的 exp 思路就是先把一个 note 指向setvbuf()的 got, 然后用 show 把地址 leak 出来，这样可以 offset 到system(). 然后再将另一个 note 地址改到strcmp()的 got, 通过 edit 把内容改成system()的地址。最后调用strcmp(), title 填/bin/sh就可以了。 Gist: cubarco/30a44a61252f448964c4 note2 这题在赛时没找到漏洞，赛后看了 FlappyPig 的 Writeup2, 只是简单的 fastbin, 感觉好可惜… 360 安全播报给的代码没缩进根本不能看，自己重新写了个。 Gist: cubarco/9752fbbe78a071b04b37 note3 这题同样是没有在赛时做出来，但是与 note2 相反，这题我是找到了两个可以利用的漏洞的(一个是 integer overflow, 另一个是可以增加第八个 note), 但是不知道如何利用。我在比赛的时候一直想着怎么 fastbin, 因为我觉得 unlink 这么古老的 exp 肯定已经不能用了… 没想到这题的环境刚好适合 unlink, 有点可惜。赛后看了 FlappyPig...">
 <meta name="keywords" content="Hack, CTF, Writeup, Exploitation, PWN">
 
@@ -27,7 +27,7 @@
 <meta property="og:title" content="Writeup: ZCTF">
 <meta property="og:description" content="2016 年第一篇 blog! 这次只做出两道 pwn, 好忧伤… guess 在最近的 32c3ctf 中出现过一道类似的 readme1. 就是把argv[1]改成目的字符串位置，可以在 libc 打出错误信息的时候，被当作文件名打印出来。 Gist: cubarco/cbbd4ab5462c2f0f287b note1 这题的 note 是以链表形式储存的，堆溢出（edit 存在溢出漏洞）之后可以覆盖地址更改链表结构。我的 exp 思路就是先把一个 note 指向setvbuf()的 got, 然后用 show 把地址 leak 出来，这样可以 offset 到system(). 然后再将另一个 note 地址改到strcmp()的 got, 通过 edit 把内容改成system()的地址。最后调用strcmp(), title 填/bin/sh就可以了。 Gist: cubarco/30a44a61252f448964c4 note2 这题在赛时没找到漏洞，赛后看了 FlappyPig 的 Writeup2, 只是简单的 fastbin, 感觉好可惜… 360 安全播报给的代码没缩进根本不能看，自己重新写了个。 Gist: cubarco/9752fbbe78a071b04b37 note3 这题同样是没有在赛时做出来，但是与 note2 相反，这题我是找到了两个可以利用的漏洞的(一个是 integer overflow, 另一个是可以增加第八个 note), 但是不知道如何利用。我在比赛的时候一直想着怎么 fastbin, 因为我觉得 unlink 这么古老的 exp 肯定已经不能用了… 没想到这题的环境刚好适合 unlink, 有点可惜。赛后看了 FlappyPig...">
 <meta property="og:url" content="https://cub4r.co/blog/2016/01/writeup-zctf/">
-<meta property="og:site_name" content="盘子里的部落格">
+<meta property="og:site_name" content="/home/cubarco">
 
 
 
@@ -35,7 +35,7 @@
 
 
 <link rel="canonical" href="https://cub4r.co/blog/2016/01/writeup-zctf/">
-<link href="https://cub4r.co/feed.xml" type="application/atom+xml" rel="alternate" title="盘子里的部落格 Feed">
+<link href="https://cub4r.co/feed.xml" type="application/atom+xml" rel="alternate" title="/home/cubarco Feed">
 <link rel="author" href="http://plus.google.com/+%E6%9E%97%E5%AE%B6%E5%86%9BCube?rel=author">
 
 <!-- http://t.co/dKP3o1e -->
@@ -138,15 +138,8 @@
 </div>
 <!-- ./search-wrapper -->
 
-<header class="masthead">
-	<div class="wrap">
-        
-        <h1 class="site-title animated fadeIn"><a href="https://cub4r.co">盘子里的部落格</a></h1>
-		<h2 class="site-description animated fadeIn" itemprop="description">Yet another Jekyll blog.</h2>
-	</div>
-</header><!-- /.masthead -->
-
 <div class="js-menu-screen menu-screen"></div>
+
 
 <div id="main" role="main">
   <article class="hentry">

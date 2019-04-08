@@ -5,7 +5,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="theme-color" content="#000000">
-<title>Writeup-9447 CTF: calcpop – 盘子里的部落格</title>
+<title>Writeup-9447 CTF: calcpop – /home/cubarco</title>
 <meta name="description" content="先看反汇编代码： ... 8048460: 55 push %ebp 8048461: 89 e5 mov %esp,%ebp 8048463: 57 push %edi 8048464: 56 push %esi 8048465: be 00 01 00 00 mov $0x100,%esi 804846a: 53 push %ebx 804846b: 83 e4 f0 and $0xfffffff0,%esp 804846e: 81 ec 90 00 00 00 sub $0x90,%esp 8048474: a1 60 a0 04 08 mov 0x804a060,%eax 8048479: c7 44 24 0c 00 00 00 movl $0x0,0xc(%esp) 8048480: 00 8048481: 8d 5c 24 10 lea 0x10(%esp),%ebx 8048485: c7...">
 <meta name="keywords" content="Hack, CTF, Writeup, Exploitation">
 
@@ -27,7 +27,7 @@
 <meta property="og:title" content="Writeup-9447 CTF: calcpop">
 <meta property="og:description" content="先看反汇编代码： ... 8048460: 55 push %ebp 8048461: 89 e5 mov %esp,%ebp 8048463: 57 push %edi 8048464: 56 push %esi 8048465: be 00 01 00 00 mov $0x100,%esi 804846a: 53 push %ebx 804846b: 83 e4 f0 and $0xfffffff0,%esp 804846e: 81 ec 90 00 00 00 sub $0x90,%esp 8048474: a1 60 a0 04 08 mov 0x804a060,%eax 8048479: c7 44 24 0c 00 00 00 movl $0x0,0xc(%esp) 8048480: 00 8048481: 8d 5c 24 10 lea 0x10(%esp),%ebx 8048485: c7...">
 <meta property="og:url" content="https://cub4r.co/blog/2015/11/9477-calcpop-writeup/">
-<meta property="og:site_name" content="盘子里的部落格">
+<meta property="og:site_name" content="/home/cubarco">
 
 
 
@@ -35,7 +35,7 @@
 
 
 <link rel="canonical" href="https://cub4r.co/blog/2015/11/9477-calcpop-writeup/">
-<link href="https://cub4r.co/feed.xml" type="application/atom+xml" rel="alternate" title="盘子里的部落格 Feed">
+<link href="https://cub4r.co/feed.xml" type="application/atom+xml" rel="alternate" title="/home/cubarco Feed">
 <link rel="author" href="http://plus.google.com/+%E6%9E%97%E5%AE%B6%E5%86%9BCube?rel=author">
 
 <!-- http://t.co/dKP3o1e -->
@@ -138,15 +138,8 @@
 </div>
 <!-- ./search-wrapper -->
 
-<header class="masthead">
-	<div class="wrap">
-        
-        <h1 class="site-title animated fadeIn"><a href="https://cub4r.co">盘子里的部落格</a></h1>
-		<h2 class="site-description animated fadeIn" itemprop="description">Yet another Jekyll blog.</h2>
-	</div>
-</header><!-- /.masthead -->
-
 <div class="js-menu-screen menu-screen"></div>
+
 
 <div id="main" role="main">
   <article class="hentry">

@@ -5,7 +5,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="theme-color" content="#000000">
-<title>如何用 Nginx 搭建简单的 DuckDuckGo 代理站 – 盘子里的部落格</title>
+<title>如何用 Nginx 搭建简单的 DuckDuckGo 代理站 – /home/cubarco</title>
 <meta name="description" content="最近感觉手机的网络环境经常变，在寝室 v6， 出门 v4，有的时候会懒得开代理。所以就用 cloudflare+nginx 搞了个简单的 DuckDuckGo 代理站，方便随时掏出手机搜索。没有选择代理 Google 有几点原因，一个是 vps 连 Google 经常让输验证码，再就是 DuckDuckGo 不带 cookie 的搜索结果貌似比 Google 优(?)。 Nginx nginx 的配置文件如下。domain.com 改成具体的域名，/path/to/要改成 duck.domain.com 的证书路径。/etc/letsencrypt/live/images.duck.domain.com/是 Let’s encrypt 生成证书的默认目录，稍后会提到。 Gist: cubarco/08e99fbf316a435b7935727810e40458 Cloudflare duck.domain.com 可以用 Cloudflare 做 CDN，然后 crypto 策略选 Full(非strict) 的话在服务器上可以随便给 duck.domain.com 创建个证书用，具体参照1。但是像 images.duck.domain.com 这种三级域名的话，Cloudflare 是没有给 SSL 证书的，所以只好自己在服务器上配，推荐用 Let’s encrypt 签证书，方便快捷。 Let’s encrypt Let’s encrypt 的使用细节我就不赘述了，可以看官方给的 Guide2. 这里需要的三个证书可以用如下命令生成： ./letsencrypt-auto certonly --manual -d images.duck.domain.com \ -d icons.duck.domain.com \ -d ac.duck.domain.com References Create self-signed SSL certificate for...">
 <meta name="keywords" content="Linux, GFW, DuckDuckGo, Proxy">
 
@@ -27,7 +27,7 @@
 <meta property="og:title" content="如何用 Nginx 搭建简单的 DuckDuckGo 代理站">
 <meta property="og:description" content="最近感觉手机的网络环境经常变，在寝室 v6， 出门 v4，有的时候会懒得开代理。所以就用 cloudflare+nginx 搞了个简单的 DuckDuckGo 代理站，方便随时掏出手机搜索。没有选择代理 Google 有几点原因，一个是 vps 连 Google 经常让输验证码，再就是 DuckDuckGo 不带 cookie 的搜索结果貌似比 Google 优(?)。 Nginx nginx 的配置文件如下。domain.com 改成具体的域名，/path/to/要改成 duck.domain.com 的证书路径。/etc/letsencrypt/live/images.duck.domain.com/是 Let’s encrypt 生成证书的默认目录，稍后会提到。 Gist: cubarco/08e99fbf316a435b7935727810e40458 Cloudflare duck.domain.com 可以用 Cloudflare 做 CDN，然后 crypto 策略选 Full(非strict) 的话在服务器上可以随便给 duck.domain.com 创建个证书用，具体参照1。但是像 images.duck.domain.com 这种三级域名的话，Cloudflare 是没有给 SSL 证书的，所以只好自己在服务器上配，推荐用 Let’s encrypt 签证书，方便快捷。 Let’s encrypt Let’s encrypt 的使用细节我就不赘述了，可以看官方给的 Guide2. 这里需要的三个证书可以用如下命令生成： ./letsencrypt-auto certonly --manual -d images.duck.domain.com \ -d icons.duck.domain.com \ -d ac.duck.domain.com References Create self-signed SSL certificate for...">
 <meta property="og:url" content="https://cub4r.co/blog/2016/04/how-to-set-up-a-duckduckgo-proxy-site-with-nginx/">
-<meta property="og:site_name" content="盘子里的部落格">
+<meta property="og:site_name" content="/home/cubarco">
 
 
 
@@ -35,7 +35,7 @@
 
 
 <link rel="canonical" href="https://cub4r.co/blog/2016/04/how-to-set-up-a-duckduckgo-proxy-site-with-nginx/">
-<link href="https://cub4r.co/feed.xml" type="application/atom+xml" rel="alternate" title="盘子里的部落格 Feed">
+<link href="https://cub4r.co/feed.xml" type="application/atom+xml" rel="alternate" title="/home/cubarco Feed">
 <link rel="author" href="http://plus.google.com/+%E6%9E%97%E5%AE%B6%E5%86%9BCube?rel=author">
 
 <!-- http://t.co/dKP3o1e -->
@@ -138,15 +138,8 @@
 </div>
 <!-- ./search-wrapper -->
 
-<header class="masthead">
-	<div class="wrap">
-        
-        <h1 class="site-title animated fadeIn"><a href="https://cub4r.co">盘子里的部落格</a></h1>
-		<h2 class="site-description animated fadeIn" itemprop="description">Yet another Jekyll blog.</h2>
-	</div>
-</header><!-- /.masthead -->
-
 <div class="js-menu-screen menu-screen"></div>
+
 
 <div id="main" role="main">
   <article class="hentry">

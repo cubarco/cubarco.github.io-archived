@@ -5,7 +5,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="theme-color" content="#000000">
-<title>C Programming Tricks – 盘子里的部落格</title>
+<title>C Programming Tricks – /home/cubarco</title>
 <meta name="description" content="这个 Note 用来记录各处收集的 C 编程 tricks. 看到有意思的就会摘一下，来源各异。 Anonymous arrays C99 offers some really cool stuff using anonymous arrays: Removing pointless variables int yes=1; setsockopt(yourSocket, SOL_SOCKET, SO_REUSEADDR, &amp;yes, sizeof(int)); /* becomes: */ setsockopt(yourSocket, SOL_SOCKET, SO_REUSEADDR, (int[]){1}, sizeof(int)); Passing a Variable Amount of Arguments void func(type* values) { while(*values) { x = *values++; /* do whatever with x */ } } func((type[]){val1,val2,val3,val4,0}); Static linked lists int main() { struct llist { int a; struct llist* next;}; #define...">
 <meta name="keywords" content="C, GCC">
 
@@ -27,7 +27,7 @@
 <meta property="og:title" content="C Programming Tricks">
 <meta property="og:description" content="这个 Note 用来记录各处收集的 C 编程 tricks. 看到有意思的就会摘一下，来源各异。 Anonymous arrays C99 offers some really cool stuff using anonymous arrays: Removing pointless variables int yes=1; setsockopt(yourSocket, SOL_SOCKET, SO_REUSEADDR, &amp;yes, sizeof(int)); /* becomes: */ setsockopt(yourSocket, SOL_SOCKET, SO_REUSEADDR, (int[]){1}, sizeof(int)); Passing a Variable Amount of Arguments void func(type* values) { while(*values) { x = *values++; /* do whatever with x */ } } func((type[]){val1,val2,val3,val4,0}); Static linked lists int main() { struct llist { int a; struct llist* next;}; #define...">
 <meta property="og:url" content="https://cub4r.co/blog/2015/05/c-programming-tricks/">
-<meta property="og:site_name" content="盘子里的部落格">
+<meta property="og:site_name" content="/home/cubarco">
 
 
 
@@ -35,7 +35,7 @@
 
 
 <link rel="canonical" href="https://cub4r.co/blog/2015/05/c-programming-tricks/">
-<link href="https://cub4r.co/feed.xml" type="application/atom+xml" rel="alternate" title="盘子里的部落格 Feed">
+<link href="https://cub4r.co/feed.xml" type="application/atom+xml" rel="alternate" title="/home/cubarco Feed">
 <link rel="author" href="http://plus.google.com/+%E6%9E%97%E5%AE%B6%E5%86%9BCube?rel=author">
 
 <!-- http://t.co/dKP3o1e -->
@@ -138,15 +138,8 @@
 </div>
 <!-- ./search-wrapper -->
 
-<header class="masthead">
-	<div class="wrap">
-        
-        <h1 class="site-title animated fadeIn"><a href="https://cub4r.co">盘子里的部落格</a></h1>
-		<h2 class="site-description animated fadeIn" itemprop="description">Yet another Jekyll blog.</h2>
-	</div>
-</header><!-- /.masthead -->
-
 <div class="js-menu-screen menu-screen"></div>
+
 
 <div id="main" role="main">
   <article class="entry">

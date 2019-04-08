@@ -5,7 +5,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="theme-color" content="#000000">
-<title>一个解决 Linux 版 Dota 2 中 CJK 字符显示成方块的 Workaround – 盘子里的部落格</title>
+<title>一个解决 Linux 版 Dota 2 中 CJK 字符显示成方块的 Workaround – /home/cubarco</title>
 <meta name="description" content="不知道从什么时候开始，Linux 版本的 Dota 2 中载入界面的 tips sentences 和 player name 中的中文会显示成方框，详见 issue-1688。V社基本没搭理这个 bug，只好自己动手修。 猜想是游戏内直接使用了某个字体，或者该字体不存在时调用了默认字体，但是他们不支持 CJK 字符，所以显示成方块。因为 SteamFonts 给的全是Arial字体，我猜 Dota 2 那些文本使用的字体可能是Arial，开FC_DEBUG跑了一遍发现猜的没错。那么我们要做的就是用fontconfig把Arial替换成支持中文的字体。 解决办法 替换Arial的fontconfig配置是: &lt;match target=" pattern qual="any" mode="assign" binding="same" sans s chinese zen hei fontconfig_file dota version="1.0" fontconfig system ignore_missing="no" target="pattern">
 <meta name="keywords" content="Linux, Steam, Dota 2, Fonts, CJK">
 
@@ -27,7 +27,7 @@
 <meta property="og:title" content="一个解决 Linux 版 Dota 2 中 CJK 字符显示成方块的 Workaround">
 <meta property="og:description" content="不知道从什么时候开始，Linux 版本的 Dota 2 中载入界面的 tips sentences 和 player name 中的中文会显示成方框，详见 issue-1688。V社基本没搭理这个 bug，只好自己动手修。 猜想是游戏内直接使用了某个字体，或者该字体不存在时调用了默认字体，但是他们不支持 CJK 字符，所以显示成方块。因为 SteamFonts 给的全是Arial字体，我猜 Dota 2 那些文本使用的字体可能是Arial，开FC_DEBUG跑了一遍发现猜的没错。那么我们要做的就是用fontconfig把Arial替换成支持中文的字体。 解决办法 替换Arial的fontconfig配置是: &lt;match target=" pattern qual="any" name="family" mode="assign" binding="same" sans s chinese zen hei fontconfig_file dota version="1.0" fontconfig system ignore_missing="no" target="pattern">
 <meta property="og:url" content="https://cub4r.co/blog/2015/05/dota2-blocky-cjk-fonts-workaround/">
-<meta property="og:site_name" content="盘子里的部落格">
+<meta property="og:site_name" content="/home/cubarco">
 
 
 
@@ -35,7 +35,7 @@
 
 
 <link rel="canonical" href="https://cub4r.co/blog/2015/05/dota2-blocky-cjk-fonts-workaround/">
-<link href="https://cub4r.co/feed.xml" type="application/atom+xml" rel="alternate" title="盘子里的部落格 Feed">
+<link href="https://cub4r.co/feed.xml" type="application/atom+xml" rel="alternate" title="/home/cubarco Feed">
 <link rel="author" href="http://plus.google.com/+%E6%9E%97%E5%AE%B6%E5%86%9BCube?rel=author">
 
 <!-- http://t.co/dKP3o1e -->
@@ -138,15 +138,8 @@
 </div>
 <!-- ./search-wrapper -->
 
-<header class="masthead">
-	<div class="wrap">
-        
-        <h1 class="site-title animated fadeIn"><a href="https://cub4r.co">盘子里的部落格</a></h1>
-		<h2 class="site-description animated fadeIn" itemprop="description">Yet another Jekyll blog.</h2>
-	</div>
-</header><!-- /.masthead -->
-
 <div class="js-menu-screen menu-screen"></div>
+
 
 <div id="main" role="main">
   <article class="hentry">

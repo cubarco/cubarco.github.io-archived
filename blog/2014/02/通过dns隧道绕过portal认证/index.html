@@ -5,7 +5,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="theme-color" content="#000000">
-<title>通过DNS隧道绕过portal认证 – 盘子里的部落格</title>
+<title>通过DNS隧道绕过portal认证 – /home/cubarco</title>
 <meta name="description" content="        Portal在英语中是入口的意思。Portal认证通常也称为Web认证，一般将Portal认证网站称为门户网站。未认证用户上网时，设备强制用户登录到特定站点，用户可以免费访问其中的服务。当用户需要使用互联网中的其它信息时，必须在门户网站进行认证，只有认证通过后才可以使用互联网资源。用户可以主动访问已知的Portal认证网站，输入用户名和密码进行认证，这种开始Portal认证的方式称作主动认证。反之，如果用户试图通过HTTP访问其他外网，将被强制访问Portal认证网站，从而开始Portal认证过程，这种方式称作强制认证。 比如说：华某科校园网(无线端), Chinanet, CMCC, China-Unicom （华某科校园网升级后，DNS隧道被一定程度限用，处于半残状态。基本无法使用。） portal认证不同于pppoe，它已经通过DHCP对Client分发IP，但是在完成认证前会强制重定向url到protal认证界面，只有登录后才能顺利的访问网络。不过portal认证并没有阻止DNS查询的请求，通过一定手段可以绕过portal认证，直接访问internet。我们需要的软件就是iodine iodine lets you tunnel IPv4 data through a DNS server. This can be usable in different situations where internet access is firewalled, but DNS queries are allowed. 为了构建DNS隧道，一台服务器和一个域名是必须的。你需要在DNS服务器添加两条记录，这一步尤为重要。一条是NS记录，a.yourdomain.com，纪录值是”b.yourdomain.com.”(不要忘了最后一个dot)，另一条是A记录，b.yourdomain.com，记录值是server端的公网IP（example: 123.456.789.123）。设置好了以后可以在http://code.kryo.se/iodine/check-it/输入a.yourdomain.com测试是否配置成功。 使用iodine必须要保证server端和client端的iodine版本相同，所以我这里选择的是编译安装，源码是git版本。 Server端 $ git clone https://github.com/yarrick/iodine.git $ cd iodine $ make # make install 编译安装完毕，在server端使用的是iodined。 Usage: iodined [-v] [-h] [-c] [-s] [-f] [-D] [-u user] [-t chrootdir] [-d device] [-m mtu] [-z context] [-l ip...">
 <meta name="keywords" content="Amazing, Android, HustWireless, iodine, Linux, Portal">
 
@@ -27,7 +27,7 @@
 <meta property="og:title" content="通过DNS隧道绕过portal认证">
 <meta property="og:description" content="        Portal在英语中是入口的意思。Portal认证通常也称为Web认证，一般将Portal认证网站称为门户网站。未认证用户上网时，设备强制用户登录到特定站点，用户可以免费访问其中的服务。当用户需要使用互联网中的其它信息时，必须在门户网站进行认证，只有认证通过后才可以使用互联网资源。用户可以主动访问已知的Portal认证网站，输入用户名和密码进行认证，这种开始Portal认证的方式称作主动认证。反之，如果用户试图通过HTTP访问其他外网，将被强制访问Portal认证网站，从而开始Portal认证过程，这种方式称作强制认证。 比如说：华某科校园网(无线端), Chinanet, CMCC, China-Unicom （华某科校园网升级后，DNS隧道被一定程度限用，处于半残状态。基本无法使用。） portal认证不同于pppoe，它已经通过DHCP对Client分发IP，但是在完成认证前会强制重定向url到protal认证界面，只有登录后才能顺利的访问网络。不过portal认证并没有阻止DNS查询的请求，通过一定手段可以绕过portal认证，直接访问internet。我们需要的软件就是iodine iodine lets you tunnel IPv4 data through a DNS server. This can be usable in different situations where internet access is firewalled, but DNS queries are allowed. 为了构建DNS隧道，一台服务器和一个域名是必须的。你需要在DNS服务器添加两条记录，这一步尤为重要。一条是NS记录，a.yourdomain.com，纪录值是”b.yourdomain.com.”(不要忘了最后一个dot)，另一条是A记录，b.yourdomain.com，记录值是server端的公网IP（example: 123.456.789.123）。设置好了以后可以在http://code.kryo.se/iodine/check-it/输入a.yourdomain.com测试是否配置成功。 使用iodine必须要保证server端和client端的iodine版本相同，所以我这里选择的是编译安装，源码是git版本。 Server端 $ git clone https://github.com/yarrick/iodine.git $ cd iodine $ make # make install 编译安装完毕，在server端使用的是iodined。 Usage: iodined [-v] [-h] [-c] [-s] [-f] [-D] [-u user] [-t chrootdir] [-d device] [-m mtu] [-z context] [-l ip...">
 <meta property="og:url" content="https://cub4r.co/blog/2014/02/%E9%80%9A%E8%BF%87dns%E9%9A%A7%E9%81%93%E7%BB%95%E8%BF%87portal%E8%AE%A4%E8%AF%81/">
-<meta property="og:site_name" content="盘子里的部落格">
+<meta property="og:site_name" content="/home/cubarco">
 
 
 
@@ -35,7 +35,7 @@
 
 
 <link rel="canonical" href="https://cub4r.co/blog/2014/02/%E9%80%9A%E8%BF%87dns%E9%9A%A7%E9%81%93%E7%BB%95%E8%BF%87portal%E8%AE%A4%E8%AF%81/">
-<link href="https://cub4r.co/feed.xml" type="application/atom+xml" rel="alternate" title="盘子里的部落格 Feed">
+<link href="https://cub4r.co/feed.xml" type="application/atom+xml" rel="alternate" title="/home/cubarco Feed">
 <link rel="author" href="http://plus.google.com/+%E6%9E%97%E5%AE%B6%E5%86%9BCube?rel=author">
 
 <!-- http://t.co/dKP3o1e -->
@@ -138,15 +138,8 @@
 </div>
 <!-- ./search-wrapper -->
 
-<header class="masthead">
-	<div class="wrap">
-        
-        <h1 class="site-title animated fadeIn"><a href="https://cub4r.co">盘子里的部落格</a></h1>
-		<h2 class="site-description animated fadeIn" itemprop="description">Yet another Jekyll blog.</h2>
-	</div>
-</header><!-- /.masthead -->
-
 <div class="js-menu-screen menu-screen"></div>
+
 
 <div id="main" role="main">
   <article class="hentry">

@@ -5,7 +5,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="theme-color" content="#000000">
-<title>对 btrfs 的吐槽 – 盘子里的部落格</title>
+<title>对 btrfs 的吐槽 – /home/cubarco</title>
 <meta name="description" content="刚把本来给/home和/var用的 btrfs 换回 ext4，po 一发记(tu)录(cao)一下。
 
 一开始换 btrfs 呢，是感觉这个文件系统各种功能、各种酷炫啊，比如subvolume, snapshot什么的。我主要看中的其实是他的透明压缩，不仅节省硬盘空间，还能提高io的速率，这对我 5400转的 500G 硬盘还是有点作用的。不过当时年少不懂事，不知道有C这个文件属性，直接在/etc/fstab里用了全局压缩选项，结果导致虚拟机这种从单文件随机读取数据的场景速度慢到可怕。
@@ -72,7 +72,7 @@ subvolume可以实现一个分区挂载到多个目录，这样就省去了分�
 所以呢，总的来说， btrfs 的问题还是有点多，一些有意思的功能日常也起不到必不可少的作用。想入 btrfs 坑的还是再观望一段时间吧，已经入 btrfs 坑的话我只能祝你好运了。
 ">
 <meta property="og:url" content="https://cub4r.co/blog/2015/01/btrfs-sucks/">
-<meta property="og:site_name" content="盘子里的部落格">
+<meta property="og:site_name" content="/home/cubarco">
 
 
 
@@ -80,7 +80,7 @@ subvolume可以实现一个分区挂载到多个目录，这样就省去了分�
 
 
 <link rel="canonical" href="https://cub4r.co/blog/2015/01/btrfs-sucks/">
-<link href="https://cub4r.co/feed.xml" type="application/atom+xml" rel="alternate" title="盘子里的部落格 Feed">
+<link href="https://cub4r.co/feed.xml" type="application/atom+xml" rel="alternate" title="/home/cubarco Feed">
 <link rel="author" href="http://plus.google.com/+%E6%9E%97%E5%AE%B6%E5%86%9BCube?rel=author">
 
 <!-- http://t.co/dKP3o1e -->
@@ -183,15 +183,8 @@ subvolume可以实现一个分区挂载到多个目录，这样就省去了分�
 </div>
 <!-- ./search-wrapper -->
 
-<header class="masthead">
-	<div class="wrap">
-        
-        <h1 class="site-title animated fadeIn"><a href="https://cub4r.co">盘子里的部落格</a></h1>
-		<h2 class="site-description animated fadeIn" itemprop="description">Yet another Jekyll blog.</h2>
-	</div>
-</header><!-- /.masthead -->
-
 <div class="js-menu-screen menu-screen"></div>
+
 
 <div id="main" role="main">
   <article class="hentry">

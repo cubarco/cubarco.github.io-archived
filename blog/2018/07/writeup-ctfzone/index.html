@@ -5,7 +5,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="theme-color" content="#000000">
-<title>Writeup: CTFZone 2018 Quals – 盘子里的部落格</title>
+<title>Writeup: CTFZone 2018 Quals – /home/cubarco</title>
 <meta name="description" content="两道PWN题, 一个easypwn_strings, 一个Mobile Bank. easypwn_strings 问题 You can try to use very interesting and strange string functions ;) Good luck. nc pwn-03.v7frkwrfyhsjtbpfcppnu.ctfz.one 1234 And yes, there is no binary here 这是一道盲pwn类型的题，没有提供二进制(名义上的)。 nc连上之后回显： Let's choose string operation! 1. StrLen 2. SubStrRemove 3. StrRemoveLastSymbols 第一个选项：输入一个字符串，回显字符串长度。 You choise - 1 Use str good choise 123 Result: 3 第二个选项显示未实现。 第三个选项：输入一个字符串，和一个数字，服务端移除末尾指定长度的字符串后打印出来。 You choise - 3 Use str int good choise Set string: 1234567 Set number: 3 Delete 3 ending symbols...">
 <meta name="keywords" content="Hack, CTF, Writeup, Exploitation, PWN">
 
@@ -27,7 +27,7 @@
 <meta property="og:title" content="Writeup: CTFZone 2018 Quals">
 <meta property="og:description" content="两道PWN题, 一个easypwn_strings, 一个Mobile Bank. easypwn_strings 问题 You can try to use very interesting and strange string functions ;) Good luck. nc pwn-03.v7frkwrfyhsjtbpfcppnu.ctfz.one 1234 And yes, there is no binary here 这是一道盲pwn类型的题，没有提供二进制(名义上的)。 nc连上之后回显： Let's choose string operation! 1. StrLen 2. SubStrRemove 3. StrRemoveLastSymbols 第一个选项：输入一个字符串，回显字符串长度。 You choise - 1 Use str good choise 123 Result: 3 第二个选项显示未实现。 第三个选项：输入一个字符串，和一个数字，服务端移除末尾指定长度的字符串后打印出来。 You choise - 3 Use str int good choise Set string: 1234567 Set number: 3 Delete 3 ending symbols...">
 <meta property="og:url" content="https://cub4r.co/blog/2018/07/writeup-ctfzone/">
-<meta property="og:site_name" content="盘子里的部落格">
+<meta property="og:site_name" content="/home/cubarco">
 
 
 
@@ -35,7 +35,7 @@
 
 
 <link rel="canonical" href="https://cub4r.co/blog/2018/07/writeup-ctfzone/">
-<link href="https://cub4r.co/feed.xml" type="application/atom+xml" rel="alternate" title="盘子里的部落格 Feed">
+<link href="https://cub4r.co/feed.xml" type="application/atom+xml" rel="alternate" title="/home/cubarco Feed">
 <link rel="author" href="http://plus.google.com/+%E6%9E%97%E5%AE%B6%E5%86%9BCube?rel=author">
 
 <!-- http://t.co/dKP3o1e -->
@@ -138,15 +138,8 @@
 </div>
 <!-- ./search-wrapper -->
 
-<header class="masthead">
-	<div class="wrap">
-        
-        <h1 class="site-title animated fadeIn"><a href="https://cub4r.co">盘子里的部落格</a></h1>
-		<h2 class="site-description animated fadeIn" itemprop="description">Yet another Jekyll blog.</h2>
-	</div>
-</header><!-- /.masthead -->
-
 <div class="js-menu-screen menu-screen"></div>
+
 
 <div id="main" role="main">
   <article class="hentry">

@@ -5,7 +5,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="theme-color" content="#000000">
-<title>解决用 ldconfig 指定 libgl 库时 Steam 的异常 – 盘子里的部落格</title>
+<title>解决用 ldconfig 指定 libgl 库时 Steam 的异常 – /home/cubarco</title>
 <meta name="description" content="刚考完试，有点无聊，开 Steam 准备玩点游戏，结果发现之前的一个脚本不能用了。我的机器的情况是 Intel 集显 + NVIDIA 独显。两个显卡的切换一直是件很蛋疼的事情，optirun什么的性能实在太差，如果一直独显直出，耗电也是个大问题。这个学期初和 @hyrathb juju 一起研究了一下，用 ldconfig 尽可能减少切换显卡带来的麻烦(就是先关X, 然后跑个脚本开独显直出的X, 如果需要这个解决方案我可以单独po文). Steam 的坑 Steam 为了Need to add /usr/lib32 to the library path to pick up libvdpau_nvidia.so on Ubuntu 12.04把/usr/lib32加进了LD_LIBRARY_PATH变量，结果虽然在 ldconfig 中本来是 NVIDIA 的 libgl 库优先，但是/usr/lib32里面默认 mesa 的 libgl 库的链接却被优先加载了。导致 Steam 启动时会报Not direct rendering之类的错误。 之前的解决办法 这个学期初是顺便解决了这个问题的，当时就是把 steam.sh 里面如下这行注释掉。 export LD_LIBRARY_PATH=" steam steam.sh and launch steam_debugger="$DEBUGGER" unset debugger don use...>
 <meta name="keywords" content="Linux, ldconfig, Steam, Graphics Card">
 
@@ -27,7 +27,7 @@
 <meta property="og:title" content="解决用 ldconfig 指定 libgl 库时 Steam 的异常">
 <meta property="og:description" content="刚考完试，有点无聊，开 Steam 准备玩点游戏，结果发现之前的一个脚本不能用了。我的机器的情况是 Intel 集显 + NVIDIA 独显。两个显卡的切换一直是件很蛋疼的事情，optirun什么的性能实在太差，如果一直独显直出，耗电也是个大问题。这个学期初和 @hyrathb juju 一起研究了一下，用 ldconfig 尽可能减少切换显卡带来的麻烦(就是先关X, 然后跑个脚本开独显直出的X, 如果需要这个解决方案我可以单独po文). Steam 的坑 Steam 为了Need to add /usr/lib32 to the library path to pick up libvdpau_nvidia.so on Ubuntu 12.04把/usr/lib32加进了LD_LIBRARY_PATH变量，结果虽然在 ldconfig 中本来是 NVIDIA 的 libgl 库优先，但是/usr/lib32里面默认 mesa 的 libgl 库的链接却被优先加载了。导致 Steam 启动时会报Not direct rendering之类的错误。 之前的解决办法 这个学期初是顺便解决了这个问题的，当时就是把 steam.sh 里面如下这行注释掉。 export LD_LIBRARY_PATH=" steam steam.sh and launch steam_debugger="$DEBUGGER" unset debugger don use...>
 <meta property="og:url" content="https://cub4r.co/blog/2015/01/ldconfig-and-steam-workaround/">
-<meta property="og:site_name" content="盘子里的部落格">
+<meta property="og:site_name" content="/home/cubarco">
 
 
 
@@ -35,7 +35,7 @@
 
 
 <link rel="canonical" href="https://cub4r.co/blog/2015/01/ldconfig-and-steam-workaround/">
-<link href="https://cub4r.co/feed.xml" type="application/atom+xml" rel="alternate" title="盘子里的部落格 Feed">
+<link href="https://cub4r.co/feed.xml" type="application/atom+xml" rel="alternate" title="/home/cubarco Feed">
 <link rel="author" href="http://plus.google.com/+%E6%9E%97%E5%AE%B6%E5%86%9BCube?rel=author">
 
 <!-- http://t.co/dKP3o1e -->
@@ -138,15 +138,8 @@
 </div>
 <!-- ./search-wrapper -->
 
-<header class="masthead">
-	<div class="wrap">
-        
-        <h1 class="site-title animated fadeIn"><a href="https://cub4r.co">盘子里的部落格</a></h1>
-		<h2 class="site-description animated fadeIn" itemprop="description">Yet another Jekyll blog.</h2>
-	</div>
-</header><!-- /.masthead -->
-
 <div class="js-menu-screen menu-screen"></div>
+
 
 <div id="main" role="main">
   <article class="hentry">

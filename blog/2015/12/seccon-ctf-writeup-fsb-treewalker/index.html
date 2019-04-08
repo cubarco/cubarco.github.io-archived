@@ -5,7 +5,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="theme-color" content="#000000">
-<title>Writeup-Seccon CTF: FSB:TreeWalker – 盘子里的部落格</title>
+<title>Writeup-Seccon CTF: FSB:TreeWalker – /home/cubarco</title>
 <meta name="description" content="printf() 因为这题直接把 FSB 写在题名里，我一拿到题就直接跑去找能利用 FSB 的点了。 利用点在这里： 400881: 0f 1f 80 00 00 00 00 nopl 0x0(%rax) 400888: 4c 8b 05 f9 09 20 00 mov 0x2009f9(%rip),%r8 # 601288 &lt;stdin@@GLIBC_2.2.5&gt; 40088f: 48 8d 7c 24 50 lea 0x50(%rsp),%rdi 400894: ba 01 00 00 00 mov $0x1,%edx 400899: be 00 10 00 00 mov $0x1000,%esi 40089e: e8 fd fe ff ff callq 4007a0 &lt;__fread_chk@plt&gt; 4008a3: 48 39 44 24 08 cmp %rax,0x8(%rsp) 4008a8: 0f 85 81...">
 <meta name="keywords" content="Hack, CTF, Writeup, Exploitation, FSB">
 
@@ -27,7 +27,7 @@
 <meta property="og:title" content="Writeup-Seccon CTF: FSB:TreeWalker">
 <meta property="og:description" content="printf() 因为这题直接把 FSB 写在题名里，我一拿到题就直接跑去找能利用 FSB 的点了。 利用点在这里： 400881: 0f 1f 80 00 00 00 00 nopl 0x0(%rax) 400888: 4c 8b 05 f9 09 20 00 mov 0x2009f9(%rip),%r8 # 601288 &lt;stdin@@GLIBC_2.2.5&gt; 40088f: 48 8d 7c 24 50 lea 0x50(%rsp),%rdi 400894: ba 01 00 00 00 mov $0x1,%edx 400899: be 00 10 00 00 mov $0x1000,%esi 40089e: e8 fd fe ff ff callq 4007a0 &lt;__fread_chk@plt&gt; 4008a3: 48 39 44 24 08 cmp %rax,0x8(%rsp) 4008a8: 0f 85 81...">
 <meta property="og:url" content="https://cub4r.co/blog/2015/12/seccon-ctf-writeup-fsb-treewalker/">
-<meta property="og:site_name" content="盘子里的部落格">
+<meta property="og:site_name" content="/home/cubarco">
 
 
 
@@ -35,7 +35,7 @@
 
 
 <link rel="canonical" href="https://cub4r.co/blog/2015/12/seccon-ctf-writeup-fsb-treewalker/">
-<link href="https://cub4r.co/feed.xml" type="application/atom+xml" rel="alternate" title="盘子里的部落格 Feed">
+<link href="https://cub4r.co/feed.xml" type="application/atom+xml" rel="alternate" title="/home/cubarco Feed">
 <link rel="author" href="http://plus.google.com/+%E6%9E%97%E5%AE%B6%E5%86%9BCube?rel=author">
 
 <!-- http://t.co/dKP3o1e -->
@@ -138,15 +138,8 @@
 </div>
 <!-- ./search-wrapper -->
 
-<header class="masthead">
-	<div class="wrap">
-        
-        <h1 class="site-title animated fadeIn"><a href="https://cub4r.co">盘子里的部落格</a></h1>
-		<h2 class="site-description animated fadeIn" itemprop="description">Yet another Jekyll blog.</h2>
-	</div>
-</header><!-- /.masthead -->
-
 <div class="js-menu-screen menu-screen"></div>
+
 
 <div id="main" role="main">
   <article class="hentry">

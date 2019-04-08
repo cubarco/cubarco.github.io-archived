@@ -5,7 +5,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="theme-color" content="#000000">
-<title>利用非标准端口 DNS 服务器避免 DNS 劫持 – 盘子里的部落格</title>
+<title>利用非标准端口 DNS 服务器避免 DNS 劫持 – /home/cubarco</title>
 <meta name="description" content="GFW的DNS劫持原理: 说起来挺简单,GFW对境外DNS的劫持,是在发现你请求敏感域名的DNS记录时,伪装成你请求的DNS返回一个污染的数据包给你的解析器,但并不会丢弃你向境外DNS的请求,也不会丢弃境外DNS返回的正确解析结果,他只是让错误的数据抢先回来欺骗了你的解析器而已,毕竟他直接从国内给你发污染数据怎么都比国外DNS返回正确数据要快.而解析器在先收到了欺骗数据包之后,就不会再管后面返回的正确数据了,这样你就被 DNS劫持了.1 很久以前我是用这篇 blog1提供的方法，就是用 iptables drop 掉 GFW 的假 DNS 解析包。但是 2015 年 GFW 开始采用随机 IP 污染的方式，这种黑名单的解决方案已经不可用了。后来换了 dnscrypt-proxy，还算是比较好用的。但是最近不明原因，dnscrypt-proxy 在使用一段时间之后老是卡住。尝试解决无果，就想办法找替代的方案。 前几天发现 GFW 没有劫持非标准端口的 DNS 服务器，于是想到了下面两种方法避免劫持。 iptables 将外网网卡(我这是 enp8s0)发出的 dport 是 53 的包 DNAT 给 OpenDNS 443 端口。 # iptables -t nat -A OUTPUT -o enp8s0 -p udp --dport 53 \ -j DNAT --to 208.67.222.222:443 dnsmasq 以下是采用 OpenDNS 443 端口的示例配置。 port=53 no-resolv # For IPv6 # server=2620:0:ccc::2#443 server=208.67.222.222#443 listen-address=127.0.0.1 Dnsmasq 的具体使用，可以看 ArchWiki2. Update: 2016-05-15 推荐结合 @felixonmars...">
 <meta name="keywords" content="Linux, DNS, GFW, Dnsmasq, OpenDNS">
 
@@ -27,7 +27,7 @@
 <meta property="og:title" content="利用非标准端口 DNS 服务器避免 DNS 劫持">
 <meta property="og:description" content="GFW的DNS劫持原理: 说起来挺简单,GFW对境外DNS的劫持,是在发现你请求敏感域名的DNS记录时,伪装成你请求的DNS返回一个污染的数据包给你的解析器,但并不会丢弃你向境外DNS的请求,也不会丢弃境外DNS返回的正确解析结果,他只是让错误的数据抢先回来欺骗了你的解析器而已,毕竟他直接从国内给你发污染数据怎么都比国外DNS返回正确数据要快.而解析器在先收到了欺骗数据包之后,就不会再管后面返回的正确数据了,这样你就被 DNS劫持了.1 很久以前我是用这篇 blog1提供的方法，就是用 iptables drop 掉 GFW 的假 DNS 解析包。但是 2015 年 GFW 开始采用随机 IP 污染的方式，这种黑名单的解决方案已经不可用了。后来换了 dnscrypt-proxy，还算是比较好用的。但是最近不明原因，dnscrypt-proxy 在使用一段时间之后老是卡住。尝试解决无果，就想办法找替代的方案。 前几天发现 GFW 没有劫持非标准端口的 DNS 服务器，于是想到了下面两种方法避免劫持。 iptables 将外网网卡(我这是 enp8s0)发出的 dport 是 53 的包 DNAT 给 OpenDNS 443 端口。 # iptables -t nat -A OUTPUT -o enp8s0 -p udp --dport 53 \ -j DNAT --to 208.67.222.222:443 dnsmasq 以下是采用 OpenDNS 443 端口的示例配置。 port=53 no-resolv # For IPv6 # server=2620:0:ccc::2#443 server=208.67.222.222#443 listen-address=127.0.0.1 Dnsmasq 的具体使用，可以看 ArchWiki2. Update: 2016-05-15 推荐结合 @felixonmars...">
 <meta property="og:url" content="https://cub4r.co/blog/2016/03/avoid-dns-hijacking-with-non-standard-port-dns/">
-<meta property="og:site_name" content="盘子里的部落格">
+<meta property="og:site_name" content="/home/cubarco">
 
 
 
@@ -35,7 +35,7 @@
 
 
 <link rel="canonical" href="https://cub4r.co/blog/2016/03/avoid-dns-hijacking-with-non-standard-port-dns/">
-<link href="https://cub4r.co/feed.xml" type="application/atom+xml" rel="alternate" title="盘子里的部落格 Feed">
+<link href="https://cub4r.co/feed.xml" type="application/atom+xml" rel="alternate" title="/home/cubarco Feed">
 <link rel="author" href="http://plus.google.com/+%E6%9E%97%E5%AE%B6%E5%86%9BCube?rel=author">
 
 <!-- http://t.co/dKP3o1e -->
@@ -138,15 +138,8 @@
 </div>
 <!-- ./search-wrapper -->
 
-<header class="masthead">
-	<div class="wrap">
-        
-        <h1 class="site-title animated fadeIn"><a href="https://cub4r.co">盘子里的部落格</a></h1>
-		<h2 class="site-description animated fadeIn" itemprop="description">Yet another Jekyll blog.</h2>
-	</div>
-</header><!-- /.masthead -->
-
 <div class="js-menu-screen menu-screen"></div>
+
 
 <div id="main" role="main">
   <article class="hentry">

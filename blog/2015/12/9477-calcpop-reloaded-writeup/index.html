@@ -5,7 +5,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="theme-color" content="#000000">
-<title>Writeup-9447 CTF: calcpop-reloaded – 盘子里的部落格</title>
+<title>Writeup-9447 CTF: calcpop-reloaded – /home/cubarco</title>
 <meta name="description" content="从这一题开始，9447 加上了 POW, 其实只要爆破就可以，这里就不放脚本了。（关于 POW, 有个叫 hashcash 的东西，挺有意思的） 这道题我没有在比赛期间做出来。当时完全没有逆向 load address 未知的二进制的经验，什么都干不了。后来简单看了别人的 writeup，在只知道逆向方法的情况下重新做出了这题。前后大概还是花了七八小时（我好渣…），硬着头皮写篇 writeup 记录一下。 Load Address 找 load address 的过程大概是先用 radare 打开，然后翻反汇编代码，可以找到mov eax, 0x1007a7这类代码，大概可以猜出 load address 在 0x100000. 用 IDA 打开，填好 load offset, 开始调试。可以猜出 main 函数(?)的位置大概在 0x1008bc. Overflow 接下来找溢出点。可以看到 0x001008EE 处调用了输入函数，分配栈空间是 0x98, 但是传递了一个大概是 size 的参数，值为 0x100. 存在溢出。 这题和 calcpop 有一点不同的是，calcpop 中输入 exit 会直接退出 main 函数，这题输入 exit 会调用shutdown()之类的函数，没细看，效果就是不会再有输出了。这道题退出 main 函数的方法是，正确输入，让计算结果为 201527, 程序会输出彩蛋信息，然后退出 main 函数。 接下来就是怎么溢出了，先看 main 函数入口和出口处的栈变化： ; entry: lea ecx, [esp-4] and esp, 0FFFFFFF0h...">
 <meta name="keywords" content="Hack, CTF, Writeup, Exploitation">
 
@@ -27,7 +27,7 @@
 <meta property="og:title" content="Writeup-9447 CTF: calcpop-reloaded">
 <meta property="og:description" content="从这一题开始，9447 加上了 POW, 其实只要爆破就可以，这里就不放脚本了。（关于 POW, 有个叫 hashcash 的东西，挺有意思的） 这道题我没有在比赛期间做出来。当时完全没有逆向 load address 未知的二进制的经验，什么都干不了。后来简单看了别人的 writeup，在只知道逆向方法的情况下重新做出了这题。前后大概还是花了七八小时（我好渣…），硬着头皮写篇 writeup 记录一下。 Load Address 找 load address 的过程大概是先用 radare 打开，然后翻反汇编代码，可以找到mov eax, 0x1007a7这类代码，大概可以猜出 load address 在 0x100000. 用 IDA 打开，填好 load offset, 开始调试。可以猜出 main 函数(?)的位置大概在 0x1008bc. Overflow 接下来找溢出点。可以看到 0x001008EE 处调用了输入函数，分配栈空间是 0x98, 但是传递了一个大概是 size 的参数，值为 0x100. 存在溢出。 这题和 calcpop 有一点不同的是，calcpop 中输入 exit 会直接退出 main 函数，这题输入 exit 会调用shutdown()之类的函数，没细看，效果就是不会再有输出了。这道题退出 main 函数的方法是，正确输入，让计算结果为 201527, 程序会输出彩蛋信息，然后退出 main 函数。 接下来就是怎么溢出了，先看 main 函数入口和出口处的栈变化： ; entry: lea ecx, [esp-4] and esp, 0FFFFFFF0h...">
 <meta property="og:url" content="https://cub4r.co/blog/2015/12/9477-calcpop-reloaded-writeup/">
-<meta property="og:site_name" content="盘子里的部落格">
+<meta property="og:site_name" content="/home/cubarco">
 
 
 
@@ -35,7 +35,7 @@
 
 
 <link rel="canonical" href="https://cub4r.co/blog/2015/12/9477-calcpop-reloaded-writeup/">
-<link href="https://cub4r.co/feed.xml" type="application/atom+xml" rel="alternate" title="盘子里的部落格 Feed">
+<link href="https://cub4r.co/feed.xml" type="application/atom+xml" rel="alternate" title="/home/cubarco Feed">
 <link rel="author" href="http://plus.google.com/+%E6%9E%97%E5%AE%B6%E5%86%9BCube?rel=author">
 
 <!-- http://t.co/dKP3o1e -->
@@ -138,15 +138,8 @@
 </div>
 <!-- ./search-wrapper -->
 
-<header class="masthead">
-	<div class="wrap">
-        
-        <h1 class="site-title animated fadeIn"><a href="https://cub4r.co">盘子里的部落格</a></h1>
-		<h2 class="site-description animated fadeIn" itemprop="description">Yet another Jekyll blog.</h2>
-	</div>
-</header><!-- /.masthead -->
-
 <div class="js-menu-screen menu-screen"></div>
+
 
 <div id="main" role="main">
   <article class="hentry">
