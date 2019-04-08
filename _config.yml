@@ -5,7 +5,7 @@ locale: zh_CN
 description: Yet another Jekyll blog.
 logo: #site-logo.png
 search: true
-url: https://cubarco.org
+url: https://cub4r.co
 
 
 # Jekyll configuration
@@ -40,7 +40,7 @@ exclude: ["lib", "config.rb", "Capfile", "config", "log", "Rakefile", "Rakefile.
 owner:
   name: Cubarco
   avatar: matrix.png
-  email: me at cubarco.org
+  email: me at cub4r.co
   disqus-shortname: cubarco
   twitter: Cube_Lin
   facebook: cubarco
