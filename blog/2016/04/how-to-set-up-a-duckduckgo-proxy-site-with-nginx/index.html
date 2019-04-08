@@ -18,7 +18,7 @@
 
 <meta name="twitter:card" content="summary">
 <!--
-   -<meta name="twitter:image" content="https://cubarco.org/images/">
+   -<meta name="twitter:image" content="https://cub4r.co/images/">
    -->
 
 <!-- Open Graph -->
@@ -26,7 +26,7 @@
 <meta property="og:type" content="article">
 <meta property="og:title" content="如何用 Nginx 搭建简单的 DuckDuckGo 代理站">
 <meta property="og:description" content="最近感觉手机的网络环境经常变，在寝室 v6， 出门 v4，有的时候会懒得开代理。所以就用 cloudflare+nginx 搞了个简单的 DuckDuckGo 代理站，方便随时掏出手机搜索。没有选择代理 Google 有几点原因，一个是 vps 连 Google 经常让输验证码，再就是 DuckDuckGo 不带 cookie 的搜索结果貌似比 Google 优(?)。 Nginx nginx 的配置文件如下。domain.com 改成具体的域名，/path/to/要改成 duck.domain.com 的证书路径。/etc/letsencrypt/live/images.duck.domain.com/是 Let’s encrypt 生成证书的默认目录，稍后会提到。 Gist: cubarco/08e99fbf316a435b7935727810e40458 Cloudflare duck.domain.com 可以用 Cloudflare 做 CDN，然后 crypto 策略选 Full(非strict) 的话在服务器上可以随便给 duck.domain.com 创建个证书用，具体参照1。但是像 images.duck.domain.com 这种三级域名的话，Cloudflare 是没有给 SSL 证书的，所以只好自己在服务器上配，推荐用 Let’s encrypt 签证书，方便快捷。 Let’s encrypt Let’s encrypt 的使用细节我就不赘述了，可以看官方给的 Guide2. 这里需要的三个证书可以用如下命令生成： ./letsencrypt-auto certonly --manual -d images.duck.domain.com \ -d icons.duck.domain.com \ -d ac.duck.domain.com References Create self-signed SSL certificate for...">
-<meta property="og:url" content="https://cubarco.org/blog/2016/04/how-to-set-up-a-duckduckgo-proxy-site-with-nginx/">
+<meta property="og:url" content="https://cub4r.co/blog/2016/04/how-to-set-up-a-duckduckgo-proxy-site-with-nginx/">
 <meta property="og:site_name" content="盘子里的部落格">
 
 
@@ -34,8 +34,8 @@
 
 
 
-<link rel="canonical" href="https://cubarco.org/blog/2016/04/how-to-set-up-a-duckduckgo-proxy-site-with-nginx/">
-<link href="https://cubarco.org/feed.xml" type="application/atom+xml" rel="alternate" title="盘子里的部落格 Feed">
+<link rel="canonical" href="https://cub4r.co/blog/2016/04/how-to-set-up-a-duckduckgo-proxy-site-with-nginx/">
+<link href="https://cub4r.co/feed.xml" type="application/atom+xml" rel="alternate" title="盘子里的部落格 Feed">
 <link rel="author" href="http://plus.google.com/+%E6%9E%97%E5%AE%B6%E5%86%9BCube?rel=author">
 
 <!-- http://t.co/dKP3o1e -->
@@ -44,7 +44,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <!-- For all browsers -->
-<link rel="stylesheet" href="https://cubarco.org/assets/css/main.css">
+<link rel="stylesheet" href="https://cub4r.co/assets/css/main.css">
 <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.2.0/css/font-awesome.min.css">
 
 <!--Webfonts-->
@@ -58,8 +58,8 @@
 
 <!-- HTML5 Shiv and Media Query Support -->
 <!--[if lt IE 9]>
-  <script src="https://cubarco.org/assets/js/vendor/html5shiv.min.js"></script>
-  <script src="https://cubarco.org/assets/js/vendor/respond.min.js"></script>
+  <script src="https://cub4r.co/assets/js/vendor/html5shiv.min.js"></script>
+  <script src="https://cub4r.co/assets/js/vendor/respond.min.js"></script>
 <![endif]-->
 
 <!-- Modernizr -->
@@ -69,32 +69,32 @@
 <!-- Icons -->
 <!--
    -[> 16x16 <]
-   -<link rel="shortcut icon" href="https://cubarco.org/favicon-16x16.ico">
+   -<link rel="shortcut icon" href="https://cub4r.co/favicon-16x16.ico">
    -[> 32x32 <]
-   -<link rel="shortcut icon" href="https://cubarco.org/favicon-32x32.ico">
+   -<link rel="shortcut icon" href="https://cub4r.co/favicon-32x32.ico">
    -[> 57x57 (precomposed) for iPhone 3GS, pre-2011 iPod Touch and older Android devices <]
-   -<link rel="apple-touch-icon-precomposed" href="https://cubarco.org/images/apple-touch-icon-precomposed.png">
+   -<link rel="apple-touch-icon-precomposed" href="https://cub4r.co/images/apple-touch-icon-precomposed.png">
    -[> 72x72 (precomposed) for 1st generation iPad, iPad 2 and iPad mini <]
-   -<link rel="apple-touch-icon-precomposed" sizes="72x72" href="https://cubarco.org/images/apple-touch-icon-72x72-precomposed.png">
+   -<link rel="apple-touch-icon-precomposed" sizes="72x72" href="https://cub4r.co/images/apple-touch-icon-72x72-precomposed.png">
    -[> 114x114 (precomposed) for iPhone 4, 4S, 5 and post-2011 iPod Touch <]
-   -<link rel="apple-touch-icon-precomposed" sizes="114x114" href="https://cubarco.org/images/apple-touch-icon-114x114-precomposed.png">
+   -<link rel="apple-touch-icon-precomposed" sizes="114x114" href="https://cub4r.co/images/apple-touch-icon-114x114-precomposed.png">
    -[> 144x144 (precomposed) for iPad 3rd and 4th generation <]
-   -<link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://cubarco.org/images/apple-touch-icon-144x144-precomposed.png">
+   -<link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://cub4r.co/images/apple-touch-icon-144x144-precomposed.png">
    -->
-<link rel="shortcut icon" href="https://cubarco.org/favicon.ico">
-<link rel="apple-touch-icon" sizes="57x57" href="https://cubarco.org/images/favicons/apple-touch-icon-57x57.png">
-<link rel="apple-touch-icon" sizes="60x60" href="https://cubarco.org/images/favicons/apple-touch-icon-60x60.png">
-<link rel="apple-touch-icon" sizes="72x72" href="https://cubarco.org/images/favicons/apple-touch-icon-72x72.png">
-<link rel="apple-touch-icon" sizes="76x76" href="https://cubarco.org/images/favicons/apple-touch-icon-76x76.png">
-<link rel="apple-touch-icon" sizes="114x114" href="https://cubarco.org/images/favicons/apple-touch-icon-114x114.png">
-<link rel="apple-touch-icon" sizes="120x120" href="https://cubarco.org/images/favicons/apple-touch-icon-120x120.png">
-<link rel="apple-touch-icon" sizes="144x144" href="https://cubarco.org/images/favicons/apple-touch-icon-144x144.png">
-<link rel="apple-touch-icon" sizes="152x152" href="https://cubarco.org/images/favicons/apple-touch-icon-152x152.png">
-<link rel="apple-touch-icon" sizes="180x180" href="https://cubarco.org/images/favicons/apple-touch-icon-180x180.png">
-<link rel="icon" type="image/png" href="https://cubarco.org/images/favicons/android-chrome-192x192.png" sizes="192x192">
-<link rel="icon" type="image/png" href="https://cubarco.org/images/favicons/favicon-32x32.png" sizes="32x32">
-<link rel="icon" type="image/png" href="https://cubarco.org/images/favicons/favicon-96x96.png" sizes="96x96">
-<link rel="icon" type="image/png" href="https://cubarco.org/images/favicons/favicon-16x16.png" sizes="16x16">
+<link rel="shortcut icon" href="https://cub4r.co/favicon.ico">
+<link rel="apple-touch-icon" sizes="57x57" href="https://cub4r.co/images/favicons/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="https://cub4r.co/images/favicons/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="https://cub4r.co/images/favicons/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="https://cub4r.co/images/favicons/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="https://cub4r.co/images/favicons/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="https://cub4r.co/images/favicons/apple-touch-icon-120x120.png">
+<link rel="apple-touch-icon" sizes="144x144" href="https://cub4r.co/images/favicons/apple-touch-icon-144x144.png">
+<link rel="apple-touch-icon" sizes="152x152" href="https://cub4r.co/images/favicons/apple-touch-icon-152x152.png">
+<link rel="apple-touch-icon" sizes="180x180" href="https://cub4r.co/images/favicons/apple-touch-icon-180x180.png">
+<link rel="icon" type="image/png" href="https://cub4r.co/images/favicons/android-chrome-192x192.png" sizes="192x192">
+<link rel="icon" type="image/png" href="https://cub4r.co/images/favicons/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="https://cub4r.co/images/favicons/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="https://cub4r.co/images/favicons/favicon-16x16.png" sizes="16x16">
 
 </head>
 
@@ -105,19 +105,19 @@
 	    <ul>
       
 		    
-		    <li><a href="https://cubarco.org/blog/">Latest</a></li>
+		    <li><a href="https://cub4r.co/blog/">Latest</a></li>
 		  
 		    
-		    <li><a href="https://cubarco.org/blog/about/">About</a></li>
+		    <li><a href="https://cub4r.co/blog/about/">About</a></li>
 		  
 		    
-		    <li><a href="https://cubarco.org/blog/category/blog/">Blog</a></li>
+		    <li><a href="https://cub4r.co/blog/category/blog/">Blog</a></li>
 		  
 		    
-		    <li><a href="https://cubarco.org/blog/category/notes/">Notes</a></li>
+		    <li><a href="https://cub4r.co/blog/category/notes/">Notes</a></li>
 		  
 		    
-		    <li><a href="https://cubarco.org/blog/tags/">Tags</a></li>
+		    <li><a href="https://cub4r.co/blog/tags/">Tags</a></li>
 		  
         <li class="dosearch"><span><i class="fa fa-search"></i> Search</span></li>
 	    </ul>
@@ -141,7 +141,7 @@
 <header class="masthead">
 	<div class="wrap">
         
-        <h1 class="site-title animated fadeIn"><a href="https://cubarco.org">盘子里的部落格</a></h1>
+        <h1 class="site-title animated fadeIn"><a href="https://cub4r.co">盘子里的部落格</a></h1>
 		<h2 class="site-description animated fadeIn" itemprop="description">Yet another Jekyll blog.</h2>
 	</div>
 </header><!-- /.masthead -->
@@ -153,7 +153,7 @@
     
     <div class="entry-wrapper">
       <header class="entry-header">
-        <span class="entry-tags"><a href="https://cubarco.org/blog/tags/#Linux" title="Pages tagged Linux">Linux</a> • <a href="https://cubarco.org/blog/tags/#GFW" title="Pages tagged GFW">GFW</a> • <a href="https://cubarco.org/blog/tags/#DuckDuckGo" title="Pages tagged DuckDuckGo">DuckDuckGo</a> • <a href="https://cubarco.org/blog/tags/#Proxy" title="Pages tagged Proxy">Proxy</a></span>
+        <span class="entry-tags"><a href="https://cub4r.co/blog/tags/#Linux" title="Pages tagged Linux">Linux</a> • <a href="https://cub4r.co/blog/tags/#GFW" title="Pages tagged GFW">GFW</a> • <a href="https://cub4r.co/blog/tags/#DuckDuckGo" title="Pages tagged DuckDuckGo">DuckDuckGo</a> • <a href="https://cub4r.co/blog/tags/#Proxy" title="Pages tagged Proxy">Proxy</a></span>
         
           <h1 class="entry-title">如何用 Nginx 搭建简单的 DuckDuckGo 代理站</h1>
         
@@ -161,20 +161,20 @@
       <footer class="entry-meta">
         
         
-          <img src="https://cubarco.org/images/matrix.png" class="bio-photo" alt="Cubarco bio photo">
+          <img src="https://cub4r.co/images/matrix.png" class="bio-photo" alt="Cubarco bio photo">
         
         <span class="author vcard">By <span class="fn">Cubarco</span></span>
         <span class="entry-date date published"><time datetime="2016-04-09T00:00:00+00:00"><i class="fa fa-calendar-o"></i> April 09, 2016</time></span>
         
         <span class="entry-comments"><i class="fa fa-comment-o"></i> <a href="#disqus_thread">Comment</a></span>
         <span class="social-share-twitter">
-  <a href="https://twitter.com/intent/tweet?hashtags=Linux,GFW,DuckDuckGo,Proxy&amp;text=%E5%A6%82%E4%BD%95%E7%94%A8%20Nginx%20%E6%90%AD%E5%BB%BA%E7%AE%80%E5%8D%95%E7%9A%84%20DuckDuckGo%20%E4%BB%A3%E7%90%86%E7%AB%99&amp;url=https://cubarco.org/blog/2016/04/how-to-set-up-a-duckduckgo-proxy-site-with-nginx/&amp;via=Cube_Lin" title="Share on Twitter" itemprop="Twitter"><i class="fa fa-twitter-square"></i> Tweet</a>
+  <a href="https://twitter.com/intent/tweet?hashtags=Linux,GFW,DuckDuckGo,Proxy&amp;text=%E5%A6%82%E4%BD%95%E7%94%A8%20Nginx%20%E6%90%AD%E5%BB%BA%E7%AE%80%E5%8D%95%E7%9A%84%20DuckDuckGo%20%E4%BB%A3%E7%90%86%E7%AB%99&amp;url=https://cub4r.co/blog/2016/04/how-to-set-up-a-duckduckgo-proxy-site-with-nginx/&amp;via=Cube_Lin" title="Share on Twitter" itemprop="Twitter"><i class="fa fa-twitter-square"></i> Tweet</a>
 </span>
 <span class="social-share-facebook">
-  <a href="https://www.facebook.com/sharer/sharer.php?u=https://cubarco.org/blog/2016/04/how-to-set-up-a-duckduckgo-proxy-site-with-nginx/" title="Share on Facebook" itemprop="Facebook"><i class="fa fa-facebook-square"></i> Like</a>
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https://cub4r.co/blog/2016/04/how-to-set-up-a-duckduckgo-proxy-site-with-nginx/" title="Share on Facebook" itemprop="Facebook"><i class="fa fa-facebook-square"></i> Like</a>
 </span>
 <span class="social-share-googleplus">
-  <a href="https://plus.google.com/share?url=https://cubarco.org/blog/2016/04/how-to-set-up-a-duckduckgo-proxy-site-with-nginx/" title="Share on Google Plus" itemprop="GooglePlus"><i class="fa fa-google-plus-square"></i> +1</a>
+  <a href="https://plus.google.com/share?url=https://cub4r.co/blog/2016/04/how-to-set-up-a-duckduckgo-proxy-site-with-nginx/" title="Share on Google Plus" itemprop="GooglePlus"><i class="fa fa-google-plus-square"></i> +1</a>
 </span>
 <!-- /.social-share -->
         
@@ -220,10 +220,10 @@
         </div>
         <nav class="pagination" role="navigation">
             
-              <a href="https://cubarco.org/blog/2016/03/avoid-dns-hijacking-with-non-standard-port-dns/" class="btn" title="利用非标准端口 DNS 服务器避免 DNS 劫持">Previous</a>
+              <a href="https://cub4r.co/blog/2016/03/avoid-dns-hijacking-with-non-standard-port-dns/" class="btn" title="利用非标准端口 DNS 服务器避免 DNS 劫持">Previous</a>
             
             
-              <a href="https://cubarco.org/blog/2018/07/writeup-ctfzone/" class="btn" title="Writeup: CTFZone 2018 Quals">Next</a>
+              <a href="https://cub4r.co/blog/2018/07/writeup-ctfzone/" class="btn" title="Writeup: CTFZone 2018 Quals">Next</a>
             
         </nav><!-- /.pagination -->
         <div id="disqus_thread"></div>
@@ -252,7 +252,7 @@
 	
 	<a href="https://github.com/cubarco" title="Cubarco on Github" target="_blank"><i class="fa fa-github-square fa-2x"></i></a>
 	
-  <a href="https://cubarco.org/feed.xml" title="Atom/RSS feed"><i class="fa fa-rss-square fa-2x"></i></a>
+  <a href="https://cub4r.co/feed.xml" title="Atom/RSS feed"><i class="fa fa-rss-square fa-2x"></i></a>
 </div>
 <!-- /.social-icons -->
 
@@ -261,15 +261,15 @@
 <!-- /.footer-wrapper -->
 
 <script src="//cdn.bootcss.com/jquery/2.1.4/jquery.min.js"></script>
-<script>window.jQuery || document.write('<script src="https://cubarco.org/assets/js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
-<script src="https://cubarco.org/assets/js/gist-async.min.js"></script>
-<script src="https://cubarco.org/assets/js/scripts.min.js"></script>
+<script>window.jQuery || document.write('<script src="https://cub4r.co/assets/js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
+<script src="https://cub4r.co/assets/js/gist-async.min.js"></script>
+<script src="https://cub4r.co/assets/js/scripts.min.js"></script>
 
 <!-- Jekyll Simple Search option -->
 <script>
   $(document).ready(function() {
       $('.search-field').jekyllSearch({
-          jsonFile: 'https://cubarco.org/search.json',
+          jsonFile: 'https://cub4r.co/search.json',
           searchResults: '.search-results',
           template: '<li><article><a href="{url}">{title} <span class="entry-date"><time datetime="{date}">{shortdate}</time></span></a></article></li>',
           fuzzy: true,

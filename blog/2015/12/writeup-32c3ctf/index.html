@@ -18,7 +18,7 @@
 
 <meta name="twitter:card" content="summary">
 <!--
-   -<meta name="twitter:image" content="https://cubarco.org/images/">
+   -<meta name="twitter:image" content="https://cub4r.co/images/">
    -->
 
 <!-- Open Graph -->
@@ -26,7 +26,7 @@
 <meta property="og:type" content="article">
 <meta property="og:title" content="Writeup: 32c3ctf">
 <meta property="og:description" content="forth forth 直接能跑system1。 S" sh system gurke pickle unpickle __reduce__ eval __main__.flag.flag stderr gist: cubarco teufel bin gadgets libc. leak rbp offset offset. offset.py exp.py readme flag update zctf guess sandbox references execute...>
-<meta property="og:url" content="https://cubarco.org/blog/2015/12/writeup-32c3ctf/">
+<meta property="og:url" content="https://cub4r.co/blog/2015/12/writeup-32c3ctf/">
 <meta property="og:site_name" content="盘子里的部落格">
 
 
@@ -34,8 +34,8 @@
 
 
 
-<link rel="canonical" href="https://cubarco.org/blog/2015/12/writeup-32c3ctf/">
-<link href="https://cubarco.org/feed.xml" type="application/atom+xml" rel="alternate" title="盘子里的部落格 Feed">
+<link rel="canonical" href="https://cub4r.co/blog/2015/12/writeup-32c3ctf/">
+<link href="https://cub4r.co/feed.xml" type="application/atom+xml" rel="alternate" title="盘子里的部落格 Feed">
 <link rel="author" href="http://plus.google.com/+%E6%9E%97%E5%AE%B6%E5%86%9BCube?rel=author">
 
 <!-- http://t.co/dKP3o1e -->
@@ -44,7 +44,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <!-- For all browsers -->
-<link rel="stylesheet" href="https://cubarco.org/assets/css/main.css">
+<link rel="stylesheet" href="https://cub4r.co/assets/css/main.css">
 <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.2.0/css/font-awesome.min.css">
 
 <!--Webfonts-->
@@ -58,8 +58,8 @@
 
 <!-- HTML5 Shiv and Media Query Support -->
 <!--[if lt IE 9]>
-  <script src="https://cubarco.org/assets/js/vendor/html5shiv.min.js"></script>
-  <script src="https://cubarco.org/assets/js/vendor/respond.min.js"></script>
+  <script src="https://cub4r.co/assets/js/vendor/html5shiv.min.js"></script>
+  <script src="https://cub4r.co/assets/js/vendor/respond.min.js"></script>
 <![endif]-->
 
 <!-- Modernizr -->
@@ -69,32 +69,32 @@
 <!-- Icons -->
 <!--
    -[> 16x16 <]
-   -<link rel="shortcut icon" href="https://cubarco.org/favicon-16x16.ico">
+   -<link rel="shortcut icon" href="https://cub4r.co/favicon-16x16.ico">
    -[> 32x32 <]
-   -<link rel="shortcut icon" href="https://cubarco.org/favicon-32x32.ico">
+   -<link rel="shortcut icon" href="https://cub4r.co/favicon-32x32.ico">
    -[> 57x57 (precomposed) for iPhone 3GS, pre-2011 iPod Touch and older Android devices <]
-   -<link rel="apple-touch-icon-precomposed" href="https://cubarco.org/images/apple-touch-icon-precomposed.png">
+   -<link rel="apple-touch-icon-precomposed" href="https://cub4r.co/images/apple-touch-icon-precomposed.png">
    -[> 72x72 (precomposed) for 1st generation iPad, iPad 2 and iPad mini <]
-   -<link rel="apple-touch-icon-precomposed" sizes="72x72" href="https://cubarco.org/images/apple-touch-icon-72x72-precomposed.png">
+   -<link rel="apple-touch-icon-precomposed" sizes="72x72" href="https://cub4r.co/images/apple-touch-icon-72x72-precomposed.png">
    -[> 114x114 (precomposed) for iPhone 4, 4S, 5 and post-2011 iPod Touch <]
-   -<link rel="apple-touch-icon-precomposed" sizes="114x114" href="https://cubarco.org/images/apple-touch-icon-114x114-precomposed.png">
+   -<link rel="apple-touch-icon-precomposed" sizes="114x114" href="https://cub4r.co/images/apple-touch-icon-114x114-precomposed.png">
    -[> 144x144 (precomposed) for iPad 3rd and 4th generation <]
-   -<link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://cubarco.org/images/apple-touch-icon-144x144-precomposed.png">
+   -<link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://cub4r.co/images/apple-touch-icon-144x144-precomposed.png">
    -->
-<link rel="shortcut icon" href="https://cubarco.org/favicon.ico">
-<link rel="apple-touch-icon" sizes="57x57" href="https://cubarco.org/images/favicons/apple-touch-icon-57x57.png">
-<link rel="apple-touch-icon" sizes="60x60" href="https://cubarco.org/images/favicons/apple-touch-icon-60x60.png">
-<link rel="apple-touch-icon" sizes="72x72" href="https://cubarco.org/images/favicons/apple-touch-icon-72x72.png">
-<link rel="apple-touch-icon" sizes="76x76" href="https://cubarco.org/images/favicons/apple-touch-icon-76x76.png">
-<link rel="apple-touch-icon" sizes="114x114" href="https://cubarco.org/images/favicons/apple-touch-icon-114x114.png">
-<link rel="apple-touch-icon" sizes="120x120" href="https://cubarco.org/images/favicons/apple-touch-icon-120x120.png">
-<link rel="apple-touch-icon" sizes="144x144" href="https://cubarco.org/images/favicons/apple-touch-icon-144x144.png">
-<link rel="apple-touch-icon" sizes="152x152" href="https://cubarco.org/images/favicons/apple-touch-icon-152x152.png">
-<link rel="apple-touch-icon" sizes="180x180" href="https://cubarco.org/images/favicons/apple-touch-icon-180x180.png">
-<link rel="icon" type="image/png" href="https://cubarco.org/images/favicons/android-chrome-192x192.png" sizes="192x192">
-<link rel="icon" type="image/png" href="https://cubarco.org/images/favicons/favicon-32x32.png" sizes="32x32">
-<link rel="icon" type="image/png" href="https://cubarco.org/images/favicons/favicon-96x96.png" sizes="96x96">
-<link rel="icon" type="image/png" href="https://cubarco.org/images/favicons/favicon-16x16.png" sizes="16x16">
+<link rel="shortcut icon" href="https://cub4r.co/favicon.ico">
+<link rel="apple-touch-icon" sizes="57x57" href="https://cub4r.co/images/favicons/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="https://cub4r.co/images/favicons/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="https://cub4r.co/images/favicons/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="https://cub4r.co/images/favicons/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="https://cub4r.co/images/favicons/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="https://cub4r.co/images/favicons/apple-touch-icon-120x120.png">
+<link rel="apple-touch-icon" sizes="144x144" href="https://cub4r.co/images/favicons/apple-touch-icon-144x144.png">
+<link rel="apple-touch-icon" sizes="152x152" href="https://cub4r.co/images/favicons/apple-touch-icon-152x152.png">
+<link rel="apple-touch-icon" sizes="180x180" href="https://cub4r.co/images/favicons/apple-touch-icon-180x180.png">
+<link rel="icon" type="image/png" href="https://cub4r.co/images/favicons/android-chrome-192x192.png" sizes="192x192">
+<link rel="icon" type="image/png" href="https://cub4r.co/images/favicons/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="https://cub4r.co/images/favicons/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="https://cub4r.co/images/favicons/favicon-16x16.png" sizes="16x16">
 
 </head>
 
@@ -105,19 +105,19 @@
 	    <ul>
       
 		    
-		    <li><a href="https://cubarco.org/blog/">Latest</a></li>
+		    <li><a href="https://cub4r.co/blog/">Latest</a></li>
 		  
 		    
-		    <li><a href="https://cubarco.org/blog/about/">About</a></li>
+		    <li><a href="https://cub4r.co/blog/about/">About</a></li>
 		  
 		    
-		    <li><a href="https://cubarco.org/blog/category/blog/">Blog</a></li>
+		    <li><a href="https://cub4r.co/blog/category/blog/">Blog</a></li>
 		  
 		    
-		    <li><a href="https://cubarco.org/blog/category/notes/">Notes</a></li>
+		    <li><a href="https://cub4r.co/blog/category/notes/">Notes</a></li>
 		  
 		    
-		    <li><a href="https://cubarco.org/blog/tags/">Tags</a></li>
+		    <li><a href="https://cub4r.co/blog/tags/">Tags</a></li>
 		  
         <li class="dosearch"><span><i class="fa fa-search"></i> Search</span></li>
 	    </ul>
@@ -141,7 +141,7 @@
 <header class="masthead">
 	<div class="wrap">
         
-        <h1 class="site-title animated fadeIn"><a href="https://cubarco.org">盘子里的部落格</a></h1>
+        <h1 class="site-title animated fadeIn"><a href="https://cub4r.co">盘子里的部落格</a></h1>
 		<h2 class="site-description animated fadeIn" itemprop="description">Yet another Jekyll blog.</h2>
 	</div>
 </header><!-- /.masthead -->
@@ -153,7 +153,7 @@
     
     <div class="entry-wrapper">
       <header class="entry-header">
-        <span class="entry-tags"><a href="https://cubarco.org/blog/tags/#Hack" title="Pages tagged Hack">Hack</a> • <a href="https://cubarco.org/blog/tags/#CTF" title="Pages tagged CTF">CTF</a> • <a href="https://cubarco.org/blog/tags/#Writeup" title="Pages tagged Writeup">Writeup</a> • <a href="https://cubarco.org/blog/tags/#Exploitation" title="Pages tagged Exploitation">Exploitation</a> • <a href="https://cubarco.org/blog/tags/#PWN" title="Pages tagged PWN">PWN</a> • <a href="https://cubarco.org/blog/tags/#MISC" title="Pages tagged MISC">MISC</a></span>
+        <span class="entry-tags"><a href="https://cub4r.co/blog/tags/#Hack" title="Pages tagged Hack">Hack</a> • <a href="https://cub4r.co/blog/tags/#CTF" title="Pages tagged CTF">CTF</a> • <a href="https://cub4r.co/blog/tags/#Writeup" title="Pages tagged Writeup">Writeup</a> • <a href="https://cub4r.co/blog/tags/#Exploitation" title="Pages tagged Exploitation">Exploitation</a> • <a href="https://cub4r.co/blog/tags/#PWN" title="Pages tagged PWN">PWN</a> • <a href="https://cub4r.co/blog/tags/#MISC" title="Pages tagged MISC">MISC</a></span>
         
           <h1 class="entry-title">Writeup: 32c3ctf</h1>
         
@@ -161,20 +161,20 @@
       <footer class="entry-meta">
         
         
-          <img src="https://cubarco.org/images/matrix.png" class="bio-photo" alt="Cubarco bio photo">
+          <img src="https://cub4r.co/images/matrix.png" class="bio-photo" alt="Cubarco bio photo">
         
         <span class="author vcard">By <span class="fn">Cubarco</span></span>
         <span class="entry-date date published"><time datetime="2015-12-30T00:00:00+00:00"><i class="fa fa-calendar-o"></i> December 30, 2015</time></span>
         <span class="entry-date date modified"><time datetime="2016-01-24"><i class="fa fa-pencil"></i> January 24, 2016</time></span>
         <span class="entry-comments"><i class="fa fa-comment-o"></i> <a href="#disqus_thread">Comment</a></span>
         <span class="social-share-twitter">
-  <a href="https://twitter.com/intent/tweet?hashtags=Hack,CTF,Writeup,Exploitation,PWN,MISC&amp;text=Writeup:%2032c3ctf&amp;url=https://cubarco.org/blog/2015/12/writeup-32c3ctf/&amp;via=Cube_Lin" title="Share on Twitter" itemprop="Twitter"><i class="fa fa-twitter-square"></i> Tweet</a>
+  <a href="https://twitter.com/intent/tweet?hashtags=Hack,CTF,Writeup,Exploitation,PWN,MISC&amp;text=Writeup:%2032c3ctf&amp;url=https://cub4r.co/blog/2015/12/writeup-32c3ctf/&amp;via=Cube_Lin" title="Share on Twitter" itemprop="Twitter"><i class="fa fa-twitter-square"></i> Tweet</a>
 </span>
 <span class="social-share-facebook">
-  <a href="https://www.facebook.com/sharer/sharer.php?u=https://cubarco.org/blog/2015/12/writeup-32c3ctf/" title="Share on Facebook" itemprop="Facebook"><i class="fa fa-facebook-square"></i> Like</a>
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https://cub4r.co/blog/2015/12/writeup-32c3ctf/" title="Share on Facebook" itemprop="Facebook"><i class="fa fa-facebook-square"></i> Like</a>
 </span>
 <span class="social-share-googleplus">
-  <a href="https://plus.google.com/share?url=https://cubarco.org/blog/2015/12/writeup-32c3ctf/" title="Share on Google Plus" itemprop="GooglePlus"><i class="fa fa-google-plus-square"></i> +1</a>
+  <a href="https://plus.google.com/share?url=https://cub4r.co/blog/2015/12/writeup-32c3ctf/" title="Share on Google Plus" itemprop="GooglePlus"><i class="fa fa-google-plus-square"></i> +1</a>
 </span>
 <!-- /.social-share -->
         
@@ -225,7 +225,7 @@
       <p><a href="https://docs.python.org/2/library/pickle.html#object.__reduce__">Pickling and unpickling extension types</a> <a href="#fnref:2" class="reversefootnote">↩</a></p>
     </li>
     <li id="fn:3">
-      <p><a href="https://cubarco.org/blog/2016/01/writeup-zctf/">Writeup: ZCTF</a> <a href="#fnref:3" class="reversefootnote">↩</a></p>
+      <p><a href="https://cub4r.co/blog/2016/01/writeup-zctf/">Writeup: ZCTF</a> <a href="#fnref:3" class="reversefootnote">↩</a></p>
     </li>
     <li id="fn:4">
       <p><a href="https://rzhou.org/~ricky/32c3/sandbox/">Index of /~ricky/32c3/sandbox/</a> <a href="#fnref:4" class="reversefootnote">↩</a></p>
@@ -238,10 +238,10 @@
         </div>
         <nav class="pagination" role="navigation">
             
-              <a href="https://cubarco.org/blog/2015/12/writeup-pwnable-unexploitable/" class="btn" title="Writeup-Pwnable: unexploitable">Previous</a>
+              <a href="https://cub4r.co/blog/2015/12/writeup-pwnable-unexploitable/" class="btn" title="Writeup-Pwnable: unexploitable">Previous</a>
             
             
-              <a href="https://cubarco.org/blog/2016/01/writeup-zctf/" class="btn" title="Writeup: ZCTF">Next</a>
+              <a href="https://cub4r.co/blog/2016/01/writeup-zctf/" class="btn" title="Writeup: ZCTF">Next</a>
             
         </nav><!-- /.pagination -->
         <div id="disqus_thread"></div>
@@ -270,7 +270,7 @@
 	
 	<a href="https://github.com/cubarco" title="Cubarco on Github" target="_blank"><i class="fa fa-github-square fa-2x"></i></a>
 	
-  <a href="https://cubarco.org/feed.xml" title="Atom/RSS feed"><i class="fa fa-rss-square fa-2x"></i></a>
+  <a href="https://cub4r.co/feed.xml" title="Atom/RSS feed"><i class="fa fa-rss-square fa-2x"></i></a>
 </div>
 <!-- /.social-icons -->
 
@@ -279,15 +279,15 @@
 <!-- /.footer-wrapper -->
 
 <script src="//cdn.bootcss.com/jquery/2.1.4/jquery.min.js"></script>
-<script>window.jQuery || document.write('<script src="https://cubarco.org/assets/js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
-<script src="https://cubarco.org/assets/js/gist-async.min.js"></script>
-<script src="https://cubarco.org/assets/js/scripts.min.js"></script>
+<script>window.jQuery || document.write('<script src="https://cub4r.co/assets/js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
+<script src="https://cub4r.co/assets/js/gist-async.min.js"></script>
+<script src="https://cub4r.co/assets/js/scripts.min.js"></script>
 
 <!-- Jekyll Simple Search option -->
 <script>
   $(document).ready(function() {
       $('.search-field').jekyllSearch({
-          jsonFile: 'https://cubarco.org/search.json',
+          jsonFile: 'https://cub4r.co/search.json',
           searchResults: '.search-results',
           template: '<li><article><a href="{url}">{title} <span class="entry-date"><time datetime="{date}">{shortdate}</time></span></a></article></li>',
           fuzzy: true,

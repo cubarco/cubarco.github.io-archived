@@ -2,28 +2,28 @@
 <feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
 <title type="text">盘子里的部落格</title>
 <generator uri="https://github.com/jekyll/jekyll">Jekyll</generator>
-<link rel="self" type="application/atom+xml" href="https://cubarco.org/feed.xml" />
-<link rel="alternate" type="text/html" href="https://cubarco.org" />
-<updated>2018-07-23T17:19:42+00:00</updated>
-<id>https://cubarco.org/</id>
+<link rel="self" type="application/atom+xml" href="https://cub4r.co/feed.xml" />
+<link rel="alternate" type="text/html" href="https://cub4r.co" />
+<updated>2019-04-08T15:54:40+00:00</updated>
+<id>https://cub4r.co/</id>
 <author>
   <name>Cubarco</name>
-  <uri>https://cubarco.org/</uri>
-  <email>me at cubarco.org</email>
+  <uri>https://cub4r.co/</uri>
+  <email>me at cub4r.co</email>
 </author>
 
 
 <entry>
   <title type="html"><![CDATA[Writeup: CTFZone 2018 Quals]]></title>
-  <link rel="alternate" type="text/html" href="https://cubarco.org/blog/2018/07/writeup-ctfzone/" />
-  <id>https://cubarco.org/blog/2018/07/writeup-ctfzone</id>
+  <link rel="alternate" type="text/html" href="https://cub4r.co/blog/2018/07/writeup-ctfzone/" />
+  <id>https://cub4r.co/blog/2018/07/writeup-ctfzone</id>
   <updated>2018-07-24T00:00:00-00:00</updated>
   <published>2018-07-23T00:00:00+00:00</published>
   
   <author>
     <name>Cubarco</name>
-    <uri>https://cubarco.org</uri>
-    <email>me at cubarco.org</email>
+    <uri>https://cub4r.co</uri>
+    <email>me at cub4r.co</email>
   </author>
   <content type="html">&lt;p&gt;两道PWN题, 一个easypwn_strings, 一个Mobile Bank.&lt;/p&gt;
 
@@ -399,20 +399,20 @@ Your choice:
 
 &lt;div class=&quot;gist&quot; data-gist=&quot;cubarco/9bfafbc77dd2c0330e3c0ef87013c6fa&quot; data-gist-file=&quot;bank-exp.py&quot;&gt;&lt;p&gt;Gist: &lt;a href=&quot;https://gist.github.com/cubarco/9bfafbc77dd2c0330e3c0ef87013c6fa&quot;&gt;cubarco/9bfafbc77dd2c0330e3c0ef87013c6fa&lt;/a&gt;&lt;/p&gt;&lt;/div&gt;
 
-  &lt;p&gt;&lt;a href=&quot;https://cubarco.org/blog/2018/07/writeup-ctfzone/&quot;&gt;Writeup: CTFZone 2018 Quals&lt;/a&gt; was originally published by Cubarco at &lt;a href=&quot;https://cubarco.org&quot;&gt;盘子里的部落格&lt;/a&gt; on July 23, 2018.&lt;/p&gt;</content>
+  &lt;p&gt;&lt;a href=&quot;https://cub4r.co/blog/2018/07/writeup-ctfzone/&quot;&gt;Writeup: CTFZone 2018 Quals&lt;/a&gt; was originally published by Cubarco at &lt;a href=&quot;https://cub4r.co&quot;&gt;盘子里的部落格&lt;/a&gt; on July 23, 2018.&lt;/p&gt;</content>
 </entry>
 
 
 <entry>
   <title type="html"><![CDATA[如何用 Nginx 搭建简单的 DuckDuckGo 代理站]]></title>
-  <link rel="alternate" type="text/html" href="https://cubarco.org/blog/2016/04/how-to-set-up-a-duckduckgo-proxy-site-with-nginx/" />
-  <id>https://cubarco.org/blog/2016/04/how-to-set-up-a-duckduckgo-proxy-site-with-nginx</id>
+  <link rel="alternate" type="text/html" href="https://cub4r.co/blog/2016/04/how-to-set-up-a-duckduckgo-proxy-site-with-nginx/" />
+  <id>https://cub4r.co/blog/2016/04/how-to-set-up-a-duckduckgo-proxy-site-with-nginx</id>
   <published>2016-04-09T00:00:00+00:00</published>
   <updated>2016-04-09T00:00:00+00:00</updated>
   <author>
     <name>Cubarco</name>
-    <uri>https://cubarco.org</uri>
-    <email>me at cubarco.org</email>
+    <uri>https://cub4r.co</uri>
+    <email>me at cub4r.co</email>
   </author>
   <content type="html">&lt;p&gt;最近感觉手机的网络环境经常变，在寝室 v6， 出门 v4，有的时候会懒得开代理。所以就用 cloudflare+nginx 搞了个简单的 &lt;a href=&quot;https://duckduckgo.com&quot;&gt;DuckDuckGo&lt;/a&gt; 代理站，方便随时掏出手机搜索。没有选择代理 Google 有几点原因，一个是 vps 连 Google 经常让输验证码，再就是 DuckDuckGo 不带 cookie 的搜索结果貌似比 Google 优(?)。&lt;/p&gt;
 
@@ -449,21 +449,21 @@ Your choice:
   &lt;/ol&gt;
 &lt;/div&gt;
 
-  &lt;p&gt;&lt;a href=&quot;https://cubarco.org/blog/2016/04/how-to-set-up-a-duckduckgo-proxy-site-with-nginx/&quot;&gt;如何用 Nginx 搭建简单的 DuckDuckGo 代理站&lt;/a&gt; was originally published by Cubarco at &lt;a href=&quot;https://cubarco.org&quot;&gt;盘子里的部落格&lt;/a&gt; on April 09, 2016.&lt;/p&gt;</content>
+  &lt;p&gt;&lt;a href=&quot;https://cub4r.co/blog/2016/04/how-to-set-up-a-duckduckgo-proxy-site-with-nginx/&quot;&gt;如何用 Nginx 搭建简单的 DuckDuckGo 代理站&lt;/a&gt; was originally published by Cubarco at &lt;a href=&quot;https://cub4r.co&quot;&gt;盘子里的部落格&lt;/a&gt; on April 09, 2016.&lt;/p&gt;</content>
 </entry>
 
 
 <entry>
   <title type="html"><![CDATA[利用非标准端口 DNS 服务器避免 DNS 劫持]]></title>
-  <link rel="alternate" type="text/html" href="https://cubarco.org/blog/2016/03/avoid-dns-hijacking-with-non-standard-port-dns/" />
-  <id>https://cubarco.org/blog/2016/03/avoid-dns-hijacking-with-non-standard-port-dns</id>
+  <link rel="alternate" type="text/html" href="https://cub4r.co/blog/2016/03/avoid-dns-hijacking-with-non-standard-port-dns/" />
+  <id>https://cub4r.co/blog/2016/03/avoid-dns-hijacking-with-non-standard-port-dns</id>
   <updated>2016-05-15T00:00:00-00:00</updated>
   <published>2016-03-23T00:00:00+00:00</published>
   
   <author>
     <name>Cubarco</name>
-    <uri>https://cubarco.org</uri>
-    <email>me at cubarco.org</email>
+    <uri>https://cub4r.co</uri>
+    <email>me at cub4r.co</email>
   </author>
   <content type="html">&lt;blockquote&gt;
   &lt;p&gt;GFW的DNS劫持原理: 说起来挺简单,GFW对境外DNS的劫持,是在发现你请求敏感域名的DNS记录时,伪装成你请求的DNS返回一个污染的数据包给你的解析器,但并不会丢弃你向境外DNS的请求,也不会丢弃境外DNS返回的正确解析结果,他只是让错误的数据抢先回来欺骗了你的解析器而已,毕竟他直接从国内给你发污染数据怎么都比国外DNS返回正确数据要快.而解析器在先收到了欺骗数据包之后,就不会再管后面返回的正确数据了,这样你就被 DNS劫持了.&lt;sup id=&quot;fnref:1&quot;&gt;&lt;a href=&quot;#fn:1&quot; class=&quot;footnote&quot;&gt;1&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
@@ -509,21 +509,21 @@ Your choice:
   &lt;/ol&gt;
 &lt;/div&gt;
 
-  &lt;p&gt;&lt;a href=&quot;https://cubarco.org/blog/2016/03/avoid-dns-hijacking-with-non-standard-port-dns/&quot;&gt;利用非标准端口 DNS 服务器避免 DNS 劫持&lt;/a&gt; was originally published by Cubarco at &lt;a href=&quot;https://cubarco.org&quot;&gt;盘子里的部落格&lt;/a&gt; on March 23, 2016.&lt;/p&gt;</content>
+  &lt;p&gt;&lt;a href=&quot;https://cub4r.co/blog/2016/03/avoid-dns-hijacking-with-non-standard-port-dns/&quot;&gt;利用非标准端口 DNS 服务器避免 DNS 劫持&lt;/a&gt; was originally published by Cubarco at &lt;a href=&quot;https://cub4r.co&quot;&gt;盘子里的部落格&lt;/a&gt; on March 23, 2016.&lt;/p&gt;</content>
 </entry>
 
 
 <entry>
   <title type="html"><![CDATA[Writeup: ZCTF]]></title>
-  <link rel="alternate" type="text/html" href="https://cubarco.org/blog/2016/01/writeup-zctf/" />
-  <id>https://cubarco.org/blog/2016/01/writeup-zctf</id>
+  <link rel="alternate" type="text/html" href="https://cub4r.co/blog/2016/01/writeup-zctf/" />
+  <id>https://cub4r.co/blog/2016/01/writeup-zctf</id>
   <updated>2016-01-28T00:00:00-00:00</updated>
   <published>2016-01-24T00:00:00+00:00</published>
   
   <author>
     <name>Cubarco</name>
-    <uri>https://cubarco.org</uri>
-    <email>me at cubarco.org</email>
+    <uri>https://cub4r.co</uri>
+    <email>me at cub4r.co</email>
   </author>
   <content type="html">&lt;blockquote&gt;
   &lt;p&gt;2016 年第一篇 blog!&lt;/p&gt;
@@ -568,21 +568,21 @@ Your choice:
   &lt;/ol&gt;
 &lt;/div&gt;
 
-  &lt;p&gt;&lt;a href=&quot;https://cubarco.org/blog/2016/01/writeup-zctf/&quot;&gt;Writeup: ZCTF&lt;/a&gt; was originally published by Cubarco at &lt;a href=&quot;https://cubarco.org&quot;&gt;盘子里的部落格&lt;/a&gt; on January 24, 2016.&lt;/p&gt;</content>
+  &lt;p&gt;&lt;a href=&quot;https://cub4r.co/blog/2016/01/writeup-zctf/&quot;&gt;Writeup: ZCTF&lt;/a&gt; was originally published by Cubarco at &lt;a href=&quot;https://cub4r.co&quot;&gt;盘子里的部落格&lt;/a&gt; on January 24, 2016.&lt;/p&gt;</content>
 </entry>
 
 
 <entry>
   <title type="html"><![CDATA[Writeup: 32c3ctf]]></title>
-  <link rel="alternate" type="text/html" href="https://cubarco.org/blog/2015/12/writeup-32c3ctf/" />
-  <id>https://cubarco.org/blog/2015/12/writeup-32c3ctf</id>
+  <link rel="alternate" type="text/html" href="https://cub4r.co/blog/2015/12/writeup-32c3ctf/" />
+  <id>https://cub4r.co/blog/2015/12/writeup-32c3ctf</id>
   <updated>2016-01-24T00:00:00-00:00</updated>
   <published>2015-12-30T00:00:00+00:00</published>
   
   <author>
     <name>Cubarco</name>
-    <uri>https://cubarco.org</uri>
-    <email>me at cubarco.org</email>
+    <uri>https://cub4r.co</uri>
+    <email>me at cub4r.co</email>
   </author>
   <content type="html">&lt;h2 id=&quot;forth&quot;&gt;forth&lt;/h2&gt;
 
@@ -629,7 +629,7 @@ Your choice:
       &lt;p&gt;&lt;a href=&quot;https://docs.python.org/2/library/pickle.html#object.__reduce__&quot;&gt;Pickling and unpickling extension types&lt;/a&gt; &lt;a href=&quot;#fnref:2&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
     &lt;/li&gt;
     &lt;li id=&quot;fn:3&quot;&gt;
-      &lt;p&gt;&lt;a href=&quot;https://cubarco.org/blog/2016/01/writeup-zctf/&quot;&gt;Writeup: ZCTF&lt;/a&gt; &lt;a href=&quot;#fnref:3&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+      &lt;p&gt;&lt;a href=&quot;https://cub4r.co/blog/2016/01/writeup-zctf/&quot;&gt;Writeup: ZCTF&lt;/a&gt; &lt;a href=&quot;#fnref:3&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
     &lt;/li&gt;
     &lt;li id=&quot;fn:4&quot;&gt;
       &lt;p&gt;&lt;a href=&quot;https://rzhou.org/~ricky/32c3/sandbox/&quot;&gt;Index of /~ricky/32c3/sandbox/&lt;/a&gt; &lt;a href=&quot;#fnref:4&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
@@ -637,21 +637,21 @@ Your choice:
   &lt;/ol&gt;
 &lt;/div&gt;
 
-  &lt;p&gt;&lt;a href=&quot;https://cubarco.org/blog/2015/12/writeup-32c3ctf/&quot;&gt;Writeup: 32c3ctf&lt;/a&gt; was originally published by Cubarco at &lt;a href=&quot;https://cubarco.org&quot;&gt;盘子里的部落格&lt;/a&gt; on December 30, 2015.&lt;/p&gt;</content>
+  &lt;p&gt;&lt;a href=&quot;https://cub4r.co/blog/2015/12/writeup-32c3ctf/&quot;&gt;Writeup: 32c3ctf&lt;/a&gt; was originally published by Cubarco at &lt;a href=&quot;https://cub4r.co&quot;&gt;盘子里的部落格&lt;/a&gt; on December 30, 2015.&lt;/p&gt;</content>
 </entry>
 
 
 <entry>
   <title type="html"><![CDATA[Writeup-Pwnable: unexploitable]]></title>
-  <link rel="alternate" type="text/html" href="https://cubarco.org/blog/2015/12/writeup-pwnable-unexploitable/" />
-  <id>https://cubarco.org/blog/2015/12/writeup-pwnable-unexploitable</id>
+  <link rel="alternate" type="text/html" href="https://cub4r.co/blog/2015/12/writeup-pwnable-unexploitable/" />
+  <id>https://cub4r.co/blog/2015/12/writeup-pwnable-unexploitable</id>
   <updated>2015-12-23T00:00:00-00:00</updated>
   <published>2015-12-23T00:00:00+00:00</published>
   
   <author>
     <name>Cubarco</name>
-    <uri>https://cubarco.org</uri>
-    <email>me at cubarco.org</email>
+    <uri>https://cub4r.co</uri>
+    <email>me at cub4r.co</email>
   </author>
   <content type="html">&lt;h3 id=&quot;rop&quot;&gt;ROP&lt;/h3&gt;
 
@@ -684,20 +684,20 @@ Your choice:
   &lt;/ol&gt;
 &lt;/div&gt;
 
-  &lt;p&gt;&lt;a href=&quot;https://cubarco.org/blog/2015/12/writeup-pwnable-unexploitable/&quot;&gt;Writeup-Pwnable: unexploitable&lt;/a&gt; was originally published by Cubarco at &lt;a href=&quot;https://cubarco.org&quot;&gt;盘子里的部落格&lt;/a&gt; on December 23, 2015.&lt;/p&gt;</content>
+  &lt;p&gt;&lt;a href=&quot;https://cub4r.co/blog/2015/12/writeup-pwnable-unexploitable/&quot;&gt;Writeup-Pwnable: unexploitable&lt;/a&gt; was originally published by Cubarco at &lt;a href=&quot;https://cub4r.co&quot;&gt;盘子里的部落格&lt;/a&gt; on December 23, 2015.&lt;/p&gt;</content>
 </entry>
 
 
 <entry>
   <title type="html"><![CDATA[Writeup-Pwnable: syscall]]></title>
-  <link rel="alternate" type="text/html" href="https://cubarco.org/blog/2015/12/writeup-pwnable-syscall/" />
-  <id>https://cubarco.org/blog/2015/12/writeup-pwnable-syscall</id>
+  <link rel="alternate" type="text/html" href="https://cub4r.co/blog/2015/12/writeup-pwnable-syscall/" />
+  <id>https://cub4r.co/blog/2015/12/writeup-pwnable-syscall</id>
   <published>2015-12-16T00:00:00+00:00</published>
   <updated>2015-12-16T00:00:00+00:00</updated>
   <author>
     <name>Cubarco</name>
-    <uri>https://cubarco.org</uri>
-    <email>me at cubarco.org</email>
+    <uri>https://cub4r.co</uri>
+    <email>me at cub4r.co</email>
   </author>
   <content type="html">
 &lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-c&quot; data-lang=&quot;c&quot;&gt;&lt;span class=&quot;c1&quot;&gt;// adding a new system call : sys_upper
@@ -791,20 +791,20 @@ Your choice:
   &lt;/ol&gt;
 &lt;/div&gt;
 
-  &lt;p&gt;&lt;a href=&quot;https://cubarco.org/blog/2015/12/writeup-pwnable-syscall/&quot;&gt;Writeup-Pwnable: syscall&lt;/a&gt; was originally published by Cubarco at &lt;a href=&quot;https://cubarco.org&quot;&gt;盘子里的部落格&lt;/a&gt; on December 16, 2015.&lt;/p&gt;</content>
+  &lt;p&gt;&lt;a href=&quot;https://cub4r.co/blog/2015/12/writeup-pwnable-syscall/&quot;&gt;Writeup-Pwnable: syscall&lt;/a&gt; was originally published by Cubarco at &lt;a href=&quot;https://cub4r.co&quot;&gt;盘子里的部落格&lt;/a&gt; on December 16, 2015.&lt;/p&gt;</content>
 </entry>
 
 
 <entry>
   <title type="html"><![CDATA[Writeup-Pwnable: tiny & tiny_easy]]></title>
-  <link rel="alternate" type="text/html" href="https://cubarco.org/blog/2015/12/writeup-pwnable-tiny-and-tiny-easy/" />
-  <id>https://cubarco.org/blog/2015/12/writeup-pwnable-tiny-and-tiny-easy</id>
+  <link rel="alternate" type="text/html" href="https://cub4r.co/blog/2015/12/writeup-pwnable-tiny-and-tiny-easy/" />
+  <id>https://cub4r.co/blog/2015/12/writeup-pwnable-tiny-and-tiny-easy</id>
   <published>2015-12-11T00:00:00+00:00</published>
   <updated>2015-12-11T00:00:00+00:00</updated>
   <author>
     <name>Cubarco</name>
-    <uri>https://cubarco.org</uri>
-    <email>me at cubarco.org</email>
+    <uri>https://cub4r.co</uri>
+    <email>me at cub4r.co</email>
   </author>
   <content type="html">&lt;h2 id=&quot;tinyeasy&quot;&gt;tiny_easy&lt;/h2&gt;
 
@@ -906,21 +906,21 @@ Breakpoint 1, 0x08048054 in ?? ()
   &lt;/ol&gt;
 &lt;/div&gt;
 
-  &lt;p&gt;&lt;a href=&quot;https://cubarco.org/blog/2015/12/writeup-pwnable-tiny-and-tiny-easy/&quot;&gt;Writeup-Pwnable: tiny &amp; tiny_easy&lt;/a&gt; was originally published by Cubarco at &lt;a href=&quot;https://cubarco.org&quot;&gt;盘子里的部落格&lt;/a&gt; on December 11, 2015.&lt;/p&gt;</content>
+  &lt;p&gt;&lt;a href=&quot;https://cub4r.co/blog/2015/12/writeup-pwnable-tiny-and-tiny-easy/&quot;&gt;Writeup-Pwnable: tiny &amp; tiny_easy&lt;/a&gt; was originally published by Cubarco at &lt;a href=&quot;https://cub4r.co&quot;&gt;盘子里的部落格&lt;/a&gt; on December 11, 2015.&lt;/p&gt;</content>
 </entry>
 
 
 <entry>
   <title type="html"><![CDATA[Writeup-Seccon CTF: FSB:TreeWalker]]></title>
-  <link rel="alternate" type="text/html" href="https://cubarco.org/blog/2015/12/seccon-ctf-writeup-fsb-treewalker/" />
-  <id>https://cubarco.org/blog/2015/12/seccon-ctf-writeup-fsb-treewalker</id>
+  <link rel="alternate" type="text/html" href="https://cub4r.co/blog/2015/12/seccon-ctf-writeup-fsb-treewalker/" />
+  <id>https://cub4r.co/blog/2015/12/seccon-ctf-writeup-fsb-treewalker</id>
   <updated>2015-12-13T00:00:00-00:00</updated>
   <published>2015-12-07T00:00:00+00:00</published>
   
   <author>
     <name>Cubarco</name>
-    <uri>https://cubarco.org</uri>
-    <email>me at cubarco.org</email>
+    <uri>https://cub4r.co</uri>
+    <email>me at cub4r.co</email>
   </author>
   <content type="html">&lt;h3 id=&quot;printf&quot;&gt;printf()&lt;/h3&gt;
 
@@ -1064,20 +1064,20 @@ Breakpoint 1, 0x08048054 in ?? ()
 &lt;/ol&gt;
 
 
-  &lt;p&gt;&lt;a href=&quot;https://cubarco.org/blog/2015/12/seccon-ctf-writeup-fsb-treewalker/&quot;&gt;Writeup-Seccon CTF: FSB:TreeWalker&lt;/a&gt; was originally published by Cubarco at &lt;a href=&quot;https://cubarco.org&quot;&gt;盘子里的部落格&lt;/a&gt; on December 07, 2015.&lt;/p&gt;</content>
+  &lt;p&gt;&lt;a href=&quot;https://cub4r.co/blog/2015/12/seccon-ctf-writeup-fsb-treewalker/&quot;&gt;Writeup-Seccon CTF: FSB:TreeWalker&lt;/a&gt; was originally published by Cubarco at &lt;a href=&quot;https://cub4r.co&quot;&gt;盘子里的部落格&lt;/a&gt; on December 07, 2015.&lt;/p&gt;</content>
 </entry>
 
 
 <entry>
   <title type="html"><![CDATA[Writeup-9447 CTF: calcpop-reloaded]]></title>
-  <link rel="alternate" type="text/html" href="https://cubarco.org/blog/2015/12/9477-calcpop-reloaded-writeup/" />
-  <id>https://cubarco.org/blog/2015/12/9477-calcpop-reloaded-writeup</id>
+  <link rel="alternate" type="text/html" href="https://cub4r.co/blog/2015/12/9477-calcpop-reloaded-writeup/" />
+  <id>https://cub4r.co/blog/2015/12/9477-calcpop-reloaded-writeup</id>
   <published>2015-12-04T00:00:00+00:00</published>
   <updated>2015-12-04T00:00:00+00:00</updated>
   <author>
     <name>Cubarco</name>
-    <uri>https://cubarco.org</uri>
-    <email>me at cubarco.org</email>
+    <uri>https://cub4r.co</uri>
+    <email>me at cub4r.co</email>
   </author>
   <content type="html">&lt;p&gt;&lt;em&gt;从这一题开始，9447 加上了 POW, 其实只要爆破就可以，这里就不放脚本了。（关于 POW, 有个叫 hashcash 的东西，挺有意思的）&lt;/em&gt;&lt;/p&gt;
 
@@ -1144,20 +1144,20 @@ call ebx  ; spawn(%x, %x, %d)&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;div class=&quot;gist&quot; data-gist=&quot;cubarco/b4aee1ac22f1b3039d30&quot;&gt;&lt;p&gt;Gist: &lt;a href=&quot;https://gist.github.com/cubarco/b4aee1ac22f1b3039d30&quot;&gt;cubarco/b4aee1ac22f1b3039d30&lt;/a&gt;&lt;/p&gt;&lt;/div&gt;
 
-  &lt;p&gt;&lt;a href=&quot;https://cubarco.org/blog/2015/12/9477-calcpop-reloaded-writeup/&quot;&gt;Writeup-9447 CTF: calcpop-reloaded&lt;/a&gt; was originally published by Cubarco at &lt;a href=&quot;https://cubarco.org&quot;&gt;盘子里的部落格&lt;/a&gt; on December 04, 2015.&lt;/p&gt;</content>
+  &lt;p&gt;&lt;a href=&quot;https://cub4r.co/blog/2015/12/9477-calcpop-reloaded-writeup/&quot;&gt;Writeup-9447 CTF: calcpop-reloaded&lt;/a&gt; was originally published by Cubarco at &lt;a href=&quot;https://cub4r.co&quot;&gt;盘子里的部落格&lt;/a&gt; on December 04, 2015.&lt;/p&gt;</content>
 </entry>
 
 
 <entry>
   <title type="html"><![CDATA[Writeup-9447 CTF: calcpop]]></title>
-  <link rel="alternate" type="text/html" href="https://cubarco.org/blog/2015/11/9477-calcpop-writeup/" />
-  <id>https://cubarco.org/blog/2015/11/9477-calcpop-writeup</id>
+  <link rel="alternate" type="text/html" href="https://cub4r.co/blog/2015/11/9477-calcpop-writeup/" />
+  <id>https://cub4r.co/blog/2015/11/9477-calcpop-writeup</id>
   <published>2015-11-30T00:00:00+00:00</published>
   <updated>2015-11-30T00:00:00+00:00</updated>
   <author>
     <name>Cubarco</name>
-    <uri>https://cubarco.org</uri>
-    <email>me at cubarco.org</email>
+    <uri>https://cub4r.co</uri>
+    <email>me at cub4r.co</email>
   </author>
   <content type="html">&lt;p&gt;先看反汇编代码：&lt;/p&gt;
 
@@ -1229,21 +1229,21 @@ Pattern 0x41326641 first occurrence at position 156 in pattern.&lt;/code&gt;&lt;
 
 &lt;div class=&quot;gist&quot; data-gist=&quot;cubarco/ee054809d1643602b844&quot;&gt;&lt;p&gt;Gist: &lt;a href=&quot;https://gist.github.com/cubarco/ee054809d1643602b844&quot;&gt;cubarco/ee054809d1643602b844&lt;/a&gt;&lt;/p&gt;&lt;/div&gt;
 
-  &lt;p&gt;&lt;a href=&quot;https://cubarco.org/blog/2015/11/9477-calcpop-writeup/&quot;&gt;Writeup-9447 CTF: calcpop&lt;/a&gt; was originally published by Cubarco at &lt;a href=&quot;https://cubarco.org&quot;&gt;盘子里的部落格&lt;/a&gt; on November 30, 2015.&lt;/p&gt;</content>
+  &lt;p&gt;&lt;a href=&quot;https://cub4r.co/blog/2015/11/9477-calcpop-writeup/&quot;&gt;Writeup-9447 CTF: calcpop&lt;/a&gt; was originally published by Cubarco at &lt;a href=&quot;https://cub4r.co&quot;&gt;盘子里的部落格&lt;/a&gt; on November 30, 2015.&lt;/p&gt;</content>
 </entry>
 
 
 <entry>
   <title type="html"><![CDATA[一个解决 Linux 版 Dota 2 中 CJK 字符显示成方块的 Workaround]]></title>
-  <link rel="alternate" type="text/html" href="https://cubarco.org/blog/2015/05/dota2-blocky-cjk-fonts-workaround/" />
-  <id>https://cubarco.org/blog/2015/05/dota2-blocky-cjk-fonts-workaround</id>
+  <link rel="alternate" type="text/html" href="https://cub4r.co/blog/2015/05/dota2-blocky-cjk-fonts-workaround/" />
+  <id>https://cub4r.co/blog/2015/05/dota2-blocky-cjk-fonts-workaround</id>
   <updated>2015-05-29T00:00:00-00:00</updated>
   <published>2015-05-14T00:00:00+00:00</published>
   
   <author>
     <name>Cubarco</name>
-    <uri>https://cubarco.org</uri>
-    <email>me at cubarco.org</email>
+    <uri>https://cub4r.co</uri>
+    <email>me at cub4r.co</email>
   </author>
   <content type="html">&lt;p&gt;不知道从什么时候开始，Linux 版本的 Dota 2 中载入界面的 tips sentences 和 player name 中的中文会显示成方框，详见 &lt;a href=&quot;https://github.com/ValveSoftware/Dota-2/issues/1688&quot;&gt;issue-1688&lt;/a&gt;。V社基本没搭理这个 bug，只好自己动手修。&lt;/p&gt;
 
@@ -1300,7 +1300,7 @@ steam&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 &lt;p&gt;当然这个方法并不推荐，因为会影响到其他程序。&lt;/p&gt;
 
 &lt;h4 id=&quot;update-2015-05-29&quot;&gt;Update 2015-05-29&lt;/h4&gt;
-&lt;p&gt;可能每次都要用命令行启动 Steam 不太方便，下方&lt;a href=&quot;https://cubarco.org/blog/2015/05/dota2-blocky-cjk-fonts-workaround/#comment-2051101448&quot;&gt;评论&lt;/a&gt;里有解决办法。就是给 Dota 2 加个启动选项。&lt;/p&gt;
+&lt;p&gt;可能每次都要用命令行启动 Steam 不太方便，下方&lt;a href=&quot;https://cub4r.co/blog/2015/05/dota2-blocky-cjk-fonts-workaround/#comment-2051101448&quot;&gt;评论&lt;/a&gt;里有解决办法。就是给 Dota 2 加个启动选项。&lt;/p&gt;
 
 &lt;h4 id=&quot;reference&quot;&gt;Reference&lt;/h4&gt;
 &lt;div class=&quot;footnotes&quot;&gt;
@@ -1311,21 +1311,21 @@ steam&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
   &lt;/ol&gt;
 &lt;/div&gt;
 
-  &lt;p&gt;&lt;a href=&quot;https://cubarco.org/blog/2015/05/dota2-blocky-cjk-fonts-workaround/&quot;&gt;一个解决 Linux 版 Dota 2 中 CJK 字符显示成方块的 Workaround&lt;/a&gt; was originally published by Cubarco at &lt;a href=&quot;https://cubarco.org&quot;&gt;盘子里的部落格&lt;/a&gt; on May 14, 2015.&lt;/p&gt;</content>
+  &lt;p&gt;&lt;a href=&quot;https://cub4r.co/blog/2015/05/dota2-blocky-cjk-fonts-workaround/&quot;&gt;一个解决 Linux 版 Dota 2 中 CJK 字符显示成方块的 Workaround&lt;/a&gt; was originally published by Cubarco at &lt;a href=&quot;https://cub4r.co&quot;&gt;盘子里的部落格&lt;/a&gt; on May 14, 2015.&lt;/p&gt;</content>
 </entry>
 
 
 <entry>
   <title type="html"><![CDATA[C Programming Tricks]]></title>
-  <link rel="alternate" type="text/html" href="https://cubarco.org/blog/2015/05/c-programming-tricks/" />
-  <id>https://cubarco.org/blog/2015/05/c-programming-tricks</id>
+  <link rel="alternate" type="text/html" href="https://cub4r.co/blog/2015/05/c-programming-tricks/" />
+  <id>https://cub4r.co/blog/2015/05/c-programming-tricks</id>
   <updated>2015-05-05T00:00:00-00:00</updated>
   <published>2015-05-02T00:00:00+00:00</published>
   
   <author>
     <name>Cubarco</name>
-    <uri>https://cubarco.org</uri>
-    <email>me at cubarco.org</email>
+    <uri>https://cub4r.co</uri>
+    <email>me at cub4r.co</email>
   </author>
   <content type="html">&lt;p&gt;这个 Note 用来记录各处收集的 C 编程 tricks. 看到有意思的就会摘一下，来源各异。&lt;/p&gt;
 
@@ -1407,21 +1407,21 @@ steam&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
   &lt;li&gt;&lt;a href=&quot;http://stackoverflow.com/questions/18491390/difference-between-scanfc-c-and-scanf-c-c&quot;&gt;Difference between scanf(“%c”, &amp;amp;c) and scanf(“ %c”, &amp;amp;c) - StackOverflow&lt;/a&gt;&lt;/li&gt;
 &lt;/ol&gt;
 
-  &lt;p&gt;&lt;a href=&quot;https://cubarco.org/blog/2015/05/c-programming-tricks/&quot;&gt;C Programming Tricks&lt;/a&gt; was originally published by Cubarco at &lt;a href=&quot;https://cubarco.org&quot;&gt;盘子里的部落格&lt;/a&gt; on May 02, 2015.&lt;/p&gt;</content>
+  &lt;p&gt;&lt;a href=&quot;https://cub4r.co/blog/2015/05/c-programming-tricks/&quot;&gt;C Programming Tricks&lt;/a&gt; was originally published by Cubarco at &lt;a href=&quot;https://cub4r.co&quot;&gt;盘子里的部落格&lt;/a&gt; on May 02, 2015.&lt;/p&gt;</content>
 </entry>
 
 
 <entry>
   <title type="html"><![CDATA[解决用 ldconfig 指定 libgl 库时 Steam 的异常]]></title>
-  <link rel="alternate" type="text/html" href="https://cubarco.org/blog/2015/01/ldconfig-and-steam-workaround/" />
-  <id>https://cubarco.org/blog/2015/01/ldconfig-and-steam-workaround</id>
+  <link rel="alternate" type="text/html" href="https://cub4r.co/blog/2015/01/ldconfig-and-steam-workaround/" />
+  <id>https://cub4r.co/blog/2015/01/ldconfig-and-steam-workaround</id>
   <updated>2015-03-07T00:00:00-00:00</updated>
   <published>2015-01-28T00:00:00+00:00</published>
   
   <author>
     <name>Cubarco</name>
-    <uri>https://cubarco.org</uri>
-    <email>me at cubarco.org</email>
+    <uri>https://cub4r.co</uri>
+    <email>me at cub4r.co</email>
   </author>
   <content type="html">&lt;p&gt;刚考完试，有点无聊，开 Steam 准备玩点游戏，结果发现之前的一个脚本不能用了。我的机器的情况是 Intel 集显 + NVIDIA 独显。两个显卡的切换一直是件很蛋疼的事情，optirun什么的性能实在太差，如果一直独显直出，耗电也是个大问题。这个学期初和 @hyrathb juju 一起研究了一下，用 ldconfig 尽可能减少切换显卡带来的麻烦(就是先关X, 然后跑个脚本开独显直出的X, 如果需要这个解决方案我可以单独po文).&lt;/p&gt;
 
@@ -1483,21 +1483,21 @@ steam&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 env &lt;span class=&quot;nv&quot;&gt;DEBUGGER&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;/path/to/script steam&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 
-  &lt;p&gt;&lt;a href=&quot;https://cubarco.org/blog/2015/01/ldconfig-and-steam-workaround/&quot;&gt;解决用 ldconfig 指定 libgl 库时 Steam 的异常&lt;/a&gt; was originally published by Cubarco at &lt;a href=&quot;https://cubarco.org&quot;&gt;盘子里的部落格&lt;/a&gt; on January 28, 2015.&lt;/p&gt;</content>
+  &lt;p&gt;&lt;a href=&quot;https://cub4r.co/blog/2015/01/ldconfig-and-steam-workaround/&quot;&gt;解决用 ldconfig 指定 libgl 库时 Steam 的异常&lt;/a&gt; was originally published by Cubarco at &lt;a href=&quot;https://cub4r.co&quot;&gt;盘子里的部落格&lt;/a&gt; on January 28, 2015.&lt;/p&gt;</content>
 </entry>
 
 
 <entry>
   <title type="html"><![CDATA[在社交平台上发布匹配一定规则的 Github commit message]]></title>
-  <link rel="alternate" type="text/html" href="https://cubarco.org/blog/2015/01/post-github-commits-to-social-platforms/" />
-  <id>https://cubarco.org/blog/2015/01/post-github-commits-to-social-platforms</id>
+  <link rel="alternate" type="text/html" href="https://cub4r.co/blog/2015/01/post-github-commits-to-social-platforms/" />
+  <id>https://cub4r.co/blog/2015/01/post-github-commits-to-social-platforms</id>
   <updated>2015-01-15T00:00:00-00:00</updated>
   <published>2015-01-15T00:00:00+00:00</published>
   
   <author>
     <name>Cubarco</name>
-    <uri>https://cubarco.org</uri>
-    <email>me at cubarco.org</email>
+    <uri>https://cub4r.co</uri>
+    <email>me at cub4r.co</email>
   </author>
   <content type="html">&lt;p&gt;之前看到了 @fqj1994 juju 的这篇 blog: &lt;a href=&quot;https://blog.fqj.me/posts/2013/08/google-app-script-share-blog-updates-with-social-network&quot;&gt;用 Google App Script 實現博客更新時自動在社交網絡上發狀態分享&lt;/a&gt;, 也感觉自己的 blog 根本没人访问，需要一个类似的东西。因为我的 blog 是用的 jekyll, 挂在 &lt;a href=&quot;https://github.com/cubarco/cubarco.github.io&quot;&gt;Github&lt;/a&gt; 上的，Github 又提供了一个叫 Webhook 的东西，就准备自己实现一种更加&lt;s&gt;优雅&lt;/s&gt;的方式。&lt;/p&gt;
 
@@ -1514,20 +1514,20 @@ env &lt;span class=&quot;nv&quot;&gt;DEBUGGER&lt;/span&gt;&lt;span class=&quot;o
 &lt;h6 id=&quot;update-2015-01-15&quot;&gt;Update 2015-01-15:&lt;/h6&gt;
 &lt;p&gt;这个 blog 发出去之后发现 log 报错了(UnicodeEncodeError)，但是没时间修了&lt;s&gt;(出去玩了)&lt;/s&gt;。晚上回来处理完各种事情之后才开始修。发现是 &lt;code class=&quot;highlighter-rouge&quot;&gt;urllib.urlencode()&lt;/code&gt; 不支持 unicode, fix 已经推到 Github 上了… 感觉 python 还是学的不好啊。其实我一开始学 python 就是随手写个后台，没准备深入。现在又发觉 python 挺好用的，但是不知道怎么深入，有心无力的感觉哎。&lt;/p&gt;
 
-  &lt;p&gt;&lt;a href=&quot;https://cubarco.org/blog/2015/01/post-github-commits-to-social-platforms/&quot;&gt;在社交平台上发布匹配一定规则的 Github commit message&lt;/a&gt; was originally published by Cubarco at &lt;a href=&quot;https://cubarco.org&quot;&gt;盘子里的部落格&lt;/a&gt; on January 15, 2015.&lt;/p&gt;</content>
+  &lt;p&gt;&lt;a href=&quot;https://cub4r.co/blog/2015/01/post-github-commits-to-social-platforms/&quot;&gt;在社交平台上发布匹配一定规则的 Github commit message&lt;/a&gt; was originally published by Cubarco at &lt;a href=&quot;https://cub4r.co&quot;&gt;盘子里的部落格&lt;/a&gt; on January 15, 2015.&lt;/p&gt;</content>
 </entry>
 
 
 <entry>
   <title type="html"><![CDATA[Vim 删除成对的字符]]></title>
-  <link rel="alternate" type="text/html" href="https://cubarco.org/blog/2015/01/vimscript-delpair/" />
-  <id>https://cubarco.org/blog/2015/01/vimscript-delpair</id>
+  <link rel="alternate" type="text/html" href="https://cub4r.co/blog/2015/01/vimscript-delpair/" />
+  <id>https://cub4r.co/blog/2015/01/vimscript-delpair</id>
   <published>2015-01-11T00:00:00+00:00</published>
   <updated>2015-01-11T00:00:00+00:00</updated>
   <author>
     <name>Cubarco</name>
-    <uri>https://cubarco.org</uri>
-    <email>me at cubarco.org</email>
+    <uri>https://cub4r.co</uri>
+    <email>me at cub4r.co</email>
   </author>
   <content type="html">&lt;p&gt;今天为了偷懒又往 .vimrc 里面写了点东西，作用是在删除类似于&lt;code class=&quot;highlighter-rouge&quot;&gt;()&lt;/code&gt;这种成对出现的字符对的前一个字符时同时删除后面那个…&lt;/p&gt;
 
@@ -1552,21 +1552,21 @@ env &lt;span class=&quot;nv&quot;&gt;DEBUGGER&lt;/span&gt;&lt;span class=&quot;o
 &lt;span class=&quot;k&quot;&gt;endf&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 
-  &lt;p&gt;&lt;a href=&quot;https://cubarco.org/blog/2015/01/vimscript-delpair/&quot;&gt;Vim 删除成对的字符&lt;/a&gt; was originally published by Cubarco at &lt;a href=&quot;https://cubarco.org&quot;&gt;盘子里的部落格&lt;/a&gt; on January 11, 2015.&lt;/p&gt;</content>
+  &lt;p&gt;&lt;a href=&quot;https://cub4r.co/blog/2015/01/vimscript-delpair/&quot;&gt;Vim 删除成对的字符&lt;/a&gt; was originally published by Cubarco at &lt;a href=&quot;https://cub4r.co&quot;&gt;盘子里的部落格&lt;/a&gt; on January 11, 2015.&lt;/p&gt;</content>
 </entry>
 
 
 <entry>
   <title type="html"><![CDATA[vpn-udp-libev 开发总结]]></title>
-  <link rel="alternate" type="text/html" href="https://cubarco.org/blog/2015/01/vpn-udp-libev-development-notes/" />
-  <id>https://cubarco.org/blog/2015/01/vpn-udp-libev-development-notes</id>
+  <link rel="alternate" type="text/html" href="https://cub4r.co/blog/2015/01/vpn-udp-libev-development-notes/" />
+  <id>https://cub4r.co/blog/2015/01/vpn-udp-libev-development-notes</id>
   <updated>2015-01-10T00:00:00-00:00</updated>
   <published>2015-01-09T00:00:00+00:00</published>
   
   <author>
     <name>Cubarco</name>
-    <uri>https://cubarco.org</uri>
-    <email>me at cubarco.org</email>
+    <uri>https://cub4r.co</uri>
+    <email>me at cub4r.co</email>
   </author>
   <content type="html">&lt;p&gt;最近又在看 UNIX 网络编程那本书，写了个 vpn 练手，代码和简单的介绍在 &lt;a href=&quot;https://github.com/cubarco/network-programming-exp/tree/master/vpn-udp-libev&quot; title=&quot;cubarco/network-programming-exp/vpn-udp-libev&quot;&gt;Github&lt;/a&gt; 上&lt;s&gt;(好像效率还不错的样子)&lt;/s&gt;。这里照例做一下总结，便于以后查阅。&lt;/p&gt;
 
@@ -1601,20 +1601,20 @@ plied to the call.&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 &lt;h4 id=&quot;more&quot;&gt;More&lt;/h4&gt;
 &lt;p&gt;想到再写&lt;/p&gt;
 
-  &lt;p&gt;&lt;a href=&quot;https://cubarco.org/blog/2015/01/vpn-udp-libev-development-notes/&quot;&gt;vpn-udp-libev 开发总结&lt;/a&gt; was originally published by Cubarco at &lt;a href=&quot;https://cubarco.org&quot;&gt;盘子里的部落格&lt;/a&gt; on January 09, 2015.&lt;/p&gt;</content>
+  &lt;p&gt;&lt;a href=&quot;https://cub4r.co/blog/2015/01/vpn-udp-libev-development-notes/&quot;&gt;vpn-udp-libev 开发总结&lt;/a&gt; was originally published by Cubarco at &lt;a href=&quot;https://cub4r.co&quot;&gt;盘子里的部落格&lt;/a&gt; on January 09, 2015.&lt;/p&gt;</content>
 </entry>
 
 
 <entry>
   <title type="html"><![CDATA[对 btrfs 的吐槽]]></title>
-  <link rel="alternate" type="text/html" href="https://cubarco.org/blog/2015/01/btrfs-sucks/" />
-  <id>https://cubarco.org/blog/2015/01/btrfs-sucks</id>
+  <link rel="alternate" type="text/html" href="https://cub4r.co/blog/2015/01/btrfs-sucks/" />
+  <id>https://cub4r.co/blog/2015/01/btrfs-sucks</id>
   <published>2015-01-02T00:00:00+00:00</published>
   <updated>2015-01-02T00:00:00+00:00</updated>
   <author>
     <name>Cubarco</name>
-    <uri>https://cubarco.org</uri>
-    <email>me at cubarco.org</email>
+    <uri>https://cub4r.co</uri>
+    <email>me at cub4r.co</email>
   </author>
   <content type="html">&lt;p&gt;刚把本来给&lt;code class=&quot;highlighter-rouge&quot;&gt;/home&lt;/code&gt;和&lt;code class=&quot;highlighter-rouge&quot;&gt;/var&lt;/code&gt;用的 btrfs 换回 ext4，po 一发记(tu)录(cao)一下。&lt;/p&gt;
 
@@ -1632,21 +1632,21 @@ plied to the call.&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;p&gt;所以呢，总的来说， btrfs 的问题还是有点多，一些有意思的功能日常也起不到&lt;em&gt;必不可少&lt;/em&gt;的作用。想入 btrfs 坑的还是再观望一段时间吧，已经入 btrfs 坑的话我只能祝你好运了。&lt;/p&gt;
 
-  &lt;p&gt;&lt;a href=&quot;https://cubarco.org/blog/2015/01/btrfs-sucks/&quot;&gt;对 btrfs 的吐槽&lt;/a&gt; was originally published by Cubarco at &lt;a href=&quot;https://cubarco.org&quot;&gt;盘子里的部落格&lt;/a&gt; on January 02, 2015.&lt;/p&gt;</content>
+  &lt;p&gt;&lt;a href=&quot;https://cub4r.co/blog/2015/01/btrfs-sucks/&quot;&gt;对 btrfs 的吐槽&lt;/a&gt; was originally published by Cubarco at &lt;a href=&quot;https://cub4r.co&quot;&gt;盘子里的部落格&lt;/a&gt; on January 02, 2015.&lt;/p&gt;</content>
 </entry>
 
 
 <entry>
   <title type="html"><![CDATA[Paf 开发总结]]></title>
-  <link rel="alternate" type="text/html" href="https://cubarco.org/blog/2014/12/paf-develop-notes/" />
-  <id>https://cubarco.org/blog/2014/12/paf-develop-notes</id>
+  <link rel="alternate" type="text/html" href="https://cub4r.co/blog/2014/12/paf-develop-notes/" />
+  <id>https://cub4r.co/blog/2014/12/paf-develop-notes</id>
   <updated>2015-01-01T00:00:00-00:00</updated>
   <published>2014-12-31T00:00:00+00:00</published>
   
   <author>
     <name>Cubarco</name>
-    <uri>https://cubarco.org</uri>
-    <email>me at cubarco.org</email>
+    <uri>https://cub4r.co</uri>
+    <email>me at cub4r.co</email>
   </author>
   <content type="html">&lt;p&gt;&lt;a href=&quot;https://github.com/cubarco/paf&quot; title=&quot;Pipe as File Github Homepage&quot;&gt;Paf (Pipe as file)&lt;/a&gt; 并不是什么大项目，只是一时兴起为满足自己奇怪需求而开发的小工具。具体的介绍都摆在 Github 上了，这里就不赘述了。只是对开发过程中遇到的一些问题和技巧做一下总结。&lt;/p&gt;
 
@@ -1691,20 +1691,20 @@ plied to the call.&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
   &lt;/ol&gt;
 &lt;/div&gt;
 
-  &lt;p&gt;&lt;a href=&quot;https://cubarco.org/blog/2014/12/paf-develop-notes/&quot;&gt;Paf 开发总结&lt;/a&gt; was originally published by Cubarco at &lt;a href=&quot;https://cubarco.org&quot;&gt;盘子里的部落格&lt;/a&gt; on December 31, 2014.&lt;/p&gt;</content>
+  &lt;p&gt;&lt;a href=&quot;https://cub4r.co/blog/2014/12/paf-develop-notes/&quot;&gt;Paf 开发总结&lt;/a&gt; was originally published by Cubarco at &lt;a href=&quot;https://cub4r.co&quot;&gt;盘子里的部落格&lt;/a&gt; on December 31, 2014.&lt;/p&gt;</content>
 </entry>
 
 
 <entry>
   <title type="html"><![CDATA[How do you read source code?]]></title>
-  <link rel="alternate" type="text/html" href="https://cubarco.org/blog/2014/12/repost-how-do-you-read-source-code/" />
-  <id>https://cubarco.org/blog/2014/12/repost-how-do-you-read-source-code</id>
+  <link rel="alternate" type="text/html" href="https://cub4r.co/blog/2014/12/repost-how-do-you-read-source-code/" />
+  <id>https://cub4r.co/blog/2014/12/repost-how-do-you-read-source-code</id>
   <published>2014-12-19T00:00:00+00:00</published>
   <updated>2014-12-19T00:00:00+00:00</updated>
   <author>
     <name>Cubarco</name>
-    <uri>https://cubarco.org</uri>
-    <email>me at cubarco.org</email>
+    <uri>https://cub4r.co</uri>
+    <email>me at cub4r.co</email>
   </author>
   <content type="html">&lt;blockquote&gt;
   &lt;p&gt;Originally posted &lt;a href=&quot;http://himmele.blogspot.com/2012/01/how-do-you-read-source-code.html&quot;&gt;here&lt;/a&gt;&lt;/p&gt;
@@ -1791,7 +1791,7 @@ plied to the call.&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
   &lt;li&gt;…&lt;/li&gt;
 &lt;/ul&gt;
 
-  &lt;p&gt;&lt;a href=&quot;https://cubarco.org/blog/2014/12/repost-how-do-you-read-source-code/&quot;&gt;How do you read source code?&lt;/a&gt; was originally published by Cubarco at &lt;a href=&quot;https://cubarco.org&quot;&gt;盘子里的部落格&lt;/a&gt; on December 19, 2014.&lt;/p&gt;</content>
+  &lt;p&gt;&lt;a href=&quot;https://cub4r.co/blog/2014/12/repost-how-do-you-read-source-code/&quot;&gt;How do you read source code?&lt;/a&gt; was originally published by Cubarco at &lt;a href=&quot;https://cub4r.co&quot;&gt;盘子里的部落格&lt;/a&gt; on December 19, 2014.&lt;/p&gt;</content>
 </entry>
 
 </feed>
