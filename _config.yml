@@ -1,8 +1,8 @@
 # Site wide configuration
 
-title: 盘子里的部落格
+title: /home/cubarco
 locale: zh_CN
-description: Yet another Jekyll blog.
+description: PWN for fun.
 logo: #site-logo.png
 search: true
 url: https://cub4r.co
