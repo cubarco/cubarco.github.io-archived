@@ -6,7 +6,11 @@
     { "src": "build.sh", "use": "@now/static-build", "config": { "distDir": "_site" } }
   ],
   "routes": [
-    {"src": "/gist/(.*)", "dest": "https://gist.github.com/$1"}
+    {
+      "src": "/gist/(.*)",
+      "dest": "https://gist.github.com/$1",
+      "headers": {"cache-control": "s-maxage=604800"}
+    }
   ]
 }
 
