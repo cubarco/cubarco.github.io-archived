@@ -4,6 +4,9 @@
   "alias": "cub4r.co",
   "builds": [
     { "src": "build.sh", "use": "@now/static-build", "config": { "distDir": "_site" } }
+  ],
+  "routes": [
+    {"src": "/gist/(.*)", "dest": "https://gist.github.com/$1"}
   ]
 }
 
