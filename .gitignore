@@ -20,3 +20,5 @@ node_modules
 
 .bundle
 vendor
+
+Gemfile.lock
