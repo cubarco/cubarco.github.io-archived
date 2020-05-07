@@ -9,7 +9,7 @@ env:
 before_install:
   - gem update --system
 script:
-  - JEKYLL_ENV=production bundle exec jekyll build
+  - JEKYLL_ENV=production bundle exec jekyll build --destination site
   # - JEKYLL_ENV=production bundle exec jekyll build --destination site && ./purge-cache.sh
 
 deploy:
