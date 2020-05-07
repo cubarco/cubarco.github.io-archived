@@ -1,11 +1,12 @@
-<!DOCTYPE html>
-<!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]--><!--[if (IE 7)&!(IEMobile)]><html class="no-js lt-ie9 lt-ie8" lang="en"><![endif]--><!--[if (IE 8)&!(IEMobile)]><html class="no-js lt-ie9" lang="en"><![endif]--><!--[if gt IE 8]><!--><html class="no-js" lang="en">
-<!--<![endif]-->
+<!doctype html>
+<!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if (IE 7)&!(IEMobile)]><html class="no-js lt-ie9 lt-ie8" lang="en"><![endif]-->
+<!--[if (IE 8)&!(IEMobile)]><html class="no-js lt-ie9" lang="en"><![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"><!--<![endif]-->
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="theme-color" content="#000000">
-<title>如何用 Nginx 搭建简单的 DuckDuckGo 代理站 – /home/cubarco</title>
+<title>如何用 Nginx 搭建简单的 DuckDuckGo 代理站 &#8211; /home/cubarco</title>
 <meta name="description" content="最近感觉手机的网络环境经常变，在寝室 v6， 出门 v4，有的时候会懒得开代理。所以就用 cloudflare+nginx 搞了个简单的 DuckDuckGo 代理站，方便随时掏出手机搜索。没有选择代理 Google 有几点原因，一个是 vps 连 Google 经常让输验证码，再就是 DuckDuckGo 不带 cookie 的搜索结果貌似比 Google 优(?)。 Nginx nginx 的配置文件如下。domain.com 改成具体的域名，/path/to/要改成 duck.domain.com 的证书路径。/etc/letsencrypt/live/images.duck.domain.com/是 Let’s encrypt 生成证书的默认目录，稍后会提到。 Gist: cubarco/08e99fbf316a435b7935727810e40458 Cloudflare duck.domain.com 可以用 Cloudflare 做 CDN，然后 crypto 策略选 Full(非strict) 的话在服务器上可以随便给 duck.domain.com 创建个证书用，具体参照1。但是像 images.duck.domain.com 这种三级域名的话，Cloudflare 是没有给 SSL 证书的，所以只好自己在服务器上配，推荐用 Let’s encrypt 签证书，方便快捷。 Let’s encrypt Let’s encrypt 的使用细节我就不赘述了，可以看官方给的 Guide2. 这里需要的三个证书可以用如下命令生成： ./letsencrypt-auto certonly --manual -d images.duck.domain.com \ -d icons.duck.domain.com \ -d ac.duck.domain.com References Create self-signed SSL certificate for...">
 <meta name="keywords" content="Linux, GFW, DuckDuckGo, Proxy">
 
@@ -36,7 +37,7 @@
 
 <link rel="canonical" href="https://cub4r.co/blog/2016/04/how-to-set-up-a-duckduckgo-proxy-site-with-nginx/">
 <link href="https://cub4r.co/feed.xml" type="application/atom+xml" rel="alternate" title="/home/cubarco Feed">
-<link rel="author" href="http://plus.google.com/+%E6%9E%97%E5%AE%B6%E5%86%9BCube?rel=author">
+
 
 <!-- http://t.co/dKP3o1e -->
 <meta name="HandheldFriendly" content="True">
@@ -48,7 +49,7 @@
 <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.2.0/css/font-awesome.min.css">
 
 <!--Webfonts-->
-<link href="//fonts.googleapis.com/css?family=Volkhov%7CCabin" rel="stylesheet" type="text/css">
+<link href='//fonts.googleapis.com/css?family=Volkhov|Cabin' rel='stylesheet' type='text/css'>
 <!--
    -[> Webfonts <]
    -<script src="//use.edgefonts.net/source-sans-pro:n2,i2,n3,i3,n4,i4,n6,i6,n7,i7,n9,i9;source-code-pro:n4,n7;volkhov;cabin.js"></script>
@@ -105,25 +106,24 @@
 	    <ul>
       
 		    
-		    <li><a href="https://cub4r.co/blog/">Latest</a></li>
+		    <li><a href="https://cub4r.co/blog/" >Latest</a></li>
 		  
 		    
-		    <li><a href="https://cub4r.co/blog/about/">About</a></li>
+		    <li><a href="https://cub4r.co/blog/about/" >About</a></li>
 		  
 		    
-		    <li><a href="https://cub4r.co/blog/category/blog/">Blog</a></li>
+		    <li><a href="https://cub4r.co/blog/category/blog/" >Blog</a></li>
 		  
 		    
-		    <li><a href="https://cub4r.co/blog/category/notes/">Notes</a></li>
+		    <li><a href="https://cub4r.co/blog/category/notes/" >Notes</a></li>
 		  
 		    
-		    <li><a href="https://cub4r.co/blog/tags/">Tags</a></li>
+		    <li><a href="https://cub4r.co/blog/tags/" >Tags</a></li>
 		  
         <li class="dosearch"><span><i class="fa fa-search"></i> Search</span></li>
 	    </ul>
 	</nav>
-</div>
-<!-- /.navigation-wrapper -->
+</div><!-- /.navigation-wrapper -->
 
 <!--[if lt IE 9]><div class="upgrade"><strong><a href="http://whatbrowser.org/">Your browser is quite old!</strong> Why not upgrade to a different browser to better enjoy this site?</a></div><![endif]-->
 
@@ -131,12 +131,9 @@
   <div class="search-form">
     <input type="text" class="search-field" placeholder="Search...">
     <button class="close-btn"><i class="fa fa-times-circle fa-2x"></i></button>
-    <ul class="search-results post-list"></ul>
-<!-- /.search-results -->
-  </div>
-<!-- /.search-form -->
-</div>
-<!-- ./search-wrapper -->
+    <ul class="search-results post-list"></ul><!-- /.search-results -->
+  </div><!-- /.search-form -->
+</div><!-- ./search-wrapper -->
 
 <div class="js-menu-screen menu-screen"></div>
 
@@ -146,7 +143,7 @@
     
     <div class="entry-wrapper">
       <header class="entry-header">
-        <span class="entry-tags"><a href="https://cub4r.co/blog/tags/#Linux" title="Pages tagged Linux">Linux</a> • <a href="https://cub4r.co/blog/tags/#GFW" title="Pages tagged GFW">GFW</a> • <a href="https://cub4r.co/blog/tags/#DuckDuckGo" title="Pages tagged DuckDuckGo">DuckDuckGo</a> • <a href="https://cub4r.co/blog/tags/#Proxy" title="Pages tagged Proxy">Proxy</a></span>
+        <span class="entry-tags"><a href="https://cub4r.co/blog/tags/#Linux" title="Pages tagged Linux">Linux</a>&nbsp;&bull;&nbsp;<a href="https://cub4r.co/blog/tags/#GFW" title="Pages tagged GFW">GFW</a>&nbsp;&bull;&nbsp;<a href="https://cub4r.co/blog/tags/#DuckDuckGo" title="Pages tagged DuckDuckGo">DuckDuckGo</a>&nbsp;&bull;&nbsp;<a href="https://cub4r.co/blog/tags/#Proxy" title="Pages tagged Proxy">Proxy</a></span>
         
           <h1 class="entry-title">如何用 Nginx 搭建简单的 DuckDuckGo 代理站</h1>
         
@@ -154,14 +151,14 @@
       <footer class="entry-meta">
         
         
-          <img src="https://cub4r.co/images/matrix.png" class="bio-photo" alt="Cubarco bio photo">
+          <img src="https://cub4r.co/images/matrix.png" class="bio-photo" alt="Cubarco bio photo"></a>
         
         <span class="author vcard">By <span class="fn">Cubarco</span></span>
         <span class="entry-date date published"><time datetime="2016-04-09T00:00:00+00:00"><i class="fa fa-calendar-o"></i> April 09, 2016</time></span>
         
         <span class="entry-comments"><i class="fa fa-comment-o"></i> <a href="#disqus_thread">Comment</a></span>
         <span class="social-share-twitter">
-  <a href="https://twitter.com/intent/tweet?hashtags=Linux,GFW,DuckDuckGo,Proxy&amp;text=%E5%A6%82%E4%BD%95%E7%94%A8%20Nginx%20%E6%90%AD%E5%BB%BA%E7%AE%80%E5%8D%95%E7%9A%84%20DuckDuckGo%20%E4%BB%A3%E7%90%86%E7%AB%99&amp;url=https://cub4r.co/blog/2016/04/how-to-set-up-a-duckduckgo-proxy-site-with-nginx/&amp;via=Cube_Lin" title="Share on Twitter" itemprop="Twitter"><i class="fa fa-twitter-square"></i> Tweet</a>
+  <a href="https://twitter.com/intent/tweet?hashtags=Linux,GFW,DuckDuckGo,Proxy&amp;text=如何用%20Nginx%20搭建简单的%20DuckDuckGo%20代理站&amp;url=https://cub4r.co/blog/2016/04/how-to-set-up-a-duckduckgo-proxy-site-with-nginx/&amp;via=Cube_Lin" title="Share on Twitter" itemprop="Twitter"><i class="fa fa-twitter-square"></i> Tweet</a>
 </span>
 <span class="social-share-facebook">
   <a href="https://www.facebook.com/sharer/sharer.php?u=https://cub4r.co/blog/2016/04/how-to-set-up-a-duckduckgo-proxy-site-with-nginx/" title="Share on Facebook" itemprop="Facebook"><i class="fa fa-facebook-square"></i> Like</a>
@@ -191,25 +188,25 @@
 
 <p>这里需要的三个证书可以用如下命令生成：</p>
 
-<pre><code class="language-console">./letsencrypt-auto certonly --manual -d images.duck.domain.com \
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">./letsencrypt-auto certonly --manual -d images.duck.domain.com \
     -d icons.duck.domain.com \
     -d ac.duck.domain.com
-</code></pre>
+</span></code></pre></div></div>
 
 <h3 id="references">References</h3>
 <div class="footnotes">
   <ol>
     <li id="fn:1">
-      <p><a href="https://gist.github.com/jessedearing/2351836">Create self-signed SSL certificate for Nginx</a> <a href="#fnref:1" class="reversefootnote">↩</a></p>
+      <p><a href="https://gist.github.com/jessedearing/2351836">Create self-signed SSL certificate for Nginx</a> <a href="#fnref:1" class="reversefootnote">&#8617;</a></p>
     </li>
     <li id="fn:2">
-      <p><a href="https://letsencrypt.org/getting-started/">Getting Started @ Let’s Encrypt</a> <a href="#fnref:2" class="reversefootnote">↩</a></p>
+      <p><a href="https://letsencrypt.org/getting-started/">Getting Started @ Let’s Encrypt</a> <a href="#fnref:2" class="reversefootnote">&#8617;</a></p>
     </li>
   </ol>
 </div>
 
         <div align="right">
-		    <span><a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc/4.0/88x31.png"></a></span>
+		    <span><a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc/4.0/88x31.png" /></a></span>
         </div>
         <nav class="pagination" role="navigation">
             
@@ -219,39 +216,33 @@
               <a href="https://cub4r.co/blog/2018/07/writeup-ctfzone/" class="btn" title="Writeup: CTFZone 2018 Quals">Next</a>
             
         </nav><!-- /.pagination -->
-        <div id="disqus_thread"></div>
-<!-- /#disqus_thread -->
-      </div>
-<!-- /.entry-content -->
-    </div>
-<!-- /.entry-wrapper -->
+        <div id="disqus_thread"></div><!-- /#disqus_thread -->
+      </div><!-- /.entry-content -->
+    </div><!-- /.entry-wrapper -->
 
   </article>
-</div>
-<!-- /#main -->
+</div><!-- /#main -->
 
 <div class="footer-wrapper">
   <footer role="contentinfo" class="entry-wrapper">
     
 
-<span>Powered by <a href="http://jekyllrb.com" rel="nofollow">Jekyll</a> using the <a href="https://mademistakes.com/work/so-simple-jekyll-theme/" rel="nofollow">So Simple Theme</a>. Published with <a href="https://github.com/cubarco/cubarco.github.io">GitHub Pages</a>.</span>
+<span>Powered by <a href="http://jekyllrb.com" rel="nofollow">Jekyll</a> using the <a href="https://mademistakes.com/work/so-simple-jekyll-theme/" rel="nofollow">So Simple Theme</a>. Published with <a href="https://now.sh/">Now</a>.</span>
 <div class="social-icons">
 	<a href="https://twitter.com/Cube_Lin" title="Cubarco on Twitter" target="_blank"><i class="fa fa-twitter-square fa-2x"></i></a>
-	<a href="https://www.facebook.com/cubarco" title="Cubarco on Facebook" target="_blank"><i class="fa fa-facebook-square fa-2x"></i></a>
-	<a href="https://plus.google.com/+%E6%9E%97%E5%AE%B6%E5%86%9BCube" title="Cubarco on Google+" target="_blank"><i class="fa fa-google-plus-square fa-2x"></i></a>
 	
 	
-	<a href="https://www.instagram.com/cubarco/" title="Cubarco on Instagram" target="_blank"><i class="fa fa-instagram fa-2x"></i></a>
+	
+	
+	
 	
 	<a href="https://github.com/cubarco" title="Cubarco on Github" target="_blank"><i class="fa fa-github-square fa-2x"></i></a>
 	
   <a href="https://cub4r.co/feed.xml" title="Atom/RSS feed"><i class="fa fa-rss-square fa-2x"></i></a>
-</div>
-<!-- /.social-icons -->
+</div><!-- /.social-icons -->
 
   </footer>
-</div>
-<!-- /.footer-wrapper -->
+</div><!-- /.footer-wrapper -->
 
 <script src="//cdn.bootcss.com/jquery/2.1.4/jquery.min.js"></script>
 <script>window.jQuery || document.write('<script src="https://cub4r.co/assets/js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
@@ -319,8 +310,7 @@
         (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
     }());
 </script>
-<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a>
-</noscript>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
 <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
 
 

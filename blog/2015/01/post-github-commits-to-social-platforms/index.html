@@ -1,11 +1,12 @@
-<!DOCTYPE html>
-<!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]--><!--[if (IE 7)&!(IEMobile)]><html class="no-js lt-ie9 lt-ie8" lang="en"><![endif]--><!--[if (IE 8)&!(IEMobile)]><html class="no-js lt-ie9" lang="en"><![endif]--><!--[if gt IE 8]><!--><html class="no-js" lang="en">
-<!--<![endif]-->
+<!doctype html>
+<!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if (IE 7)&!(IEMobile)]><html class="no-js lt-ie9 lt-ie8" lang="en"><![endif]-->
+<!--[if (IE 8)&!(IEMobile)]><html class="no-js lt-ie9" lang="en"><![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"><!--<![endif]-->
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="theme-color" content="#000000">
-<title>在社交平台上发布匹配一定规则的 Github commit message – /home/cubarco</title>
+<title>在社交平台上发布匹配一定规则的 Github commit message &#8211; /home/cubarco</title>
 <meta name="description" content="之前看到了 @fqj1994 juju 的这篇 blog: 用 Google App Script 實現博客更新時自動在社交網絡上發狀態分享, 也感觉自己的 blog 根本没人访问，需要一个类似的东西。因为我的 blog 是用的 jekyll, 挂在 Github 上的，Github 又提供了一个叫 Webhook 的东西，就准备自己实现一种更加优雅的方式。 项目放在 Github 上，遵循 GPLv2 协议。整个流程很简单，就是接受 Webhook 发来的 json, 然后从中提取 commits message, 用一定的正则表达式取出标题，之后再发往各个社交平台。 昨天实现了 twitter 的部分(twitter 可以拿到不会过期的 access token)，看了下 OAuth 感觉要维护那些 token 的状态好麻烦，懒得弄… 我正在用的主要就是 twitter, Google+, 和 Facebook. Google+ 据说没给发 post 的 api, 所以作罢。接下来尽可能支持 Facebook. 如果腳本正常的話，理論上這則文章會很快被發佈到我常用的社交網絡。 嗯，就是这样。 Update 2015-01-15: 这个 blog 发出去之后发现 log 报错了(UnicodeEncodeError)，但是没时间修了(出去玩了)。晚上回来处理完各种事情之后才开始修。发现是 urllib.urlencode() 不支持 unicode, fix 已经推到 Github 上了… 感觉 python 还是学的不好啊。其实我一开始学...">
 <meta name="keywords" content="Blog, Python, Github">
 
@@ -36,7 +37,7 @@
 
 <link rel="canonical" href="https://cub4r.co/blog/2015/01/post-github-commits-to-social-platforms/">
 <link href="https://cub4r.co/feed.xml" type="application/atom+xml" rel="alternate" title="/home/cubarco Feed">
-<link rel="author" href="http://plus.google.com/+%E6%9E%97%E5%AE%B6%E5%86%9BCube?rel=author">
+
 
 <!-- http://t.co/dKP3o1e -->
 <meta name="HandheldFriendly" content="True">
@@ -48,7 +49,7 @@
 <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.2.0/css/font-awesome.min.css">
 
 <!--Webfonts-->
-<link href="//fonts.googleapis.com/css?family=Volkhov%7CCabin" rel="stylesheet" type="text/css">
+<link href='//fonts.googleapis.com/css?family=Volkhov|Cabin' rel='stylesheet' type='text/css'>
 <!--
    -[> Webfonts <]
    -<script src="//use.edgefonts.net/source-sans-pro:n2,i2,n3,i3,n4,i4,n6,i6,n7,i7,n9,i9;source-code-pro:n4,n7;volkhov;cabin.js"></script>
@@ -122,8 +123,7 @@
         <li class="dosearch"><span><i class="fa fa-search"></i> Search</span></li>
 	    </ul>
 	</nav>
-</div>
-<!-- /.navigation-wrapper -->
+</div><!-- /.navigation-wrapper -->
 
 <!--[if lt IE 9]><div class="upgrade"><strong><a href="http://whatbrowser.org/">Your browser is quite old!</strong> Why not upgrade to a different browser to better enjoy this site?</a></div><![endif]-->
 
@@ -135,8 +135,7 @@
 <!-- /.search-results -->
   </div>
 <!-- /.search-form -->
-</div>
-<!-- ./search-wrapper -->
+</div><!-- ./search-wrapper -->
 
 <div class="js-menu-screen menu-screen"></div>
 
@@ -207,21 +206,20 @@
 <!-- /.entry-wrapper -->
 
   </article>
-</div>
-<!-- /#main -->
+</div><!-- /#main -->
 
 <div class="footer-wrapper">
   <footer role="contentinfo" class="entry-wrapper">
     
 
-<span>Powered by <a href="http://jekyllrb.com" rel="nofollow">Jekyll</a> using the <a href="https://mademistakes.com/work/so-simple-jekyll-theme/" rel="nofollow">So Simple Theme</a>. Published with <a href="https://github.com/cubarco/cubarco.github.io">GitHub Pages</a>.</span>
+<span>Powered by <a href="http://jekyllrb.com" rel="nofollow">Jekyll</a> using the <a href="https://mademistakes.com/work/so-simple-jekyll-theme/" rel="nofollow">So Simple Theme</a>. Published with <a href="https://now.sh/">Now</a>.</span>
 <div class="social-icons">
 	<a href="https://twitter.com/Cube_Lin" title="Cubarco on Twitter" target="_blank"><i class="fa fa-twitter-square fa-2x"></i></a>
-	<a href="https://www.facebook.com/cubarco" title="Cubarco on Facebook" target="_blank"><i class="fa fa-facebook-square fa-2x"></i></a>
-	<a href="https://plus.google.com/+%E6%9E%97%E5%AE%B6%E5%86%9BCube" title="Cubarco on Google+" target="_blank"><i class="fa fa-google-plus-square fa-2x"></i></a>
 	
 	
-	<a href="https://www.instagram.com/cubarco/" title="Cubarco on Instagram" target="_blank"><i class="fa fa-instagram fa-2x"></i></a>
+	
+	
+	
 	
 	<a href="https://github.com/cubarco" title="Cubarco on Github" target="_blank"><i class="fa fa-github-square fa-2x"></i></a>
 	
@@ -230,8 +228,7 @@
 <!-- /.social-icons -->
 
   </footer>
-</div>
-<!-- /.footer-wrapper -->
+</div><!-- /.footer-wrapper -->
 
 <script src="//cdn.bootcss.com/jquery/2.1.4/jquery.min.js"></script>
 <script>window.jQuery || document.write('<script src="https://cub4r.co/assets/js/vendor/jquery-1.9.1.min.js"><\/script>')</script>

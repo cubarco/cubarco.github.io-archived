@@ -1,11 +1,12 @@
-<!DOCTYPE html>
-<!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]--><!--[if (IE 7)&!(IEMobile)]><html class="no-js lt-ie9 lt-ie8" lang="en"><![endif]--><!--[if (IE 8)&!(IEMobile)]><html class="no-js lt-ie9" lang="en"><![endif]--><!--[if gt IE 8]><!--><html class="no-js" lang="en">
-<!--<![endif]-->
+<!doctype html>
+<!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if (IE 7)&!(IEMobile)]><html class="no-js lt-ie9 lt-ie8" lang="en"><![endif]-->
+<!--[if (IE 8)&!(IEMobile)]><html class="no-js lt-ie9" lang="en"><![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"><!--<![endif]-->
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="theme-color" content="#000000">
-<title>Writeup-Pwnable: syscall – /home/cubarco</title>
+<title>Writeup-Pwnable: syscall &#8211; /home/cubarco</title>
 <meta name="description" content="// adding a new system call : sys_upper #include &lt;linux/module.h&gt; #include &lt;linux/kernel.h&gt; #include &lt;linux/slab.h&gt; #include &lt;linux/vmalloc.h&gt; #include &lt;linux/mm.h&gt; #include &lt;asm/unistd.h&gt; #include &lt;asm/page.h&gt; #include &lt;linux/syscalls.h&gt; #define SYS_CALL_TABLE 0x8000e348 // manually configure this address!! #define NR_SYS_UNUSED 223 //Pointers to re-mapped writable pages unsigned int** sct; asmlinkage long sys_upper(char *in, char* out){ int len = strlen(in); int i; for(i=0; i&lt;len; i++){ if(in[i]&gt;=0x61 &amp;&amp; in[i]&lt;=0x7a){ out[i] = in[i] - 0x20; } else{ out[i] = in[i]; } } return 0;...">
 <meta name="keywords" content="Hack, CTF, Writeup, Exploitation, ARM">
 
@@ -36,7 +37,7 @@
 
 <link rel="canonical" href="https://cub4r.co/blog/2015/12/writeup-pwnable-syscall/">
 <link href="https://cub4r.co/feed.xml" type="application/atom+xml" rel="alternate" title="/home/cubarco Feed">
-<link rel="author" href="http://plus.google.com/+%E6%9E%97%E5%AE%B6%E5%86%9BCube?rel=author">
+
 
 <!-- http://t.co/dKP3o1e -->
 <meta name="HandheldFriendly" content="True">
@@ -48,7 +49,7 @@
 <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.2.0/css/font-awesome.min.css">
 
 <!--Webfonts-->
-<link href="//fonts.googleapis.com/css?family=Volkhov%7CCabin" rel="stylesheet" type="text/css">
+<link href='//fonts.googleapis.com/css?family=Volkhov|Cabin' rel='stylesheet' type='text/css'>
 <!--
    -[> Webfonts <]
    -<script src="//use.edgefonts.net/source-sans-pro:n2,i2,n3,i3,n4,i4,n6,i6,n7,i7,n9,i9;source-code-pro:n4,n7;volkhov;cabin.js"></script>
@@ -122,8 +123,7 @@
         <li class="dosearch"><span><i class="fa fa-search"></i> Search</span></li>
 	    </ul>
 	</nav>
-</div>
-<!-- /.navigation-wrapper -->
+</div><!-- /.navigation-wrapper -->
 
 <!--[if lt IE 9]><div class="upgrade"><strong><a href="http://whatbrowser.org/">Your browser is quite old!</strong> Why not upgrade to a different browser to better enjoy this site?</a></div><![endif]-->
 
@@ -135,8 +135,7 @@
 <!-- /.search-results -->
   </div>
 <!-- /.search-form -->
-</div>
-<!-- ./search-wrapper -->
+</div><!-- ./search-wrapper -->
 
 <div class="js-menu-screen menu-screen"></div>
 
@@ -174,8 +173,8 @@
       </footer>
       <div class="entry-content">
         
-<figure class="highlight"><pre><code class="language-c" data-lang="c"><span class="c1">// adding a new system call : sys_upper
-</span>
+<figure class="highlight"><pre><code class="language-c" data-lang="c"><span class="c1">// adding a new system call : sys_upper</span>
+
 <span class="cp">#include &lt;linux/module.h&gt;
 #include &lt;linux/kernel.h&gt;
 #include &lt;linux/slab.h&gt;
@@ -188,8 +187,8 @@
 <span class="cp">#define SYS_CALL_TABLE		0x8000e348		// manually configure this address!!
 #define NR_SYS_UNUSED		223
 </span>
-<span class="c1">//Pointers to re-mapped writable pages
-</span><span class="kt">unsigned</span> <span class="kt">int</span><span class="o">**</span> <span class="n">sct</span><span class="p">;</span>
+<span class="c1">//Pointers to re-mapped writable pages</span>
+<span class="kt">unsigned</span> <span class="kt">int</span><span class="o">**</span> <span class="n">sct</span><span class="p">;</span>
 
 <span class="n">asmlinkage</span> <span class="kt">long</span> <span class="n">sys_upper</span><span class="p">(</span><span class="kt">char</span> <span class="o">*</span><span class="n">in</span><span class="p">,</span> <span class="kt">char</span><span class="o">*</span> <span class="n">out</span><span class="p">){</span>
 	<span class="kt">int</span> <span class="n">len</span> <span class="o">=</span> <span class="n">strlen</span><span class="p">(</span><span class="n">in</span><span class="p">);</span>
@@ -227,10 +226,10 @@
 
 <p>在现在版本的 Linux 内核修改 uid，需要通过<code class="highlighter-rouge">prepare_creds()</code>和<code class="highlighter-rouge">commit_creds()</code>两步<sup id="fnref:2"><a href="#fn:2" class="footnote">2</a></sup>。这两个函数的地址存在<code class="highlighter-rouge">/proc/kallsyms</code>:</p>
 
-<figure class="highlight"><pre><code class="language-console" data-lang="console">$ cat /proc/kallsyms | grep 'prepare_creds\|commit_creds'
-8003f44c T prepare_creds
+<figure class="highlight"><pre><code class="language-console" data-lang="console"><span class="gp">$</span> <span class="nb">cat</span> /proc/kallsyms | <span class="nb">grep</span> <span class="s1">'prepare_creds\|commit_creds'</span>
+<span class="go">8003f44c T prepare_creds
 8003f56c T commit_creds
-...</code></pre></figure>
+</span><span class="c">...</span></code></pre></figure>
 
 <p>我参考 <a href="https://github.com/acama" class="user-mention">@acama</a> 的版本<sup id="fnref:3"><a href="#fn:3" class="footnote">3</a></sup>写了一个( <a href="https://github.com/acama" class="user-mention">@acama</a> 的版本<code class="highlighter-rouge">prepare_creds()</code>之后直接就<code class="highlighter-rouge">commit_creds()</code>, 这估计只在老版本可以).<code class="highlighter-rouge">prepare_creds()</code>返回的结构体定义可以看参考<sup id="fnref:4"><a href="#fn:4" class="footnote">4</a></sup>.</p>
 
@@ -251,16 +250,16 @@
 <div class="footnotes">
   <ol>
     <li id="fn:1">
-      <p><a href="http://unix.stackexchange.com/questions/121715/what-is-the-relationship-between-root-and-kernel">What is the relationship between root and kernel?</a> <a href="#fnref:1" class="reversefootnote">↩</a></p>
+      <p><a href="http://unix.stackexchange.com/questions/121715/what-is-the-relationship-between-root-and-kernel">What is the relationship between root and kernel?</a> <a href="#fnref:1" class="reversefootnote">↩</a></p>
     </li>
     <li id="fn:2">
-      <p><a href="https://memset.wordpress.com/2010/12/28/syscall-hijacking-simple-rootkit-kernel-2-6-x/">Syscall Hijacking: Simple Rootkit (kernel 2.6.x)</a> <a href="#fnref:2" class="reversefootnote">↩</a></p>
+      <p><a href="https://memset.wordpress.com/2010/12/28/syscall-hijacking-simple-rootkit-kernel-2-6-x/">Syscall Hijacking: Simple Rootkit (kernel 2.6.x)</a> <a href="#fnref:2" class="reversefootnote">↩</a></p>
     </li>
     <li id="fn:3">
-      <p><a href="https://github.com/acama/arm-evt/blob/master/local_example/exploit/backdoor.asm">arm-evt/local_example/exploit/backdoor.asm</a> <a href="#fnref:3" class="reversefootnote">↩</a></p>
+      <p><a href="https://github.com/acama/arm-evt/blob/master/local_example/exploit/backdoor.asm">arm-evt/local_example/exploit/backdoor.asm</a> <a href="#fnref:3" class="reversefootnote">↩</a></p>
     </li>
     <li id="fn:4">
-      <p><a href="http://lxr.free-electrons.com/source/include/linux/cred.h?v=3.11#L102">Linux/include/linux/cred.h</a> <a href="#fnref:4" class="reversefootnote">↩</a></p>
+      <p><a href="http://lxr.free-electrons.com/source/include/linux/cred.h?v=3.11#L102">Linux/include/linux/cred.h</a> <a href="#fnref:4" class="reversefootnote">↩</a></p>
     </li>
   </ol>
 </div>
@@ -284,21 +283,20 @@
 <!-- /.entry-wrapper -->
 
   </article>
-</div>
-<!-- /#main -->
+</div><!-- /#main -->
 
 <div class="footer-wrapper">
   <footer role="contentinfo" class="entry-wrapper">
     
 
-<span>Powered by <a href="http://jekyllrb.com" rel="nofollow">Jekyll</a> using the <a href="https://mademistakes.com/work/so-simple-jekyll-theme/" rel="nofollow">So Simple Theme</a>. Published with <a href="https://github.com/cubarco/cubarco.github.io">GitHub Pages</a>.</span>
+<span>Powered by <a href="http://jekyllrb.com" rel="nofollow">Jekyll</a> using the <a href="https://mademistakes.com/work/so-simple-jekyll-theme/" rel="nofollow">So Simple Theme</a>. Published with <a href="https://now.sh/">Now</a>.</span>
 <div class="social-icons">
 	<a href="https://twitter.com/Cube_Lin" title="Cubarco on Twitter" target="_blank"><i class="fa fa-twitter-square fa-2x"></i></a>
-	<a href="https://www.facebook.com/cubarco" title="Cubarco on Facebook" target="_blank"><i class="fa fa-facebook-square fa-2x"></i></a>
-	<a href="https://plus.google.com/+%E6%9E%97%E5%AE%B6%E5%86%9BCube" title="Cubarco on Google+" target="_blank"><i class="fa fa-google-plus-square fa-2x"></i></a>
 	
 	
-	<a href="https://www.instagram.com/cubarco/" title="Cubarco on Instagram" target="_blank"><i class="fa fa-instagram fa-2x"></i></a>
+	
+	
+	
 	
 	<a href="https://github.com/cubarco" title="Cubarco on Github" target="_blank"><i class="fa fa-github-square fa-2x"></i></a>
 	
@@ -307,8 +305,7 @@
 <!-- /.social-icons -->
 
   </footer>
-</div>
-<!-- /.footer-wrapper -->
+</div><!-- /.footer-wrapper -->
 
 <script src="//cdn.bootcss.com/jquery/2.1.4/jquery.min.js"></script>
 <script>window.jQuery || document.write('<script src="https://cub4r.co/assets/js/vendor/jquery-1.9.1.min.js"><\/script>')</script>

@@ -1,11 +1,12 @@
-<!DOCTYPE html>
-<!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]--><!--[if (IE 7)&!(IEMobile)]><html class="no-js lt-ie9 lt-ie8" lang="en"><![endif]--><!--[if (IE 8)&!(IEMobile)]><html class="no-js lt-ie9" lang="en"><![endif]--><!--[if gt IE 8]><!--><html class="no-js" lang="en">
-<!--<![endif]-->
+<!doctype html>
+<!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if (IE 7)&!(IEMobile)]><html class="no-js lt-ie9 lt-ie8" lang="en"><![endif]-->
+<!--[if (IE 8)&!(IEMobile)]><html class="no-js lt-ie9" lang="en"><![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"><!--<![endif]-->
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="theme-color" content="#000000">
-<title>How do you read source code? – /home/cubarco</title>
+<title>How do you read source code? &#8211; /home/cubarco</title>
 <meta name="description" content="Originally posted here If software is eating the world as Marc Andreessen and I think, how do you [r]ea(d|t) source code? Well, let’s first answer why you should be good at reading source code at all. First it’s always great fun to figure out how things work. By reading source code one is exactly doing that to learn about interesting software systems and projects. Another reason for reading source code may be to get better...">
 <meta name="keywords" content="">
 
@@ -36,7 +37,7 @@
 
 <link rel="canonical" href="https://cub4r.co/blog/2014/12/repost-how-do-you-read-source-code/">
 <link href="https://cub4r.co/feed.xml" type="application/atom+xml" rel="alternate" title="/home/cubarco Feed">
-<link rel="author" href="http://plus.google.com/+%E6%9E%97%E5%AE%B6%E5%86%9BCube?rel=author">
+
 
 <!-- http://t.co/dKP3o1e -->
 <meta name="HandheldFriendly" content="True">
@@ -48,7 +49,7 @@
 <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.2.0/css/font-awesome.min.css">
 
 <!--Webfonts-->
-<link href="//fonts.googleapis.com/css?family=Volkhov%7CCabin" rel="stylesheet" type="text/css">
+<link href='//fonts.googleapis.com/css?family=Volkhov|Cabin' rel='stylesheet' type='text/css'>
 <!--
    -[> Webfonts <]
    -<script src="//use.edgefonts.net/source-sans-pro:n2,i2,n3,i3,n4,i4,n6,i6,n7,i7,n9,i9;source-code-pro:n4,n7;volkhov;cabin.js"></script>
@@ -105,25 +106,24 @@
 	    <ul>
       
 		    
-		    <li><a href="https://cub4r.co/blog/">Latest</a></li>
+		    <li><a href="https://cub4r.co/blog/" >Latest</a></li>
 		  
 		    
-		    <li><a href="https://cub4r.co/blog/about/">About</a></li>
+		    <li><a href="https://cub4r.co/blog/about/" >About</a></li>
 		  
 		    
-		    <li><a href="https://cub4r.co/blog/category/blog/">Blog</a></li>
+		    <li><a href="https://cub4r.co/blog/category/blog/" >Blog</a></li>
 		  
 		    
-		    <li><a href="https://cub4r.co/blog/category/notes/">Notes</a></li>
+		    <li><a href="https://cub4r.co/blog/category/notes/" >Notes</a></li>
 		  
 		    
-		    <li><a href="https://cub4r.co/blog/tags/">Tags</a></li>
+		    <li><a href="https://cub4r.co/blog/tags/" >Tags</a></li>
 		  
         <li class="dosearch"><span><i class="fa fa-search"></i> Search</span></li>
 	    </ul>
 	</nav>
-</div>
-<!-- /.navigation-wrapper -->
+</div><!-- /.navigation-wrapper -->
 
 <!--[if lt IE 9]><div class="upgrade"><strong><a href="http://whatbrowser.org/">Your browser is quite old!</strong> Why not upgrade to a different browser to better enjoy this site?</a></div><![endif]-->
 
@@ -131,12 +131,9 @@
   <div class="search-form">
     <input type="text" class="search-field" placeholder="Search...">
     <button class="close-btn"><i class="fa fa-times-circle fa-2x"></i></button>
-    <ul class="search-results post-list"></ul>
-<!-- /.search-results -->
-  </div>
-<!-- /.search-form -->
-</div>
-<!-- ./search-wrapper -->
+    <ul class="search-results post-list"></ul><!-- /.search-results -->
+  </div><!-- /.search-form -->
+</div><!-- ./search-wrapper -->
 
 <div class="js-menu-screen menu-screen"></div>
 
@@ -216,8 +213,7 @@
 
 <ul>
   <li><a href="http://source.android.com/source/downloading.html">Google Android</a></li>
-  <li>
-<a href="http://git.minix3.org/?p=minix.git;a=tree">Minix</a> (Monolithic OSes are not here to stay forever :-))</li>
+  <li><a href="http://git.minix3.org/?p=minix.git;a=tree">Minix</a> (Monolithic OSes are not here to stay forever :-))</li>
   <li><a href="http://www.kernel.org/">Linux Kernel</a></li>
   <li><a href="http://singularity.codeplex.com/releases/view/19428">Microsoft Singularity</a></li>
   <li><a href="https://github.com/erlang/otp">Erlang</a></li>
@@ -226,48 +222,41 @@
   <li><a href="http://aspnet.codeplex.com/SourceControl/changeset/view/72551">Microsoft ASP.NET MVC</a></li>
   <li><a href="https://github.com/GenTiradentes/tinyvm">TinyVM</a></li>
   <li><a href="http://git.kernel.org/?p=linux/kernel/git/torvalds/linux.git;a=tree;f=fs/ext4;h=10fc5796018ce1f8611a94eb3801c33119b185f1;hb=HEAD">Ext4 FS</a></li>
-  <li>TCP/IP networking stacks: <a href="http://www.netbsd.org/">NetBSD</a>, <a href="http://git.savannah.gnu.org/cgit/lwip.git/tree/">lwIP</a>
-</li>
+  <li>TCP/IP networking stacks: <a href="http://www.netbsd.org/">NetBSD</a>, <a href="http://git.savannah.gnu.org/cgit/lwip.git/tree/">lwIP</a></li>
   <li><a href="http://lucene.apache.org/java/docs/developer-resources.html#source">Apache Lucene</a></li>
   <li><a href="http://hadoop.apache.org/mapreduce/version_control.html#Anonymous+Access+%28read-only%29">Apache Hadoop</a></li>
   <li><a href="http://bio.codeplex.com/documentation">Microsoft .NET Bio</a></li>
   <li><a href="http://llvm.org/">LLVM</a></li>
-  <li>
-<a href="http://www.qnx.com/developers/docs/6.4.1/neutrino/sys_arch/about.html">QNX Neutrino RTOS</a> (Sadly the QNX Neutrino RTOS is not shared source anymore, but hopefully a great software company will buy QNX Software Systems some day and make this great OS really huge :-))</li>
+  <li><a href="http://www.qnx.com/developers/docs/6.4.1/neutrino/sys_arch/about.html">QNX Neutrino RTOS</a> (Sadly the QNX Neutrino RTOS is not shared source anymore, but hopefully a great software company will buy QNX Software Systems some day and make this great OS really huge :-))</li>
   <li>…</li>
 </ul>
 
         
-      </div>
-<!-- /.entry-content -->
-    </div>
-<!-- /.entry-wrapper -->
+      </div><!-- /.entry-content -->
+    </div><!-- /.entry-wrapper -->
   </article>
-</div>
-<!-- /#main -->
+</div><!-- /#main -->
 
 <div class="footer-wrapper">
   <footer role="contentinfo" class="entry-wrapper">
     
 
-<span>Powered by <a href="http://jekyllrb.com" rel="nofollow">Jekyll</a> using the <a href="https://mademistakes.com/work/so-simple-jekyll-theme/" rel="nofollow">So Simple Theme</a>. Published with <a href="https://github.com/cubarco/cubarco.github.io">GitHub Pages</a>.</span>
+<span>Powered by <a href="http://jekyllrb.com" rel="nofollow">Jekyll</a> using the <a href="https://mademistakes.com/work/so-simple-jekyll-theme/" rel="nofollow">So Simple Theme</a>. Published with <a href="https://now.sh/">Now</a>.</span>
 <div class="social-icons">
 	<a href="https://twitter.com/Cube_Lin" title="Cubarco on Twitter" target="_blank"><i class="fa fa-twitter-square fa-2x"></i></a>
-	<a href="https://www.facebook.com/cubarco" title="Cubarco on Facebook" target="_blank"><i class="fa fa-facebook-square fa-2x"></i></a>
-	<a href="https://plus.google.com/+%E6%9E%97%E5%AE%B6%E5%86%9BCube" title="Cubarco on Google+" target="_blank"><i class="fa fa-google-plus-square fa-2x"></i></a>
 	
 	
-	<a href="https://www.instagram.com/cubarco/" title="Cubarco on Instagram" target="_blank"><i class="fa fa-instagram fa-2x"></i></a>
+	
+	
+	
 	
 	<a href="https://github.com/cubarco" title="Cubarco on Github" target="_blank"><i class="fa fa-github-square fa-2x"></i></a>
 	
   <a href="https://cub4r.co/feed.xml" title="Atom/RSS feed"><i class="fa fa-rss-square fa-2x"></i></a>
-</div>
-<!-- /.social-icons -->
+</div><!-- /.social-icons -->
 
   </footer>
-</div>
-<!-- /.footer-wrapper -->
+</div><!-- /.footer-wrapper -->
 
 <script src="//cdn.bootcss.com/jquery/2.1.4/jquery.min.js"></script>
 <script>window.jQuery || document.write('<script src="https://cub4r.co/assets/js/vendor/jquery-1.9.1.min.js"><\/script>')</script>

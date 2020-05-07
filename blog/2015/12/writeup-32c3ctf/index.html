@@ -1,18 +1,19 @@
-<!DOCTYPE html>
-<!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]--><!--[if (IE 7)&!(IEMobile)]><html class="no-js lt-ie9 lt-ie8" lang="en"><![endif]--><!--[if (IE 8)&!(IEMobile)]><html class="no-js lt-ie9" lang="en"><![endif]--><!--[if gt IE 8]><!--><html class="no-js" lang="en">
-<!--<![endif]-->
+<!doctype html>
+<!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if (IE 7)&!(IEMobile)]><html class="no-js lt-ie9 lt-ie8" lang="en"><![endif]-->
+<!--[if (IE 8)&!(IEMobile)]><html class="no-js lt-ie9" lang="en"><![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"><!--<![endif]-->
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="theme-color" content="#000000">
-<title>Writeup: 32c3ctf – /home/cubarco</title>
-<meta name="description" content="forth forth 直接能跑system1。 S" sh system gurke pickle unpickle __reduce__ eval __main__.flag.flag stderr gist: cubarco teufel bin gadgets libc. leak rbp offset offset. offset.py exp.py readme flag update zctf guess sandbox references execute...>
+<title>Writeup: 32c3ctf &#8211; /home/cubarco</title>
+<meta name="description" content="forth forth 直接能跑system1。 S" sh" system gurke pickle 在 unpickle 的时候会执行对象的 __reduce__ 方法2。用 eval 把 __main__.flag.flag 打进 stderr 就行了。 Gist: cubarco/e46eb03e1cd06046d130 teufel 这题的 bin 不大，里面的 gadgets 很少，但是给了 libc. 思路就是先 leak 出保存在栈中的 rbp, 然后 offset 到 system。 这个 offset 要先在本机确定后三位(16 进制), 然后跑个脚本，用 0x1000 的步长去爆破服务器上的 offset. 我的办法是先找__stack_chk_fail, 原因是这个函数不需要参数就能输出。 offset.py Gist: cubarco/569fd814a29d8ef988e1 exp.py Gist: cubarco/569fd814a29d8ef988e1 吐槽 readme 的 flag 居然是文件名… 不过LIBC_FATAL_STDERR_这个环境变量确实是以前没见过的。 update 2016-01-24: 关于 readme 这道题，之前以为 flag 是文件名，做 ZCTF 的 guess 时3，回来看才发现原来是把argv[1]改掉了，蛮有意思。 @rickyz 的 sandbox 解法4蛮有意思，居然想到争抢修改系统调用参数。直接改/proc/self/mem来改变程序流也是第一次见。 References Execute...">
 <meta name="keywords" content="Hack, CTF, Writeup, Exploitation, PWN, MISC">
 
 
 <!-- Twitter Cards -->
 <meta name="twitter:title" content="Writeup: 32c3ctf">
-<meta name="twitter:description" content="forth forth 直接能跑system1。 S" sh system gurke pickle unpickle __reduce__ eval __main__.flag.flag stderr gist: cubarco teufel bin gadgets libc. leak rbp offset offset. offset.py exp.py readme flag update zctf guess sandbox references execute...>
+<meta name="twitter:description" content="forth forth 直接能跑system1。 S" sh" system gurke pickle 在 unpickle 的时候会执行对象的 __reduce__ 方法2。用 eval 把 __main__.flag.flag 打进 stderr 就行了。 Gist: cubarco/e46eb03e1cd06046d130 teufel 这题的 bin 不大，里面的 gadgets 很少，但是给了 libc. 思路就是先 leak 出保存在栈中的 rbp, 然后 offset 到 system。 这个 offset 要先在本机确定后三位(16 进制), 然后跑个脚本，用 0x1000 的步长去爆破服务器上的 offset. 我的办法是先找__stack_chk_fail, 原因是这个函数不需要参数就能输出。 offset.py Gist: cubarco/569fd814a29d8ef988e1 exp.py Gist: cubarco/569fd814a29d8ef988e1 吐槽 readme 的 flag 居然是文件名… 不过LIBC_FATAL_STDERR_这个环境变量确实是以前没见过的。 update 2016-01-24: 关于 readme 这道题，之前以为 flag 是文件名，做 ZCTF 的 guess 时3，回来看才发现原来是把argv[1]改掉了，蛮有意思。 @rickyz 的 sandbox 解法4蛮有意思，居然想到争抢修改系统调用参数。直接改/proc/self/mem来改变程序流也是第一次见。 References Execute...">
 <meta name="twitter:site" content="@Cube_Lin">
 <meta name="twitter:creator" content="@Cube_Lin">
 
@@ -25,7 +26,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Writeup: 32c3ctf">
-<meta property="og:description" content="forth forth 直接能跑system1。 S" sh system gurke pickle unpickle __reduce__ eval __main__.flag.flag stderr gist: cubarco teufel bin gadgets libc. leak rbp offset offset. offset.py exp.py readme flag update zctf guess sandbox references execute...>
+<meta property="og:description" content="forth forth 直接能跑system1。 S" sh" system gurke pickle 在 unpickle 的时候会执行对象的 __reduce__ 方法2。用 eval 把 __main__.flag.flag 打进 stderr 就行了。 Gist: cubarco/e46eb03e1cd06046d130 teufel 这题的 bin 不大，里面的 gadgets 很少，但是给了 libc. 思路就是先 leak 出保存在栈中的 rbp, 然后 offset 到 system。 这个 offset 要先在本机确定后三位(16 进制), 然后跑个脚本，用 0x1000 的步长去爆破服务器上的 offset. 我的办法是先找__stack_chk_fail, 原因是这个函数不需要参数就能输出。 offset.py Gist: cubarco/569fd814a29d8ef988e1 exp.py Gist: cubarco/569fd814a29d8ef988e1 吐槽 readme 的 flag 居然是文件名… 不过LIBC_FATAL_STDERR_这个环境变量确实是以前没见过的。 update 2016-01-24: 关于 readme 这道题，之前以为 flag 是文件名，做 ZCTF 的 guess 时3，回来看才发现原来是把argv[1]改掉了，蛮有意思。 @rickyz 的 sandbox 解法4蛮有意思，居然想到争抢修改系统调用参数。直接改/proc/self/mem来改变程序流也是第一次见。 References Execute...">
 <meta property="og:url" content="https://cub4r.co/blog/2015/12/writeup-32c3ctf/">
 <meta property="og:site_name" content="/home/cubarco">
 
@@ -36,7 +37,7 @@
 
 <link rel="canonical" href="https://cub4r.co/blog/2015/12/writeup-32c3ctf/">
 <link href="https://cub4r.co/feed.xml" type="application/atom+xml" rel="alternate" title="/home/cubarco Feed">
-<link rel="author" href="http://plus.google.com/+%E6%9E%97%E5%AE%B6%E5%86%9BCube?rel=author">
+
 
 <!-- http://t.co/dKP3o1e -->
 <meta name="HandheldFriendly" content="True">
@@ -48,7 +49,7 @@
 <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.2.0/css/font-awesome.min.css">
 
 <!--Webfonts-->
-<link href="//fonts.googleapis.com/css?family=Volkhov%7CCabin" rel="stylesheet" type="text/css">
+<link href='//fonts.googleapis.com/css?family=Volkhov|Cabin' rel='stylesheet' type='text/css'>
 <!--
    -[> Webfonts <]
    -<script src="//use.edgefonts.net/source-sans-pro:n2,i2,n3,i3,n4,i4,n6,i6,n7,i7,n9,i9;source-code-pro:n4,n7;volkhov;cabin.js"></script>
@@ -122,8 +123,7 @@
         <li class="dosearch"><span><i class="fa fa-search"></i> Search</span></li>
 	    </ul>
 	</nav>
-</div>
-<!-- /.navigation-wrapper -->
+</div><!-- /.navigation-wrapper -->
 
 <!--[if lt IE 9]><div class="upgrade"><strong><a href="http://whatbrowser.org/">Your browser is quite old!</strong> Why not upgrade to a different browser to better enjoy this site?</a></div><![endif]-->
 
@@ -135,8 +135,7 @@
 <!-- /.search-results -->
   </div>
 <!-- /.search-form -->
-</div>
-<!-- ./search-wrapper -->
+</div><!-- ./search-wrapper -->
 
 <div class="js-menu-screen menu-screen"></div>
 
@@ -199,7 +198,7 @@
 
 <div class="gist" data-gist="cubarco/569fd814a29d8ef988e1" data-gist-file="32c3ctf-teufel-exp.py"><p>Gist: <a href="https://gist.github.com/cubarco/569fd814a29d8ef988e1">cubarco/569fd814a29d8ef988e1</a></p></div>
 
-<h2 id="deldel"><del>吐槽</del></h2>
+<h2 id="吐槽"><del>吐槽</del></h2>
 
 <p><del>readme 的 flag 居然是文件名… </del>不过<code class="highlighter-rouge">LIBC_FATAL_STDERR_</code>这个环境变量确实是以前没见过的。</p>
 
@@ -212,16 +211,16 @@
 <div class="footnotes">
   <ol>
     <li id="fn:1">
-      <p><a href="http://rosettacode.org/wiki/Execute_a_system_command#Forth">Execute a system command#forth</a> <a href="#fnref:1" class="reversefootnote">↩</a></p>
+      <p><a href="http://rosettacode.org/wiki/Execute_a_system_command#Forth">Execute a system command#forth</a> <a href="#fnref:1" class="reversefootnote">↩</a></p>
     </li>
     <li id="fn:2">
-      <p><a href="https://docs.python.org/2/library/pickle.html#object.__reduce__">Pickling and unpickling extension types</a> <a href="#fnref:2" class="reversefootnote">↩</a></p>
+      <p><a href="https://docs.python.org/2/library/pickle.html#object.__reduce__">Pickling and unpickling extension types</a> <a href="#fnref:2" class="reversefootnote">↩</a></p>
     </li>
     <li id="fn:3">
-      <p><a href="https://cub4r.co/blog/2016/01/writeup-zctf/">Writeup: ZCTF</a> <a href="#fnref:3" class="reversefootnote">↩</a></p>
+      <p><a href="https://cub4r.co/blog/2016/01/writeup-zctf/">Writeup: ZCTF</a> <a href="#fnref:3" class="reversefootnote">↩</a></p>
     </li>
     <li id="fn:4">
-      <p><a href="https://rzhou.org/~ricky/32c3/sandbox/">Index of /~ricky/32c3/sandbox/</a> <a href="#fnref:4" class="reversefootnote">↩</a></p>
+      <p><a href="https://rzhou.org/~ricky/32c3/sandbox/">Index of /~ricky/32c3/sandbox/</a> <a href="#fnref:4" class="reversefootnote">↩</a></p>
     </li>
   </ol>
 </div>
@@ -245,21 +244,20 @@
 <!-- /.entry-wrapper -->
 
   </article>
-</div>
-<!-- /#main -->
+</div><!-- /#main -->
 
 <div class="footer-wrapper">
   <footer role="contentinfo" class="entry-wrapper">
     
 
-<span>Powered by <a href="http://jekyllrb.com" rel="nofollow">Jekyll</a> using the <a href="https://mademistakes.com/work/so-simple-jekyll-theme/" rel="nofollow">So Simple Theme</a>. Published with <a href="https://github.com/cubarco/cubarco.github.io">GitHub Pages</a>.</span>
+<span>Powered by <a href="http://jekyllrb.com" rel="nofollow">Jekyll</a> using the <a href="https://mademistakes.com/work/so-simple-jekyll-theme/" rel="nofollow">So Simple Theme</a>. Published with <a href="https://now.sh/">Now</a>.</span>
 <div class="social-icons">
 	<a href="https://twitter.com/Cube_Lin" title="Cubarco on Twitter" target="_blank"><i class="fa fa-twitter-square fa-2x"></i></a>
-	<a href="https://www.facebook.com/cubarco" title="Cubarco on Facebook" target="_blank"><i class="fa fa-facebook-square fa-2x"></i></a>
-	<a href="https://plus.google.com/+%E6%9E%97%E5%AE%B6%E5%86%9BCube" title="Cubarco on Google+" target="_blank"><i class="fa fa-google-plus-square fa-2x"></i></a>
 	
 	
-	<a href="https://www.instagram.com/cubarco/" title="Cubarco on Instagram" target="_blank"><i class="fa fa-instagram fa-2x"></i></a>
+	
+	
+	
 	
 	<a href="https://github.com/cubarco" title="Cubarco on Github" target="_blank"><i class="fa fa-github-square fa-2x"></i></a>
 	
@@ -268,8 +266,7 @@
 <!-- /.social-icons -->
 
   </footer>
-</div>
-<!-- /.footer-wrapper -->
+</div><!-- /.footer-wrapper -->
 
 <script src="//cdn.bootcss.com/jquery/2.1.4/jquery.min.js"></script>
 <script>window.jQuery || document.write('<script src="https://cub4r.co/assets/js/vendor/jquery-1.9.1.min.js"><\/script>')</script>

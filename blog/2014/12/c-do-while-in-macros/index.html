@@ -1,11 +1,12 @@
-<!DOCTYPE html>
-<!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]--><!--[if (IE 7)&!(IEMobile)]><html class="no-js lt-ie9 lt-ie8" lang="en"><![endif]--><!--[if (IE 8)&!(IEMobile)]><html class="no-js lt-ie9" lang="en"><![endif]--><!--[if gt IE 8]><!--><html class="no-js" lang="en">
-<!--<![endif]-->
+<!doctype html>
+<!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if (IE 7)&!(IEMobile)]><html class="no-js lt-ie9 lt-ie8" lang="en"><![endif]-->
+<!--[if (IE 8)&!(IEMobile)]><html class="no-js lt-ie9" lang="en"><![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"><!--<![endif]-->
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="theme-color" content="#000000">
-<title>do {…} while (0) — What is it good for? – /home/cubarco</title>
+<title>do {…} while (0) — What is it good for? &#8211; /home/cubarco</title>
 <meta name="description" content="Originally posted in stackoverflow It’s the only construct in C that you can use to #define a multistatement operation, put a semicolon after, and still use within an if statement. An example might help: #define FOO(x) foo(x); bar(x) if (condition) FOO(x); else // syntax error here ...; Even using braces doesn’t help: #define FOO(x) { foo(x); bar(x); } Using this in an if statement would require that you omit the semicolon, which is counterintuitive: if...">
 <meta name="keywords" content="">
 
@@ -36,7 +37,7 @@
 
 <link rel="canonical" href="https://cub4r.co/blog/2014/12/c-do-while-in-macros/">
 <link href="https://cub4r.co/feed.xml" type="application/atom+xml" rel="alternate" title="/home/cubarco Feed">
-<link rel="author" href="http://plus.google.com/+%E6%9E%97%E5%AE%B6%E5%86%9BCube?rel=author">
+
 
 <!-- http://t.co/dKP3o1e -->
 <meta name="HandheldFriendly" content="True">
@@ -48,7 +49,7 @@
 <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.2.0/css/font-awesome.min.css">
 
 <!--Webfonts-->
-<link href="//fonts.googleapis.com/css?family=Volkhov%7CCabin" rel="stylesheet" type="text/css">
+<link href='//fonts.googleapis.com/css?family=Volkhov|Cabin' rel='stylesheet' type='text/css'>
 <!--
    -[> Webfonts <]
    -<script src="//use.edgefonts.net/source-sans-pro:n2,i2,n3,i3,n4,i4,n6,i6,n7,i7,n9,i9;source-code-pro:n4,n7;volkhov;cabin.js"></script>
@@ -105,25 +106,24 @@
 	    <ul>
       
 		    
-		    <li><a href="https://cub4r.co/blog/">Latest</a></li>
+		    <li><a href="https://cub4r.co/blog/" >Latest</a></li>
 		  
 		    
-		    <li><a href="https://cub4r.co/blog/about/">About</a></li>
+		    <li><a href="https://cub4r.co/blog/about/" >About</a></li>
 		  
 		    
-		    <li><a href="https://cub4r.co/blog/category/blog/">Blog</a></li>
+		    <li><a href="https://cub4r.co/blog/category/blog/" >Blog</a></li>
 		  
 		    
-		    <li><a href="https://cub4r.co/blog/category/notes/">Notes</a></li>
+		    <li><a href="https://cub4r.co/blog/category/notes/" >Notes</a></li>
 		  
 		    
-		    <li><a href="https://cub4r.co/blog/tags/">Tags</a></li>
+		    <li><a href="https://cub4r.co/blog/tags/" >Tags</a></li>
 		  
         <li class="dosearch"><span><i class="fa fa-search"></i> Search</span></li>
 	    </ul>
 	</nav>
-</div>
-<!-- /.navigation-wrapper -->
+</div><!-- /.navigation-wrapper -->
 
 <!--[if lt IE 9]><div class="upgrade"><strong><a href="http://whatbrowser.org/">Your browser is quite old!</strong> Why not upgrade to a different browser to better enjoy this site?</a></div><![endif]-->
 
@@ -131,12 +131,9 @@
   <div class="search-form">
     <input type="text" class="search-field" placeholder="Search...">
     <button class="close-btn"><i class="fa fa-times-circle fa-2x"></i></button>
-    <ul class="search-results post-list"></ul>
-<!-- /.search-results -->
-  </div>
-<!-- /.search-form -->
-</div>
-<!-- ./search-wrapper -->
+    <ul class="search-results post-list"></ul><!-- /.search-results -->
+  </div><!-- /.search-form -->
+</div><!-- ./search-wrapper -->
 
 <div class="js-menu-screen menu-screen"></div>
 
@@ -159,8 +156,8 @@
 </span>
 <span class="k">if</span> <span class="p">(</span><span class="n">condition</span><span class="p">)</span>
     <span class="n">FOO</span><span class="p">(</span><span class="n">x</span><span class="p">);</span>
-<span class="k">else</span> <span class="c1">// syntax error here
-</span>    <span class="p">...;</span></code></pre></figure>
+<span class="k">else</span> <span class="c1">// syntax error here</span>
+    <span class="p">...;</span></code></pre></figure>
 
 <p>Even using braces doesn’t help:</p>
 
@@ -186,36 +183,31 @@
 
 
         
-      </div>
-<!-- /.entry-content -->
-    </div>
-<!-- /.entry-wrapper -->
+      </div><!-- /.entry-content -->
+    </div><!-- /.entry-wrapper -->
   </article>
-</div>
-<!-- /#main -->
+</div><!-- /#main -->
 
 <div class="footer-wrapper">
   <footer role="contentinfo" class="entry-wrapper">
     
 
-<span>Powered by <a href="http://jekyllrb.com" rel="nofollow">Jekyll</a> using the <a href="https://mademistakes.com/work/so-simple-jekyll-theme/" rel="nofollow">So Simple Theme</a>. Published with <a href="https://github.com/cubarco/cubarco.github.io">GitHub Pages</a>.</span>
+<span>Powered by <a href="http://jekyllrb.com" rel="nofollow">Jekyll</a> using the <a href="https://mademistakes.com/work/so-simple-jekyll-theme/" rel="nofollow">So Simple Theme</a>. Published with <a href="https://now.sh/">Now</a>.</span>
 <div class="social-icons">
 	<a href="https://twitter.com/Cube_Lin" title="Cubarco on Twitter" target="_blank"><i class="fa fa-twitter-square fa-2x"></i></a>
-	<a href="https://www.facebook.com/cubarco" title="Cubarco on Facebook" target="_blank"><i class="fa fa-facebook-square fa-2x"></i></a>
-	<a href="https://plus.google.com/+%E6%9E%97%E5%AE%B6%E5%86%9BCube" title="Cubarco on Google+" target="_blank"><i class="fa fa-google-plus-square fa-2x"></i></a>
 	
 	
-	<a href="https://www.instagram.com/cubarco/" title="Cubarco on Instagram" target="_blank"><i class="fa fa-instagram fa-2x"></i></a>
+	
+	
+	
 	
 	<a href="https://github.com/cubarco" title="Cubarco on Github" target="_blank"><i class="fa fa-github-square fa-2x"></i></a>
 	
   <a href="https://cub4r.co/feed.xml" title="Atom/RSS feed"><i class="fa fa-rss-square fa-2x"></i></a>
-</div>
-<!-- /.social-icons -->
+</div><!-- /.social-icons -->
 
   </footer>
-</div>
-<!-- /.footer-wrapper -->
+</div><!-- /.footer-wrapper -->
 
 <script src="//cdn.bootcss.com/jquery/2.1.4/jquery.min.js"></script>
 <script>window.jQuery || document.write('<script src="https://cub4r.co/assets/js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
