@@ -5,11 +5,11 @@
 {% if author.twitter %}<meta name="twitter:creator" content="@{{ author.twitter }}">{% endif %}
 {% if page.image.feature %}
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="{{ site.url }}/images/{{ page.image.feature }}">
+<meta name="twitter:image" content="{{ site.ghmirror }}/images/{{ page.image.feature }}">
 {% else %}
 <meta name="twitter:card" content="summary">
 <!--
-   -<meta name="twitter:image" content="{% if page.image.thumb %}{{ site.url }}/images/{{ page.image.thumb }}{% else %}{{ site.url }}/images/{{ site.logo }}{% endif %}">
+   -<meta name="twitter:image" content="{% if page.image.thumb %}{{ site.ghmirror }}/images/{{ page.image.thumb }}{% else %}{{ site.ghmirror }}/images/{{ site.logo }}{% endif %}">
    -->
 {% endif %}
 <!-- Open Graph -->

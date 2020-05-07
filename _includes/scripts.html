@@ -1,13 +1,13 @@
 <script src="//cdn.bootcss.com/jquery/2.1.4/jquery.min.js"></script>
-<script>window.jQuery || document.write('<script src="{{ site.url }}/assets/js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
-<script src="{{ site.url }}/assets/js/gist-async.min.js"></script>
-<script src="{{ site.url }}/assets/js/scripts.min.js"></script>
+<script>window.jQuery || document.write('<script src="{{ site.ghmirror }}/assets/js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
+<script src="{{ site.ghmirror }}/assets/js/gist-async.min.js"></script>
+<script src="{{ site.ghmirror }}/assets/js/scripts.min.js"></script>
 {% if site.search %}
 <!-- Jekyll Simple Search option -->
 <script>
   $(document).ready(function() {
       $('.search-field').jekyllSearch({
-          jsonFile: '{{ site.url }}/search.json',
+          jsonFile: '{{ site.ghmirror }}/search.json',
           searchResults: '.search-results',
           template: '<li><article><a href="{url}">{title} <span class="entry-date"><time datetime="{date}">{shortdate}</time></span></a></article></li>',
           fuzzy: true,
