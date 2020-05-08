@@ -1,0 +1,20 @@
+{
+  "version": 2,
+  "name": "blog",
+  "alias": "cub4r.co",
+  "rewrites": [
+    {"source": "/gist/(.*)", "destination": "https://gist.github.com/$1"},
+    {"source": "/(.*)", "destination": "https://cubarco.github.io/$1"}
+  ],
+  "headers": [
+        {
+        "source": "(.*)",
+        "headers" : [
+                {
+                        "key" : "Access-Control-Allow-Origin",
+                        "value" : "*"
+                }
+        ]
+        }
+    ]
+}
