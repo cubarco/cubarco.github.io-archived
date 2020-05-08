@@ -58,3 +58,11 @@ owner:
     ad-client:
     ad-slot:
   bing-verify:
+ 
+disqus:
+        shortname: cubarco
+        siteName: /home/cubarco
+        api: https://disqus.skk.moe/disqus/
+        apikey: Jw86RA4MHn7FOX9T3JdY2rdOwXIHztQXp1QGQzvEjil3rXPCOfIrn4yF53NEOcho
+        admin: cubarco
+        adminLabel: Mod
