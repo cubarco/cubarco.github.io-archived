@@ -5,7 +5,7 @@ locale: zh_CN
 description: PWN for fun.
 logo: #site-logo.png
 search: true
-url: https://cub4r.co
+url: https://cubarco.org
 
 
 # Jekyll configuration
@@ -40,7 +40,7 @@ exclude: ["lib", "config.rb", "Capfile", "config", "log", "Rakefile", "Rakefile.
 owner:
   name: Cubarco
   avatar: matrix.png
-  email: me at cub4r.co
+  email: me at cubarco.org
   disqus-shortname: cubarco
   twitter: Cube_Lin
   facebook:
