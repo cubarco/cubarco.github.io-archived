@@ -5,7 +5,7 @@ locale: zh_CN
 description: PWN for fun.
 logo: #site-logo.png
 search: true
-url: https://cub4r.co
+url: https://cubarco.org
 ghmirror: https://cdn.jsdelivr.net/gh/cubarco/cubarco.github.io@master
 
 
@@ -41,7 +41,7 @@ exclude: ["lib", "config.rb", "Capfile", "config", "log", "Rakefile", "Rakefile.
 owner:
   name: Cubarco
   avatar: matrix.png
-  email: me at cub4r.co
+  email: me at cubarco.org
   disqus-shortname: cubarco
   twitter: Cube_Lin
   facebook:
@@ -62,7 +62,7 @@ owner:
 disqus:
         shortname: cubarco
         siteName: /home/cubarco
-        api: https://disqus.cub4r.co/
+        api: https://disqus.cubarco.org/
         apikey: Jw86RA4MHn7FOX9T3JdY2rdOwXIHztQXp1QGQzvEjil3rXPCOfIrn4yF53NEOcho
         admin: cubarco
         adminLabel: Mod
