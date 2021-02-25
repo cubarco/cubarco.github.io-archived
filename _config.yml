@@ -6,7 +6,7 @@ description: PWN for fun.
 logo: #site-logo.png
 search: true
 url: https://jekyll.cubarco.org
-ghmirror: https://cdn.jsdelivr.net/gh/cubarco/cubarco.github.io@0b8307106005da598a49adb0fb236037a07c609c
+ghmirror: https://cdn.jsdelivr.net/gh/cubarco/cubarco.github.io@travis-master-archived
 
 
 # Jekyll configuration
