@@ -66,7 +66,7 @@ steam
 当然这个方法并不推荐，因为会影响到其他程序。
 
 #### Update 2015-05-29
-可能每次都要用命令行启动 Steam 不太方便，下方[评论](https://cubarco.org/blog/2015/05/dota2-blocky-cjk-fonts-workaround/#comment-2051101448)里有解决办法。就是给 Dota 2 加个启动选项。
+可能每次都要用命令行启动 Steam 不太方便，下方[评论](https://jekyll.cubarco.org/blog/2015/05/dota2-blocky-cjk-fonts-workaround/#comment-2051101448)里有解决办法。就是给 Dota 2 加个启动选项。
 
 #### Reference
 [^1]: [fonts-conf](http://www.freedesktop.org/software/fontconfig/fontconfig-user.html)
