@@ -1,1 +1,1 @@
-Sitemap: https://cub4r.co/sitemap.xml
+Sitemap: https://jekyll.cubarco.org/sitemap.xml

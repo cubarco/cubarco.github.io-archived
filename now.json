@@ -1,7 +1,14 @@
 {
    "version":2,
    "name":"blog",
-   "alias":"cub4r.co",
+   "alias":"jekyll.cubarco.org",
+   "builds": [
+       {
+           "src": "build.sh",
+           "use": "@now/static-build",
+           "config": {"distDir": "_site"}
+       }
+   ],
    "rewrites":[
       {
          "source":"/gist/(.*)",
