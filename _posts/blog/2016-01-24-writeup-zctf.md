@@ -3,7 +3,7 @@ title: 'Writeup: ZCTF'
 layout: post
 categories: blog
 tags: [Hack, CTF, Writeup, Exploitation, PWN]
-share: true
+share: false
 modified: 2016-01-28
 ---
 

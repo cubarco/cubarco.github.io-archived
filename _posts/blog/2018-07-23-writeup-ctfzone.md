@@ -3,7 +3,7 @@ title: 'Writeup: CTFZone 2018 Quals'
 layout: post
 categories: blog
 tags: [Hack, CTF, Writeup, Exploitation, PWN]
-share: true
+share: false
 modified: 2018-07-24
 ---
 

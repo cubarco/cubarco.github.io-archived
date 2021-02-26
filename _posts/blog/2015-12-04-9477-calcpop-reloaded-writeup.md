@@ -3,7 +3,7 @@ title: 'Writeup-9447 CTF: calcpop-reloaded'
 layout: post
 categories: blog
 tags: [Hack, CTF, Writeup, Exploitation]
-share: true
+share: false
 ---
 
 *从这一题开始，9447 加上了 POW, 其实只要爆破就可以，这里就不放脚本了。（关于 POW, 有个叫 hashcash 的东西，挺有意思的）*

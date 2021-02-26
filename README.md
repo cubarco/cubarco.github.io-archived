@@ -1,1 +1,1 @@
-Site URL: https://jekyll.cubarco.org/
+Site URL: https://cubl.in/

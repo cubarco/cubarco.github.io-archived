@@ -3,7 +3,7 @@ title: 'Writeup-Pwnable: syscall'
 layout: post
 categories: blog
 tags: [Hack, CTF, Writeup, Exploitation, ARM]
-share: true
+share: false
 ---
 
 {% highlight c %}

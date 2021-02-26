@@ -3,7 +3,7 @@ title: 'Writeup-Training: Warchall &#8211; 7 Tropical Fruits'
 layout: post
 categories: blog
 tags: [Hack, Python, Writeup]
-share: true
+share: false
 ---
 <p style="color: #000000;">
   Challenge URL：<a style="color: #294666;" href="http://www.wechall.net/challenge/warchall/tropical/7/index.php">Training: Warchall &#8211; 7 Tropical Fruits</a>
