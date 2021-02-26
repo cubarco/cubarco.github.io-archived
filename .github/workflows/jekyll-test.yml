@@ -1,0 +1,25 @@
+name: Build jekyll only but don't deploy to gh-pages
+
+on:
+  push:
+    branches:
+      - source-gh-actions
+
+jobs:
+  jekyll:
+    runs-on: ubuntu-16.04
+    steps:
+    - uses: actions/checkout@v2
+
+    # Use GitHub Actions' cache to shorten build times and decrease load on servers
+    - uses: actions/cache@v2
+      with:
+        path: vendor/bundle
+        key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}
+        restore-keys: |
+          ${{ runner.os }}-gems-
+
+    # Specify the target branch (optional)
+    - uses: helaili/jekyll-action@v2
+      with:
+        build_only: true
