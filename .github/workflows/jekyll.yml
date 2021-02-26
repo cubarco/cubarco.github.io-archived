@@ -25,7 +25,7 @@ jobs:
       with:
         token: ${{ secrets.GITHUB_TOKEN }}
         use_tag: true
-        keep_history: true
+        #keep_history: true
         target_branch: 'gh-pages' 
 
     - name: Build only
