@@ -40,8 +40,8 @@ exclude: ["lib", "config.rb", "Capfile", "config", "log", "Rakefile", "Rakefile.
 # Site owner
 owner:
   name: Cubarco
-  avatar: matrix.png
-  email: me at cubarco.org
+  avatar: # matrix.png
+  email: i at cubl.in
   disqus-shortname: cubarco
   twitter: Cube_Lin
   facebook:
