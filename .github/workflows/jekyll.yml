@@ -24,8 +24,8 @@ jobs:
       if: ${{ github.ref == 'refs/heads/source-gh-actions' }}
       with:
         token: ${{ secrets.GITHUB_TOKEN }}
-        use_tag: true
         keep_history: true
+        use_tag: true
         target_branch: 'gh-pages' 
 
     - name: Build only
