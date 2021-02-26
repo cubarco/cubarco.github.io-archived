@@ -254,18 +254,20 @@ span + .entry-title {
 		color: $text-color;
 	}
 	@include media($large) {
-		@include span-columns(2.5);
+		@include span-columns(12);
 	}
 	& > span {
 		padding: 0 20px 10px 0;
 		display: inline-block;
-		@include media($large) {
-			display: block;
-			padding: 8px 0;
-			border-bottom: 1px solid lighten($black,80);
-			border-bottom: 1px solid rgba($black,.10);
-		}
+		//@include media($large) {
+		//	display: block;
+		//	padding: 8px 0;
+		//	border-bottom: 1px solid lighten($black,80);
+		//	border-bottom: 1px solid rgba($black,.10);
+		//}
 	}
+  border-bottom: 1px solid lighten($black,80);
+  border-bottom: 1px solid rgba($black,.10);
 }
 .bio-photo {
 	display: none;
@@ -284,7 +286,7 @@ span + .entry-title {
 		margin-top: 0;
 	}
 	@include media($large) {
-		@include span-columns(9.5);
+		@include span-columns(12);
 	}
 	p > a,
 	li > a {
