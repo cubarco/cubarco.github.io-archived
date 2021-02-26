@@ -1,10 +1,13 @@
 name: Build & deploy jekyll site with Github Actions
 
 on:
-  push
+  push:
+    branches:
+      - source-gh-actions
 
 jobs:
   jekyll:
+    if: ${{ github.event_name != 'pull_request' }}
     runs-on: ubuntu-16.04
     steps:
     - uses: actions/checkout@v2
