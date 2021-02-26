@@ -20,7 +20,7 @@ jobs:
           ${{ runner.os }}-gems-
 
     - name: Build & deploy
-      uses: cubarco/jekyll-action
+      uses: cubarco/jekyll-action@master
       if: ${{ github.ref == 'refs/heads/source-gh-actions' }}
       with:
         token: ${{ secrets.GITHUB_TOKEN }}
@@ -29,7 +29,7 @@ jobs:
         target_branch: 'gh-pages' 
 
     - name: Build only
-      uses: cubarco/jekyll-action
+      uses: cubarco/jekyll-action@master
       if: ${{ github.ref != 'refs/heads/source-gh-actions' }}
       with:
         build_only: true
