@@ -3,7 +3,6 @@ title: 'Writeup-Seccon CTF: FSB:TreeWalker'
 layout: post
 categories: blog
 tags: [Hack, CTF, Writeup, Exploitation, FSB]
-share: false
 modified: 2015-12-13
 ---
 

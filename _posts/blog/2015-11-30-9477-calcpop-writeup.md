@@ -3,7 +3,6 @@ title: 'Writeup-9447 CTF: calcpop'
 layout: post
 categories: blog
 tags: [Hack, CTF, Writeup, Exploitation]
-share: false
 ---
 
 先看反汇编代码：
