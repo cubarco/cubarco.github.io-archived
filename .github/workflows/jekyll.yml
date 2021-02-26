@@ -1,4 +1,4 @@
-name: Build & deploy jekyll site with Github Actions
+name: Build & deploy jekyll site.
 
 on:
   push:
@@ -7,7 +7,6 @@ on:
 
 jobs:
   jekyll:
-    if: ${{ github.ref == 'refs/heads/source-gh-actions' }}
     runs-on: ubuntu-16.04
     steps:
     - uses: actions/checkout@v2
@@ -20,8 +19,15 @@ jobs:
         restore-keys: |
           ${{ runner.os }}-gems-
 
-    # Specify the target branch (optional)
-    - uses: helaili/jekyll-action@v2
+    - name: Build & deploy
+      uses: helaili/jekyll-action@v2
+      if: ${{ github.ref == 'refs/heads/source-gh-actions' }}
       with:
         token: ${{ secrets.GITHUB_TOKEN }}
         target_branch: 'gh-pages' 
+
+    - name: Build only
+      uses: helaili/jekyll-action@v2
+      if: ${{ github.ref != 'refs/heads/source-gh-actions' }}
+      with:
+        build_only: true
