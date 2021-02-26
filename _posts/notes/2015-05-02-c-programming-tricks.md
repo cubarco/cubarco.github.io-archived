@@ -35,10 +35,10 @@ func((type[]){val1,val2,val3,val4,0});
 {% endhighlight %}
 
 ###### Static linked lists
-{% highlight c %}
+```c
 int main() {
     struct llist { int a; struct llist* next;};
-    #define cons(x,y) (struct llist[]){{x,y}}
+    #define cons(x,y) (struct llist[]){ {x,y} }
     struct llist *list=cons(1, cons(2, cons(3, cons(4, NULL))));
     struct llist *p = list;
     while(p != 0) {
@@ -46,7 +46,7 @@ int main() {
       p = p->next;
     }
 }
-{% endhighlight %}
+```
 
 ## Include data file as header inside array initializer
 {% highlight c %}
