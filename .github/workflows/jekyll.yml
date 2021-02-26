@@ -20,16 +20,16 @@ jobs:
           ${{ runner.os }}-gems-
 
     - name: Build & deploy
-      uses: cubarco/jekyll-action@v2
+      uses: cubarco/jekyll-action
       if: ${{ github.ref == 'refs/heads/source-gh-actions' }}
       with:
         token: ${{ secrets.GITHUB_TOKEN }}
         use_tag: true
-        keep_HISTORY: true
+        keep_history: true
         target_branch: 'gh-pages' 
 
     - name: Build only
-      uses: cubarco/jekyll-action@v2
+      uses: cubarco/jekyll-action
       if: ${{ github.ref != 'refs/heads/source-gh-actions' }}
       with:
         build_only: true
