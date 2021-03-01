@@ -9,27 +9,27 @@ jobs:
   jekyll:
     runs-on: ubuntu-16.04
     steps:
-    - uses: actions/checkout@v2
+      - uses: actions/checkout@v2
 
-    # Use GitHub Actions' cache to shorten build times and decrease load on servers
-    - uses: actions/cache@v2
-      with:
-        path: vendor/bundle
-        key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}
-        restore-keys: |
-          ${{ runner.os }}-gems-
+      # Use GitHub Actions' cache to shorten build times and decrease load on servers
+      - uses: actions/cache@v2
+        with:
+          path: vendor/bundle
+          key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-gems-
 
-    - name: Build & deploy
-      uses: cubarco/jekyll-action@master
-      if: ${{ github.ref == 'refs/heads/source-gh-actions' }}
-      with:
-        token: ${{ secrets.GITHUB_TOKEN }}
-        use_tag: true
-        #keep_history: true
-        target_branch: 'gh-pages' 
+      - name: Build & deploy
+        uses: cubarco/jekyll-action@master
+        if: ${{ github.ref == 'refs/heads/source-gh-actions' }}
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          use_tag: true
+          #keep_history: true
+          target_branch: "gh-pages"
 
-    - name: Build only
-      uses: cubarco/jekyll-action@master
-      if: ${{ github.ref != 'refs/heads/source-gh-actions' }}
-      with:
-        build_only: true
+      - name: Build only
+        uses: cubarco/jekyll-action@master
+        if: ${{ github.ref != 'refs/heads/source-gh-actions' }}
+        with:
+          build_only: true

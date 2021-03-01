@@ -1,11 +1,11 @@
-hr { 
-    display: block; 
-    margin: 1em 0; 
-    padding: 0;
-    height: 1px; 
-    border: 0; 
-    border-top: 1px solid #ccc;
-    border-bottom: 1px solid #fff; 
+hr {
+  display: block;
+  margin: 1em 0;
+  padding: 0;
+  height: 1px;
+  border: 0;
+  border-top: 1px solid #ccc;
+  border-bottom: 1px solid #fff;
 }
 
 // Figures and images
@@ -18,7 +18,7 @@ figure {
   img {
     margin-bottom: 10px;
   }
-  a { 
+  a {
     img {
       @include transform(translateY(0));
       -webkit-transition-duration: 0.25s;
@@ -27,7 +27,7 @@ figure {
       opacity: 0.7;
       &:hover {
         @include transform(translateY(-5px));
-        @include box-shadow(0 0 10px rgba($black, .20));
+        @include box-shadow(0 0 10px rgba($black, 0.2));
         opacity: 1;
       }
     }
@@ -59,14 +59,14 @@ figure {
     }
   }
 }
-svg:not(:root) {
-  overflow: hidden; 
-}
 
+svg:not(:root) {
+  overflow: hidden;
+}
 
 // Tables
 // --------------------------------------------------
-table { 
+table {
   width: 100%;
 }
 
@@ -110,23 +110,61 @@ table {
 
 // Animations
 // --------------------------------------------------
-.animated{-webkit-animation-fill-mode:both;-moz-animation-fill-mode:both;-ms-animation-fill-mode:both;-o-animation-fill-mode:both;animation-fill-mode:both;-webkit-animation-duration:1s;-moz-animation-duration:1s;-ms-animation-duration:1s;-o-animation-duration:1s;animation-duration:1s;}.animated.hinge{-webkit-animation-duration:2s;-moz-animation-duration:2s;-ms-animation-duration:2s;-o-animation-duration:2s;animation-duration:2s;}@-webkit-keyframes fadeIn {
-  0% {opacity: 0;}  100% {opacity: 1;}
+.animated {
+  -webkit-animation-fill-mode: both;
+  -moz-animation-fill-mode: both;
+  -ms-animation-fill-mode: both;
+  -o-animation-fill-mode: both;
+  animation-fill-mode: both;
+  -webkit-animation-duration: 1s;
+  -moz-animation-duration: 1s;
+  -ms-animation-duration: 1s;
+  -o-animation-duration: 1s;
+  animation-duration: 1s;
+}
+
+.animated.hinge {
+  -webkit-animation-duration: 2s;
+  -moz-animation-duration: 2s;
+  -ms-animation-duration: 2s;
+  -o-animation-duration: 2s;
+  animation-duration: 2s;
+}
+
+@-webkit-keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 
 @-moz-keyframes fadeIn {
-  0% {opacity: 0;}  
-  100% {opacity: 1;}
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 
 @-o-keyframes fadeIn {
-  0% {opacity: 0;}  
-  100% {opacity: 1;}
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 
 @keyframes fadeIn {
-  0% {opacity: 0;}  
-  100% {opacity: 1;}
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 
 .fadeIn {
@@ -135,12 +173,12 @@ table {
   -o-animation-name: fadeIn;
   animation-name: fadeIn;
 }
+
 @-webkit-keyframes fadeInDown {
   0% {
     opacity: 0;
     -webkit-transform: translateY(-20px);
   }
-  
   100% {
     opacity: 1;
     -webkit-transform: translateY(0);
@@ -152,7 +190,6 @@ table {
     opacity: 0;
     -moz-transform: translateY(-20px);
   }
-  
   100% {
     opacity: 1;
     -moz-transform: translateY(0);
@@ -164,7 +201,6 @@ table {
     opacity: 0;
     -o-transform: translateY(-20px);
   }
-  
   100% {
     opacity: 1;
     -o-transform: translateY(0);
@@ -176,7 +212,6 @@ table {
     opacity: 0;
     transform: translateY(-20px);
   }
-  
   100% {
     opacity: 1;
     transform: translateY(0);
@@ -189,12 +224,12 @@ table {
   -o-animation-name: fadeInDown;
   animation-name: fadeInDown;
 }
+
 @-webkit-keyframes fadeInDownBig {
   0% {
     opacity: 0;
     -webkit-transform: translateY(-2000px);
   }
-  
   100% {
     opacity: 1;
     -webkit-transform: translateY(0);
@@ -206,7 +241,6 @@ table {
     opacity: 0;
     -moz-transform: translateY(-2000px);
   }
-  
   100% {
     opacity: 1;
     -moz-transform: translateY(0);
@@ -218,7 +252,6 @@ table {
     opacity: 0;
     -o-transform: translateY(-2000px);
   }
-  
   100% {
     opacity: 1;
     -o-transform: translateY(0);
@@ -230,7 +263,6 @@ table {
     opacity: 0;
     transform: translateY(-2000px);
   }
-  
   100% {
     opacity: 1;
     transform: translateY(0);
@@ -243,21 +275,19 @@ table {
   -o-animation-name: fadeInDownBig;
   animation-name: fadeInDownBig;
 }
+
 @-webkit-keyframes bounceIn {
   0% {
     opacity: 0;
-    -webkit-transform: scale(.3);
+    -webkit-transform: scale(0.3);
   }
-  
   50% {
     opacity: 1;
     -webkit-transform: scale(1.05);
   }
-  
   70% {
-    -webkit-transform: scale(.9);
+    -webkit-transform: scale(0.9);
   }
-  
   100% {
     -webkit-transform: scale(1);
   }
@@ -266,18 +296,15 @@ table {
 @-moz-keyframes bounceIn {
   0% {
     opacity: 0;
-    -moz-transform: scale(.3);
+    -moz-transform: scale(0.3);
   }
-  
   50% {
     opacity: 1;
     -moz-transform: scale(1.05);
   }
-  
   70% {
-    -moz-transform: scale(.9);
+    -moz-transform: scale(0.9);
   }
-  
   100% {
     -moz-transform: scale(1);
   }
@@ -286,18 +313,15 @@ table {
 @-o-keyframes bounceIn {
   0% {
     opacity: 0;
-    -o-transform: scale(.3);
+    -o-transform: scale(0.3);
   }
-  
   50% {
     opacity: 1;
     -o-transform: scale(1.05);
   }
-  
   70% {
-    -o-transform: scale(.9);
+    -o-transform: scale(0.9);
   }
-  
   100% {
     -o-transform: scale(1);
   }
@@ -306,18 +330,15 @@ table {
 @keyframes bounceIn {
   0% {
     opacity: 0;
-    transform: scale(.3);
+    transform: scale(0.3);
   }
-  
   50% {
     opacity: 1;
     transform: scale(1.05);
   }
-  
   70% {
-    transform: scale(.9);
+    transform: scale(0.9);
   }
-  
   100% {
     transform: scale(1);
   }
@@ -329,21 +350,19 @@ table {
   -o-animation-name: bounceIn;
   animation-name: bounceIn;
 }
+
 @-webkit-keyframes bounceInDown {
   0% {
     opacity: 0;
     -webkit-transform: translateY(-2000px);
   }
-  
   60% {
     opacity: 1;
     -webkit-transform: translateY(30px);
   }
-  
   80% {
     -webkit-transform: translateY(-10px);
   }
-  
   100% {
     -webkit-transform: translateY(0);
   }
@@ -354,16 +373,13 @@ table {
     opacity: 0;
     -moz-transform: translateY(-2000px);
   }
-  
   60% {
     opacity: 1;
     -moz-transform: translateY(30px);
   }
-  
   80% {
     -moz-transform: translateY(-10px);
   }
-  
   100% {
     -moz-transform: translateY(0);
   }
@@ -374,16 +390,13 @@ table {
     opacity: 0;
     -o-transform: translateY(-2000px);
   }
-  
   60% {
     opacity: 1;
     -o-transform: translateY(30px);
   }
-  
   80% {
     -o-transform: translateY(-10px);
   }
-  
   100% {
     -o-transform: translateY(0);
   }
@@ -394,16 +407,13 @@ table {
     opacity: 0;
     transform: translateY(-2000px);
   }
-  
   60% {
     opacity: 1;
     transform: translateY(30px);
   }
-  
   80% {
     transform: translateY(-10px);
   }
-  
   100% {
     transform: translateY(0);
   }
@@ -419,35 +429,39 @@ table {
 @-webkit-keyframes drop {
   0% {
     -webkit-transform: translateY(-500px);
-  } 
+  }
   100% {
     -webkit-transform: translateY(0);
   }
 }
+
 @-moz-keyframes drop {
   0% {
     -moz-transform: translateY(-500px);
-  } 
+  }
   100% {
     -moz-transform: translateY(0);
   }
 }
+
 @-o-keyframes drop {
   0% {
     -o-transform: translateY(-500px);
-  } 
+  }
   100% {
     -o-transform: translateY(0);
   }
 }
+
 @keyframes drop {
   0% {
     transform: translateY(-500px);
-  } 
+  }
   100% {
     transform: translateY(0);
   }
 }
+
 .drop {
   -webkit-animation-name: drop;
   -moz-animation-name: drop;

@@ -1,22 +1,28 @@
 <meta charset="utf-8">
 <meta name="theme-color" content="#000000">
 <title>{% if page.title %}{{ page.title }} &#8211; {% endif %}{{ site.title }}</title>
-<meta name="description" content="{% if page.excerpt and page.excerpt != "" %}{{ page.excerpt | strip_html }}{% else %}{{ content | strip_html | truncatewords:75 }}{% endif %}">
-{% if page.tags %}<meta name="keywords" content="{{ page.tags | join: ', ' }}">{% endif %}
+<meta name="description"
+  content="{% if page.excerpt and page.excerpt != "" %}{{ page.excerpt | strip_html }}{% else %}{{ content | strip_html | truncatewords:75 }}{% endif %}">
+{% if page.tags %}
+<meta name="keywords" content="{{ page.tags | join: ', ' }}">{% endif %}
 {% if page.author %}
-  {% assign author = site.data.authors[page.author] %}{% else %}{% assign author = site.owner %}
+{% assign author = site.data.authors[page.author] %}{% else %}{% assign author = site.owner %}
 {% endif %}
 
 {% include open-graph.html %}
 
-{% if site.owner.google.verify %}<!-- Webmaster Tools verfication -->
+{% if site.owner.google.verify %}
+<!-- Webmaster Tools verfication -->
 <meta name="google-site-verification" content="{{ site.owner.google.verify }}">{% endif %}
-{% if site.owner.bing-verify %}<meta name="msvalidate.01" content="{{ site.owner.bing-verify }}">{% endif %}
+{% if site.owner.bing-verify %}
+<meta name="msvalidate.01" content="{{ site.owner.bing-verify }}">{% endif %}
 
-{% capture canonical %}{{ site.url }}{% if site.permalink contains '.html' %}{{ page.url }}{% else %}{{ page.url | remove:'index.html' | strip_slash }}{% endif %}{% endcapture %}
+{% capture canonical %}{{ site.url }}{% if site.permalink contains '.html' %}{{ page.url }}{% else %}{{ page.url |
+remove:'index.html' | strip_slash }}{% endif %}{% endcapture %}
 <link rel="canonical" href="{{ canonical }}">
 <link href="{{ site.url }}/feed.xml" type="application/atom+xml" rel="alternate" title="{{ site.title }} Feed">
-{% if site.owner.google.plus %}<link rel="author" href="http://plus.google.com/+{{ site.owner.google.plus }}?rel=author">{% endif %}
+{% if site.owner.google.plus %}
+<link rel="author" href="http://plus.google.com/+{{ site.owner.google.plus }}?rel=author">{% endif %}
 
 <!-- http://t.co/dKP3o1e -->
 <meta name="HandheldFriendly" content="True">
@@ -25,7 +31,8 @@
 
 <!-- For all browsers -->
 <link rel="stylesheet" href="{{ site.ghmirror }}/assets/css/main.css">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/cdnjs/cdnjs@95f0cba887c60c1b8c7944d59442a02623193751/ajax/libs/font-awesome/4.2.0/css/font-awesome.min.css">
+<link rel="stylesheet"
+  href="https://cdn.jsdelivr.net/gh/cdnjs/cdnjs@95f0cba887c60c1b8c7944d59442a02623193751/ajax/libs/font-awesome/4.2.0/css/font-awesome.min.css">
 
 <!--Webfonts-->
 <link href='//fonts.googleapis.com/css?family=Volkhov|Cabin' rel='stylesheet' type='text/css'>
@@ -44,7 +51,8 @@
 
 <!-- Modernizr -->
 <!--<script src="/assets/js/vendor/modernizr-2.7.1.custom.min.js"></script>-->
-<script src="https://cdn.jsdelivr.net/gh/cdnjs/cdnjs@95f0cba887c60c1b8c7944d59442a02623193751/ajax/libs/modernizr/2.7.1/modernizr.min.js"></script>
+<script
+  src="https://cdn.jsdelivr.net/gh/cdnjs/cdnjs@95f0cba887c60c1b8c7944d59442a02623193751/ajax/libs/modernizr/2.7.1/modernizr.min.js"></script>
 
 <!-- Icons -->
 <!--

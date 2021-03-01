@@ -1,30 +1,31 @@
-<script src="https://cdn.jsdelivr.net/gh/cdnjs/cdnjs@95f0cba887c60c1b8c7944d59442a02623193751/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+<script
+  src="https://cdn.jsdelivr.net/gh/cdnjs/cdnjs@95f0cba887c60c1b8c7944d59442a02623193751/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 <script>window.jQuery || document.write('<script src="{{ site.ghmirror }}/assets/js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
 <script src="{{ site.ghmirror }}/assets/js/gist-async.min.js"></script>
 <script src="{{ site.ghmirror }}/assets/js/scripts.min.js"></script>
 {% if site.search %}
 <!-- Jekyll Simple Search option -->
 <script>
-  $(document).ready(function() {
-      $('.search-field').jekyllSearch({
-          jsonFile: '{{ site.ghmirror }}/search.json',
-          searchResults: '.search-results',
-          template: '<li><article><a href="{url}">{title} <span class="entry-date"><time datetime="{date}">{shortdate}</time></span></a></article></li>',
-          fuzzy: true,
-          noResults: '<p>Nothing found.</p>'
-        });
+  $(document).ready(function () {
+    $('.search-field').jekyllSearch({
+      jsonFile: '{{ site.ghmirror }}/search.json',
+      searchResults: '.search-results',
+      template: '<li><article><a href="{url}">{title} <span class="entry-date"><time datetime="{date}">{shortdate}</time></span></a></article></li>',
+      fuzzy: true,
+      noResults: '<p>Nothing found.</p>'
+    });
   });
 
-  (function( $, window, undefined ) {
+  (function ($, window, undefined) {
 
-     var bs = {
-          close: $(".close-btn"),
-          searchform: $(".search-form"),
-          canvas: $(".js-menu-screen"),
-          dothis: $('.dosearch')
-      };
+    var bs = {
+      close: $(".close-btn"),
+      searchform: $(".search-form"),
+      canvas: $(".js-menu-screen"),
+      dothis: $('.dosearch')
+    };
 
-    bs.dothis.on('click', function() {
+    bs.dothis.on('click', function () {
       $('.search-wrapper').css({ display: "block" });
       $('body').toggleClass('no-scroll');
       bs.searchform.toggleClass('active');
@@ -32,19 +33,19 @@
       bs.canvas.toggleClass('is-visible');
     });
 
-      bs.close.on('click', function() {
-        $('.search-wrapper').removeAttr( 'style' );
-        $('body').toggleClass('no-scroll');
-        bs.searchform.toggleClass('active');
-        bs.canvas.removeClass('is-visible');
+    bs.close.on('click', function () {
+      $('.search-wrapper').removeAttr('style');
+      $('body').toggleClass('no-scroll');
+      bs.searchform.toggleClass('active');
+      bs.canvas.removeClass('is-visible');
     });
-  })( jQuery, window );
+  })(jQuery, window);
 </script>
 {% endif %}
 
 <!-- Check whether the page is a post -->
 {% if page.comments != false and page.layout == "post" or page.comments == true %}
-  {% include disqus_comments.html %}
+{% include disqus_comments.html %}
 {% endif %}
 
 {% if site.owner.google.analytics %}
@@ -52,12 +53,12 @@
 <script>
   var _gaq = _gaq || [];
   var pluginUrl =
- '//www.google-analytics.com/plugins/ga/inpage_linkid.js';
+    '//www.google-analytics.com/plugins/ga/inpage_linkid.js';
   _gaq.push(['_require', 'inpage_linkid', pluginUrl]);
   _gaq.push(['_setAccount', '{{ site.owner.google.analytics }}']);
   _gaq.push(['_trackPageview']);
 
-  (function() {
+  (function () {
     var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
     ga.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'stats.g.doubleclick.net/dc.js';
     var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
