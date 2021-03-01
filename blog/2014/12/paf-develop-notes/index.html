@@ -1,0 +1,473 @@
+<!doctype html>
+<!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if (IE 7)&!(IEMobile)]><html class="no-js lt-ie9 lt-ie8" lang="en"><![endif]-->
+<!--[if (IE 8)&!(IEMobile)]><html class="no-js lt-ie9" lang="en"><![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"><!--<![endif]-->
+<head>
+<meta charset="utf-8">
+<meta name="theme-color" content="#000000">
+<title>Paf 开发总结 &#8211; /home/cubarco</title>
+<meta name="description" content="Paf (Pipe as file) 并不是什么大项目，只是一时兴起为满足自己奇怪需求而开发的小工具。具体的介绍都摆在 Github 上了，这里就不赘述了。只是对开发过程中遇到的一些问题和技巧做一下总结。
+
+EOF 的产生
+pipe是有一定容量的1，这一部分就是内核维护的缓冲区。当pipe的读端试图对文件描述符执行read()系统调用的时候，内核会先检查缓冲区是否有数据，有则返回; 若没有，则根据读端文件描述符具体是否以阻塞标志打开，如阻塞，则阻塞至缓冲区有数据，或者当对端已经关闭文件描述符的时候，读端的read()调用会返回0, 这就是所谓的EOF。对pipe的写端执行close()并不会刷新pipe的缓冲区，而且读端也并不能立即察觉到写端已经关闭。这引发了一个问题，也是我在开发过程中碰到的一个很大的问题。如果写端在关闭后，在pipe的缓冲区还没被读端读取完的时候，重新打开并写入数据，这部分数据会写入原先的缓冲区并被读端继续读取。
+
+FIFO 的正确使用姿势
+上文提到的EOF并未被读端及时响应还会造成另一个问题。如果写端关闭后立即执行open()系统调用，这个函数不会阻塞，因为读端确实正处于打开的状态。另一方面，读端关闭后立即执行也不会阻塞。这对程序的逻辑造成了致命的影响，它让读端误以为第二次打开的是一个新的文件，同时让写端误以为读端已经在请求新文件的数据。
+
+所以FIFO的正确使用姿势应该是在写端open()之后立即unlink()然后再mkfifo():
+
+wfd = open(filename, O_WRONLY, NULL);
+unlink(filename);
+mkfifo(filename, FIFO_MODE);
+
+虽然对FIFO进行了unlink(), 文件已经不存在，但是内核实际上还在维护读写两端的文件描述符和对应的缓冲区。而第二次mkfifo()即使创建的FIFO的名字是一样的，内核会为它维护另一套空间。这样的话，无论是读端还是写端，连续的两次open()都会阻塞。而且打开后缓冲区是空的。
+
+二阶指针
+二阶指针玩链表其实还是蛮有意思的嘛(虽然只是少定义一个中间变量)…
+
+stdin, stdout, stderr and tty
+/dev/{stdin,stdout,stderr}默认分别是/proc/self/fd/{0,1,2}的软链接，而/proc/self/fd/{0,1,2}默认都是pts或者tty的软链接，所以stdin, stdout, stderr默认就是终端设备。当stdin被 shell 用管道替换之后，可以用以下方式重新打开键盘输入(另外两个类似):
+
+#include &lt;unistd.h&gt; /* for dup2(), close() and STDIN_FILENO */
+#include &lt;fcntl.h&gt; /* for open() and O_RDONLY */
+
+int realstdin = open("/dev/tty", O_RDONLY);
+dup2(realstdin, STDIN_FILENO);
+close(realstdin);
+
+/dev/tty总是当前终端设备
+
+More
+想到什么我再更新吧。
+
+Reference
+
+  
+    
+      pipe(7) - Linux man page &#8617;
+    
+  
+
+">
+<meta name="keywords" content="FIFO, Linux, Pipe">
+
+
+<!-- Twitter Cards -->
+<meta name="twitter:title" content="Paf 开发总结">
+<meta name="twitter:description" content="Paf (Pipe as file) 并不是什么大项目，只是一时兴起为满足自己奇怪需求而开发的小工具。具体的介绍都摆在 Github 上了，这里就不赘述了。只是对开发过程中遇到的一些问题和技巧做一下总结。
+
+EOF 的产生
+pipe是有一定容量的1，这一部分就是内核维护的缓冲区。当pipe的读端试图对文件描述符执行read()系统调用的时候，内核会先检查缓冲区是否有数据，有则返回; 若没有，则根据读端文件描述符具体是否以阻塞标志打开，如阻塞，则阻塞至缓冲区有数据，或者当对端已经关闭文件描述符的时候，读端的read()调用会返回0, 这就是所谓的EOF。对pipe的写端执行close()并不会刷新pipe的缓冲区，而且读端也并不能立即察觉到写端已经关闭。这引发了一个问题，也是我在开发过程中碰到的一个很大的问题。如果写端在关闭后，在pipe的缓冲区还没被读端读取完的时候，重新打开并写入数据，这部分数据会写入原先的缓冲区并被读端继续读取。
+
+FIFO 的正确使用姿势
+上文提到的EOF并未被读端及时响应还会造成另一个问题。如果写端关闭后立即执行open()系统调用，这个函数不会阻塞，因为读端确实正处于打开的状态。另一方面，读端关闭后立即执行也不会阻塞。这对程序的逻辑造成了致命的影响，它让读端误以为第二次打开的是一个新的文件，同时让写端误以为读端已经在请求新文件的数据。
+
+所以FIFO的正确使用姿势应该是在写端open()之后立即unlink()然后再mkfifo():
+
+wfd = open(filename, O_WRONLY, NULL);
+unlink(filename);
+mkfifo(filename, FIFO_MODE);
+
+虽然对FIFO进行了unlink(), 文件已经不存在，但是内核实际上还在维护读写两端的文件描述符和对应的缓冲区。而第二次mkfifo()即使创建的FIFO的名字是一样的，内核会为它维护另一套空间。这样的话，无论是读端还是写端，连续的两次open()都会阻塞。而且打开后缓冲区是空的。
+
+二阶指针
+二阶指针玩链表其实还是蛮有意思的嘛(虽然只是少定义一个中间变量)…
+
+stdin, stdout, stderr and tty
+/dev/{stdin,stdout,stderr}默认分别是/proc/self/fd/{0,1,2}的软链接，而/proc/self/fd/{0,1,2}默认都是pts或者tty的软链接，所以stdin, stdout, stderr默认就是终端设备。当stdin被 shell 用管道替换之后，可以用以下方式重新打开键盘输入(另外两个类似):
+
+#include &lt;unistd.h&gt; /* for dup2(), close() and STDIN_FILENO */
+#include &lt;fcntl.h&gt; /* for open() and O_RDONLY */
+
+int realstdin = open("/dev/tty", O_RDONLY);
+dup2(realstdin, STDIN_FILENO);
+close(realstdin);
+
+/dev/tty总是当前终端设备
+
+More
+想到什么我再更新吧。
+
+Reference
+
+  
+    
+      pipe(7) - Linux man page &#8617;
+    
+  
+
+">
+<meta name="twitter:site" content="@Cube_Lin">
+<meta name="twitter:creator" content="@Cube_Lin">
+
+<meta name="twitter:card" content="summary">
+<!--
+   -<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/cubarco/cubarco.github.io@2021-0301-033545-6197/images/">
+   -->
+
+<!-- Open Graph -->
+<meta property="og:locale" content="zh_CN">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Paf 开发总结">
+<meta property="og:description" content="Paf (Pipe as file) 并不是什么大项目，只是一时兴起为满足自己奇怪需求而开发的小工具。具体的介绍都摆在 Github 上了，这里就不赘述了。只是对开发过程中遇到的一些问题和技巧做一下总结。
+
+EOF 的产生
+pipe是有一定容量的1，这一部分就是内核维护的缓冲区。当pipe的读端试图对文件描述符执行read()系统调用的时候，内核会先检查缓冲区是否有数据，有则返回; 若没有，则根据读端文件描述符具体是否以阻塞标志打开，如阻塞，则阻塞至缓冲区有数据，或者当对端已经关闭文件描述符的时候，读端的read()调用会返回0, 这就是所谓的EOF。对pipe的写端执行close()并不会刷新pipe的缓冲区，而且读端也并不能立即察觉到写端已经关闭。这引发了一个问题，也是我在开发过程中碰到的一个很大的问题。如果写端在关闭后，在pipe的缓冲区还没被读端读取完的时候，重新打开并写入数据，这部分数据会写入原先的缓冲区并被读端继续读取。
+
+FIFO 的正确使用姿势
+上文提到的EOF并未被读端及时响应还会造成另一个问题。如果写端关闭后立即执行open()系统调用，这个函数不会阻塞，因为读端确实正处于打开的状态。另一方面，读端关闭后立即执行也不会阻塞。这对程序的逻辑造成了致命的影响，它让读端误以为第二次打开的是一个新的文件，同时让写端误以为读端已经在请求新文件的数据。
+
+所以FIFO的正确使用姿势应该是在写端open()之后立即unlink()然后再mkfifo():
+
+wfd = open(filename, O_WRONLY, NULL);
+unlink(filename);
+mkfifo(filename, FIFO_MODE);
+
+虽然对FIFO进行了unlink(), 文件已经不存在，但是内核实际上还在维护读写两端的文件描述符和对应的缓冲区。而第二次mkfifo()即使创建的FIFO的名字是一样的，内核会为它维护另一套空间。这样的话，无论是读端还是写端，连续的两次open()都会阻塞。而且打开后缓冲区是空的。
+
+二阶指针
+二阶指针玩链表其实还是蛮有意思的嘛(虽然只是少定义一个中间变量)…
+
+stdin, stdout, stderr and tty
+/dev/{stdin,stdout,stderr}默认分别是/proc/self/fd/{0,1,2}的软链接，而/proc/self/fd/{0,1,2}默认都是pts或者tty的软链接，所以stdin, stdout, stderr默认就是终端设备。当stdin被 shell 用管道替换之后，可以用以下方式重新打开键盘输入(另外两个类似):
+
+#include &lt;unistd.h&gt; /* for dup2(), close() and STDIN_FILENO */
+#include &lt;fcntl.h&gt; /* for open() and O_RDONLY */
+
+int realstdin = open("/dev/tty", O_RDONLY);
+dup2(realstdin, STDIN_FILENO);
+close(realstdin);
+
+/dev/tty总是当前终端设备
+
+More
+想到什么我再更新吧。
+
+Reference
+
+  
+    
+      pipe(7) - Linux man page &#8617;
+    
+  
+
+">
+<meta property="og:url" content="https://cubl.in/blog/2014/12/paf-develop-notes/">
+<meta property="og:site_name" content="/home/cubarco">
+
+
+
+
+
+
+<link rel="canonical" href="https://cubl.in/blog/2014/12/paf-develop-notes/">
+<link href="https://cubl.in/feed.xml" type="application/atom+xml" rel="alternate" title="/home/cubarco Feed">
+
+
+<!-- http://t.co/dKP3o1e -->
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/cubarco/cubarco.github.io@2021-0301-033545-6197/assets/css/main.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/cdnjs/cdnjs@95f0cba887c60c1b8c7944d59442a02623193751/ajax/libs/font-awesome/4.2.0/css/font-awesome.min.css">
+
+<!--Webfonts-->
+<link href='//fonts.googleapis.com/css?family=Volkhov|Cabin' rel='stylesheet' type='text/css'>
+<!--
+   -[> Webfonts <]
+   -<script src="//use.edgefonts.net/source-sans-pro:n2,i2,n3,i3,n4,i4,n6,i6,n7,i7,n9,i9;source-code-pro:n4,n7;volkhov;cabin.js"></script>
+   -->
+
+<meta http-equiv="cleartype" content="on">
+
+<!-- HTML5 Shiv and Media Query Support -->
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/gh/cubarco/cubarco.github.io@2021-0301-033545-6197/assets/js/vendor/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/cubarco/cubarco.github.io@2021-0301-033545-6197/assets/js/vendor/respond.min.js"></script>
+<![endif]-->
+
+<!-- Modernizr -->
+<!--<script src="/assets/js/vendor/modernizr-2.7.1.custom.min.js"></script>-->
+<script src="https://cdn.jsdelivr.net/gh/cdnjs/cdnjs@95f0cba887c60c1b8c7944d59442a02623193751/ajax/libs/modernizr/2.7.1/modernizr.min.js"></script>
+
+<!-- Icons -->
+<!--
+   -[> 16x16 <]
+   -<link rel="shortcut icon" href="https://cdn.jsdelivr.net/gh/cubarco/cubarco.github.io@2021-0301-033545-6197/favicon-16x16.ico">
+   -[> 32x32 <]
+   -<link rel="shortcut icon" href="https://cdn.jsdelivr.net/gh/cubarco/cubarco.github.io@2021-0301-033545-6197/favicon-32x32.ico">
+   -[> 57x57 (precomposed) for iPhone 3GS, pre-2011 iPod Touch and older Android devices <]
+   -<link rel="apple-touch-icon-precomposed" href="https://cdn.jsdelivr.net/gh/cubarco/cubarco.github.io@2021-0301-033545-6197/images/apple-touch-icon-precomposed.png">
+   -[> 72x72 (precomposed) for 1st generation iPad, iPad 2 and iPad mini <]
+   -<link rel="apple-touch-icon-precomposed" sizes="72x72" href="https://cdn.jsdelivr.net/gh/cubarco/cubarco.github.io@2021-0301-033545-6197/images/apple-touch-icon-72x72-precomposed.png">
+   -[> 114x114 (precomposed) for iPhone 4, 4S, 5 and post-2011 iPod Touch <]
+   -<link rel="apple-touch-icon-precomposed" sizes="114x114" href="https://cdn.jsdelivr.net/gh/cubarco/cubarco.github.io@2021-0301-033545-6197/images/apple-touch-icon-114x114-precomposed.png">
+   -[> 144x144 (precomposed) for iPad 3rd and 4th generation <]
+   -<link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://cdn.jsdelivr.net/gh/cubarco/cubarco.github.io@2021-0301-033545-6197/images/apple-touch-icon-144x144-precomposed.png">
+   -->
+<!--
+<link rel="shortcut icon" href="https://cdn.jsdelivr.net/gh/cubarco/cubarco.github.io@2021-0301-033545-6197/favicon.ico">
+<link rel="apple-touch-icon" sizes="57x57" href="https://cdn.jsdelivr.net/gh/cubarco/cubarco.github.io@2021-0301-033545-6197/images/favicons/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="https://cdn.jsdelivr.net/gh/cubarco/cubarco.github.io@2021-0301-033545-6197/images/favicons/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="https://cdn.jsdelivr.net/gh/cubarco/cubarco.github.io@2021-0301-033545-6197/images/favicons/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="https://cdn.jsdelivr.net/gh/cubarco/cubarco.github.io@2021-0301-033545-6197/images/favicons/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="https://cdn.jsdelivr.net/gh/cubarco/cubarco.github.io@2021-0301-033545-6197/images/favicons/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="https://cdn.jsdelivr.net/gh/cubarco/cubarco.github.io@2021-0301-033545-6197/images/favicons/apple-touch-icon-120x120.png">
+<link rel="apple-touch-icon" sizes="144x144" href="https://cdn.jsdelivr.net/gh/cubarco/cubarco.github.io@2021-0301-033545-6197/images/favicons/apple-touch-icon-144x144.png">
+<link rel="apple-touch-icon" sizes="152x152" href="https://cdn.jsdelivr.net/gh/cubarco/cubarco.github.io@2021-0301-033545-6197/images/favicons/apple-touch-icon-152x152.png">
+<link rel="apple-touch-icon" sizes="180x180" href="https://cdn.jsdelivr.net/gh/cubarco/cubarco.github.io@2021-0301-033545-6197/images/favicons/apple-touch-icon-180x180.png">
+<link rel="icon" type="image/png" href="https://cdn.jsdelivr.net/gh/cubarco/cubarco.github.io@2021-0301-033545-6197/images/favicons/android-chrome-192x192.png" sizes="192x192">
+<link rel="icon" type="image/png" href="https://cdn.jsdelivr.net/gh/cubarco/cubarco.github.io@2021-0301-033545-6197/images/favicons/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="https://cdn.jsdelivr.net/gh/cubarco/cubarco.github.io@2021-0301-033545-6197/images/favicons/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="https://cdn.jsdelivr.net/gh/cubarco/cubarco.github.io@2021-0301-033545-6197/images/favicons/favicon-16x16.png" sizes="16x16">
+-->
+
+</head>
+
+<body id="post">
+
+<div class="navigation-wrapper">
+	<nav role="navigation" id="site-nav" class="animated drop">
+	    <ul>
+      
+		    
+		    <li><a href="https://cubl.in/blog/" >Latest</a></li>
+		  
+		    
+		    <li><a href="https://cubl.in/blog/about/" >About</a></li>
+		  
+		    
+		    <li><a href="https://cubl.in/blog/category/blog/" >Blog</a></li>
+		  
+		    
+		    <li><a href="https://cubl.in/blog/category/notes/" >Notes</a></li>
+		  
+		    
+		    <li><a href="https://cubl.in/blog/tags/" >Tags</a></li>
+		  
+        <li class="dosearch"><span><i class="fa fa-search"></i> Search</span></li>
+	    </ul>
+	</nav>
+</div><!-- /.navigation-wrapper -->
+
+<!--[if lt IE 9]><div class="upgrade"><strong><a href="http://whatbrowser.org/">Your browser is quite old!</strong> Why not upgrade to a different browser to better enjoy this site?</a></div><![endif]-->
+
+<div class="search-wrapper">
+  <div class="search-form">
+    <input type="text" class="search-field" placeholder="Search...">
+    <button class="close-btn"><i class="fa fa-times-circle fa-2x"></i></button>
+    <ul class="search-results post-list"></ul><!-- /.search-results -->
+  </div><!-- /.search-form -->
+</div><!-- ./search-wrapper -->
+
+<div class="js-menu-screen menu-screen"></div>
+
+
+<div id="main" role="main">
+  <article class="hentry">
+    
+    <div class="entry-wrapper">
+      <header class="entry-header">
+        <span class="entry-tags"><a href="https://cubl.in/blog/tags/#FIFO" title="Pages tagged FIFO">FIFO</a>&nbsp;&bull;&nbsp;<a href="https://cubl.in/blog/tags/#Linux" title="Pages tagged Linux">Linux</a>&nbsp;&bull;&nbsp;<a href="https://cubl.in/blog/tags/#Pipe" title="Pages tagged Pipe">Pipe</a></span>
+        
+          <h1 class="entry-title">Paf 开发总结</h1>
+        
+      </header>
+      <footer class="entry-meta">
+        
+        
+        <span class="author vcard">By <span class="fn">Cubarco</span></span>
+        <span class="entry-date date published"><time datetime="2014-12-31T00:00:00+00:00"><i class="fa fa-calendar-o"></i> December 31, 2014</time></span>
+        <span class="entry-date date modified"><time datetime="2015-01-01"><i class="fa fa-pencil"></i> January 01, 2015</time></span>
+        <span class="entry-comments"><i class="fa fa-comment-o"></i> <a href="#disqus_thread">Comment</a></span>
+        <span class="social-share-twitter">
+  <a href="https://twitter.com/intent/tweet?hashtags=FIFO,Linux,Pipe&amp;text=Paf%20开发总结&amp;url=https://cubl.in/blog/2014/12/paf-develop-notes/&amp;via=Cube_Lin" title="Share on Twitter" itemprop="Twitter"><i class="fa fa-twitter-square"></i> Tweet</a>
+</span>
+<span class="social-share-facebook">
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https://cubl.in/blog/2014/12/paf-develop-notes/" title="Share on Facebook" itemprop="Facebook"><i class="fa fa-facebook-square"></i> Like</a>
+</span>
+<!-- /.social-share -->
+
+        
+      </footer>
+      <div class="entry-content">
+        <p><a href="https://github.com/cubarco/paf" title="Pipe as File Github Homepage">Paf (Pipe as file)</a> 并不是什么大项目，只是一时兴起为满足自己奇怪需求而开发的小工具。具体的介绍都摆在 Github 上了，这里就不赘述了。只是对开发过程中遇到的一些问题和技巧做一下总结。</p>
+
+<h4 id="eof-的产生">EOF 的产生</h4>
+<p><code class="highlighter-rouge">pipe</code>是有一定容量的<sup id="fnref:1"><a href="#fn:1" class="footnote">1</a></sup>，这一部分就是内核维护的缓冲区。当<code class="highlighter-rouge">pipe</code>的读端试图对文件描述符执行<code class="highlighter-rouge">read()</code>系统调用的时候，内核会先检查缓冲区是否有数据，有则返回; 若没有，则根据读端文件描述符具体是否以阻塞标志打开，如阻塞，则阻塞至缓冲区有数据，或者当对端已经关闭文件描述符的时候，读端的<code class="highlighter-rouge">read()</code>调用会返回0, 这就是所谓的<code class="highlighter-rouge">EOF</code>。对<code class="highlighter-rouge">pipe</code>的写端执行<code class="highlighter-rouge">close()</code>并不会刷新<code class="highlighter-rouge">pipe</code>的缓冲区，而且读端也并不能立即察觉到写端已经关闭。这引发了一个问题，也是我在开发过程中碰到的一个很大的问题。如果写端在关闭后，在<code class="highlighter-rouge">pipe</code>的缓冲区还没被读端读取完的时候，重新打开并写入数据，这部分数据会写入原先的缓冲区并被读端继续读取。</p>
+
+<h4 id="fifo-的正确使用姿势">FIFO 的正确使用姿势</h4>
+<p>上文提到的<code class="highlighter-rouge">EOF</code>并未被读端及时响应还会造成另一个问题。如果写端关闭后立即执行<code class="highlighter-rouge">open()</code>系统调用，这个函数不会阻塞，因为读端确实正处于打开的状态。另一方面，读端关闭后立即执行也不会阻塞。这对程序的逻辑造成了致命的影响，它让读端误以为第二次打开的是一个新的文件，同时让写端误以为读端已经在请求新文件的数据。</p>
+
+<p>所以<code class="highlighter-rouge">FIFO</code>的正确使用姿势应该是在写端<code class="highlighter-rouge">open()</code>之后立即<code class="highlighter-rouge">unlink()</code>然后再<code class="highlighter-rouge">mkfifo()</code>:</p>
+
+<figure class="highlight"><pre><code class="language-c" data-lang="c"><span class="n">wfd</span> <span class="o">=</span> <span class="n">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">O_WRONLY</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">);</span>
+<span class="n">unlink</span><span class="p">(</span><span class="n">filename</span><span class="p">);</span>
+<span class="n">mkfifo</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">FIFO_MODE</span><span class="p">);</span></code></pre></figure>
+
+<p>虽然对<code class="highlighter-rouge">FIFO</code>进行了<code class="highlighter-rouge">unlink()</code>, 文件已经不存在，但是内核实际上还在维护读写两端的文件描述符和对应的缓冲区。而第二次<code class="highlighter-rouge">mkfifo()</code>即使创建的<code class="highlighter-rouge">FIFO</code>的名字是一样的，内核会为它维护另一套空间。这样的话，无论是读端还是写端，连续的两次<code class="highlighter-rouge">open()</code>都会阻塞。而且打开后缓冲区是空的。</p>
+
+<h4 id="二阶指针">二阶指针</h4>
+<p>二阶指针玩链表其实还是蛮有意思的嘛<s>(虽然只是少定义一个中间变量)</s>…</p>
+
+<h4 id="stdin-stdout-stderr-and-tty">stdin, stdout, stderr and tty</h4>
+<p><code class="highlighter-rouge">/dev/{stdin,stdout,stderr}</code>默认分别是<code class="highlighter-rouge">/proc/self/fd/{0,1,2}</code>的软链接，而<code class="highlighter-rouge">/proc/self/fd/{0,1,2}</code>默认都是<code class="highlighter-rouge">pts</code>或者<code class="highlighter-rouge">tty</code>的软链接，所以<code class="highlighter-rouge">stdin</code>, <code class="highlighter-rouge">stdout</code>, <code class="highlighter-rouge">stderr</code>默认就是终端设备。当<code class="highlighter-rouge">stdin</code>被 shell 用管道替换之后，可以用以下方式重新打开键盘输入(另外两个类似):</p>
+
+<figure class="highlight"><pre><code class="language-c" data-lang="c"><span class="cp">#include &lt;unistd.h&gt; </span><span class="cm">/* for dup2(), close() and STDIN_FILENO */</span><span class="cp">
+#include &lt;fcntl.h&gt; </span><span class="cm">/* for open() and O_RDONLY */</span><span class="cp">
+</span>
+<span class="kt">int</span> <span class="n">realstdin</span> <span class="o">=</span> <span class="n">open</span><span class="p">(</span><span class="s">"/dev/tty"</span><span class="p">,</span> <span class="n">O_RDONLY</span><span class="p">);</span>
+<span class="n">dup2</span><span class="p">(</span><span class="n">realstdin</span><span class="p">,</span> <span class="n">STDIN_FILENO</span><span class="p">);</span>
+<span class="n">close</span><span class="p">(</span><span class="n">realstdin</span><span class="p">);</span></code></pre></figure>
+
+<p><code class="highlighter-rouge">/dev/tty</code>总是当前终端设备</p>
+
+<h4 id="more">More</h4>
+<p>想到什么我再更新吧。</p>
+
+<h4 id="reference">Reference</h4>
+<div class="footnotes">
+  <ol>
+    <li id="fn:1">
+      <p><a href="http://linux.die.net/man/7/pipe">pipe(7) - Linux man page</a> <a href="#fnref:1" class="reversefootnote">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
+
+        <div align="right">
+		    <span><a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://cdn.jsdelivr.net/gh/cubarco/cubarco.github.io@2021-0301-033545-6197/images/cc_by-nc_88x31.png" /></a></span>
+        </div>
+        <nav class="pagination" role="navigation">
+            
+              <a href="https://cubl.in/blog/2014/12/repost-how-do-you-read-source-code/" class="btn" title="How do you read source code?">Previous</a>
+            
+            
+              <a href="https://cubl.in/blog/2015/01/btrfs-sucks/" class="btn" title="对 btrfs 的吐槽">Next</a>
+            
+        </nav><!-- /.pagination -->
+        <div id="disqus_thread"></div><!-- /#disqus_thread -->
+      </div><!-- /.entry-content -->
+    </div><!-- /.entry-wrapper -->
+
+  </article>
+</div><!-- /#main -->
+
+<div class="footer-wrapper">
+  <footer role="contentinfo" class="entry-wrapper">
+    
+
+<span>Powered by <a href="http://jekyllrb.com" rel="nofollow">Jekyll</a> using the <a
+        href="https://mademistakes.com/work/so-simple-jekyll-theme/" rel="nofollow">So Simple
+        Theme</a>. Published with <a
+href="https://docs.github.com/en/github/working-with-github-pages/creating-a-github-pages-site">Github
+    Pages</a>.</span>
+<div class="social-icons">
+	<a href="https://twitter.com/Cube_Lin" title="Cubarco on Twitter" target="_blank"><i class="fa fa-twitter-square fa-2x"></i></a>
+	
+	
+	
+	
+	
+	
+	<a href="https://github.com/cubarco" title="Cubarco on Github" target="_blank"><i class="fa fa-github-square fa-2x"></i></a>
+	
+  <a href="https://cubl.in/feed.xml" title="Atom/RSS feed"><i class="fa fa-rss-square fa-2x"></i></a>
+</div><!-- /.social-icons -->
+
+  </footer>
+</div><!-- /.footer-wrapper -->
+
+<script src="https://cdn.jsdelivr.net/gh/cdnjs/cdnjs@95f0cba887c60c1b8c7944d59442a02623193751/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="https://cdn.jsdelivr.net/gh/cubarco/cubarco.github.io@2021-0301-033545-6197/assets/js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
+<script src="https://cdn.jsdelivr.net/gh/cubarco/cubarco.github.io@2021-0301-033545-6197/assets/js/gist-async.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/cubarco/cubarco.github.io@2021-0301-033545-6197/assets/js/scripts.min.js"></script>
+
+<!-- Jekyll Simple Search option -->
+<script>
+  $(document).ready(function() {
+      $('.search-field').jekyllSearch({
+          jsonFile: 'https://cdn.jsdelivr.net/gh/cubarco/cubarco.github.io@2021-0301-033545-6197/search.json',
+          searchResults: '.search-results',
+          template: '<li><article><a href="{url}">{title} <span class="entry-date"><time datetime="{date}">{shortdate}</time></span></a></article></li>',
+          fuzzy: true,
+          noResults: '<p>Nothing found.</p>'
+        });
+  });
+
+  (function( $, window, undefined ) {
+
+     var bs = {
+          close: $(".close-btn"),
+          searchform: $(".search-form"),
+          canvas: $(".js-menu-screen"),
+          dothis: $('.dosearch')
+      };
+
+    bs.dothis.on('click', function() {
+      $('.search-wrapper').css({ display: "block" });
+      $('body').toggleClass('no-scroll');
+      bs.searchform.toggleClass('active');
+      bs.searchform.find('input').focus();
+      bs.canvas.toggleClass('is-visible');
+    });
+
+      bs.close.on('click', function() {
+        $('.search-wrapper').removeAttr( 'style' );
+        $('body').toggleClass('no-scroll');
+        bs.searchform.toggleClass('active');
+        bs.canvas.removeClass('is-visible');
+    });
+  })( jQuery, window );
+</script>
+
+
+<!-- Check whether the page is a post -->
+
+  
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/disqusjs@1.2/dist/disqusjs.css">
+<script id="dsqjs-script" src="https://cdn.jsdelivr.net/npm/disqusjs@1.2/dist/disqus.js"></script>
+<script>
+    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+    var disqus_shortname = 'cubarco';
+    var disqus_siteName = '/home/cubarco';
+    var disqus_api = 'https://disqus.cubl.in/';
+    var disqus_apikey = 'Jw86RA4MHn7FOX9T3JdY2rdOwXIHztQXp1QGQzvEjil3rXPCOfIrn4yF53NEOcho';
+    var disqus_admin = 'cubarco';
+    var disqus_adminLabel = 'Mod';
+    var dsqjs = new DisqusJS({
+    	    shortname: disqus_shortname,
+    	    siteName: disqus_siteName,
+    	    api: disqus_api,
+    	    apikey: disqus_apikey,
+    	    admin: disqus_admin,
+    	    adminLabel: disqus_adminLabel
+    });
+</script>
+
+
+
+
+
+<!-- Asynchronous Google Analytics snippet -->
+<script>
+  var _gaq = _gaq || [];
+  var pluginUrl =
+ '//www.google-analytics.com/plugins/ga/inpage_linkid.js';
+  _gaq.push(['_require', 'inpage_linkid', pluginUrl]);
+  _gaq.push(['_setAccount', 'UA-54867602-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'stats.g.doubleclick.net/dc.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+
+
+</body>
+</html>
