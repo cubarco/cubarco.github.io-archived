@@ -9,8 +9,8 @@
 - title: Blog
   url: /blog/category/blog/
 
-- title: Notes
-  url: /blog/category/notes/
+#- title: Notes
+#  url: /blog/category/notes/
 
 - title: Tags
   url: /blog/tags/

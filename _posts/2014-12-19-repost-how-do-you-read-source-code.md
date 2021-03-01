@@ -1,7 +1,7 @@
 ---
-layout: page
+layout: post
 title: "How do you read source code?"
-categories: notes
+categories: blog
 ---
 
 >Originally posted [here](http://himmele.blogspot.com/2012/01/how-do-you-read-source-code.html)

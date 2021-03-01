@@ -1,7 +1,7 @@
 ---
-layout: page
+layout: post
 title: "do {…} while (0) — What is it good for?"
-categories: notes
+categories: blog
 ---
 
 >Originally posted in [stackoverflow][stackoverflow]

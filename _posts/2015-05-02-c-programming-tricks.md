@@ -1,7 +1,7 @@
 ---
 title: C Programming Tricks
-layout: page
-categories: notes
+layout: post
+categories: blog
 tags:
   - C
   - GCC
