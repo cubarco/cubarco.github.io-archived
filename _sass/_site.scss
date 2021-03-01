@@ -221,7 +221,7 @@ li {
 	code {
 		@include font-size(16);
 		font-family: $code-font;
-		white-space: nowrap;
+		white-space: pre-wrap;
 		margin: 0 2px;
 		padding: 0 5px;
 		border: 1px solid lighten($black, 90);
