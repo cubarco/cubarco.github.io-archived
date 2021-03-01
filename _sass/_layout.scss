@@ -17,7 +17,7 @@ body {
 		display: inline-block;
 		width: 100%;
 		vertical-align: top;
-		margin: 0 0 50px;
+		margin: 0 0 0px;
 		padding: 4px 20px;
 		background-color: $black;
 		@include media($medium) {
@@ -433,7 +433,7 @@ span + .entry-title {
 	margin-top: 0;
 	padding-right: $gutter;
 	padding-left: $gutter;
-	height: 1px;
+	height: 0px;  // why 1px here?
 }
 
 
