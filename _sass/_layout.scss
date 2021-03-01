@@ -209,6 +209,7 @@ body {
 }
 .entry-tags {
 	display: block;
+  overflow-x: auto;
 	margin-top: 2em;
 	text-transform: uppercase;
 	@include font-size(16);
