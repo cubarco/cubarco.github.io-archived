@@ -11,7 +11,10 @@
     var disqus_shortname = '{{ site.disqus.shortname }}';
     var disqus_siteName = '{{ site.disqus.siteName }}';
     var disqus_api = '{{ site.disqus.api }}';
-    var disqus_apikey = '{{ site.disqus.apikey }}';
+    var disqus_apikey = [];
+    {% for apikey in site.disqus.apikey %}
+        disqus_apikey.push('{{ apikey }}');
+    {% endfor %}
     var disqus_admin = '{{ site.disqus.admin }}';
     var disqus_adminLabel = '{{ site.disqus.adminLabel }}';
     var dsqjs = new DisqusJS({
