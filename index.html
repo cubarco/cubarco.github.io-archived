@@ -1,3 +1,7 @@
+---
+# there must be a header here for jekyll to recognize this as a page source
+---
+
 <!doctype html>
 <html>
 
@@ -13,14 +17,15 @@
     <style type="text/css" media="screen">
         @font-face {
             font-family: "SilkscreenNormal";
-            src: url("https://cdn.jsdelivr.net/gh/cubarco/cubarco.github.io@travis-master-archived/nyan/slkscr-webfont.eot");
-            src: url("https://cdn.jsdelivr.net/gh/cubarco/cubarco.github.io@travis-master-archived/nyan/slkscr-webfont.eot?#iefix") format("eot"), url("https://cdn.jsdelivr.net/gh/cubarco/cubarco.github.io@travis-master-archived/nyan/slkscr-webfont.ttf") format("truetype");
+            src: url("{{ site.ghmirror }}/nyan/slkscr-webfont.eot");
+            src: url("{{ site.ghmirror }}/nyan/slkscr-webfont.eot?#iefix") format("eot"),
+            url("{{ site.ghmirror }}/nyan/slkscr-webfont.ttf") format("truetype");
             font-weight: normal;
-            font-style: normal;
+            font-style: normal
         }
 
         body {
-            background: url('https://cdn.jsdelivr.net/gh/cubarco/cubarco.github.io@travis-master-archived/nyan/nyanback.jpg') center no-repeat #0F4D8F;
+            background: url('{{ site.ghmirror }}/nyan/nyanback.jpg') center no-repeat #0F4D8F;
             margin: 50px auto;
             padding: 0;
             text-align: center;
@@ -108,18 +113,16 @@
             -webkit-animation-timing-function: linear;
         }
     </style>
-    <link rel="icon" type="image/gif"
-        href="https://cdn.jsdelivr.net/gh/cubarco/cubarco.github.io@travis-master-archived/nyan/favicon.gif">
+    <link rel="icon" type="image/gif" href="{{ site.ghmirror }}/nyan/favicon.gif">
 </head>
 
 <body>
     <div id="feedme">
         <p>NON-STOP NYAN CAT EVERYWHERE!!!!!</p>
-        <img src="https://cdn.jsdelivr.net/gh/cubarco/cubarco.github.io@travis-master-archived/nyan/nyan2.gif"
-            width="500px" />
+        <img src="{{ site.ghmirror }}/nyan/nyan2.gif" width="500px" />
     </div>
     <p>(〜￣△￣)〜 Spam Away</p>
-    <p><a class="shake" href="https://cubl.in/blog/">-&gt; Blog &lt;-</a></p>
+    <p><a class="shake" href="{{ site.url }}/blog/">-&gt; Blog &lt;-</a></p>
     <!--
      -<p>
      -  <a href="https://plus.google.com/+%E6%9E%97%E5%AE%B6%E5%86%9BCube">Google+</a>
