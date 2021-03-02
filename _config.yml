@@ -5,14 +5,15 @@ locale: zh_CN
 description: Pwning for fun.
 logo: #site-logo.png
 search: true
+since: 2014
 url: https://cubl.in
 ghmirror: https://cdn.jsdelivr.net/gh/cubarco/cubarco.github.io@COMMIT_TAG_NAME
 
 
 # Jekyll configuration
 
-permalink:   /blog/:year/:month/:title/
-markdown:    kramdown
+permalink: /blog/:year/:month/:title/
+markdown: kramdown
 highlighter: rouge
 excerpt_separator: ""
 sass:
@@ -34,8 +35,32 @@ kramdown:
   toc_levels: 1..2
 
 include: [".htaccess"]
-exclude: ["lib", "config.rb", "Capfile", "config", "log", "Rakefile", "Rakefile.rb", "tmp", "less", "*.sublime-project", "*.sublime-workspace", "test", "spec", "Gruntfile.js", "package.json", "node_modules", "Gemfile", "Gemfile.lock", "LICENSE", "vendor", "purge-cache.sh", "build.sh", "README.md"]
-
+exclude:
+  [
+    "lib",
+    "config.rb",
+    "Capfile",
+    "config",
+    "log",
+    "Rakefile",
+    "Rakefile.rb",
+    "tmp",
+    "less",
+    "*.sublime-project",
+    "*.sublime-workspace",
+    "test",
+    "spec",
+    "Gruntfile.js",
+    "package.json",
+    "node_modules",
+    "Gemfile",
+    "Gemfile.lock",
+    "LICENSE",
+    "vendor",
+    "purge-cache.sh",
+    "build.sh",
+    "README.md",
+  ]
 
 # Site owner
 owner:
@@ -58,14 +83,14 @@ owner:
     ad-client:
     ad-slot:
   bing-verify:
- 
+
 disqus:
-        shortname: cubarco
-        siteName: /home/cubarco
-        api: https://disqus.cubl.in/
-        apikey:
-          - Jw86RA4MHn7FOX9T3JdY2rdOwXIHztQXp1QGQzvEjil3rXPCOfIrn4yF53NEOcho
-          - IDVVwMUDkvtvpwfL7KK9Yuqf0OHx0yCpEF3f3awBvWwg0RA2QMRSktMNiBOJs0am
-          - ZOkyhwsK71f8GqNw5M9oCPEAyLXzA3IRqS76QXhJG29XvyjG3g7ocNoSA2PQCp1R
-        admin: cubarco
-        adminLabel: Mod
+  shortname: cubarco
+  siteName: /home/cubarco
+  api: https://disqus.cubl.in/
+  apikey:
+    - Jw86RA4MHn7FOX9T3JdY2rdOwXIHztQXp1QGQzvEjil3rXPCOfIrn4yF53NEOcho
+    - IDVVwMUDkvtvpwfL7KK9Yuqf0OHx0yCpEF3f3awBvWwg0RA2QMRSktMNiBOJs0am
+    - ZOkyhwsK71f8GqNw5M9oCPEAyLXzA3IRqS76QXhJG29XvyjG3g7ocNoSA2PQCp1R
+  admin: cubarco
+  adminLabel: Mod

@@ -1,10 +1,8 @@
 {% if site.owner.google.ad-client and site.owner.google.ad-slot %}{% include ad-footer.html %}{% endif %}
 
-<span>Powered by <a href="http://jekyllrb.com" rel="nofollow">Jekyll</a> using the <a
-		href="https://mademistakes.com/work/so-simple-jekyll-theme/" rel="nofollow">So Simple
-		Theme</a>. Published with <a
-		href="https://docs.github.com/en/github/working-with-github-pages/creating-a-github-pages-site">Github
-		Pages</a>.</span>
+<span>Powered by <a href="https://jekyllrb.com">Jekyll</a>, <a href="https://pages.github.com/">Github
+		Pages</a>, <a href="https://github.com/features/actions">Github Actions</a> and <a
+		href="https://vercel.com/">Vercel</a>.<br />© {{ site.since }} - {{ site.time | date: "%Y" }} ❤ Cubl</span>
 <div class="social-icons">
 	{% if site.owner.twitter %}<a href="https://twitter.com/{{ site.owner.twitter }}"
 		title="{{ site.owner.name}} on Twitter" target="_blank"><i class="fa fa-twitter-square fa-2x"></i></a>{% endif
