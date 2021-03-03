@@ -6,8 +6,10 @@ description: Pwning for fun.
 logo: #site-logo.png
 search: true
 since: 2014
-url: https://cubl.in
-ghmirror: https://cdn.jsdelivr.net/gh/cubarco/cubarco.github.io@COMMIT_TAG_NAME
+#url: https://cubl.in
+url: http://localhost:4000
+#ghmirror: https://cdn.jsdelivr.net/gh/cubarco/cubarco.github.io@COMMIT_TAG_NAME
+ghmirror: http://localhost:4000
 
 
 # Jekyll configuration
