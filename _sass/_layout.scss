@@ -276,8 +276,11 @@ span + .entry-title {
     //	border-bottom: 1px solid rgba($black,.10);
     //}
   }
-  border-bottom: 1px solid lighten($black, 80);
-  border-bottom: 1px solid rgba($black, 0.1);
+  //border-bottom: 1px solid lighten($black, 80);
+  //border-bottom: 1px solid rgba($black, 0.1);
+  border: 1px solid $black;
+  padding: 5px;
+  box-shadow: 5px 10px;
 }
 
 .bio-photo {
@@ -306,6 +309,12 @@ span + .entry-title {
     &:hover {
       border-bottom-style: solid;
     }
+  }
+  h1 {
+    border-bottom: 1px solid #ccc;
+  }
+  h2 {
+    border-bottom: 1px solid #ccc;
   }
 }
 
