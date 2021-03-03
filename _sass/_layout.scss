@@ -403,38 +403,38 @@ span + .entry-title {
 
 // Table of Contents
 // table of contents
-#markdown-toc {
-  font-family: $alt-font;
-  margin-top: $gutter;
-  margin-bottom: $gutter;
-  padding-left: 0;
-  border: 1px solid $border-color;
-  border-radius: $border-radius;
-  ul {
-    list-style-type: none;
-    padding-left: 0;
-  }
-  li {
-    @include font-size(16, no, 18);
-    border-bottom: 1px solid $border-color;
-    list-style-type: none;
-  }
-  h6 {
-    margin: 0;
-    padding: (0.25 * $gutter) (0.5 * $gutter);
-    background: $table-stripe-color;
-  }
-  a {
-    display: block;
-    padding: (0.25 * $gutter) (0.5 * $gutter);
-    border-left: 2px solid transparent;
-    border-bottom: 0 solid transparent;
-    &:hover,
-    &:focus {
-      background: lighten($border-color, 5);
-    }
-  }
-}
+//#markdown-toc {
+//  font-family: $alt-font;
+//  margin-top: $gutter;
+//  margin-bottom: $gutter;
+//  padding-left: 0;
+//  border: 1px solid $border-color;
+//  border-radius: $border-radius;
+//  ul {
+//    list-style-type: none;
+//    padding-left: 0;
+//  }
+//  li {
+//    @include font-size(16, no, 18);
+//    border-bottom: 1px solid $border-color;
+//    list-style-type: none;
+//  }
+//  h6 {
+//    margin: 0;
+//    padding: (0.25 * $gutter) (0.5 * $gutter);
+//    background: $table-stripe-color;
+//  }
+//  a {
+//    display: block;
+//    padding: (0.25 * $gutter) (0.5 * $gutter);
+//    border-left: 2px solid transparent;
+//    border-bottom: 0 solid transparent;
+//    &:hover,
+//    &:focus {
+//      background: lighten($border-color, 5);
+//    }
+//  }
+//}
 
 // Footer
 // --------------------------------------------------

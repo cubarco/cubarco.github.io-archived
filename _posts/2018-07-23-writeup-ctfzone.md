@@ -6,6 +6,8 @@ tags: [Hack, CTF, Writeup, Exploitation, PWN]
 modified: 2018-07-24
 ---
 
+{% include toc %}
+
 两道PWN题, 一个easypwn_strings, 一个Mobile Bank.
 
 # easypwn_strings

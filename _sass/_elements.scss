@@ -468,3 +468,80 @@ table {
   -o-animation-name: drop;
   animation-name: drop;
 }
+
+.toc-wrapper {
+  display: inline-block;
+  margin-bottom: 1.5em;
+  border: 1px solid;
+  border-radius: $border-radius;
+
+  h2 {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    margin: 0;
+    padding: 0.75rem 1rem;
+    font-family: $base-font;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    cursor: pointer;
+
+    .toc-toggle-icon {
+      margin-left: 1rem;
+      -webkit-transition: -webkit-transform 350ms ease;
+      transition: -webkit-transform 350ms ease;
+      transition: transform 350ms ease;
+      transition: transform 350ms ease, -webkit-transform 350ms ease;
+    }
+
+    &.js-toc-is-open {
+      .toc-toggle-icon {
+        -webkit-transform: rotate(180deg);
+        -ms-transform: rotate(180deg);
+        transform: rotate(180deg);
+      }
+    }
+  }
+
+  #markdown-toc {
+    display: none;
+    height: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-left: 2rem;
+    overflow: hidden;
+    font-size: 0.9rem;
+    -webkit-transition: height 350ms ease;
+    transition: height 350ms ease;
+
+    &.js-toc-is-open {
+      display: block;
+      height: auto;
+    }
+  }
+
+  li {
+    padding: 0.3em 0;
+    font-family: $base-font;
+
+    a {
+      display: inline-block;
+      color: inherit;
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-decoration: none;
+      border-bottom: 1px dotted transparent;
+    }
+
+    ol {
+      padding-left: 0.5rem;
+      list-style-type: lower-roman;
+    }
+  }
+}
