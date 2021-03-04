@@ -459,6 +459,7 @@ span + .entry-title {
   padding-right: $gutter;
   padding-left: $gutter;
   height: 0px; // why 1px here?
+  display: none;
 }
 
 // Social Icons
