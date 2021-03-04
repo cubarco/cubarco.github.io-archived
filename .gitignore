@@ -19,7 +19,7 @@ node_modules
 .*~
 
 .bundle
-vendor
+/vendor
 
 .vercel
 .jekyll-cache
