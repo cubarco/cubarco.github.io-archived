@@ -25,7 +25,7 @@
         }
 
         body {
-            background: url('{{ site.ghmirror }}/nyan/nyanback.jpg') center no-repeat #0F4D8F;
+            background: url('{{ site.ghmirror }}/nyan/nyanback.jpg') center repeat-y #0F4D8F;
             margin: 50px auto;
             padding: 0;
             text-align: center;
@@ -112,18 +112,26 @@
             -webkit-animation-iteration-count: infinite;
             -webkit-animation-timing-function: linear;
         }
+
+        .container {
+            position: fixed;
+            top: 40%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
     </style>
     <link rel="icon" type="image/gif" href="{{ site.ghmirror }}/nyan/favicon.gif">
 </head>
 
 <body>
-    <div id="feedme">
-        <p>NON-STOP NYAN CAT EVERYWHERE!!!!!</p>
-        <img src="{{ site.ghmirror }}/nyan/nyan2.gif" width="500px" />
-    </div>
-    <p>(〜￣△￣)〜 Spam Away</p>
-    <p><a class="shake" href="{{ site.url }}/blog/">-&gt; Blog &lt;-</a></p>
-    <!--
+    <div class="container">
+        <div id="feedme">
+            <p>NON-STOP NYAN CAT EVERYWHERE!!!!!</p>
+            <img src="{{ site.ghmirror }}/nyan/nyan2.gif" width="500px" />
+        </div>
+        <p>(〜￣△￣)〜 Spam Away</p>
+        <p><a class="shake" href="{{ site.url }}/blog/">-&gt; Blog &lt;-</a></p>
+        <!--
      -<p>
      -  <a href="https://plus.google.com/+%E6%9E%97%E5%AE%B6%E5%86%9BCube">Google+</a>
      -  |
@@ -134,6 +142,7 @@
      -  <a href="https://github.com/cubarco">Github</a>
      -</p>
      -->
+    </div>
 
 </body>
 <script>
