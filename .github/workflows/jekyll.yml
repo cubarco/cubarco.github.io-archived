@@ -5,6 +5,9 @@ on:
     branches:
       - source-gh-actions
 
+env:
+  FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
+
 jobs:
   jekyll:
     runs-on: ubuntu-16.04
@@ -19,7 +22,7 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-gems-
 
-      - name: Build & deploy
+      - name: Build & deploy to github pages
         uses: cubarco/jekyll-action@master
         if: ${{ github.ref == 'refs/heads/source-gh-actions' }}
         with:
@@ -27,6 +30,13 @@ jobs:
           use_tag: true
           keep_history: true
           target_branch: "gh-pages"
+
+      - name: Deploy to fly.io
+        if: ${{ github.ref == 'refs/heads/source-gh-actions' }}
+        working-directory: ./_site
+        uses: superfly/flyctl-actions@1.1
+        with:
+          args: "deploy"
 
       - name: Build only
         uses: cubarco/jekyll-action@master
