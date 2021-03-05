@@ -1,0 +1,322 @@
+<!doctype html>
+<!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if (IE 7)&!(IEMobile)]><html class="no-js lt-ie9 lt-ie8" lang="en"><![endif]-->
+<!--[if (IE 8)&!(IEMobile)]><html class="no-js lt-ie9" lang="en"><![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js" lang="en">
+<!--<![endif]-->
+
+<head>
+  <meta charset="utf-8">
+<meta name="theme-color" content="#000000">
+<title>Latest Posts &#8211; /home/cubarco</title>
+<meta name="description"
+  content="
+
+  Writeup: CTFZone 2018 Quals July 23, 2018
+
+  如何用 Nginx 搭建简单的 DuckDuckGo 代理站 April 09, 2016
+
+  利用非标准端口 DNS 服务器避免 DNS 劫持 March 23, 2016
+
+  Writeup: ZCTF January 24, 2016
+
+  Writeup: 32c3ctf December 30, 2015
+
+  Writeup-Pwnable: unexploitable December 23, 2015
+
+  Writeup-Pwnable: syscall December 16, 2015
+
+  Writeup-Pwnable: tiny & tiny_easy December 11, 2015
+
+  Writeup-Seccon CTF: FSB:TreeWalker December 07, 2015
+
+  Writeup-9447 CTF: calcpop-reloaded December 04, 2015
+
+
+">
+
+
+
+<!-- Twitter Cards -->
+<meta name="twitter:title" content="Latest Posts">
+<meta name="twitter:description"
+   content="
+
+  Writeup: CTFZone 2018 Quals July 23, 2018
+
+  如何用 Nginx 搭建简单的 DuckDuckGo 代理站 April 09, 2016
+
+  利用非标准端口 DNS 服务器避免 DNS 劫持 March 23, 2016
+
+  Writeup: ZCTF January 24, 2016
+
+  Writeup: 32c3ctf December 30, 2015
+
+  Writeup-Pwnable: unexploitable December 23, 2015
+
+  Writeup-Pwnable: syscall December 16, 2015
+
+  Writeup-Pwnable: tiny & tiny_easy December 11, 2015
+
+  Writeup-Seccon CTF: FSB:TreeWalker December 07, 2015
+
+  Writeup-9447 CTF: calcpop-reloaded December 04, 2015
+
+
+">
+
+<meta name="twitter:site" content="@Cube_Lin">
+
+<meta name="twitter:creator" content="@Cube_Lin">
+
+<meta name="twitter:card" content="summary">
+<!--
+   -<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/cubarco/cubarco.github.io@2021-0305-075102-5525/images/">
+   -->
+
+<!-- Open Graph -->
+<meta property="og:locale" content="zh_CN">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Latest Posts">
+<meta property="og:description"
+   content="
+
+  Writeup: CTFZone 2018 Quals July 23, 2018
+
+  如何用 Nginx 搭建简单的 DuckDuckGo 代理站 April 09, 2016
+
+  利用非标准端口 DNS 服务器避免 DNS 劫持 March 23, 2016
+
+  Writeup: ZCTF January 24, 2016
+
+  Writeup: 32c3ctf December 30, 2015
+
+  Writeup-Pwnable: unexploitable December 23, 2015
+
+  Writeup-Pwnable: syscall December 16, 2015
+
+  Writeup-Pwnable: tiny & tiny_easy December 11, 2015
+
+  Writeup-Seccon CTF: FSB:TreeWalker December 07, 2015
+
+  Writeup-9447 CTF: calcpop-reloaded December 04, 2015
+
+
+">
+<meta property="og:url" content="https://cubl.in/blog/">
+<meta property="og:site_name" content="/home/cubarco">
+
+
+
+
+
+<link rel="canonical" href="https://cubl.in/blog/">
+<link href="https://cubl.in/feed.xml" type="application/atom+xml" rel="alternate" title="/home/cubarco Feed">
+
+
+<!-- http://t.co/dKP3o1e -->
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/cubarco/cubarco.github.io@2021-0305-075102-5525/assets/css/main.css">
+
+
+<!--Webfonts-->
+<link href='//fonts.googleapis.com/css?family=Volkhov|Cabin' rel='stylesheet' type='text/css'>
+<meta http-equiv="cleartype" content="on">
+
+<!-- HTML5 Shiv and Media Query Support -->
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/gh/cubarco/cubarco.github.io@2021-0305-075102-5525/assets/js/vendor/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/cubarco/cubarco.github.io@2021-0305-075102-5525/assets/js/vendor/respond.min.js"></script>
+<![endif]-->
+
+<!-- Modernizr -->
+<script src="https://cdn.jsdelivr.net/gh/cubarco/cubarco.github.io@2021-0305-075102-5525/assets/js/vendor/modernizr-2.7.1.custom.min.js"></script>
+
+  <style>
+    .entry-title {
+      font-family: 'volkhov', serif;
+      font-style: italic;
+      letter-spacing: -3px;
+    }
+  </style>
+</head>
+
+<body id="page">
+
+  <div class="navigation-wrapper">
+	<nav role="navigation" id="site-nav" class="animated drop">
+		<ul>
+			
+			
+			<li><a href="https://cubl.in/blog/" >Latest</a></li>
+			
+			
+			<li><a href="https://cubl.in/blog/about/" >About</a></li>
+			
+			
+			<li><a href="https://cubl.in/blog/archives/" >Archives</a></li>
+			
+			
+			<li><a href="https://cubl.in/blog/tags/" >Tags</a></li>
+			
+			<li class="dosearch"><span><i class="fa fa-search"></i> Search</span></li>
+		</ul>
+	</nav>
+</div><!-- /.navigation-wrapper -->
+
+<!--[if lt IE 9]><div class="upgrade"><strong><a href="http://whatbrowser.org/">Your browser is quite old!</strong> Why not upgrade to a different browser to better enjoy this site?</a></div><![endif]-->
+
+<div class="search-wrapper">
+  <div class="search-form">
+    <input type="text" class="search-field" placeholder="Search...">
+    <button class="close-btn"><i class="fa fa-times-circle fa-2x"></i></button>
+    <ul class="search-results post-list"></ul><!-- /.search-results -->
+  </div><!-- /.search-form -->
+</div><!-- ./search-wrapper -->
+
+<header class="masthead">
+	<div class="wrap">
+		
+		<h1 class="site-title animated fadeIn"><a href="https://cubl.in">/home/cubarco</a></h1>
+		<h2 class="site-description animated fadeIn" itemprop="description">Pwning for fun.</h2>
+	</div>
+</header><!-- /.masthead -->
+
+<div class="js-menu-screen menu-screen"></div>
+
+  <div id="main" role="main">
+    <article class="entry">
+      
+      <div class="entry-wrapper">
+        <header class="entry-header">
+          <h1 class="entry-title">Latest Posts</h1>
+        </header>
+        <div class="entry-content">
+          <ul class="post-list">
+
+  <li><article><a href="https://cubl.in/blog/2018/07/writeup-ctfzone/">Writeup: CTFZone 2018 Quals <span class="entry-date"><time datetime="2018-07-23T00:00:00+00:00">July 23, 2018</time></span></a></article></li>
+
+  <li><article><a href="https://cubl.in/blog/2016/04/how-to-set-up-a-duckduckgo-proxy-site-with-nginx/">如何用 Nginx 搭建简单的 DuckDuckGo 代理站 <span class="entry-date"><time datetime="2016-04-09T00:00:00+00:00">April 09, 2016</time></span></a></article></li>
+
+  <li><article><a href="https://cubl.in/blog/2016/03/avoid-dns-hijacking-with-non-standard-port-dns/">利用非标准端口 DNS 服务器避免 DNS 劫持 <span class="entry-date"><time datetime="2016-03-23T00:00:00+00:00">March 23, 2016</time></span></a></article></li>
+
+  <li><article><a href="https://cubl.in/blog/2016/01/writeup-zctf/">Writeup: ZCTF <span class="entry-date"><time datetime="2016-01-24T00:00:00+00:00">January 24, 2016</time></span></a></article></li>
+
+  <li><article><a href="https://cubl.in/blog/2015/12/writeup-32c3ctf/">Writeup: 32c3ctf <span class="entry-date"><time datetime="2015-12-30T00:00:00+00:00">December 30, 2015</time></span></a></article></li>
+
+  <li><article><a href="https://cubl.in/blog/2015/12/writeup-pwnable-unexploitable/">Writeup-Pwnable: unexploitable <span class="entry-date"><time datetime="2015-12-23T00:00:00+00:00">December 23, 2015</time></span></a></article></li>
+
+  <li><article><a href="https://cubl.in/blog/2015/12/writeup-pwnable-syscall/">Writeup-Pwnable: syscall <span class="entry-date"><time datetime="2015-12-16T00:00:00+00:00">December 16, 2015</time></span></a></article></li>
+
+  <li><article><a href="https://cubl.in/blog/2015/12/writeup-pwnable-tiny-and-tiny-easy/">Writeup-Pwnable: tiny & tiny_easy <span class="entry-date"><time datetime="2015-12-11T00:00:00+00:00">December 11, 2015</time></span></a></article></li>
+
+  <li><article><a href="https://cubl.in/blog/2015/12/seccon-ctf-writeup-fsb-treewalker/">Writeup-Seccon CTF: FSB:TreeWalker <span class="entry-date"><time datetime="2015-12-07T00:00:00+00:00">December 07, 2015</time></span></a></article></li>
+
+  <li><article><a href="https://cubl.in/blog/2015/12/9477-calcpop-reloaded-writeup/">Writeup-9447 CTF: calcpop-reloaded <span class="entry-date"><time datetime="2015-12-04T00:00:00+00:00">December 04, 2015</time></span></a></article></li>
+
+</ul>
+
+          
+        </div><!-- /.entry-content -->
+      </div><!-- /.entry-wrapper -->
+    </article>
+  </div><!-- /#main -->
+
+  <div class="footer-wrapper">
+    <footer role="contentinfo" class="entry-wrapper">
+      
+
+<span>
+	Powered by <a href="https://jekyllrb.com">Jekyll</a>, <a href="https://github.com/features/actions">Github Actions</a>, <a href="https://pages.github.com/">Github Pages</a>, <a href="https://www.jsdelivr.com/">jsDelivr</a> and <a href="https://vercel.com/">Vercel</a>.
+	<br />
+	© 2014 - 2021 ❤ Cubl
+</span>
+<div class="social-icons">
+	<a href="https://twitter.com/Cube_Lin"
+		title="Cubarco on Twitter" target="_blank"><i class="fa fa-twitter-square fa-2x"></i></a>
+	
+	
+	
+	
+	
+	
+	<a href="https://github.com/cubarco"
+		title="Cubarco on Github" target="_blank"><i class="fa fa-github-square fa-2x"></i></a>
+	
+	<a href="https://cubl.in/feed.xml" title="Atom/RSS feed"><i class="fa fa-rss-square fa-2x"></i></a>
+</div><!-- /.social-icons -->
+    </footer>
+  </div><!-- /.footer-wrapper -->
+
+  <script src="https://cdn.jsdelivr.net/gh/cubarco/cubarco.github.io@2021-0305-075102-5525/assets/js/vendor/jquery-2.1.4.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/cubarco/cubarco.github.io@2021-0305-075102-5525/assets/js/gist-async.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/cubarco/cubarco.github.io@2021-0305-075102-5525/assets/js/scripts.min.js"></script>
+
+<!-- Jekyll Simple Search option -->
+<script>
+  $(document).ready(function () {
+    $('.search-field').jekyllSearch({
+      jsonFile: 'https://cdn.jsdelivr.net/gh/cubarco/cubarco.github.io@2021-0305-075102-5525/search.json',
+      searchResults: '.search-results',
+      template: '<li><article><a href="{url}">{title} <span class="entry-date"><time datetime="{date}">{shortdate}</time></span></a></article></li>',
+      fuzzy: true,
+      noResults: '<p>Nothing found.</p>'
+    });
+  });
+
+  (function ($, window, undefined) {
+
+    var bs = {
+      close: $(".close-btn"),
+      searchform: $(".search-form"),
+      canvas: $(".js-menu-screen"),
+      dothis: $('.dosearch')
+    };
+
+    bs.dothis.on('click', function () {
+      $('.search-wrapper').css({ display: "block" });
+      $('body').toggleClass('no-scroll');
+      bs.searchform.toggleClass('active');
+      bs.searchform.find('input').focus();
+      bs.canvas.toggleClass('is-visible');
+    });
+
+    bs.close.on('click', function () {
+      $('.search-wrapper').removeAttr('style');
+      $('body').toggleClass('no-scroll');
+      bs.searchform.toggleClass('active');
+      bs.canvas.removeClass('is-visible');
+    });
+  })(jQuery, window);
+</script>
+
+
+<!-- Check whether the page is a post -->
+
+
+
+<!-- Asynchronous Google Analytics snippet -->
+<script>
+  var _gaq = _gaq || [];
+  var pluginUrl =
+    '//www.google-analytics.com/plugins/ga/inpage_linkid.js';
+  _gaq.push(['_require', 'inpage_linkid', pluginUrl]);
+  _gaq.push(['_setAccount', 'UA-54867602-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function () {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'stats.g.doubleclick.net/dc.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+
+</body>
+
+</html>
