@@ -1,0 +1,435 @@
+<!doctype html>
+<!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if (IE 7)&!(IEMobile)]><html class="no-js lt-ie9 lt-ie8" lang="en"><![endif]-->
+<!--[if (IE 8)&!(IEMobile)]><html class="no-js lt-ie9" lang="en"><![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js" lang="en">
+<!--<![endif]-->
+
+<head>
+  <meta charset="utf-8">
+<meta name="theme-color" content="#000000">
+<title>[转] C中的可变参数研究 &#8211; /home/cubarco</title>
+<meta name="description"
+  content="初学C，感觉可变参数挺好玩的，转载一发做个mark。本想注明来源，发现来源也是转载的，找不到根源，就不贴链接了。 一. 何谓可变参数 int printf(const char* format, ...); 这是使用过C语言的人所再熟悉不过的printf函数原型，它的参数中就有固定参数format和可变参数（用”…”表示）.   而我们又可以用各种方式来调用printf,如: printf("%d",value); printf("%s",str); printf("the number is %d,string is: %s", value, str); 二. 实现原理 C语言用宏来处理这些可变参数。这些宏看起来很复杂，其实原理挺简单，就是根据参数入栈的特点从最靠近第一个可变参数的固定参数开始，依次获取每个可变参数的地址。下面我们来分析这些宏。在VC中的stdarg.h头文件中，针对不同平台有不同的宏定义，我们选取X86平台下的宏定义： typedef char *va_list; /*把va_list被定义成char*，这是因为在我们目前所用的PC机上，字符指针类型可以用来存储内存单元地址。而在有的机器上va_list是被定义成void*的*/ #define _INTSIZEOF(n) ((sizeof(n) + sizeof(int) - 1) &amp; ~(sizeof(int) - 1)) /*_INTSIZEOF(n)宏是为了考虑那些内存地址需要对齐的系统，从宏的名字来应该是跟sizeof(int)对齐。一般的sizeof(int)=4，也就是参数在内存中的地址都为4的倍数。比如，如果sizeof(n)在1－4之间，那么_INTSIZEOF(n)＝4；如果sizeof(n)在5－8之间，那么_INTSIZEOF(n)=8。*/ #define va_start(ap,v)(ap = (va_list)&amp;v + _INTSIZEOF(v)) /*va_start的定义为 &amp;v+_INTSIZEOF(v), 这里&amp;v是最后一个固定参数的起始地址，再加上其实际占用大小后，就得到了第一个可变参数的起始内存地址。所以我们运行va_start(ap, v)以后,ap指向第一个可变参数在的内存地址*/ #define va_arg(ap,t) (*(t*)((ap += _INTSIZEOF(t)) - _INTSIZEOF(t))) /*这个宏做了两个事情， ①用用户输入的类型名对参数地址进行强制类型转换，得到用户所需要的值 ②计算出本参数的实际大小，将指针调到本参数的结尾，也就是下一个参数的首地址，以便后续处理。*/ #define va_end(ap) (ap = (va_list)0) /*x86平台定义为ap=(char*)0;使ap不再指向堆栈,而是跟NULL一样.有些直接定义为((void*)0),这样编译器不会为va_end产生代码,例如gcc在linux的x86平台就是这样定义的.在这里大家要注意一个问题:由于参数的地址用于va_start宏,所以参数不能声明为寄存器变量或作为函数或数组类型.*/ 以下再用图来表示(这什么破图): 在VC等绝大多数C编译器中，默认情况下，参数进栈的顺序是由右向左的，因此，参数进栈以后的内存模型如下图所示：最后一个固定参数的地址位于第一个可变参数之下，并且是连续存储的。 |——————————————————————————| |最后一个可变参数   |   -&gt;高内存地址处 |——————————————————————————|...">
+
+<meta name="keywords" content="C">
+
+
+<!-- Twitter Cards -->
+<meta name="twitter:title" content="[转] C中的可变参数研究">
+<meta name="twitter:description"
+   content="初学C，感觉可变参数挺好玩的，转载一发做个mark。本想注明来源，发现来源也是转载的，找不到根源，就不贴链接了。 一. 何谓可变参数 int printf(const char* format, ...); 这是使用过C语言的人所再熟悉不过的printf函数原型，它的参数中就有固定参数format和可变参数（用”…”表示）.   而我们又可以用各种方式来调用printf,如: printf("%d",value); printf("%s",str); printf("the number is %d,string is: %s", value, str); 二. 实现原理 C语言用宏来处理这些可变参数。这些宏看起来很复杂，其实原理挺简单，就是根据参数入栈的特点从最靠近第一个可变参数的固定参数开始，依次获取每个可变参数的地址。下面我们来分析这些宏。在VC中的stdarg.h头文件中，针对不同平台有不同的宏定义，我们选取X86平台下的宏定义： typedef char *va_list; /*把va_list被定义成char*，这是因为在我们目前所用的PC机上，字符指针类型可以用来存储内存单元地址。而在有的机器上va_list是被定义成void*的*/ #define _INTSIZEOF(n) ((sizeof(n) + sizeof(int) - 1) &amp; ~(sizeof(int) - 1)) /*_INTSIZEOF(n)宏是为了考虑那些内存地址需要对齐的系统，从宏的名字来应该是跟sizeof(int)对齐。一般的sizeof(int)=4，也就是参数在内存中的地址都为4的倍数。比如，如果sizeof(n)在1－4之间，那么_INTSIZEOF(n)＝4；如果sizeof(n)在5－8之间，那么_INTSIZEOF(n)=8。*/ #define va_start(ap,v)(ap = (va_list)&amp;v + _INTSIZEOF(v)) /*va_start的定义为 &amp;v+_INTSIZEOF(v), 这里&amp;v是最后一个固定参数的起始地址，再加上其实际占用大小后，就得到了第一个可变参数的起始内存地址。所以我们运行va_start(ap, v)以后,ap指向第一个可变参数在的内存地址*/ #define va_arg(ap,t) (*(t*)((ap += _INTSIZEOF(t)) - _INTSIZEOF(t))) /*这个宏做了两个事情， ①用用户输入的类型名对参数地址进行强制类型转换，得到用户所需要的值 ②计算出本参数的实际大小，将指针调到本参数的结尾，也就是下一个参数的首地址，以便后续处理。*/ #define va_end(ap) (ap = (va_list)0) /*x86平台定义为ap=(char*)0;使ap不再指向堆栈,而是跟NULL一样.有些直接定义为((void*)0),这样编译器不会为va_end产生代码,例如gcc在linux的x86平台就是这样定义的.在这里大家要注意一个问题:由于参数的地址用于va_start宏,所以参数不能声明为寄存器变量或作为函数或数组类型.*/ 以下再用图来表示(这什么破图): 在VC等绝大多数C编译器中，默认情况下，参数进栈的顺序是由右向左的，因此，参数进栈以后的内存模型如下图所示：最后一个固定参数的地址位于第一个可变参数之下，并且是连续存储的。 |——————————————————————————| |最后一个可变参数   |   -&gt;高内存地址处 |——————————————————————————|...">
+
+<meta name="twitter:site" content="@Cube_Lin">
+
+<meta name="twitter:creator" content="@Cube_Lin">
+
+<meta name="twitter:card" content="summary">
+<!--
+   -<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/cubarco/cubarco.github.io@2021-0305-034504-1678/images/">
+   -->
+
+<!-- Open Graph -->
+<meta property="og:locale" content="zh_CN">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[转] C中的可变参数研究">
+<meta property="og:description"
+   content="初学C，感觉可变参数挺好玩的，转载一发做个mark。本想注明来源，发现来源也是转载的，找不到根源，就不贴链接了。 一. 何谓可变参数 int printf(const char* format, ...); 这是使用过C语言的人所再熟悉不过的printf函数原型，它的参数中就有固定参数format和可变参数（用”…”表示）.   而我们又可以用各种方式来调用printf,如: printf("%d",value); printf("%s",str); printf("the number is %d,string is: %s", value, str); 二. 实现原理 C语言用宏来处理这些可变参数。这些宏看起来很复杂，其实原理挺简单，就是根据参数入栈的特点从最靠近第一个可变参数的固定参数开始，依次获取每个可变参数的地址。下面我们来分析这些宏。在VC中的stdarg.h头文件中，针对不同平台有不同的宏定义，我们选取X86平台下的宏定义： typedef char *va_list; /*把va_list被定义成char*，这是因为在我们目前所用的PC机上，字符指针类型可以用来存储内存单元地址。而在有的机器上va_list是被定义成void*的*/ #define _INTSIZEOF(n) ((sizeof(n) + sizeof(int) - 1) &amp; ~(sizeof(int) - 1)) /*_INTSIZEOF(n)宏是为了考虑那些内存地址需要对齐的系统，从宏的名字来应该是跟sizeof(int)对齐。一般的sizeof(int)=4，也就是参数在内存中的地址都为4的倍数。比如，如果sizeof(n)在1－4之间，那么_INTSIZEOF(n)＝4；如果sizeof(n)在5－8之间，那么_INTSIZEOF(n)=8。*/ #define va_start(ap,v)(ap = (va_list)&amp;v + _INTSIZEOF(v)) /*va_start的定义为 &amp;v+_INTSIZEOF(v), 这里&amp;v是最后一个固定参数的起始地址，再加上其实际占用大小后，就得到了第一个可变参数的起始内存地址。所以我们运行va_start(ap, v)以后,ap指向第一个可变参数在的内存地址*/ #define va_arg(ap,t) (*(t*)((ap += _INTSIZEOF(t)) - _INTSIZEOF(t))) /*这个宏做了两个事情， ①用用户输入的类型名对参数地址进行强制类型转换，得到用户所需要的值 ②计算出本参数的实际大小，将指针调到本参数的结尾，也就是下一个参数的首地址，以便后续处理。*/ #define va_end(ap) (ap = (va_list)0) /*x86平台定义为ap=(char*)0;使ap不再指向堆栈,而是跟NULL一样.有些直接定义为((void*)0),这样编译器不会为va_end产生代码,例如gcc在linux的x86平台就是这样定义的.在这里大家要注意一个问题:由于参数的地址用于va_start宏,所以参数不能声明为寄存器变量或作为函数或数组类型.*/ 以下再用图来表示(这什么破图): 在VC等绝大多数C编译器中，默认情况下，参数进栈的顺序是由右向左的，因此，参数进栈以后的内存模型如下图所示：最后一个固定参数的地址位于第一个可变参数之下，并且是连续存储的。 |——————————————————————————| |最后一个可变参数   |   -&gt;高内存地址处 |——————————————————————————|...">
+<meta property="og:url" content="https://cubl.in/blog/2014/02/C%E8%AF%AD%E8%A8%80%E4%B8%AD%E5%8F%AF%E5%8F%98%E5%8F%82%E6%95%B0%E7%9A%84%E7%A0%94%E7%A9%B6/">
+<meta property="og:site_name" content="/home/cubarco">
+
+
+
+
+
+<link rel="canonical" href="https://cubl.in/blog/2014/02/C%E8%AF%AD%E8%A8%80%E4%B8%AD%E5%8F%AF%E5%8F%98%E5%8F%82%E6%95%B0%E7%9A%84%E7%A0%94%E7%A9%B6/">
+<link href="https://cubl.in/feed.xml" type="application/atom+xml" rel="alternate" title="/home/cubarco Feed">
+
+
+<!-- http://t.co/dKP3o1e -->
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/cubarco/cubarco.github.io@2021-0305-034504-1678/assets/css/main.css">
+
+
+<!--Webfonts-->
+<link href='//fonts.googleapis.com/css?family=Volkhov|Cabin' rel='stylesheet' type='text/css'>
+<meta http-equiv="cleartype" content="on">
+
+<!-- HTML5 Shiv and Media Query Support -->
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/gh/cubarco/cubarco.github.io@2021-0305-034504-1678/assets/js/vendor/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/cubarco/cubarco.github.io@2021-0305-034504-1678/assets/js/vendor/respond.min.js"></script>
+<![endif]-->
+
+<!-- Modernizr -->
+<script src="https://cdn.jsdelivr.net/gh/cubarco/cubarco.github.io@2021-0305-034504-1678/assets/js/vendor/modernizr-2.7.1.custom.min.js"></script>
+
+</head>
+
+<body id="post">
+
+  <div class="navigation-wrapper">
+	<nav role="navigation" id="site-nav" class="animated drop">
+		<ul>
+			
+			
+			<li><a href="https://cubl.in/blog/" >Latest</a></li>
+			
+			
+			<li><a href="https://cubl.in/blog/about/" >About</a></li>
+			
+			
+			<li><a href="https://cubl.in/blog/category/blog/" >Blog</a></li>
+			
+			
+			<li><a href="https://cubl.in/blog/tags/" >Tags</a></li>
+			
+			<li class="dosearch"><span><i class="fa fa-search"></i> Search</span></li>
+		</ul>
+	</nav>
+</div><!-- /.navigation-wrapper -->
+
+<!--[if lt IE 9]><div class="upgrade"><strong><a href="http://whatbrowser.org/">Your browser is quite old!</strong> Why not upgrade to a different browser to better enjoy this site?</a></div><![endif]-->
+
+<div class="search-wrapper">
+  <div class="search-form">
+    <input type="text" class="search-field" placeholder="Search...">
+    <button class="close-btn"><i class="fa fa-times-circle fa-2x"></i></button>
+    <ul class="search-results post-list"></ul><!-- /.search-results -->
+  </div><!-- /.search-form -->
+</div><!-- ./search-wrapper -->
+
+<div class="js-menu-screen menu-screen"></div>
+
+  <div id="main" role="main">
+    <article class="hentry">
+      
+      <div class="entry-wrapper">
+        <header class="entry-header">
+          <span class="entry-tags"><a href="https://cubl.in/blog/tags/#C"
+              title="Pages tagged C">C</a></span>
+          
+          <h1 class="entry-title">[转] C中的可变参数研究</h1>
+          
+        </header>
+        <footer class="entry-meta">
+          
+          
+          <span class="author vcard">By <span class="fn">Cubarco</span></span>
+          <span class="entry-date date published"><time datetime="2014-02-25T00:00:00+00:00"><i
+                class="fa fa-calendar-o"></i> February 25, 2014</time></span>
+          
+          <span class="entry-comments"><i
+              class="fa fa-comment-o"></i> <a href="#disqus_thread">Comment</a></span>
+          <span class="social-share-twitter">
+  <a href="https://twitter.com/intent/tweet?hashtags=C&amp;text=[转]%20C中的可变参数研究&amp;url=https://cubl.in/blog/2014/02/C%E8%AF%AD%E8%A8%80%E4%B8%AD%E5%8F%AF%E5%8F%98%E5%8F%82%E6%95%B0%E7%9A%84%E7%A0%94%E7%A9%B6/&amp;via=Cube_Lin"
+    title="Share on Twitter" itemprop="Twitter"><i class="fa fa-twitter-square"></i> Tweet</a>
+</span>
+<span class="social-share-facebook">
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https://cubl.in/blog/2014/02/C%E8%AF%AD%E8%A8%80%E4%B8%AD%E5%8F%AF%E5%8F%98%E5%8F%82%E6%95%B0%E7%9A%84%E7%A0%94%E7%A9%B6/" title="Share on Facebook"
+    itemprop="Facebook"><i class="fa fa-facebook-square"></i> Like</a>
+</span>
+<!-- /.social-share -->
+          
+        </footer>
+        <div class="entry-content">
+          <p><em><del>初学C，感觉可变参数挺好玩的，转载一发做个mark。本想注明来源，发现来源也是转载的，找不到根源，就不贴链接了。</del></em></p>
+
+<h3 id="一-何谓可变参数">一. 何谓可变参数</h3>
+
+<figure class="highlight"><pre><code class="language-c" data-lang="c"><span class="kt">int</span> <span class="nf">printf</span><span class="p">(</span><span class="k">const</span> <span class="kt">char</span><span class="o">*</span> <span class="n">format</span><span class="p">,</span> <span class="p">...);</span></code></pre></figure>
+
+<p>这是使用过C语言的人所再熟悉不过的printf函数原型，它的参数中就有固定参数format和可变参数（用”…”表示）.   而我们又可以用各种方式来调用printf,如:</p>
+
+<figure class="highlight"><pre><code class="language-c" data-lang="c"><span class="n">printf</span><span class="p">(</span><span class="s">"%d"</span><span class="p">,</span><span class="n">value</span><span class="p">);</span>
+<span class="n">printf</span><span class="p">(</span><span class="s">"%s"</span><span class="p">,</span><span class="n">str</span><span class="p">);</span>
+<span class="n">printf</span><span class="p">(</span><span class="s">"the number is %d,string is: %s"</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">str</span><span class="p">);</span></code></pre></figure>
+
+<h3 id="二-实现原理">二. 实现原理</h3>
+
+<p>C语言用宏来处理这些可变参数。这些宏看起来很复杂，其实原理挺简单，就是根据参数入栈的特点从最靠近第一个可变参数的固定参数开始，依次获取每个可变参数的地址。下面我们来分析这些宏。在VC中的stdarg.h头文件中，针对不同平台有不同的宏定义，我们选取X86平台下的宏定义：</p>
+
+<figure class="highlight"><pre><code class="language-c" data-lang="c"><span class="k">typedef</span> <span class="kt">char</span> <span class="o">*</span><span class="kt">va_list</span><span class="p">;</span>
+<span class="cm">/*把va_list被定义成char*，这是因为在我们目前所用的PC机上，字符指针类型可以用来存储内存单元地址。而在有的机器上va_list是被定义成void*的*/</span>
+<span class="cp">#define _INTSIZEOF(n) ((sizeof(n) + sizeof(int) - 1) &amp; ~(sizeof(int) - 1))
+</span><span class="cm">/*_INTSIZEOF(n)宏是为了考虑那些内存地址需要对齐的系统，从宏的名字来应该是跟sizeof(int)对齐。一般的sizeof(int)=4，也就是参数在内存中的地址都为4的倍数。比如，如果sizeof(n)在1－4之间，那么_INTSIZEOF(n)＝4；如果sizeof(n)在5－8之间，那么_INTSIZEOF(n)=8。*/</span>
+<span class="cp">#define va_start(ap,v)(ap = (va_list)&amp;v + _INTSIZEOF(v))
+</span><span class="cm">/*va_start的定义为 &amp;v+_INTSIZEOF(v), 这里&amp;v是最后一个固定参数的起始地址，再加上其实际占用大小后，就得到了第一个可变参数的起始内存地址。所以我们运行va_start(ap, v)以后,ap指向第一个可变参数在的内存地址*/</span>
+<span class="cp">#define va_arg(ap,t) (*(t*)((ap += _INTSIZEOF(t)) - _INTSIZEOF(t)))
+</span><span class="cm">/*这个宏做了两个事情，
+①用用户输入的类型名对参数地址进行强制类型转换，得到用户所需要的值
+②计算出本参数的实际大小，将指针调到本参数的结尾，也就是下一个参数的首地址，以便后续处理。*/</span>
+<span class="cp">#define va_end(ap) (ap = (va_list)0)
+</span><span class="cm">/*x86平台定义为ap=(char*)0;使ap不再指向堆栈,而是跟NULL一样.有些直接定义为((void*)0),这样编译器不会为va_end产生代码,例如gcc在linux的x86平台就是这样定义的.在这里大家要注意一个问题:由于参数的地址用于va_start宏,所以参数不能声明为寄存器变量或作为函数或数组类型.*/</span></code></pre></figure>
+
+<p>以下再用图来表示<del>(这什么破图)</del>:</p>
+
+<p>在VC等绝大多数C编译器中，默认情况下，参数进栈的顺序是由右向左的，因此，参数进栈以后的内存模型如下图所示：最后一个固定参数的地址位于第一个可变参数之下，并且是连续存储的。</p>
+<pre>
+|——————————————————————————|  
+|最后一个可变参数   |   -&gt;高内存地址处  
+|——————————————————————————|  
+&#8230;&#8230;&#8230;&#8230;&#8230;&#8230;.  
+|——————————————————————————|  
+|第N个可变参数   |   -&gt;va\_arg(arg\_ptr,int)后arg_ptr所指的地方,  
+|   |   即第N个可变参数的地址。  
+|———————————————   |  
+………………………….  
+|——————————————————————————|  
+|第一个可变参数   |   -&gt;va\_start(arg\_ptr,start)后arg_ptr所指的地方  
+|   |   即第一个可变参数的地址  
+|———————————————   |  
+|————————————————————————   ——|  
+|   |  
+|最后一个固定参数   |   -&gt;   start的起始地址  
+|——————————————   —|   &#8230;&#8230;&#8230;&#8230;&#8230;..  
+|——————————————————————————   |  
+|   |  
+|———————————————   |-&gt;   低内存地址处
+</pre>
+
+<h3 id="三-printf研究">三. printf研究</h3>
+
+<p>下面是一个简单的printf函数的实现。<del>（作者简直是幽默，所谓printf函数的实现里面居然用到了printf函数。。。）</del></p>
+
+<figure class="highlight"><pre><code class="language-c" data-lang="c"><span class="cp">#include "stdio.h"
+#include "stdlib.h"
+</span><span class="kt">void</span> <span class="nf">myprintf</span><span class="p">(</span><span class="kt">char</span><span class="o">*</span> <span class="n">fmt</span><span class="p">,</span> <span class="p">...)</span> <span class="c1">//一个简单的类似于printf的实现,参数必须都是int类型</span>
+<span class="p">{</span>
+<span class="kt">char</span><span class="o">*</span> <span class="n">pArg</span><span class="o">=</span><span class="nb">NULL</span><span class="p">;</span> <span class="err"> </span> <span class="c1">//等价于原来的va_list</span>
+<span class="kt">char</span> <span class="n">c</span><span class="p">;</span>
+
+<span class="n">pArg</span> <span class="o">=</span> <span class="p">(</span><span class="kt">char</span><span class="o">*</span><span class="p">)</span><span class="o">&amp;</span><span class="n">fmt</span><span class="p">;</span> <span class="err"> </span> <span class="c1">//注意不要写成p = fmt, 因为这里要对参数取址，而不是取值</span>
+<span class="n">pArg</span> <span class="o">+=</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">fmt</span><span class="p">);</span> <span class="err"> </span> <span class="c1">//等价于原来的va_start</span>
+
+<span class="k">do</span>
+<span class="p">{</span>
+<span class="n">c</span> <span class="o">=*</span><span class="n">fmt</span><span class="p">;</span>
+<span class="k">if</span> <span class="p">(</span><span class="n">c</span> <span class="o">!=</span> <span class="sc">'%'</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="n">putchar</span><span class="p">(</span><span class="n">c</span><span class="p">);</span> <span class="err"> </span> <span class="c1">//照原样输出字符</span>
+<span class="p">}</span>
+<span class="k">else</span>
+<span class="p">{</span>
+<span class="c1">//按格式字符输出数据</span>
+<span class="k">switch</span><span class="p">(</span><span class="o">*++</span><span class="n">fmt</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="k">case</span> <span class="sc">'d'</span><span class="p">:</span>
+<span class="n">printf</span><span class="p">(</span><span class="s">"%d"</span><span class="p">,</span> <span class="o">*</span><span class="p">((</span><span class="kt">int</span><span class="o">*</span><span class="p">)</span><span class="n">pArg</span><span class="p">));</span>
+<span class="k">break</span><span class="p">;</span>
+<span class="k">case</span> <span class="sc">'x'</span><span class="p">:</span>
+<span class="n">printf</span><span class="p">(</span><span class="s">"%#x"</span><span class="p">,</span> <span class="o">*</span><span class="p">((</span><span class="kt">int</span><span class="o">*</span><span class="p">)</span><span class="n">pArg</span><span class="p">));</span>
+<span class="k">break</span><span class="p">;</span>
+<span class="nl">default:</span>
+<span class="k">break</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="n">pArg</span> <span class="o">+=</span> <span class="k">sizeof</span><span class="p">(</span><span class="kt">int</span><span class="p">);</span> <span class="err"> </span> <span class="c1">//等价于原来的va_arg</span>
+<span class="p">}</span>
+<span class="o">++</span><span class="n">fmt</span><span class="p">;</span>
+<span class="p">}</span><span class="k">while</span><span class="p">(</span><span class="o">*</span><span class="n">fmt</span> <span class="o">!=</span> <span class="err">'</span><span class="o">/</span><span class="mi">0</span><span class="err">'</span><span class="p">);</span>
+<span class="n">pArg</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span> <span class="err"> </span> <span class="c1">//等价于va_end</span>
+<span class="k">return</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span><span class="o">*</span> <span class="n">argv</span><span class="p">[])</span>
+<span class="p">{</span>
+<span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1234</span><span class="p">;</span>
+<span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">5678</span><span class="p">;</span>
+
+<span class="n">myprintf</span><span class="p">(</span><span class="s">"the first test:i=%d"</span><span class="p">,</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">);</span>
+<span class="n">myprintf</span><span class="p">(</span><span class="s">"the secend test:i=%d; %x;j=%d;"</span><span class="p">,</span><span class="n">i</span><span class="p">,</span><span class="mh">0xabcd</span><span class="p">,</span><span class="n">j</span><span class="p">);</span>
+<span class="n">system</span><span class="p">(</span><span class="s">"pause"</span><span class="p">);</span>
+<span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span></code></pre></figure>
+
+<p>在intel+win2k+vc6的机器执行结果如下：</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>the first test:i=1234
+the secend test:i=1234; 0xabcd;j=5678;
+</code></pre></div></div>
+
+<h3 id="四-应用">四. 应用</h3>
+
+<p>求最大值<del>(原文代码有问题，重写了一个)</del>:</p>
+
+<figure class="highlight"><pre><code class="language-c" data-lang="c"><span class="cp">#include &lt;stdio.h&gt;
+#include &lt;stdarg.h&gt;
+</span>
+<span class="kt">int</span> <span class="nf">max</span><span class="p">(</span><span class="kt">int</span> <span class="n">n</span><span class="p">,</span> <span class="p">...);</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+        <span class="n">printf</span><span class="p">(</span><span class="s">"%d"</span><span class="p">,</span> <span class="n">max</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">));</span>
+        <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">int</span> <span class="nf">max</span><span class="p">(</span><span class="kt">int</span> <span class="n">n</span><span class="p">,</span> <span class="p">...)</span>    <span class="c1">// n记录可变参数的数量</span>
+<span class="p">{</span>  
+        <span class="kt">va_list</span> <span class="n">ap</span><span class="p">;</span>
+        <span class="n">va_start</span><span class="p">(</span><span class="n">ap</span><span class="p">,</span> <span class="n">n</span><span class="p">);</span>    <span class="c1">// 将ap指向n的后一个参数</span>
+
+        <span class="kt">int</span> <span class="n">i</span><span class="p">,</span> <span class="n">tmp</span><span class="p">,</span> <span class="n">max_num</span><span class="o">=</span><span class="n">va_arg</span><span class="p">(</span><span class="n">ap</span><span class="p">,</span> <span class="kt">int</span><span class="p">);</span>
+        <span class="k">for</span><span class="p">(</span><span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">n</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>   <span class="c1">// 计算最大值</span>
+        <span class="p">{</span>   
+                <span class="k">if</span><span class="p">(</span><span class="n">max_num</span> <span class="o">&lt;</span> <span class="p">(</span><span class="n">tmp</span><span class="o">=</span><span class="n">va_arg</span><span class="p">(</span><span class="n">ap</span><span class="p">,</span> <span class="kt">int</span><span class="p">)))</span> 
+                        <span class="n">max_num</span> <span class="o">=</span> <span class="n">tmp</span><span class="p">;</span>
+        <span class="p">}</span>
+
+        <span class="n">va_end</span><span class="p">(</span><span class="n">ap</span><span class="p">);</span>    <span class="c1">// 清除ap</span>
+        <span class="k">return</span> <span class="n">max_num</span><span class="p">;</span>
+<span class="p">}</span></code></pre></figure>
+
+
+          <div>
+            <span><a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/"><img
+                  alt="Creative Commons License" style="border-width:0"
+                  src="https://cdn.jsdelivr.net/gh/cubarco/cubarco.github.io@2021-0305-034504-1678/images/cc_by-nc_88x31.png" /></a></span>
+          </div>
+          <nav class="pagination" role="navigation">
+            
+            <a href="https://cubl.in/blog/2014/02/%E9%80%9A%E8%BF%87dns%E9%9A%A7%E9%81%93%E7%BB%95%E8%BF%87portal%E8%AE%A4%E8%AF%81/" class="btn" title="通过DNS隧道绕过portal认证">Previous</a>
+            
+            
+            <a href="https://cubl.in/blog/2014/03/kde%E7%AA%97%E5%8F%A3%E6%92%95%E8%A3%82%E7%9A%84%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95/" class="btn" title="KDE窗口撕裂的解决办法">Next</a>
+            
+          </nav><!-- /.pagination -->
+          <div id="disqus_thread"></div>
+          <!-- /#disqus_thread -->
+        </div><!-- /.entry-content -->
+      </div><!-- /.entry-wrapper -->
+
+    </article>
+  </div><!-- /#main -->
+
+  <div class="footer-wrapper">
+    <footer role="contentinfo" class="entry-wrapper">
+      
+
+<span>
+	Powered by <a href="https://jekyllrb.com">Jekyll</a>, <a href="https://github.com/features/actions">Github Actions</a>, <a href="https://pages.github.com/">Github Pages</a>, <a href="https://www.jsdelivr.com/">jsDelivr</a> and <a href="https://vercel.com/">Vercel</a>.
+	<br />
+	© 2014 - 2021 ❤ Cubl
+</span>
+<div class="social-icons">
+	<a href="https://twitter.com/Cube_Lin"
+		title="Cubarco on Twitter" target="_blank"><i class="fa fa-twitter-square fa-2x"></i></a>
+	
+	
+	
+	
+	
+	
+	<a href="https://github.com/cubarco"
+		title="Cubarco on Github" target="_blank"><i class="fa fa-github-square fa-2x"></i></a>
+	
+	<a href="https://cubl.in/feed.xml" title="Atom/RSS feed"><i class="fa fa-rss-square fa-2x"></i></a>
+</div><!-- /.social-icons -->
+    </footer>
+  </div><!-- /.footer-wrapper -->
+
+  <script src="https://cdn.jsdelivr.net/gh/cubarco/cubarco.github.io@2021-0305-034504-1678/assets/js/vendor/jquery-2.1.4.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/cubarco/cubarco.github.io@2021-0305-034504-1678/assets/js/gist-async.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/cubarco/cubarco.github.io@2021-0305-034504-1678/assets/js/scripts.min.js"></script>
+
+<!-- Jekyll Simple Search option -->
+<script>
+  $(document).ready(function () {
+    $('.search-field').jekyllSearch({
+      jsonFile: 'https://cdn.jsdelivr.net/gh/cubarco/cubarco.github.io@2021-0305-034504-1678/search.json',
+      searchResults: '.search-results',
+      template: '<li><article><a href="{url}">{title} <span class="entry-date"><time datetime="{date}">{shortdate}</time></span></a></article></li>',
+      fuzzy: true,
+      noResults: '<p>Nothing found.</p>'
+    });
+  });
+
+  (function ($, window, undefined) {
+
+    var bs = {
+      close: $(".close-btn"),
+      searchform: $(".search-form"),
+      canvas: $(".js-menu-screen"),
+      dothis: $('.dosearch')
+    };
+
+    bs.dothis.on('click', function () {
+      $('.search-wrapper').css({ display: "block" });
+      $('body').toggleClass('no-scroll');
+      bs.searchform.toggleClass('active');
+      bs.searchform.find('input').focus();
+      bs.canvas.toggleClass('is-visible');
+    });
+
+    bs.close.on('click', function () {
+      $('.search-wrapper').removeAttr('style');
+      $('body').toggleClass('no-scroll');
+      bs.searchform.toggleClass('active');
+      bs.canvas.removeClass('is-visible');
+    });
+  })(jQuery, window);
+</script>
+
+
+<!-- Check whether the page is a post -->
+
+
+<!-- Polyfill must be loaded before DisqusJS -->
+<!-- Promise Polyfill -->
+<script src="https://cdn.jsdelivr.net/gh/cubarco/cubarco.github.io@2021-0305-034504-1678/assets/js/vendor/polyfill.min.js"></script>
+<!-- Fetch Polyfill -->
+<script src="https://cdn.jsdelivr.net/gh/cubarco/cubarco.github.io@2021-0305-034504-1678/assets/js/vendor/fetch.umd.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/cubarco/cubarco.github.io@2021-0305-034504-1678/assets/css/vendor/disqusjs.css">
+<script id="dsqjs-script" src="https://cdn.jsdelivr.net/gh/cubarco/cubarco.github.io@2021-0305-034504-1678/assets/js/vendor/disqus.js"></script>
+<script>
+    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+    var disqus_shortname = 'cubarco';
+    var disqus_siteName = '/home/cubarco';
+    var disqus_api = 'https://disqus.cubl.in/';
+    var disqus_apikey = [];
+    
+        disqus_apikey.push('Jw86RA4MHn7FOX9T3JdY2rdOwXIHztQXp1QGQzvEjil3rXPCOfIrn4yF53NEOcho');
+    
+        disqus_apikey.push('IDVVwMUDkvtvpwfL7KK9Yuqf0OHx0yCpEF3f3awBvWwg0RA2QMRSktMNiBOJs0am');
+    
+        disqus_apikey.push('ZOkyhwsK71f8GqNw5M9oCPEAyLXzA3IRqS76QXhJG29XvyjG3g7ocNoSA2PQCp1R');
+    
+    var disqus_admin = 'cubarco';
+    var disqus_adminLabel = 'Mod';
+    var dsqjs = new DisqusJS({
+        shortname: disqus_shortname,
+        siteName: disqus_siteName,
+        api: disqus_api,
+        apikey: disqus_apikey,
+        admin: disqus_admin,
+        adminLabel: disqus_adminLabel
+    });
+</script>
+
+
+
+
+
+<!-- Asynchronous Google Analytics snippet -->
+<script>
+  var _gaq = _gaq || [];
+  var pluginUrl =
+    '//www.google-analytics.com/plugins/ga/inpage_linkid.js';
+  _gaq.push(['_require', 'inpage_linkid', pluginUrl]);
+  _gaq.push(['_setAccount', 'UA-54867602-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function () {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'stats.g.doubleclick.net/dc.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+
+</body>
+
+</html>

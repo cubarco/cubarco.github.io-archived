@@ -1,0 +1,316 @@
+<!doctype html>
+<!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if (IE 7)&!(IEMobile)]><html class="no-js lt-ie9 lt-ie8" lang="en"><![endif]-->
+<!--[if (IE 8)&!(IEMobile)]><html class="no-js lt-ie9" lang="en"><![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js" lang="en">
+<!--<![endif]-->
+
+<head>
+  <meta charset="utf-8">
+<meta name="theme-color" content="#000000">
+<title>Vim 删除成对的字符 &#8211; /home/cubarco</title>
+<meta name="description"
+  content="今天为了偷懒又往 .vimrc 里面写了点东西，作用是在删除类似于()这种成对出现的字符对的前一个字符时同时删除后面那个… 下面是具体内容: inoremap &lt;BS&gt; &lt;c-r&gt;=DelPair()&lt;CR&gt; function DelPair() let currentline = getline('.') let prechar = currentline[col('.') - 2] let fochar = currentline[col('.') - 1] if (prechar == '(' &amp;&amp; fochar == ')') \ || (prechar == '[' &amp;&amp; fochar == ']') \ || (prechar == '&lt;' &amp;&amp; fochar == '&gt;') \ || (prechar == '{' &amp;&amp; fochar == '}') \ || (prechar == '"' &amp;&amp; fochar == '"') \ || (prechar == "'" &amp;&amp;...">
+
+<meta name="keywords" content="Linux, Vim, Vim Script, Trick, VimL">
+
+
+<!-- Twitter Cards -->
+<meta name="twitter:title" content="Vim 删除成对的字符">
+<meta name="twitter:description"
+   content="今天为了偷懒又往 .vimrc 里面写了点东西，作用是在删除类似于()这种成对出现的字符对的前一个字符时同时删除后面那个… 下面是具体内容: inoremap &lt;BS&gt; &lt;c-r&gt;=DelPair()&lt;CR&gt; function DelPair() let currentline = getline('.') let prechar = currentline[col('.') - 2] let fochar = currentline[col('.') - 1] if (prechar == '(' &amp;&amp; fochar == ')') \ || (prechar == '[' &amp;&amp; fochar == ']') \ || (prechar == '&lt;' &amp;&amp; fochar == '&gt;') \ || (prechar == '{' &amp;&amp; fochar == '}') \ || (prechar == '"' &amp;&amp; fochar == '"') \ || (prechar == "'" &amp;&amp;...">
+
+<meta name="twitter:site" content="@Cube_Lin">
+
+<meta name="twitter:creator" content="@Cube_Lin">
+
+<meta name="twitter:card" content="summary">
+<!--
+   -<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/cubarco/cubarco.github.io@2021-0305-034504-1678/images/">
+   -->
+
+<!-- Open Graph -->
+<meta property="og:locale" content="zh_CN">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Vim 删除成对的字符">
+<meta property="og:description"
+   content="今天为了偷懒又往 .vimrc 里面写了点东西，作用是在删除类似于()这种成对出现的字符对的前一个字符时同时删除后面那个… 下面是具体内容: inoremap &lt;BS&gt; &lt;c-r&gt;=DelPair()&lt;CR&gt; function DelPair() let currentline = getline('.') let prechar = currentline[col('.') - 2] let fochar = currentline[col('.') - 1] if (prechar == '(' &amp;&amp; fochar == ')') \ || (prechar == '[' &amp;&amp; fochar == ']') \ || (prechar == '&lt;' &amp;&amp; fochar == '&gt;') \ || (prechar == '{' &amp;&amp; fochar == '}') \ || (prechar == '"' &amp;&amp; fochar == '"') \ || (prechar == "'" &amp;&amp;...">
+<meta property="og:url" content="https://cubl.in/blog/2015/01/vimscript-delpair/">
+<meta property="og:site_name" content="/home/cubarco">
+
+
+
+
+
+<link rel="canonical" href="https://cubl.in/blog/2015/01/vimscript-delpair/">
+<link href="https://cubl.in/feed.xml" type="application/atom+xml" rel="alternate" title="/home/cubarco Feed">
+
+
+<!-- http://t.co/dKP3o1e -->
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/cubarco/cubarco.github.io@2021-0305-034504-1678/assets/css/main.css">
+
+
+<!--Webfonts-->
+<link href='//fonts.googleapis.com/css?family=Volkhov|Cabin' rel='stylesheet' type='text/css'>
+<meta http-equiv="cleartype" content="on">
+
+<!-- HTML5 Shiv and Media Query Support -->
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/gh/cubarco/cubarco.github.io@2021-0305-034504-1678/assets/js/vendor/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/cubarco/cubarco.github.io@2021-0305-034504-1678/assets/js/vendor/respond.min.js"></script>
+<![endif]-->
+
+<!-- Modernizr -->
+<script src="https://cdn.jsdelivr.net/gh/cubarco/cubarco.github.io@2021-0305-034504-1678/assets/js/vendor/modernizr-2.7.1.custom.min.js"></script>
+
+</head>
+
+<body id="post">
+
+  <div class="navigation-wrapper">
+	<nav role="navigation" id="site-nav" class="animated drop">
+		<ul>
+			
+			
+			<li><a href="https://cubl.in/blog/" >Latest</a></li>
+			
+			
+			<li><a href="https://cubl.in/blog/about/" >About</a></li>
+			
+			
+			<li><a href="https://cubl.in/blog/category/blog/" >Blog</a></li>
+			
+			
+			<li><a href="https://cubl.in/blog/tags/" >Tags</a></li>
+			
+			<li class="dosearch"><span><i class="fa fa-search"></i> Search</span></li>
+		</ul>
+	</nav>
+</div><!-- /.navigation-wrapper -->
+
+<!--[if lt IE 9]><div class="upgrade"><strong><a href="http://whatbrowser.org/">Your browser is quite old!</strong> Why not upgrade to a different browser to better enjoy this site?</a></div><![endif]-->
+
+<div class="search-wrapper">
+  <div class="search-form">
+    <input type="text" class="search-field" placeholder="Search...">
+    <button class="close-btn"><i class="fa fa-times-circle fa-2x"></i></button>
+    <ul class="search-results post-list"></ul><!-- /.search-results -->
+  </div><!-- /.search-form -->
+</div><!-- ./search-wrapper -->
+
+<div class="js-menu-screen menu-screen"></div>
+
+  <div id="main" role="main">
+    <article class="hentry">
+      
+      <div class="entry-wrapper">
+        <header class="entry-header">
+          <span class="entry-tags"><a href="https://cubl.in/blog/tags/#Linux"
+              title="Pages tagged Linux">Linux</a>&nbsp;&bull;&nbsp;<a href="https://cubl.in/blog/tags/#Vim"
+              title="Pages tagged Vim">Vim</a>&nbsp;&bull;&nbsp;<a href="https://cubl.in/blog/tags/#Vim Script"
+              title="Pages tagged Vim Script">Vim Script</a>&nbsp;&bull;&nbsp;<a href="https://cubl.in/blog/tags/#Trick"
+              title="Pages tagged Trick">Trick</a>&nbsp;&bull;&nbsp;<a href="https://cubl.in/blog/tags/#VimL"
+              title="Pages tagged VimL">VimL</a></span>
+          
+          <h1 class="entry-title">Vim 删除成对的字符</h1>
+          
+        </header>
+        <footer class="entry-meta">
+          
+          
+          <span class="author vcard">By <span class="fn">Cubarco</span></span>
+          <span class="entry-date date published"><time datetime="2015-01-11T00:00:00+00:00"><i
+                class="fa fa-calendar-o"></i> January 11, 2015</time></span>
+          
+          <span class="entry-comments"><i
+              class="fa fa-comment-o"></i> <a href="#disqus_thread">Comment</a></span>
+          <span class="social-share-twitter">
+  <a href="https://twitter.com/intent/tweet?hashtags=Linux,Vim,VimScript,Trick,VimL&amp;text=Vim%20删除成对的字符&amp;url=https://cubl.in/blog/2015/01/vimscript-delpair/&amp;via=Cube_Lin"
+    title="Share on Twitter" itemprop="Twitter"><i class="fa fa-twitter-square"></i> Tweet</a>
+</span>
+<span class="social-share-facebook">
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https://cubl.in/blog/2015/01/vimscript-delpair/" title="Share on Facebook"
+    itemprop="Facebook"><i class="fa fa-facebook-square"></i> Like</a>
+</span>
+<!-- /.social-share -->
+          
+        </footer>
+        <div class="entry-content">
+          <p>今天为了偷懒又往 .vimrc 里面写了点东西，作用是在删除类似于<code class="highlighter-rouge">()</code>这种成对出现的字符对的前一个字符时同时删除后面那个…</p>
+
+<p>下面是具体内容:</p>
+
+<figure class="highlight"><pre><code class="language-vim" data-lang="vim">inoremap <span class="p">&lt;</span>BS<span class="p">&gt;</span> <span class="p">&lt;</span><span class="k">c</span><span class="p">-</span><span class="k">r</span><span class="p">&gt;=</span>DelPair<span class="p">()&lt;</span>CR<span class="p">&gt;</span>
+
+<span class="k">function</span> DelPair<span class="p">()</span>
+    <span class="k">let</span> currentline <span class="p">=</span> <span class="nb">getline</span><span class="p">(</span><span class="s1">'.'</span><span class="p">)</span>
+    <span class="k">let</span> prechar <span class="p">=</span> currentline<span class="p">[</span><span class="k">col</span><span class="p">(</span><span class="s1">'.'</span><span class="p">)</span> <span class="p">-</span> <span class="m">2</span><span class="p">]</span>
+    <span class="k">let</span> fochar <span class="p">=</span> currentline<span class="p">[</span><span class="k">col</span><span class="p">(</span><span class="s1">'.'</span><span class="p">)</span> <span class="p">-</span> <span class="m">1</span><span class="p">]</span>
+    <span class="k">if</span> <span class="p">(</span>prechar <span class="p">==</span> <span class="s1">'('</span> &amp;&amp; fochar <span class="p">==</span> <span class="s1">')'</span><span class="p">)</span>
+<span class="se">        \</span> <span class="p">||</span> <span class="p">(</span>prechar <span class="p">==</span> <span class="s1">'['</span> &amp;&amp; fochar <span class="p">==</span> <span class="s1">']'</span><span class="p">)</span>
+<span class="se">        \</span> <span class="p">||</span> <span class="p">(</span>prechar <span class="p">==</span> <span class="s1">'&lt;'</span> &amp;&amp; fochar <span class="p">==</span> <span class="s1">'&gt;'</span><span class="p">)</span>
+<span class="se">        \</span> <span class="p">||</span> <span class="p">(</span>prechar <span class="p">==</span> <span class="s1">'{'</span> &amp;&amp; fochar <span class="p">==</span> <span class="s1">'}'</span><span class="p">)</span>
+<span class="se">        \</span> <span class="p">||</span> <span class="p">(</span>prechar <span class="p">==</span> <span class="s1">'"'</span> &amp;&amp; fochar <span class="p">==</span> <span class="s1">'"'</span><span class="p">)</span>
+<span class="se">        \</span> <span class="p">||</span> <span class="p">(</span>prechar <span class="p">==</span> <span class="s2">"'"</span> &amp;&amp; fochar <span class="p">==</span> <span class="s2">"'"</span><span class="p">)</span>
+        <span class="k">return</span> <span class="s2">"\&lt;BS&gt;\&lt;Delete&gt;"</span>
+    <span class="k">else</span>
+        <span class="k">return</span> <span class="s2">"\&lt;BS&gt;"</span>
+    <span class="k">endif</span>
+<span class="k">endf</span></code></pre></figure>
+
+
+          <div>
+            <span><a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/"><img
+                  alt="Creative Commons License" style="border-width:0"
+                  src="https://cdn.jsdelivr.net/gh/cubarco/cubarco.github.io@2021-0305-034504-1678/images/cc_by-nc_88x31.png" /></a></span>
+          </div>
+          <nav class="pagination" role="navigation">
+            
+            <a href="https://cubl.in/blog/2015/01/vpn-udp-libev-development-notes/" class="btn" title="vpn-udp-libev 开发总结">Previous</a>
+            
+            
+            <a href="https://cubl.in/blog/2015/01/post-github-commits-to-social-platforms/" class="btn" title="在社交平台上发布匹配一定规则的 Github commit message">Next</a>
+            
+          </nav><!-- /.pagination -->
+          <div id="disqus_thread"></div>
+          <!-- /#disqus_thread -->
+        </div><!-- /.entry-content -->
+      </div><!-- /.entry-wrapper -->
+
+    </article>
+  </div><!-- /#main -->
+
+  <div class="footer-wrapper">
+    <footer role="contentinfo" class="entry-wrapper">
+      
+
+<span>
+	Powered by <a href="https://jekyllrb.com">Jekyll</a>, <a href="https://github.com/features/actions">Github Actions</a>, <a href="https://pages.github.com/">Github Pages</a>, <a href="https://www.jsdelivr.com/">jsDelivr</a> and <a href="https://vercel.com/">Vercel</a>.
+	<br />
+	© 2014 - 2021 ❤ Cubl
+</span>
+<div class="social-icons">
+	<a href="https://twitter.com/Cube_Lin"
+		title="Cubarco on Twitter" target="_blank"><i class="fa fa-twitter-square fa-2x"></i></a>
+	
+	
+	
+	
+	
+	
+	<a href="https://github.com/cubarco"
+		title="Cubarco on Github" target="_blank"><i class="fa fa-github-square fa-2x"></i></a>
+	
+	<a href="https://cubl.in/feed.xml" title="Atom/RSS feed"><i class="fa fa-rss-square fa-2x"></i></a>
+</div><!-- /.social-icons -->
+    </footer>
+  </div><!-- /.footer-wrapper -->
+
+  <script src="https://cdn.jsdelivr.net/gh/cubarco/cubarco.github.io@2021-0305-034504-1678/assets/js/vendor/jquery-2.1.4.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/cubarco/cubarco.github.io@2021-0305-034504-1678/assets/js/gist-async.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/cubarco/cubarco.github.io@2021-0305-034504-1678/assets/js/scripts.min.js"></script>
+
+<!-- Jekyll Simple Search option -->
+<script>
+  $(document).ready(function () {
+    $('.search-field').jekyllSearch({
+      jsonFile: 'https://cdn.jsdelivr.net/gh/cubarco/cubarco.github.io@2021-0305-034504-1678/search.json',
+      searchResults: '.search-results',
+      template: '<li><article><a href="{url}">{title} <span class="entry-date"><time datetime="{date}">{shortdate}</time></span></a></article></li>',
+      fuzzy: true,
+      noResults: '<p>Nothing found.</p>'
+    });
+  });
+
+  (function ($, window, undefined) {
+
+    var bs = {
+      close: $(".close-btn"),
+      searchform: $(".search-form"),
+      canvas: $(".js-menu-screen"),
+      dothis: $('.dosearch')
+    };
+
+    bs.dothis.on('click', function () {
+      $('.search-wrapper').css({ display: "block" });
+      $('body').toggleClass('no-scroll');
+      bs.searchform.toggleClass('active');
+      bs.searchform.find('input').focus();
+      bs.canvas.toggleClass('is-visible');
+    });
+
+    bs.close.on('click', function () {
+      $('.search-wrapper').removeAttr('style');
+      $('body').toggleClass('no-scroll');
+      bs.searchform.toggleClass('active');
+      bs.canvas.removeClass('is-visible');
+    });
+  })(jQuery, window);
+</script>
+
+
+<!-- Check whether the page is a post -->
+
+
+<!-- Polyfill must be loaded before DisqusJS -->
+<!-- Promise Polyfill -->
+<script src="https://cdn.jsdelivr.net/gh/cubarco/cubarco.github.io@2021-0305-034504-1678/assets/js/vendor/polyfill.min.js"></script>
+<!-- Fetch Polyfill -->
+<script src="https://cdn.jsdelivr.net/gh/cubarco/cubarco.github.io@2021-0305-034504-1678/assets/js/vendor/fetch.umd.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/cubarco/cubarco.github.io@2021-0305-034504-1678/assets/css/vendor/disqusjs.css">
+<script id="dsqjs-script" src="https://cdn.jsdelivr.net/gh/cubarco/cubarco.github.io@2021-0305-034504-1678/assets/js/vendor/disqus.js"></script>
+<script>
+    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+    var disqus_shortname = 'cubarco';
+    var disqus_siteName = '/home/cubarco';
+    var disqus_api = 'https://disqus.cubl.in/';
+    var disqus_apikey = [];
+    
+        disqus_apikey.push('Jw86RA4MHn7FOX9T3JdY2rdOwXIHztQXp1QGQzvEjil3rXPCOfIrn4yF53NEOcho');
+    
+        disqus_apikey.push('IDVVwMUDkvtvpwfL7KK9Yuqf0OHx0yCpEF3f3awBvWwg0RA2QMRSktMNiBOJs0am');
+    
+        disqus_apikey.push('ZOkyhwsK71f8GqNw5M9oCPEAyLXzA3IRqS76QXhJG29XvyjG3g7ocNoSA2PQCp1R');
+    
+    var disqus_admin = 'cubarco';
+    var disqus_adminLabel = 'Mod';
+    var dsqjs = new DisqusJS({
+        shortname: disqus_shortname,
+        siteName: disqus_siteName,
+        api: disqus_api,
+        apikey: disqus_apikey,
+        admin: disqus_admin,
+        adminLabel: disqus_adminLabel
+    });
+</script>
+
+
+
+
+
+<!-- Asynchronous Google Analytics snippet -->
+<script>
+  var _gaq = _gaq || [];
+  var pluginUrl =
+    '//www.google-analytics.com/plugins/ga/inpage_linkid.js';
+  _gaq.push(['_require', 'inpage_linkid', pluginUrl]);
+  _gaq.push(['_setAccount', 'UA-54867602-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function () {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'stats.g.doubleclick.net/dc.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+
+</body>
+
+</html>
