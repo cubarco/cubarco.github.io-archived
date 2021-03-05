@@ -1,0 +1,17 @@
+:80
+
+#reverse_proxy /gist/* https://gist.github.com {
+#    header_up Host gist.github.com
+#}
+#reverse_proxy http://cubarco.github.io {
+#    header_up Host cubarco.github.io
+#}
+encode gzip
+root * /srv
+file_server {
+    hide 404.html
+}
+handle_errors {
+	  rewrite * /404.html
+	  file_server
+}
