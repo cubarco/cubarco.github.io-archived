@@ -449,6 +449,12 @@ span + .entry-title {
   a {
     color: lighten($text-color, 20);
   }
+  span > a {
+    border-bottom: 1px dotted lighten($link-color, 50);
+    &:hover {
+      border-bottom-style: solid;
+    }
+  }
 }
 
 // Search Overlay
