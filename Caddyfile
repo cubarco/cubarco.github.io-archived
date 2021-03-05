@@ -2,6 +2,10 @@
 
 encode gzip
 
+header Access-Control-Allow-Origin "*"
+header Access-Control-Expose-Headers "*"
+header Link "<https://cdn.jsdelivr.net>; rel=\"preconnect\", <https://fonts.googleapis.com>; rel=\"preconnect\", <https://fonts.gstatic.com>; rel=\"preconnect\", <https://cubarco.disqus.com>; rel=\"preconnect\""
+
 route /gist* {
     uri strip_prefix /gist
     reverse_proxy https://gist.github.com {
