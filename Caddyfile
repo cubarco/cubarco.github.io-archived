@@ -1,0 +1,31 @@
+:80
+
+encode gzip
+
+header Access-Control-Allow-Origin "*"
+header Access-Control-Expose-Headers "*"
+header Link "<https://cdn.jsdelivr.net>; rel=\"preconnect\", <https://fonts.googleapis.com>; rel=\"preconnect\", <https://fonts.gstatic.com>; rel=\"preconnect\", <https://cubarco.disqus.com>; rel=\"preconnect\""
+
+route /gist* {
+    uri strip_prefix /gist
+    reverse_proxy https://gist.github.com {
+        header_up Host gist.github.com
+    }
+}
+
+route /disqus* {
+    uri strip_prefix /disqus
+    rewrite * /api{uri}
+    reverse_proxy https://disqus.com {
+        header_up Host disqus.com
+    }
+}
+
+root * /srv
+file_server {
+    hide 404.html
+}
+handle_errors {
+	  rewrite * /404.html
+	  file_server
+}
