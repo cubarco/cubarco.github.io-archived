@@ -1,4 +1,4 @@
-app = "my-caddy2"
+app = "cubl-blog"
 
 
 [[services]]

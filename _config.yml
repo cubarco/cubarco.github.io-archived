@@ -87,7 +87,7 @@ owner:
 disqus:
   shortname: cubarco
   siteName: /home/cubarco
-  api: https://disqus.cubl.in/
+  api: https://cubl.in/disqus/
   apikey:
     - Jw86RA4MHn7FOX9T3JdY2rdOwXIHztQXp1QGQzvEjil3rXPCOfIrn4yF53NEOcho
     - IDVVwMUDkvtvpwfL7KK9Yuqf0OHx0yCpEF3f3awBvWwg0RA2QMRSktMNiBOJs0am

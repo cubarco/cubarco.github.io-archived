@@ -1,12 +1,22 @@
 :80
 
-#reverse_proxy /gist/* https://gist.github.com {
-#    header_up Host gist.github.com
-#}
-#reverse_proxy http://cubarco.github.io {
-#    header_up Host cubarco.github.io
-#}
 encode gzip
+
+route /gist* {
+    uri strip_prefix /gist
+    reverse_proxy https://gist.github.com {
+        header_up Host gist.github.com
+    }
+}
+
+route /disqus* {
+    uri strip_prefix /disqus
+    rewrite * /api{uri}
+    reverse_proxy https://disqus.com {
+        header_up Host disqus.com
+    }
+}
+
 root * /srv
 file_server {
     hide 404.html
