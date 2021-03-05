@@ -1,6 +1,6 @@
 ---
-layout: index
-title: Tag Index
+layout: page
+title: Tags
 excerpt: "An archive of posts sorted by tag."
 ---
 

@@ -1,6 +1,6 @@
 ---
-layout: index
-title: Blog
+layout: page
+title: Archives
 excerpt: "An archive of blog posts sorted by date."
 ---
 
