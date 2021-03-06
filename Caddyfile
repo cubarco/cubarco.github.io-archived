@@ -6,6 +6,14 @@ header Access-Control-Allow-Origin "*"
 header Access-Control-Expose-Headers "*"
 header Link "<https://cdn.jsdelivr.net>; rel=\"preconnect\", <https://fonts.googleapis.com>; rel=\"preconnect\", <https://fonts.gstatic.com>; rel=\"preconnect\", <https://cubarco.disqus.com>; rel=\"preconnect\""
 
+@fly_http_matcher {
+    header Fly-Forwarded-Ssl off
+}
+
+route @fly_http_matcher {
+    redir https://{host}{uri} permanent
+}
+
 route /gist* {
     uri strip_prefix /gist
     reverse_proxy * https://13.229.188.59 https://13.250.177.223 https://52.74.223.119 {
