@@ -17,6 +17,6 @@ app = "cubl-blog"
     handlers = ["tls", "http"]
     port = "443"
 
-  [[services.tcp_checks]]
-    interval = 10000
-    timeout = 2000
+#  [[services.tcp_checks]]
+#    interval = 10000
+#    timeout = 2000
