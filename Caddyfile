@@ -14,7 +14,7 @@ route @fly_http_matcher {
     redir https://{host}{uri} permanent
 }
 
-route /gist* {
+route /gist/* {
     uri strip_prefix /gist
     reverse_proxy * https://13.229.188.59 https://13.250.177.223 https://52.74.223.119 {
         header_up Host gist.github.com
@@ -24,7 +24,7 @@ route /gist* {
     }
 }
 
-route /disqus* {
+route /disqus/* {
     uri strip_prefix /disqus
     rewrite * /api{uri}
     reverse_proxy * https://151.101.192.134 https://151.101.64.134 https://151.101.128.134 https://151.101.0.134 {
