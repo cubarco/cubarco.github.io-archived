@@ -60,7 +60,7 @@ exclude:
     "purge-cache.sh",
     "build.sh",
     "README.md",
-    "docker"
+    ".fly"
   ]
 
 # Site owner
