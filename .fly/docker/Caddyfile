@@ -4,33 +4,33 @@ encode gzip
 
 header Access-Control-Allow-Origin "*"
 header Access-Control-Expose-Headers "*"
-header Link "<https://cdn.jsdelivr.net>; rel=\"preconnect\", <https://fonts.googleapis.com>; rel=\"preconnect\", <https://fonts.gstatic.com>; rel=\"preconnect\", <https://cubarco.disqus.com>; rel=\"preconnect\""
+header Link "<https://cdn.jsdelivr.net>; rel=\"preconnect\", <https://fonts.googleapis.com>; rel=\"preconnect\", <https://fonts.gstatic.com>; rel=\"preconnect\", <https://cubarco.disqus.com>; rel=\"preconnect\", <https://github.githubassets.com>; rel=\"preconnect\""
 
 @fly_http_matcher {
     header Fly-Forwarded-Ssl off
 }
 
-route @fly_http_matcher {
-    redir https://{host}{uri} permanent
-}
+route * {
+    handle @fly_http_matcher {
+        redir https://{host}{uri} permanent
+    }
 
-route /gist/* {
-    uri strip_prefix /gist
-    reverse_proxy * https://13.229.188.59 https://13.250.177.223 https://52.74.223.119 {
-        header_up Host gist.github.com
-        transport http {
-            tls_server_name gist.github.com
+    handle_path /gist/* {
+        reverse_proxy * https://13.229.188.59 https://13.250.177.223 https://52.74.223.119 {
+            header_up Host gist.github.com
+            transport http {
+                tls_server_name gist.github.com
+            }
         }
     }
-}
 
-route /disqus/* {
-    uri strip_prefix /disqus
-    rewrite * /api{uri}
-    reverse_proxy * https://151.101.192.134 https://151.101.64.134 https://151.101.128.134 https://151.101.0.134 {
-        header_up Host disqus.com
-        transport http {
-            tls_server_name disqus.com
+    handle_path /disqus/* {
+        rewrite * /api{uri}
+        reverse_proxy * https://151.101.192.134 https://151.101.64.134 https://151.101.128.134 https://151.101.0.134 {
+            header_up Host disqus.com
+            transport http {
+                tls_server_name disqus.com
+            }
         }
     }
 }
