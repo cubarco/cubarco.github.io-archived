@@ -1,10 +1,8 @@
 {
     auto_https off
-    {
-        servers :80 {
-            protocol {
-                allow_h2c
-            }
+    servers :80 {
+        protocol {
+            allow_h2c
         }
     }
 }
