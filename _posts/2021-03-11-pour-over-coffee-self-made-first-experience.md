@@ -9,14 +9,14 @@ tags: [Coffee]
 今天手冲壶和滤杯终于到了。第一次自己做手冲，万万没想到，居然感动到想要重启三年没更的博客来记录一下。
 
 ## 感动现场
-![](https://cdn.jsdelivr.net/gh/cubarco/picgo-files@codimd/img/upload_c02e52135903416493f262e1b592e936.png)
+![](https://images.pwn.icu/1615537495017-upload_c02e52135903416493f262e1b592e936.png)
 
 ## <del>技术总结</del>
 ### 豆子
 云南阿拉比卡，水洗，中深烘焙
 
 就是下面这位：
-![](https://cdn.jsdelivr.net/gh/cubarco/picgo-files@codimd/img/upload_62531420187799a23ad3b99c2438a447.png)
+![](https://images.pwn.icu/1615536675557-20210312161113.png)
 
 ### 萃取细节
 **15克**咖啡粉（泰摩磨豆机20格细度），**萃取总量200克**（闷蒸注水45克，时间15秒；因为第一次冲，闷蒸阶段一开始注水量过大，给的水基本都透过去了）。
@@ -25,7 +25,7 @@ tags: [Coffee]
 
 ## 体验
 列举一下喝到咖啡时，脑子蹦出的词：**顺滑，醇厚，甜感...** 比之前喝到的咖啡都要舒服得多。至少比今天下午开的中药好喝不少：
-![](https://cdn.jsdelivr.net/gh/cubarco/picgo-files@codimd/img/upload_d292a53f7aad1420cbbe0a7e702c0a60.png)
+![](https://images.pwn.icu/1615537531629-upload_d292a53f7aad1420cbbe0a7e702c0a60.png)
 
 手冲装备没到之前，都用家里的意式玩具机做咖啡。玩具机出品的意式，直接喝顶不住，很酸、很苦（听说还有口萃咖啡豆的，虽然感觉是梗，但还是有点厉害...)。做了各种奶咖，好喝是好喝，却又感觉咖啡味淡了点。
 
