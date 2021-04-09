@@ -63,3 +63,7 @@
   })();
 </script>
 {% endif %}
+
+{% if site.owner.umami %}
+<script async defer data-website-id="{{ site.owner.umami.website-id }}" src="{{ site.owner.umami.src-url }}"></script>
+{% endif %}

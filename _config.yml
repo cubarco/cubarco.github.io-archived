@@ -79,10 +79,13 @@ owner:
   tumblr: #username
   google:
     plus:
-    analytics: UA-54867602-1
+    analytics: #UA-54867602-1
     verify:
     ad-client:
     ad-slot:
+  umami:
+    website-id: 102e39a7-20a0-4892-ae46-9849aa15b96e
+    src-url: https://umami.pwn.ooo/umami.js
   bing-verify:
 
 disqus:
