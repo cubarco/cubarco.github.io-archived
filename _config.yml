@@ -8,6 +8,8 @@ search: true
 since: 2014
 url: https://cubl.in
 ghmirror: https://cdn.jsdelivr.net/gh/cubarco/cubarco.github.io@COMMIT_TAG_NAME
+ghmirrorpath: gh/cubarco/cubarco.github.io@COMMIT_TAG_NAME
+ghmirrorcombine: https://cdn.jsdelivr.net/combine/
 
 
 # Jekyll configuration

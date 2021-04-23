@@ -1,11 +1,10 @@
 {% if site.disqus %}
 <!-- Polyfill must be loaded before DisqusJS -->
-<!-- Promise Polyfill -->
-<script src="{{ site.ghmirror }}/assets/js/vendor/polyfill.min.js"></script>
-<!-- Fetch Polyfill -->
+<!-- <script src="{{ site.ghmirror }}/assets/js/vendor/polyfill.min.js"></script>
 <script src="{{ site.ghmirror }}/assets/js/vendor/fetch.umd.min.js"></script>
+<script id="dsqjs-script" src="{{ site.ghmirror }}/assets/js/vendor/disqus.js"></script> -->
+<script src="{{site.ghmirrorcombine}}{{site.ghmirrorpath}}/assets/js/vendor/polyfill.min.js,{{site.ghmirrorpath}}/assets/js/vendor/fetch.umd.min.js,{{site.ghmirrorpath}}/assets/js/vendor/disqus.js"></script>
 <link rel="stylesheet" href="{{ site.ghmirror }}/assets/css/vendor/disqusjs.css">
-<script id="dsqjs-script" src="{{ site.ghmirror }}/assets/js/vendor/disqus.js"></script>
 <script>
     /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
     var disqus_shortname = '{{ site.disqus.shortname }}';
