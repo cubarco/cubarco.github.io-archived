@@ -1,0 +1,377 @@
+<!doctype html>
+<!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if (IE 7)&!(IEMobile)]><html class="no-js lt-ie9 lt-ie8" lang="en"><![endif]-->
+<!--[if (IE 8)&!(IEMobile)]><html class="no-js lt-ie9" lang="en"><![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js" lang="en">
+<!--<![endif]-->
+
+<head>
+  <meta charset="utf-8">
+<meta name="theme-color" content="#000000">
+<title>C Programming Tricks &#8211; /home/cubarco</title>
+<meta name="description"
+  content="这个 Note 用来记录各处收集的 C 编程 tricks. 看到有意思的就会摘一下，来源各异。 Anonymous arrays C99 offers some really cool stuff using anonymous arrays: Removing pointless variables int yes=1; setsockopt(yourSocket, SOL_SOCKET, SO_REUSEADDR, &amp;yes, sizeof(int)); /* becomes: */ setsockopt(yourSocket, SOL_SOCKET, SO_REUSEADDR, (int[]){1}, sizeof(int)); Passing a Variable Amount of Arguments void func(type* values) { while(*values) { x = *values++; /* do whatever with x */ } } func((type[]){val1,val2,val3,val4,0}); Static linked lists int main() { struct llist { int a; struct llist* next;}; #define...">
+
+<meta name="keywords" content="C, GCC">
+
+
+<!-- Twitter Cards -->
+<meta name="twitter:title" content="C Programming Tricks">
+<meta name="twitter:description"
+   content="这个 Note 用来记录各处收集的 C 编程 tricks. 看到有意思的就会摘一下，来源各异。 Anonymous arrays C99 offers some really cool stuff using anonymous arrays: Removing pointless variables int yes=1; setsockopt(yourSocket, SOL_SOCKET, SO_REUSEADDR, &amp;yes, sizeof(int)); /* becomes: */ setsockopt(yourSocket, SOL_SOCKET, SO_REUSEADDR, (int[]){1}, sizeof(int)); Passing a Variable Amount of Arguments void func(type* values) { while(*values) { x = *values++; /* do whatever with x */ } } func((type[]){val1,val2,val3,val4,0}); Static linked lists int main() { struct llist { int a; struct llist* next;}; #define...">
+
+<meta name="twitter:site" content="@Cube_Lin">
+
+<meta name="twitter:creator" content="@Cube_Lin">
+
+<meta name="twitter:card" content="summary">
+<!--
+   -<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/cubarco/cubarco.github.io@2021-0423-061508-15242/images/">
+   -->
+
+<!-- Open Graph -->
+<meta property="og:locale" content="zh_CN">
+<meta property="og:type" content="article">
+<meta property="og:title" content="C Programming Tricks">
+<meta property="og:description"
+   content="这个 Note 用来记录各处收集的 C 编程 tricks. 看到有意思的就会摘一下，来源各异。 Anonymous arrays C99 offers some really cool stuff using anonymous arrays: Removing pointless variables int yes=1; setsockopt(yourSocket, SOL_SOCKET, SO_REUSEADDR, &amp;yes, sizeof(int)); /* becomes: */ setsockopt(yourSocket, SOL_SOCKET, SO_REUSEADDR, (int[]){1}, sizeof(int)); Passing a Variable Amount of Arguments void func(type* values) { while(*values) { x = *values++; /* do whatever with x */ } } func((type[]){val1,val2,val3,val4,0}); Static linked lists int main() { struct llist { int a; struct llist* next;}; #define...">
+<meta property="og:url" content="https://cubl.in/blog/2015/05/c-programming-tricks/">
+<meta property="og:site_name" content="/home/cubarco">
+
+
+
+
+
+<link rel="canonical" href="https://cubl.in/blog/2015/05/c-programming-tricks/">
+<link href="https://cubl.in/feed.xml" type="application/atom+xml" rel="alternate" title="/home/cubarco Feed">
+
+
+<!-- http://t.co/dKP3o1e -->
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/cubarco/cubarco.github.io@2021-0423-061508-15242/assets/css/main.css">
+
+
+<!--Webfonts-->
+<link href='//fonts.googleapis.com/css?family=Volkhov|Cabin' rel='stylesheet' type='text/css'>
+<meta http-equiv="cleartype" content="on">
+
+<!-- HTML5 Shiv and Media Query Support -->
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/gh/cubarco/cubarco.github.io@2021-0423-061508-15242/assets/js/vendor/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/cubarco/cubarco.github.io@2021-0423-061508-15242/assets/js/vendor/respond.min.js"></script>
+<![endif]-->
+
+<!-- Modernizr -->
+<script src="https://cdn.jsdelivr.net/gh/cubarco/cubarco.github.io@2021-0423-061508-15242/assets/js/vendor/modernizr-2.7.1.custom.min.js"></script>
+
+</head>
+
+<body id="post">
+
+  <div class="navigation-wrapper">
+	<nav role="navigation" id="site-nav" class="animated drop">
+		<ul>
+			
+			
+			<li><a href="https://cubl.in/blog/" >Latest</a></li>
+			
+			
+			<li><a href="https://cubl.in/blog/about/" >About</a></li>
+			
+			
+			<li><a href="https://cubl.in/blog/archives/" >Archives</a></li>
+			
+			
+			<li><a href="https://cubl.in/blog/tags/" >Tags</a></li>
+			
+			<li class="dosearch"><span><i class="fa fa-search"></i> Search</span></li>
+		</ul>
+	</nav>
+</div><!-- /.navigation-wrapper -->
+
+<!--[if lt IE 9]><div class="upgrade"><strong><a href="http://whatbrowser.org/">Your browser is quite old!</strong> Why not upgrade to a different browser to better enjoy this site?</a></div><![endif]-->
+
+<div class="search-wrapper">
+  <div class="search-form">
+    <input type="text" class="search-field" placeholder="Search...">
+    <button class="close-btn"><i class="fa fa-times-circle fa-2x"></i></button>
+    <ul class="search-results post-list"></ul><!-- /.search-results -->
+  </div><!-- /.search-form -->
+</div><!-- ./search-wrapper -->
+
+<div class="js-menu-screen menu-screen"></div>
+
+  <div id="main" role="main">
+    <article class="hentry">
+      
+      <div class="entry-wrapper">
+        <header class="entry-header">
+          <span class="entry-tags"><a href="https://cubl.in/blog/tags/#C"
+              title="Pages tagged C">C</a>&nbsp;&bull;&nbsp;<a href="https://cubl.in/blog/tags/#GCC"
+              title="Pages tagged GCC">GCC</a></span>
+          
+          <h1 class="entry-title">C Programming Tricks</h1>
+          
+        </header>
+        <footer class="entry-meta">
+          
+          
+          <span class="author vcard">By <span class="fn">Cubarco</span></span>
+          <span class="entry-date date published"><time datetime="2015-05-02T00:00:00+00:00"><i
+                class="fa fa-calendar-o"></i> May 02, 2015</time></span>
+          <span class="entry-date date modified"><time datetime="2015-05-05"><i
+                class="fa fa-pencil"></i> May 05, 2015</time></span>
+          <span class="entry-comments"><i
+              class="fa fa-comment-o"></i> <a href="#disqus_thread">Comment</a></span>
+          <span class="social-share-twitter">
+  <a href="https://twitter.com/intent/tweet?hashtags=C,GCC&amp;text=C%20Programming%20Tricks&amp;url=https://cubl.in/blog/2015/05/c-programming-tricks/&amp;via=Cube_Lin"
+    title="Share on Twitter" itemprop="Twitter"><i class="fa fa-twitter-square"></i> Tweet</a>
+</span>
+<span class="social-share-facebook">
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https://cubl.in/blog/2015/05/c-programming-tricks/" title="Share on Facebook"
+    itemprop="Facebook"><i class="fa fa-facebook-square"></i> Like</a>
+</span>
+<!-- /.social-share -->
+          
+        </footer>
+        <div class="entry-content">
+          <p>这个 Note 用来记录各处收集的 C 编程 tricks. 看到有意思的就会摘一下，来源各异。</p>
+
+<h2 id="anonymous-arrays">Anonymous arrays</h2>
+<p>C99 offers some really cool stuff using anonymous arrays:</p>
+
+<h6 id="removing-pointless-variables">Removing pointless variables</h6>
+
+<figure class="highlight"><pre><code class="language-c" data-lang="c"><span class="kt">int</span> <span class="n">yes</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span>
+<span class="n">setsockopt</span><span class="p">(</span><span class="n">yourSocket</span><span class="p">,</span> <span class="n">SOL_SOCKET</span><span class="p">,</span> <span class="n">SO_REUSEADDR</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">yes</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="kt">int</span><span class="p">));</span>
+<span class="cm">/* becomes: */</span>
+<span class="n">setsockopt</span><span class="p">(</span><span class="n">yourSocket</span><span class="p">,</span> <span class="n">SOL_SOCKET</span><span class="p">,</span> <span class="n">SO_REUSEADDR</span><span class="p">,</span> <span class="p">(</span><span class="kt">int</span><span class="p">[]){</span><span class="mi">1</span><span class="p">},</span> <span class="k">sizeof</span><span class="p">(</span><span class="kt">int</span><span class="p">));</span></code></pre></figure>
+
+<h6 id="passing-a-variable-amount-of-arguments">Passing a Variable Amount of Arguments</h6>
+
+<figure class="highlight"><pre><code class="language-c" data-lang="c"><span class="kt">void</span> <span class="nf">func</span><span class="p">(</span><span class="n">type</span><span class="o">*</span> <span class="n">values</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">while</span><span class="p">(</span><span class="o">*</span><span class="n">values</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="o">*</span><span class="n">values</span><span class="o">++</span><span class="p">;</span>
+        <span class="cm">/* do whatever with x */</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="n">func</span><span class="p">((</span><span class="n">type</span><span class="p">[]){</span><span class="n">val1</span><span class="p">,</span><span class="n">val2</span><span class="p">,</span><span class="n">val3</span><span class="p">,</span><span class="n">val4</span><span class="p">,</span><span class="mi">0</span><span class="p">});</span></code></pre></figure>
+
+<h6 id="static-linked-lists">Static linked lists</h6>
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">struct</span> <span class="n">llist</span> <span class="p">{</span> <span class="kt">int</span> <span class="n">a</span><span class="p">;</span> <span class="k">struct</span> <span class="n">llist</span><span class="o">*</span> <span class="n">next</span><span class="p">;};</span>
+    <span class="cp">#define cons(x,y) (struct llist[]){ {x,y} }
+</span>    <span class="k">struct</span> <span class="n">llist</span> <span class="o">*</span><span class="n">list</span><span class="o">=</span><span class="n">cons</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">cons</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">cons</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="n">cons</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">))));</span>
+    <span class="k">struct</span> <span class="n">llist</span> <span class="o">*</span><span class="n">p</span> <span class="o">=</span> <span class="n">list</span><span class="p">;</span>
+    <span class="k">while</span><span class="p">(</span><span class="n">p</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+      <span class="n">printf</span><span class="p">(</span><span class="s">"%d</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">p</span><span class="o">-&gt;</span><span class="n">a</span><span class="p">);</span>
+      <span class="n">p</span> <span class="o">=</span> <span class="n">p</span><span class="o">-&gt;</span><span class="n">next</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h2 id="include-data-file-as-header-inside-array-initializer">Include data file as header inside array initializer</h2>
+
+<figure class="highlight"><pre><code class="language-c" data-lang="c"><span class="kt">double</span> <span class="n">normals</span><span class="p">[][]</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="cp">#include "normals.txt"
+</span><span class="p">};</span></code></pre></figure>
+
+<h2 id="using-__file__-and-__line__-for-debugging">Using <code class="highlighter-rouge">__FILE__</code> and <code class="highlighter-rouge">__LINE__</code> for debugging</h2>
+
+<figure class="highlight"><pre><code class="language-c" data-lang="c"><span class="cp">#define WHERE fprintf(stderr,"[LOG]%s:%d\n",__FILE__,__LINE__);</span></code></pre></figure>
+
+<h2 id="dynamically-sized-objectmodified">Dynamically sized object(modified)</h2>
+
+<figure class="highlight"><pre><code class="language-c" data-lang="c"><span class="k">struct</span> <span class="n">X</span> <span class="p">{</span>
+    <span class="kt">int</span> <span class="n">len</span><span class="p">;</span>
+    <span class="kt">char</span> <span class="n">str</span><span class="p">[];</span>
+<span class="p">};</span>
+
+<span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="n">strlen</span><span class="p">(</span><span class="s">"hello world"</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+<span class="k">struct</span> <span class="n">X</span> <span class="o">*</span><span class="n">string</span> <span class="o">=</span> <span class="n">malloc</span><span class="p">(</span><span class="n">offsetof</span><span class="p">(</span><span class="k">struct</span> <span class="n">X</span><span class="p">,</span> <span class="n">str</span><span class="p">)</span> <span class="o">+</span> <span class="n">n</span><span class="p">);</span>
+<span class="n">strcpy</span><span class="p">(</span><span class="n">string</span><span class="o">-&gt;</span><span class="n">str</span><span class="p">,</span> <span class="s">"hello world"</span><span class="p">);</span>
+<span class="n">string</span><span class="o">-&gt;</span><span class="n">len</span> <span class="o">=</span> <span class="n">n</span><span class="p">;</span></code></pre></figure>
+
+<p><code class="highlighter-rouge">offsetof()</code> 本身也是一个比较有趣的宏定义(?)。</p>
+
+<h2 id="an-example-of-offsetof">An example of <code class="highlighter-rouge">offsetof()</code></h2>
+
+<figure class="highlight"><pre><code class="language-c" data-lang="c"><span class="cp">#define offsetof(st, m) ((size_t)(&amp;((st *)0)-&gt;m))</span></code></pre></figure>
+
+<p>This works by casting a null pointer into a pointer to structure st, and then obtaining the address of member m within said structure. While this implementation works correctly in many compilers, it has undefined behavior according to the C standard,[2] since it involves a dereference of a null pointer (although, one might argue that no dereferencing takes place, because the whole expression is calculated at compile time). It also tends to produce confusing compiler diagnostics if one of the arguments is misspelled.</p>
+
+<h2 id="blank-in-a-scanf-format">Blank in a <code class="highlighter-rouge">scanf()</code> format</h2>
+<p>In a <code class="highlighter-rouge">scanf()</code> format, a blank, tab or newline means ‘skip white space if there is any to skip’. It does not directly ‘clear the input buffer’, but it does eat any white space which looks similar to clearing the input buffer (but is quite distinct from that). If you’re on Windows, using <code class="highlighter-rouge">fflush(stdin)</code> clears the input buffer (of white space and non-white space characters); on Unix and according to the C standard, <code class="highlighter-rouge">fflush(stdin)</code> is undefined behaviour.</p>
+
+<figure class="highlight"><pre><code class="language-c" data-lang="c"><span class="k">while</span><span class="p">((</span><span class="n">c</span> <span class="o">=</span> <span class="n">getchar</span><span class="p">())</span> <span class="o">==</span> <span class="sc">'\n'</span><span class="p">);</span>
+<span class="cm">/* becomes: */</span>
+<span class="n">scanf</span><span class="p">(</span><span class="s">" %c"</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">c</span><span class="p">);</span></code></pre></figure>
+
+<h2 id="reference">Reference</h2>
+<ol>
+  <li><a href="http://stackoverflow.com/questions/599365/what-is-your-favorite-c-programming-trick">What is your favorite C programming trick? - StackOverflow</a></li>
+  <li><a href="https://en.wikipedia.org/wiki/Offsetof">offsetof() - Wikipedia</a></li>
+  <li><a href="http://stackoverflow.com/questions/18491390/difference-between-scanfc-c-and-scanf-c-c">Difference between scanf(“%c”, &amp;c) and scanf(“ %c”, &amp;c) - StackOverflow</a></li>
+</ol>
+
+          <!--<div>
+            <span><a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/"><img
+                  alt="Creative Commons License" style="border-width:0"
+                  src="https://cdn.jsdelivr.net/gh/cubarco/cubarco.github.io@2021-0423-061508-15242/images/cc_by-nc_88x31.png" /></a></span>
+          </div>-->
+          <nav class="pagination" role="navigation">
+            
+            <a href="https://cubl.in/blog/2015/01/ldconfig-and-steam-workaround/" class="btn" title="解决用 ldconfig 指定 libgl 库时 Steam 的异常">Previous</a>
+            
+            
+            <a href="https://cubl.in/blog/2015/05/dota2-blocky-cjk-fonts-workaround/" class="btn" title="一个解决 Linux 版 Dota 2 中 CJK 字符显示成方块的 Workaround">Next</a>
+            
+          </nav><!-- /.pagination -->
+          <div id="disqus_thread"></div>
+          <!-- /#disqus_thread -->
+        </div><!-- /.entry-content -->
+      </div><!-- /.entry-wrapper -->
+
+    </article>
+  </div><!-- /#main -->
+
+  <div class="footer-wrapper">
+    <footer role="contentinfo" class="entry-wrapper">
+      
+
+<span>
+	Powered by <a href="https://jekyllrb.com">Jekyll</a>, <a href="https://github.com/features/actions">Github Actions</a>, <a href="https://www.jsdelivr.com">jsDelivr</a> and <a href="https://fly.io">Fly.io</a>.
+	<br />
+	© 2014 - 2021 ❤ Cubl
+</span>
+<div class="social-icons">
+	<a href="https://twitter.com/Cube_Lin"
+		title="Cubarco on Twitter" target="_blank"><i class="fa fa-twitter-square fa-2x"></i></a>
+	
+	
+	
+	
+	
+	
+	<a href="https://github.com/cubarco"
+		title="Cubarco on Github" target="_blank"><i class="fa fa-github-square fa-2x"></i></a>
+	
+	<a href="https://cubl.in/feed.xml" title="Atom/RSS feed"><i class="fa fa-rss-square fa-2x"></i></a>
+</div><!-- /.social-icons -->
+
+    </footer>
+  </div><!-- /.footer-wrapper -->
+
+  <!-- <script src="https://cdn.jsdelivr.net/gh/cubarco/cubarco.github.io@2021-0423-061508-15242/assets/js/vendor/jquery-2.1.4.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/cubarco/cubarco.github.io@2021-0423-061508-15242/assets/js/gist-async.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/cubarco/cubarco.github.io@2021-0423-061508-15242/assets/js/scripts.min.js"></script> -->
+<script src="https://cdn.jsdelivr.net/combine/gh/cubarco/cubarco.github.io@2021-0423-061508-15242/assets/js/vendor/jquery-2.1.4.min.js,gh/cubarco/cubarco.github.io@2021-0423-061508-15242/assets/js/gist-async.min.js,gh/cubarco/cubarco.github.io@2021-0423-061508-15242/assets/js/scripts.min.js"></script>
+
+<!-- Jekyll Simple Search option -->
+<script>
+  $(document).ready(function () {
+    $('.search-field').jekyllSearch({
+      jsonFile: 'https://cdn.jsdelivr.net/gh/cubarco/cubarco.github.io@2021-0423-061508-15242/search.json',
+      searchResults: '.search-results',
+      template: '<li><article><a href="{url}">{title} <span class="entry-date"><time datetime="{date}">{shortdate}</time></span></a></article></li>',
+      fuzzy: true,
+      noResults: '<p>Nothing found.</p>'
+    });
+  });
+
+  (function ($, window, undefined) {
+
+    var bs = {
+      close: $(".close-btn"),
+      searchform: $(".search-form"),
+      canvas: $(".js-menu-screen"),
+      dothis: $('.dosearch')
+    };
+
+    bs.dothis.on('click', function () {
+      $('.search-wrapper').css({ display: "block" });
+      $('body').toggleClass('no-scroll');
+      bs.searchform.toggleClass('active');
+      bs.searchform.find('input').focus();
+      bs.canvas.toggleClass('is-visible');
+    });
+
+    bs.close.on('click', function () {
+      $('.search-wrapper').removeAttr('style');
+      $('body').toggleClass('no-scroll');
+      bs.searchform.toggleClass('active');
+      bs.canvas.removeClass('is-visible');
+    });
+  })(jQuery, window);
+</script>
+
+
+<!-- Check whether the page is a post -->
+
+
+<!-- Polyfill must be loaded before DisqusJS -->
+<!-- <script src="https://cdn.jsdelivr.net/gh/cubarco/cubarco.github.io@2021-0423-061508-15242/assets/js/vendor/polyfill.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/cubarco/cubarco.github.io@2021-0423-061508-15242/assets/js/vendor/fetch.umd.min.js"></script>
+<script id="dsqjs-script" src="https://cdn.jsdelivr.net/gh/cubarco/cubarco.github.io@2021-0423-061508-15242/assets/js/vendor/disqus.js"></script> -->
+<script src="https://cdn.jsdelivr.net/combine/gh/cubarco/cubarco.github.io@2021-0423-061508-15242/assets/js/vendor/polyfill.min.js,gh/cubarco/cubarco.github.io@2021-0423-061508-15242/assets/js/vendor/fetch.umd.min.js,gh/cubarco/cubarco.github.io@2021-0423-061508-15242/assets/js/vendor/disqus.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/cubarco/cubarco.github.io@2021-0423-061508-15242/assets/css/vendor/disqusjs.css">
+<script>
+    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+    var disqus_shortname = 'cubarco';
+    var disqus_siteName = '/home/cubarco';
+    var disqus_api = 'https://cubl.in/disqus/';
+    var disqus_apikey = [];
+    
+        disqus_apikey.push('Jw86RA4MHn7FOX9T3JdY2rdOwXIHztQXp1QGQzvEjil3rXPCOfIrn4yF53NEOcho');
+    
+        disqus_apikey.push('IDVVwMUDkvtvpwfL7KK9Yuqf0OHx0yCpEF3f3awBvWwg0RA2QMRSktMNiBOJs0am');
+    
+        disqus_apikey.push('ZOkyhwsK71f8GqNw5M9oCPEAyLXzA3IRqS76QXhJG29XvyjG3g7ocNoSA2PQCp1R');
+    
+    var disqus_admin = 'cubarco';
+    var disqus_adminLabel = 'Mod';
+    var dsqjs = new DisqusJS({
+        shortname: disqus_shortname,
+        siteName: disqus_siteName,
+        api: disqus_api,
+        apikey: disqus_apikey,
+        admin: disqus_admin,
+        adminLabel: disqus_adminLabel
+    });
+</script>
+
+
+
+
+
+<!-- Asynchronous Google Analytics snippet -->
+<script>
+  var _gaq = _gaq || [];
+  var pluginUrl =
+    '//www.google-analytics.com/plugins/ga/inpage_linkid.js';
+  _gaq.push(['_require', 'inpage_linkid', pluginUrl]);
+  _gaq.push(['_setAccount', 'UA-54867602-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function () {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'stats.g.doubleclick.net/dc.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+
+
+<script async defer data-website-id="e9fdcc32-0bfa-4de5-beb0-3bbf1e4638ab" src="https://umami.pwn.ooo/umami.js"></script>
+
+
+
+</body>
+
+</html>
