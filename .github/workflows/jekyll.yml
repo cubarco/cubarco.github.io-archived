@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - source-gh-actions
+  pull_request:
 
 env:
   FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
