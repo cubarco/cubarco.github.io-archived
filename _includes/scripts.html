@@ -2,6 +2,9 @@
 <script src="{{ site.ghmirror }}/assets/js/gist-async.min.js"></script>
 <script src="{{ site.ghmirror }}/assets/js/scripts.min.js"></script> -->
 <script src="{{ site.ghmirrorcombine }}{{site.ghmirrorpath}}/assets/js/vendor/jquery-2.1.4.min.js,{{site.ghmirrorpath}}/assets/js/gist-async.min.js,{{site.ghmirrorpath}}/assets/js/scripts.min.js"></script>
+<script>
+    $('img').each((x, a) => a.referrerPolicy='no-referrer')
+</script>
 {% if site.search %}
 <!-- Jekyll Simple Search option -->
 <script>
