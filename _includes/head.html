@@ -45,3 +45,9 @@ remove:'index.html' | strip_slash }}{% endif %}{% endcapture %}
 
 <!-- Modernizr -->
 <script src="{{ site.ghmirror }}/assets/js/vendor/modernizr-2.7.1.custom.min.js"></script>
+
+<script>
+    for (let ele of document.getElementsByTagName('img')) {
+        ele.referrerPolicy = "no-referrer"
+    }
+</script>
