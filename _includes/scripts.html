@@ -4,7 +4,7 @@
 <script src="{{ site.ghmirrorcombine }}{{site.ghmirrorpath}}/assets/js/vendor/jquery-2.1.4.min.js,{{site.ghmirrorpath}}/assets/js/gist-async.min.js,{{site.ghmirrorpath}}/assets/js/scripts.min.js"></script>
 <script>
   $(document).ready(function () {
-    $('img').attr('referrerpolicy', 'no-referrer')
+    $('img').hide().attr('referrerpolicy', 'no-referrer').show()
   });
 </script>
 {% if site.search %}
