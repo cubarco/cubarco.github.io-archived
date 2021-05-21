@@ -33,11 +33,6 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-npm-
 
-      - uses: actions/setup-node@v2
-        with:
-          node-version: '14'
-      - run: npm install
-
       - name: Build & deploy to github pages
         if: ${{ github.ref == 'refs/heads/source-gh-actions' }}
         uses: cubarco/jekyll-action@master
