@@ -106,38 +106,3 @@
         }
     }
 }(jQuery));
-
-$(document).ready(function () {
-      $('.search-field').jekyllSearch({
-        jsonFile: window.ghmirror + '/search.json',
-        searchResults: '.search-results',
-        template: '<li><article><a href="{url}">{title} <span class="entry-date"><time datetime="{date}">{shortdate}</time></span></a></article></li>',
-        fuzzy: true,
-        noResults: '<p>Nothing found.</p>'
-      });
-    });
-
-    (function ($, window, undefined) {
-
-      var bs = {
-        close: $(".close-btn"),
-        searchform: $(".search-form"),
-        canvas: $(".js-menu-screen"),
-        dothis: $('.dosearch')
-      };
-
-      bs.dothis.on('click', function () {
-        $('.search-wrapper').css({ display: "block" });
-        $('body').toggleClass('no-scroll');
-        bs.searchform.toggleClass('active');
-        bs.searchform.find('input').focus();
-        bs.canvas.toggleClass('is-visible');
-      });
-
-      bs.close.on('click', function () {
-        $('.search-wrapper').removeAttr('style');
-        $('body').toggleClass('no-scroll');
-        bs.searchform.toggleClass('active');
-        bs.canvas.removeClass('is-visible');
-      });
-})(jQuery, window);
