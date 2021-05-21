@@ -40,11 +40,6 @@ jobs:
           target_branch: "gh-pages"
           build_dir: /github/workspace/.fly/jekyll_build
 
-      - name: Purge main.css
-        if: ${{ github.ref == 'refs/heads/source-gh-actions' }}
-        working-directory: /github/workspace/.fly/jekyll_build
-        run: "purgecss --css ./assets/css/main.css --content ./**/*.html --output ./assets/css"
-
       - name: Deploy to fly.io
         if: ${{ github.ref == 'refs/heads/source-gh-actions' }}
         uses: superfly/flyctl-actions@1.1
