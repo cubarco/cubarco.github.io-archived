@@ -1,0 +1,297 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+<meta name="theme-color" content="#000000">
+<title>Writeup-9447 CTF: calcpop &#8211; /home/cubarco</title>
+<meta name="description"
+  content="先看反汇编代码： ... 8048460: 55 push %ebp 8048461: 89 e5 mov %esp,%ebp 8048463: 57 push %edi 8048464: 56 push %esi 8048465: be 00 01 00 00 mov $0x100,%esi 804846a: 53 push %ebx 804846b: 83 e4 f0 and $0xfffffff0,%esp 804846e: 81 ec 90 00 00 00 sub $0x90,%esp 8048474: a1 60 a0 04 08 mov 0x804a060,%eax 8048479: c7 44 24 0c 00 00 00 movl $0x0,0xc(%esp) 8048480: 00 8048481: 8d 5c 24 10 lea 0x10(%esp),%ebx 8048485: c7...">
+
+<meta name="keywords" content="Hack, CTF, Writeup, Exploitation">
+
+
+<!-- Twitter Cards -->
+<meta name="twitter:title" content="Writeup-9447 CTF: calcpop">
+<meta name="twitter:description"
+   content="先看反汇编代码： ... 8048460: 55 push %ebp 8048461: 89 e5 mov %esp,%ebp 8048463: 57 push %edi 8048464: 56 push %esi 8048465: be 00 01 00 00 mov $0x100,%esi 804846a: 53 push %ebx 804846b: 83 e4 f0 and $0xfffffff0,%esp 804846e: 81 ec 90 00 00 00 sub $0x90,%esp 8048474: a1 60 a0 04 08 mov 0x804a060,%eax 8048479: c7 44 24 0c 00 00 00 movl $0x0,0xc(%esp) 8048480: 00 8048481: 8d 5c 24 10 lea 0x10(%esp),%ebx 8048485: c7...">
+
+<meta name="twitter:site" content="@Cube_Lin">
+
+<meta name="twitter:creator" content="@Cube_Lin">
+
+<meta name="twitter:card" content="summary">
+<!--
+   -<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/cubarco/cubarco.github.io@2021-0521-095400-15690/images/">
+   -->
+
+<!-- Open Graph -->
+<meta property="og:locale" content="zh_CN">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Writeup-9447 CTF: calcpop">
+<meta property="og:description"
+   content="先看反汇编代码： ... 8048460: 55 push %ebp 8048461: 89 e5 mov %esp,%ebp 8048463: 57 push %edi 8048464: 56 push %esi 8048465: be 00 01 00 00 mov $0x100,%esi 804846a: 53 push %ebx 804846b: 83 e4 f0 and $0xfffffff0,%esp 804846e: 81 ec 90 00 00 00 sub $0x90,%esp 8048474: a1 60 a0 04 08 mov 0x804a060,%eax 8048479: c7 44 24 0c 00 00 00 movl $0x0,0xc(%esp) 8048480: 00 8048481: 8d 5c 24 10 lea 0x10(%esp),%ebx 8048485: c7...">
+<meta property="og:url" content="https://cubl.in/blog/2015/11/9477-calcpop-writeup/">
+<meta property="og:site_name" content="/home/cubarco">
+
+
+
+
+
+<link rel="canonical" href="https://cubl.in/blog/2015/11/9477-calcpop-writeup/">
+<link href="https://cubl.in/feed.xml" type="application/atom+xml" rel="alternate" title="/home/cubarco Feed">
+
+
+<!-- http://t.co/dKP3o1e -->
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/cubarco/cubarco.github.io@2021-0521-095400-15690/assets/css/main.css">
+
+<!--Webfonts-->
+<link href='//fonts.googleapis.com/css?family=Volkhov|Cabin' rel='stylesheet' type='text/css' media="none" onload="if(media!='all')media='all'">
+<meta http-equiv="cleartype" content="on">
+
+<!-- Global settings -->
+<script>
+    window.ghmirror = "https://cdn.jsdelivr.net/gh/cubarco/cubarco.github.io@2021-0521-095400-15690"
+    window.searchEnabled = "true" ? true : false
+</script>
+
+<!-- Modernizr -->
+<script src="https://cdn.jsdelivr.net/gh/cubarco/cubarco.github.io@2021-0521-095400-15690/assets/js/vendor/modernizr-2.7.1.custom.min.js" async></script>
+
+</head>
+
+<body id="post">
+
+  <div class="navigation-wrapper">
+	<nav role="navigation" id="site-nav" class="animated drop">
+		<ul>
+			
+			
+			<li><a href="https://cubl.in/blog/" >Latest</a></li>
+			
+			
+			<li><a href="https://cubl.in/blog/about/" >About</a></li>
+			
+			
+			<li><a href="https://cubl.in/blog/archives/" >Archives</a></li>
+			
+			
+			<li><a href="https://cubl.in/blog/tags/" >Tags</a></li>
+			
+			<li class="dosearch"><span><i class="fa fa-search"></i> Search</span></li>
+		</ul>
+	</nav>
+</div><!-- /.navigation-wrapper -->
+
+<div class="search-wrapper">
+  <div class="search-form">
+    <input type="text" class="search-field" placeholder="Search...">
+    <button class="close-btn"><i class="fa fa-times-circle fa-2x"></i></button>
+    <ul class="search-results post-list"></ul><!-- /.search-results -->
+  </div><!-- /.search-form -->
+</div><!-- ./search-wrapper -->
+
+<div class="js-menu-screen menu-screen"></div>
+
+
+  <div id="main" role="main">
+    <article class="hentry">
+      
+      <div class="entry-wrapper">
+        <header class="entry-header">
+          <span class="entry-tags"><a href="https://cubl.in/blog/tags/#Hack"
+              title="Pages tagged Hack">Hack</a>&nbsp;&bull;&nbsp;<a href="https://cubl.in/blog/tags/#CTF"
+              title="Pages tagged CTF">CTF</a>&nbsp;&bull;&nbsp;<a href="https://cubl.in/blog/tags/#Writeup"
+              title="Pages tagged Writeup">Writeup</a>&nbsp;&bull;&nbsp;<a href="https://cubl.in/blog/tags/#Exploitation"
+              title="Pages tagged Exploitation">Exploitation</a></span>
+          
+          <h1 class="entry-title">Writeup-9447 CTF: calcpop</h1>
+          
+        </header>
+        <footer class="entry-meta">
+          
+          
+          <span class="author vcard">By <span class="fn">Cubarco</span></span>
+          <span class="entry-date date published"><time datetime="2015-11-30T00:00:00+00:00"><i
+                class="fa fa-calendar-o"></i> November 30, 2015</time></span>
+          
+          <span class="entry-comments"><i
+              class="fa fa-comment-o"></i> <a href="#disqus_thread">Comment</a></span>
+          <span class="social-share-twitter">
+  <a href="https://twitter.com/intent/tweet?hashtags=Hack,CTF,Writeup,Exploitation&amp;text=Writeup-9447%20CTF:%20calcpop&amp;url=https://cubl.in/blog/2015/11/9477-calcpop-writeup/&amp;via=Cube_Lin"
+    title="Share on Twitter" itemprop="Twitter"><i class="fa fa-twitter-square"></i> Tweet</a>
+</span>
+<span class="social-share-facebook">
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https://cubl.in/blog/2015/11/9477-calcpop-writeup/" title="Share on Facebook"
+    itemprop="Facebook"><i class="fa fa-facebook-square"></i> Like</a>
+</span>
+<!-- /.social-share -->
+          
+        </footer>
+        <div class="entry-content">
+          <p>先看反汇编代码：</p>
+
+<figure class="highlight"><pre><code class="language-objdump" data-lang="objdump">...
+8048460:	55                   	push   %ebp
+8048461:	89 e5                	mov    %esp,%ebp
+8048463:	57                   	push   %edi
+8048464:	56                   	push   %esi
+8048465:	be 00 01 00 00       	mov    $0x100,%esi
+804846a:	53                   	push   %ebx
+804846b:	83 e4 f0             	and    $0xfffffff0,%esp
+804846e:	81 ec 90 00 00 00    	sub    $0x90,%esp
+8048474:	a1 60 a0 04 08       	mov    0x804a060,%eax
+8048479:	c7 44 24 0c 00 00 00 	movl   $0x0,0xc(%esp)
+8048480:	00
+8048481:	8d 5c 24 10          	lea    0x10(%esp),%ebx
+8048485:	c7 44 24 08 02 00 00 	movl   $0x2,0x8(%esp)
+804848c:	00
+804848d:	89 df                	mov    %ebx,%edi
+804848f:	c7 44 24 04 00 00 00 	movl   $0x0,0x4(%esp)
+8048496:	00
+8048497:	89 04 24             	mov    %eax,(%esp)
+804849a:	e8 a1 ff ff ff       	call   8048440 &lt;setvbuf@plt&gt;
+804849f:	c7 04 24 10 88 04 08 	movl   $0x8048810,(%esp)
+80484a6:	e8 55 ff ff ff       	call   8048400 &lt;puts@plt&gt;
+80484ab:	eb 29                	jmp    80484d6 &lt;main+0x76&gt;
+80484ad:	8d 76 00             	lea    0x0(%esi),%esi
+80484b0:	a1 40 a0 04 08       	mov    0x804a040,%eax
+80484b5:	89 04 24             	mov    %eax,(%esp)
+80484b8:	e8 33 ff ff ff       	call   80483f0 &lt;_IO_getc@plt&gt;
+80484bd:	85 c0                	test   %eax,%eax
+80484bf:	0f 88 e3 00 00 00    	js     80485a8 &lt;main+0x148&gt;
+80484c5:	88 07                	mov    %al,(%edi)
+80484c7:	83 ee 01             	sub    $0x1,%esi
+80484ca:	83 c7 01             	add    $0x1,%edi
+80484cd:	83 f8 0a             	cmp    $0xa,%eax
+80484d0:	0f 84 ca 00 00 00    	je     80485a0 &lt;main+0x140&gt;
+80484d6:	83 fe 01             	cmp    $0x1,%esi
+80484d9:	77 d5                	ja     80484b0 &lt;main+0x50&gt;
+80484db:	85 f6                	test   %esi,%esi
+80484dd:	0f 85 bd 00 00 00    	jne    80485a0 &lt;main+0x140&gt;
+...</code></pre></figure>
+
+<p>这段代码是 main() 函数起始的位置，可以看到这里的工作是将终端输入的数据循环读入栈中。其中 esi 寄存器是循环计数器，初始值是 0x100, 而在栈中划分的空间只有 0x90 字节, 这里存在栈溢出。</p>
+
+<p>用 <code class="highlighter-rouge">pattern.py 256</code> 生成 pattern, 开 gdb 调试 calcpop.</p>
+
+<figure class="highlight"><pre><code class="language-console" data-lang="console"><span class="gp">$</span><span class="w"> </span>gdb calcpop
+<span class="go">Reading symbols from calcpop...done.
+(gdb) r
+Starting program: /home/cubelin/is/ctf/9447/pwn/calcpop/calcpop
+Welcome to calc.exe
+Aa0Aa1Aa2Aa3Aa4Aa5Aa6Aa7Aa8Aa9Ab0Ab1Ab2Ab3Ab4Ab5Ab6Ab7Ab8Ab9Ac0Ac1Ac2Ac3Ac4Ac5Ac6Ac7Ac8Ac9Ad0Ad1Ad2Ad3Ad4Ad5Ad6Ad7Ad8Ad9Ae0Ae1Ae2Ae3Ae4Ae5Ae6Ae7Ae8Ae9Af0Af1Af2Af3Af4Af5Af6Af7Af8Af9Ag0Ag1Ag2Ag3Ag4Ag5Ag6Ag7Ag8Ag9Ah0Ah1Ah2Ah3Ah4Ah5Ah6Ah7Ah8Ah9Ai0Ai1Ai2Ai3Ai4A
+</span><span class="gp">Missing a space;</span><span class="w"> </span>your input was 0xffffd390
+<span class="gp">Missing a space;</span><span class="w"> </span>your input was 0xffffd390
+<span class="go">exit
+Exiting...
+
+Program received signal SIGSEGV, Segmentation fault.
+0x41326641 in ?? ()
+(gdb) quit
+
+</span><span class="gp">$</span><span class="w"> </span>pattern.py 0x41326641
+<span class="go">Pattern 0x41326641 first occurrence at position 156 in pattern.</span></code></pre></figure>
+
+<p>main() 函数返回地址在 offset 为 156 的位置。然后借由程序返回的栈地址，可以直接执行栈中的 shellcode.</p>
+
+<p>exp 如下:</p>
+
+<div class="gist" data-gist="cubarco/ee054809d1643602b844"><p>Gist: <a href="https://gist.github.com/cubarco/ee054809d1643602b844">cubarco/ee054809d1643602b844</a></p></div>
+
+          <!--<div>
+            <span><a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/"><img
+                  alt="Creative Commons License" style="border-width:0"
+                  src="https://cdn.jsdelivr.net/gh/cubarco/cubarco.github.io@2021-0521-095400-15690/images/cc_by-nc_88x31.png" /></a></span>
+          </div>-->
+          <nav class="pagination" role="navigation">
+            
+            <a href="https://cubl.in/blog/2015/05/dota2-blocky-cjk-fonts-workaround/" class="btn" title="一个解决 Linux 版 Dota 2 中 CJK 字符显示成方块的 Workaround">Previous</a>
+            
+            
+            <a href="https://cubl.in/blog/2015/12/9477-calcpop-reloaded-writeup/" class="btn" title="Writeup-9447 CTF: calcpop-reloaded">Next</a>
+            
+          </nav><!-- /.pagination -->
+          <div id="disqus_thread"></div>
+          <!-- /#disqus_thread -->
+        </div><!-- /.entry-content -->
+      </div><!-- /.entry-wrapper -->
+
+    </article>
+  </div><!-- /#main -->
+
+  <div class="footer-wrapper">
+    <footer role="contentinfo" class="entry-wrapper">
+      
+
+<span>
+	Powered by <a href="https://jekyllrb.com">Jekyll</a>, <a href="https://github.com/features/actions">Github Actions</a>, <a href="https://www.jsdelivr.com">jsDelivr</a> and <a href="https://fly.io">Fly.io</a>.
+	<br />
+	© 2014 - 2021 ❤ Cubl
+</span>
+<div class="social-icons">
+	<a href="https://twitter.com/Cube_Lin"
+		title="Cubarco on Twitter" target="_blank"><i class="fa fa-twitter-square fa-2x"></i></a>
+	
+	
+	
+	
+	
+	
+	<a href="https://github.com/cubarco"
+		title="Cubarco on Github" target="_blank"><i class="fa fa-github-square fa-2x"></i></a>
+	
+	<a href="https://cubl.in/feed.xml" title="Atom/RSS feed"><i class="fa fa-rss-square fa-2x"></i></a>
+</div><!-- /.social-icons -->
+
+    </footer>
+  </div><!-- /.footer-wrapper -->
+
+  <!-- <script src="https://cdn.jsdelivr.net/gh/cubarco/cubarco.github.io@2021-0521-095400-15690/assets/js/vendor/jquery-2.1.4.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/cubarco/cubarco.github.io@2021-0521-095400-15690/assets/js/gist-async.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/cubarco/cubarco.github.io@2021-0521-095400-15690/assets/js/scripts.min.js"></script> -->
+<script src="https://cdn.jsdelivr.net/combine/gh/cubarco/cubarco.github.io@2021-0521-095400-15690/assets/js/vendor/jquery-2.1.4.min.js,gh/cubarco/cubarco.github.io@2021-0521-095400-15690/assets/js/scripts.min.js" async></script>
+
+<!-- Check whether the page is a post -->
+
+
+<!-- Polyfill must be loaded before DisqusJS -->
+<!-- <script src="https://cdn.jsdelivr.net/gh/cubarco/cubarco.github.io@2021-0521-095400-15690/assets/js/vendor/polyfill.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/cubarco/cubarco.github.io@2021-0521-095400-15690/assets/js/vendor/fetch.umd.min.js"></script>
+<script id="dsqjs-script" src="https://cdn.jsdelivr.net/gh/cubarco/cubarco.github.io@2021-0521-095400-15690/assets/js/vendor/disqus.js"></script> -->
+<script>
+    window.disqus_shortname = 'cubarco';
+    window.disqus_siteName = '/home/cubarco';
+    window.disqus_api = 'https://cubl.in/disqus/';
+    window.disqus_apikey = [];
+    
+        window.disqus_apikey.push('Jw86RA4MHn7FOX9T3JdY2rdOwXIHztQXp1QGQzvEjil3rXPCOfIrn4yF53NEOcho');
+    
+        window.disqus_apikey.push('IDVVwMUDkvtvpwfL7KK9Yuqf0OHx0yCpEF3f3awBvWwg0RA2QMRSktMNiBOJs0am');
+    
+        window.disqus_apikey.push('ZOkyhwsK71f8GqNw5M9oCPEAyLXzA3IRqS76QXhJG29XvyjG3g7ocNoSA2PQCp1R');
+    
+    window.disqus_admin = 'cubarco';
+    window.disqus_adminLabel = 'Mod';
+</script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/cubarco/cubarco.github.io@2021-0521-095400-15690/assets/css/vendor/disqusjs.css" media="none" onload="if(media!='all')media='all'">
+<script src="https://cdn.jsdelivr.net/combine/gh/cubarco/cubarco.github.io@2021-0521-095400-15690/assets/js/vendor/polyfill.min.js,gh/cubarco/cubarco.github.io@2021-0521-095400-15690/assets/js/vendor/fetch.umd.min.js,gh/cubarco/cubarco.github.io@2021-0521-095400-15690/assets/js/vendor/disqus.js,gh/cubarco/cubarco.github.io@2021-0521-095400-15690/assets/js/vendor/disqus-settings.js" async></script>
+
+
+
+
+
+
+
+<script async defer data-website-id="e9fdcc32-0bfa-4de5-beb0-3bbf1e4638ab" src="https://umami.pwn.ooo/umami.js"></script>
+
+
+
+</body>
+
+</html>
