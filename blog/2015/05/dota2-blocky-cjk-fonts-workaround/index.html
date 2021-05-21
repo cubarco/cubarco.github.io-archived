@@ -1,0 +1,295 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+<meta name="theme-color" content="#000000">
+<title>一个解决 Linux 版 Dota 2 中 CJK 字符显示成方块的 Workaround &#8211; /home/cubarco</title>
+<meta name="description"
+  content="不知道从什么时候开始，Linux 版本的 Dota 2 中载入界面的 tips sentences 和 player name 中的中文会显示成方框，详见 issue-1688。V社基本没搭理这个 bug，只好自己动手修。 猜想是游戏内直接使用了某个字体，或者该字体不存在时调用了默认字体，但是他们不支持 CJK 字符，所以显示成方块。因为 SteamFonts 给的全是Arial字体，我猜 Dota 2 那些文本使用的字体可能是Arial，开FC_DEBUG跑了一遍发现猜的没错。那么我们要做的就是用fontconfig把Arial替换成支持中文的字体。 解决办法 替换Arial的fontconfig配置是: &lt;match target="pattern"&gt; &lt;test qual="any" name="family"&gt; &lt;string&gt;Arial&lt;/string&gt; &lt;/test&gt; &lt;edit name="family" mode="assign" binding="same"&gt; &lt;string&gt;Noto Sans S Chinese&lt;/string&gt; &lt;/edit&gt; &lt;/match&gt; 我用的是Noto Sans S Chinese，如果用文泉驿正黑就改成WenQuanYi Zen Hei。 怎么使这个配置生效？有两个方法。 环境变量 FONTCONFIG_FILE 这个方法需要一个为 Dota 2 单独准备的fontconfig_file，姑且命名为dota2-fontconfig.conf。 文件内容如下: &lt;?xml version="1.0"?&gt; &lt;!DOCTYPE fontconfig SYSTEM "fonts.dtd"&gt; &lt;fontconfig&gt; &lt;include ignore_missing="no"&gt;fonts.conf&lt;/include&gt; &lt;match target="pattern"&gt; &lt;test qual="any" name="family"&gt; &lt;string&gt;Arial&lt;/string&gt; &lt;/test&gt; &lt;edit name="family" mode="assign" binding="same"&gt; &lt;string&gt;Noto...">
+
+<meta name="keywords" content="Linux, Steam, Dota 2, Fonts, CJK">
+
+
+<!-- Twitter Cards -->
+<meta name="twitter:title" content="一个解决 Linux 版 Dota 2 中 CJK 字符显示成方块的 Workaround">
+<meta name="twitter:description"
+   content="不知道从什么时候开始，Linux 版本的 Dota 2 中载入界面的 tips sentences 和 player name 中的中文会显示成方框，详见 issue-1688。V社基本没搭理这个 bug，只好自己动手修。 猜想是游戏内直接使用了某个字体，或者该字体不存在时调用了默认字体，但是他们不支持 CJK 字符，所以显示成方块。因为 SteamFonts 给的全是Arial字体，我猜 Dota 2 那些文本使用的字体可能是Arial，开FC_DEBUG跑了一遍发现猜的没错。那么我们要做的就是用fontconfig把Arial替换成支持中文的字体。 解决办法 替换Arial的fontconfig配置是: &lt;match target="pattern"&gt; &lt;test qual="any" name="family"&gt; &lt;string&gt;Arial&lt;/string&gt; &lt;/test&gt; &lt;edit name="family" mode="assign" binding="same"&gt; &lt;string&gt;Noto Sans S Chinese&lt;/string&gt; &lt;/edit&gt; &lt;/match&gt; 我用的是Noto Sans S Chinese，如果用文泉驿正黑就改成WenQuanYi Zen Hei。 怎么使这个配置生效？有两个方法。 环境变量 FONTCONFIG_FILE 这个方法需要一个为 Dota 2 单独准备的fontconfig_file，姑且命名为dota2-fontconfig.conf。 文件内容如下: &lt;?xml version="1.0"?&gt; &lt;!DOCTYPE fontconfig SYSTEM "fonts.dtd"&gt; &lt;fontconfig&gt; &lt;include ignore_missing="no"&gt;fonts.conf&lt;/include&gt; &lt;match target="pattern"&gt; &lt;test qual="any" name="family"&gt; &lt;string&gt;Arial&lt;/string&gt; &lt;/test&gt; &lt;edit name="family" mode="assign" binding="same"&gt; &lt;string&gt;Noto...">
+
+<meta name="twitter:site" content="@Cube_Lin">
+
+<meta name="twitter:creator" content="@Cube_Lin">
+
+<meta name="twitter:card" content="summary">
+<!--
+   -<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/cubarco/cubarco.github.io@2021-0521-051427-10025/images/">
+   -->
+
+<!-- Open Graph -->
+<meta property="og:locale" content="zh_CN">
+<meta property="og:type" content="article">
+<meta property="og:title" content="一个解决 Linux 版 Dota 2 中 CJK 字符显示成方块的 Workaround">
+<meta property="og:description"
+   content="不知道从什么时候开始，Linux 版本的 Dota 2 中载入界面的 tips sentences 和 player name 中的中文会显示成方框，详见 issue-1688。V社基本没搭理这个 bug，只好自己动手修。 猜想是游戏内直接使用了某个字体，或者该字体不存在时调用了默认字体，但是他们不支持 CJK 字符，所以显示成方块。因为 SteamFonts 给的全是Arial字体，我猜 Dota 2 那些文本使用的字体可能是Arial，开FC_DEBUG跑了一遍发现猜的没错。那么我们要做的就是用fontconfig把Arial替换成支持中文的字体。 解决办法 替换Arial的fontconfig配置是: &lt;match target="pattern"&gt; &lt;test qual="any" name="family"&gt; &lt;string&gt;Arial&lt;/string&gt; &lt;/test&gt; &lt;edit name="family" mode="assign" binding="same"&gt; &lt;string&gt;Noto Sans S Chinese&lt;/string&gt; &lt;/edit&gt; &lt;/match&gt; 我用的是Noto Sans S Chinese，如果用文泉驿正黑就改成WenQuanYi Zen Hei。 怎么使这个配置生效？有两个方法。 环境变量 FONTCONFIG_FILE 这个方法需要一个为 Dota 2 单独准备的fontconfig_file，姑且命名为dota2-fontconfig.conf。 文件内容如下: &lt;?xml version="1.0"?&gt; &lt;!DOCTYPE fontconfig SYSTEM "fonts.dtd"&gt; &lt;fontconfig&gt; &lt;include ignore_missing="no"&gt;fonts.conf&lt;/include&gt; &lt;match target="pattern"&gt; &lt;test qual="any" name="family"&gt; &lt;string&gt;Arial&lt;/string&gt; &lt;/test&gt; &lt;edit name="family" mode="assign" binding="same"&gt; &lt;string&gt;Noto...">
+<meta property="og:url" content="https://cubl.in/blog/2015/05/dota2-blocky-cjk-fonts-workaround/">
+<meta property="og:site_name" content="/home/cubarco">
+
+
+
+
+
+<link rel="canonical" href="https://cubl.in/blog/2015/05/dota2-blocky-cjk-fonts-workaround/">
+<link href="https://cubl.in/feed.xml" type="application/atom+xml" rel="alternate" title="/home/cubarco Feed">
+
+
+<!-- http://t.co/dKP3o1e -->
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/cubarco/cubarco.github.io@2021-0521-051427-10025/assets/css/main.css">
+
+<!--Webfonts-->
+<link href='//fonts.googleapis.com/css?family=Volkhov|Cabin' rel='stylesheet' type='text/css'>
+<meta http-equiv="cleartype" content="on">
+
+<!-- Global settings -->
+<script>
+    window.ghmirror = "https://cdn.jsdelivr.net/gh/cubarco/cubarco.github.io@2021-0521-051427-10025"
+    window.searchEnabled = "true" ? true : false
+</script>
+
+<!-- Modernizr -->
+<script src="https://cdn.jsdelivr.net/gh/cubarco/cubarco.github.io@2021-0521-051427-10025/assets/js/vendor/modernizr-2.7.1.custom.min.js"></script>
+
+</head>
+
+<body id="post">
+
+  <div class="navigation-wrapper">
+	<nav role="navigation" id="site-nav" class="animated drop">
+		<ul>
+			
+			
+			<li><a href="https://cubl.in/blog/" >Latest</a></li>
+			
+			
+			<li><a href="https://cubl.in/blog/about/" >About</a></li>
+			
+			
+			<li><a href="https://cubl.in/blog/archives/" >Archives</a></li>
+			
+			
+			<li><a href="https://cubl.in/blog/tags/" >Tags</a></li>
+			
+			<li class="dosearch"><span><i class="fa fa-search"></i> Search</span></li>
+		</ul>
+	</nav>
+</div><!-- /.navigation-wrapper -->
+
+<div class="search-wrapper">
+  <div class="search-form">
+    <input type="text" class="search-field" placeholder="Search...">
+    <button class="close-btn"><i class="fa fa-times-circle fa-2x"></i></button>
+    <ul class="search-results post-list"></ul><!-- /.search-results -->
+  </div><!-- /.search-form -->
+</div><!-- ./search-wrapper -->
+
+<div class="js-menu-screen menu-screen"></div>
+
+
+  <div id="main" role="main">
+    <article class="hentry">
+      
+      <div class="entry-wrapper">
+        <header class="entry-header">
+          <span class="entry-tags"><a href="https://cubl.in/blog/tags/#Linux"
+              title="Pages tagged Linux">Linux</a>&nbsp;&bull;&nbsp;<a href="https://cubl.in/blog/tags/#Steam"
+              title="Pages tagged Steam">Steam</a>&nbsp;&bull;&nbsp;<a href="https://cubl.in/blog/tags/#Dota 2"
+              title="Pages tagged Dota 2">Dota 2</a>&nbsp;&bull;&nbsp;<a href="https://cubl.in/blog/tags/#Fonts"
+              title="Pages tagged Fonts">Fonts</a>&nbsp;&bull;&nbsp;<a href="https://cubl.in/blog/tags/#CJK"
+              title="Pages tagged CJK">CJK</a></span>
+          
+          <h1 class="entry-title">一个解决 Linux 版 Dota 2 中 CJK 字符显示成方块的 Workaround</h1>
+          
+        </header>
+        <footer class="entry-meta">
+          
+          
+          <span class="author vcard">By <span class="fn">Cubarco</span></span>
+          <span class="entry-date date published"><time datetime="2015-05-14T00:00:00+00:00"><i
+                class="fa fa-calendar-o"></i> May 14, 2015</time></span>
+          <span class="entry-date date modified"><time datetime="2015-05-29"><i
+                class="fa fa-pencil"></i> May 29, 2015</time></span>
+          <span class="entry-comments"><i
+              class="fa fa-comment-o"></i> <a href="#disqus_thread">Comment</a></span>
+          <span class="social-share-twitter">
+  <a href="https://twitter.com/intent/tweet?hashtags=Linux,Steam,Dota2,Fonts,CJK&amp;text=一个解决%20Linux%20版%20Dota%202%20中%20CJK%20字符显示成方块的%20Workaround&amp;url=https://cubl.in/blog/2015/05/dota2-blocky-cjk-fonts-workaround/&amp;via=Cube_Lin"
+    title="Share on Twitter" itemprop="Twitter"><i class="fa fa-twitter-square"></i> Tweet</a>
+</span>
+<span class="social-share-facebook">
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https://cubl.in/blog/2015/05/dota2-blocky-cjk-fonts-workaround/" title="Share on Facebook"
+    itemprop="Facebook"><i class="fa fa-facebook-square"></i> Like</a>
+</span>
+<!-- /.social-share -->
+          
+        </footer>
+        <div class="entry-content">
+          <p>不知道从什么时候开始，Linux 版本的 Dota 2 中载入界面的 tips sentences 和 player name 中的中文会显示成方框，详见 <a href="https://github.com/ValveSoftware/Dota-2/issues/1688">issue-1688</a>。V社基本没搭理这个 bug，只好自己动手修。</p>
+
+<p>猜想是游戏内直接使用了某个字体，或者该字体不存在时调用了默认字体，但是他们不支持 CJK 字符，所以显示成方块。因为 SteamFonts 给的全是<code class="highlighter-rouge">Arial</code>字体，我猜 Dota 2 那些文本使用的字体可能是<code class="highlighter-rouge">Arial</code>，开<code class="highlighter-rouge">FC_DEBUG</code>跑了一遍发现猜的没错。那么我们要做的就是用<code class="highlighter-rouge">fontconfig</code>把<code class="highlighter-rouge">Arial</code>替换成支持中文的字体。</p>
+
+<h2 id="解决办法">解决办法</h2>
+<p>替换<code class="highlighter-rouge">Arial</code>的<code class="highlighter-rouge">fontconfig</code>配置是:</p>
+
+<figure class="highlight"><pre><code class="language-xml" data-lang="xml"><span class="nt">&lt;match</span> <span class="na">target=</span><span class="s">"pattern"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;test</span> <span class="na">qual=</span><span class="s">"any"</span> <span class="na">name=</span><span class="s">"family"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;string&gt;</span>Arial<span class="nt">&lt;/string&gt;</span>
+  <span class="nt">&lt;/test&gt;</span>
+  <span class="nt">&lt;edit</span> <span class="na">name=</span><span class="s">"family"</span> <span class="na">mode=</span><span class="s">"assign"</span> <span class="na">binding=</span><span class="s">"same"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;string&gt;</span>Noto Sans S Chinese<span class="nt">&lt;/string&gt;</span>
+  <span class="nt">&lt;/edit&gt;</span>
+<span class="nt">&lt;/match&gt;</span></code></pre></figure>
+
+<p>我用的是<code class="highlighter-rouge">Noto Sans S Chinese</code>，如果用文泉驿正黑就改成<code class="highlighter-rouge">WenQuanYi Zen Hei</code>。</p>
+
+<p>怎么使这个配置生效？有两个方法。</p>
+
+<h6 id="环境变量-fontconfig_file">环境变量 FONTCONFIG_FILE</h6>
+<p>这个方法需要一个为 Dota 2 单独准备的<code class="highlighter-rouge">fontconfig_file</code>，姑且命名为<code class="highlighter-rouge">dota2-fontconfig.conf</code>。</p>
+
+<p>文件内容如下:</p>
+
+<figure class="highlight"><pre><code class="language-xml" data-lang="xml"><span class="cp">&lt;?xml version="1.0"?&gt;</span>
+<span class="cp">&lt;!DOCTYPE fontconfig SYSTEM "fonts.dtd"&gt;</span>
+<span class="nt">&lt;fontconfig&gt;</span>
+  <span class="nt">&lt;include</span> <span class="na">ignore_missing=</span><span class="s">"no"</span><span class="nt">&gt;</span>fonts.conf<span class="nt">&lt;/include&gt;</span>
+
+  <span class="nt">&lt;match</span> <span class="na">target=</span><span class="s">"pattern"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;test</span> <span class="na">qual=</span><span class="s">"any"</span> <span class="na">name=</span><span class="s">"family"</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;string&gt;</span>Arial<span class="nt">&lt;/string&gt;</span>
+    <span class="nt">&lt;/test&gt;</span>
+    <span class="nt">&lt;edit</span> <span class="na">name=</span><span class="s">"family"</span> <span class="na">mode=</span><span class="s">"assign"</span> <span class="na">binding=</span><span class="s">"same"</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;string&gt;</span>Noto Sans S Chinese<span class="nt">&lt;/string&gt;</span>
+    <span class="nt">&lt;/edit&gt;</span>
+  <span class="nt">&lt;/match&gt;</span>
+<span class="nt">&lt;/fontconfig&gt;</span></code></pre></figure>
+
+<p>然后用<code class="highlighter-rouge">FONTCONFIG_FILE</code>环境变量来传递。但是使用这个环境变量之后，<code class="highlighter-rouge">fontconfig</code>不会再加载<code class="highlighter-rouge">/etc/fonts/fonts.conf</code>，所以这里把这个文件也包含进来。<sup id="fnref:1" role="doc-noteref"><a href="#fn:1" class="footnote" rel="footnote">1</a></sup></p>
+
+<p>然后这样打开 Steam:</p>
+
+<figure class="highlight"><pre><code class="language-sh" data-lang="sh"><span class="nb">export </span><span class="nv">FONTCONFIG_FILE</span><span class="o">=</span>/path/to/dota2-fontconfig.conf
+steam</code></pre></figure>
+
+<p>再运行 Dota 2 就不会有方块的困扰了。</p>
+
+<h6 id="写进fontsconf">写进<code class="highlighter-rouge">fonts.conf</code></h6>
+<p>另一个方法是直接把字体替换的配置写进<code class="highlighter-rouge">fonts.conf</code>，比如<code class="highlighter-rouge">~/.fonts.conf</code>或者<code class="highlighter-rouge">$XDG_CONFIG_HOME/fontconfig/fonts.conf</code>。</p>
+
+<p>当然这个方法并不推荐，因为会影响到其他程序。</p>
+
+<h4 id="update-2015-05-29">Update 2015-05-29</h4>
+<p>可能每次都要用命令行启动 Steam 不太方便，下方<a href="https://cubl.in/blog/2015/05/dota2-blocky-cjk-fonts-workaround/#comment-2051101448">评论</a>里有解决办法。就是给 Dota 2 加个启动选项。</p>
+
+<h4 id="reference">Reference</h4>
+<div class="footnotes" role="doc-endnotes">
+  <ol>
+    <li id="fn:1" role="doc-endnote">
+      <p><a href="http://www.freedesktop.org/software/fontconfig/fontconfig-user.html">fonts-conf</a> <a href="#fnref:1" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
+
+          <!--<div>
+            <span><a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/"><img
+                  alt="Creative Commons License" style="border-width:0"
+                  src="https://cdn.jsdelivr.net/gh/cubarco/cubarco.github.io@2021-0521-051427-10025/images/cc_by-nc_88x31.png" /></a></span>
+          </div>-->
+          <nav class="pagination" role="navigation">
+            
+            <a href="https://cubl.in/blog/2015/05/c-programming-tricks/" class="btn" title="C Programming Tricks">Previous</a>
+            
+            
+            <a href="https://cubl.in/blog/2015/11/9477-calcpop-writeup/" class="btn" title="Writeup-9447 CTF: calcpop">Next</a>
+            
+          </nav><!-- /.pagination -->
+          <div id="disqus_thread"></div>
+          <!-- /#disqus_thread -->
+        </div><!-- /.entry-content -->
+      </div><!-- /.entry-wrapper -->
+
+    </article>
+  </div><!-- /#main -->
+
+  <div class="footer-wrapper">
+    <footer role="contentinfo" class="entry-wrapper">
+      
+
+<span>
+	Powered by <a href="https://jekyllrb.com">Jekyll</a>, <a href="https://github.com/features/actions">Github Actions</a>, <a href="https://www.jsdelivr.com">jsDelivr</a> and <a href="https://fly.io">Fly.io</a>.
+	<br />
+	© 2014 - 2021 ❤ Cubl
+</span>
+<div class="social-icons">
+	<a href="https://twitter.com/Cube_Lin"
+		title="Cubarco on Twitter" target="_blank"><i class="fa fa-twitter-square fa-2x"></i></a>
+	
+	
+	
+	
+	
+	
+	<a href="https://github.com/cubarco"
+		title="Cubarco on Github" target="_blank"><i class="fa fa-github-square fa-2x"></i></a>
+	
+	<a href="https://cubl.in/feed.xml" title="Atom/RSS feed"><i class="fa fa-rss-square fa-2x"></i></a>
+</div><!-- /.social-icons -->
+
+    </footer>
+  </div><!-- /.footer-wrapper -->
+
+  <!-- <script src="https://cdn.jsdelivr.net/gh/cubarco/cubarco.github.io@2021-0521-051427-10025/assets/js/vendor/jquery-2.1.4.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/cubarco/cubarco.github.io@2021-0521-051427-10025/assets/js/gist-async.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/cubarco/cubarco.github.io@2021-0521-051427-10025/assets/js/scripts.min.js"></script> -->
+<script src="https://cdn.jsdelivr.net/combine/gh/cubarco/cubarco.github.io@2021-0521-051427-10025/assets/js/vendor/jquery-2.1.4.min.js,gh/cubarco/cubarco.github.io@2021-0521-051427-10025/assets/js/scripts.min.js" defer></script>
+
+<!-- Check whether the page is a post -->
+
+
+<!-- Polyfill must be loaded before DisqusJS -->
+<!-- <script src="https://cdn.jsdelivr.net/gh/cubarco/cubarco.github.io@2021-0521-051427-10025/assets/js/vendor/polyfill.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/cubarco/cubarco.github.io@2021-0521-051427-10025/assets/js/vendor/fetch.umd.min.js"></script>
+<script id="dsqjs-script" src="https://cdn.jsdelivr.net/gh/cubarco/cubarco.github.io@2021-0521-051427-10025/assets/js/vendor/disqus.js"></script> -->
+<script>
+    window.disqus_shortname = 'cubarco';
+    window.disqus_siteName = '/home/cubarco';
+    window.disqus_api = 'https://cubl.in/disqus/';
+    window.disqus_apikey = [];
+    
+        window.disqus_apikey.push('Jw86RA4MHn7FOX9T3JdY2rdOwXIHztQXp1QGQzvEjil3rXPCOfIrn4yF53NEOcho');
+    
+        window.disqus_apikey.push('IDVVwMUDkvtvpwfL7KK9Yuqf0OHx0yCpEF3f3awBvWwg0RA2QMRSktMNiBOJs0am');
+    
+        window.disqus_apikey.push('ZOkyhwsK71f8GqNw5M9oCPEAyLXzA3IRqS76QXhJG29XvyjG3g7ocNoSA2PQCp1R');
+    
+    window.disqus_admin = 'cubarco';
+    window.disqus_adminLabel = 'Mod';
+</script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/cubarco/cubarco.github.io@2021-0521-051427-10025/assets/css/vendor/disqusjs.css">
+<script src="https://cdn.jsdelivr.net/combine/gh/cubarco/cubarco.github.io@2021-0521-051427-10025/assets/js/vendor/polyfill.min.js,gh/cubarco/cubarco.github.io@2021-0521-051427-10025/assets/js/vendor/fetch.umd.min.js,gh/cubarco/cubarco.github.io@2021-0521-051427-10025/assets/js/vendor/disqus.js,gh/cubarco/cubarco.github.io@2021-0521-051427-10025/assets/js/vendor/disqus-settings.js" defer></script>
+
+
+
+
+
+
+
+<script async defer data-website-id="e9fdcc32-0bfa-4de5-beb0-3bbf1e4638ab" src="https://umami.pwn.ooo/umami.js"></script>
+
+
+
+</body>
+
+</html>
