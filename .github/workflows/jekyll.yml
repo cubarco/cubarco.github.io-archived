@@ -24,6 +24,12 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-gems-
 
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+
+      - run: npm install purgecss -g
+
       - name: Build & deploy to github pages
         if: ${{ github.ref == 'refs/heads/source-gh-actions' }}
         uses: cubarco/jekyll-action@master
@@ -33,6 +39,11 @@ jobs:
           #keep_history: true
           target_branch: "gh-pages"
           build_dir: /github/workspace/.fly/jekyll_build
+
+      - name: Purge main.css
+        if: ${{ github.ref == 'refs/heads/source-gh-actions' }}
+        working-directory: /github/workspace/.fly/jekyll_build
+        run: "purgecss --css ./assets/css/main.css --content ./**/*.html --output ./assets/css"
 
       - name: Deploy to fly.io
         if: ${{ github.ref == 'refs/heads/source-gh-actions' }}
