@@ -7,7 +7,6 @@ on:
   pull_request:
 
 env:
-  FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
   FLY_PROJECT_PATH: /github/workspace/.fly
 
 jobs:
@@ -47,6 +46,8 @@ jobs:
       - name: Deploy to fly.io
         if: ${{ github.ref == 'refs/heads/source-gh-actions' }}
         uses: superfly/flyctl-actions@1.1
+        env:
+          FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
         with:
           args: "deploy"
 
