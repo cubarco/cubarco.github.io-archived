@@ -1,0 +1,371 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+<meta name="theme-color" content="#000000">
+<title>Writeup-Seccon CTF: FSB:TreeWalker &#8211; /home/cubarco</title>
+<meta name="description"
+  content="printf() 因为这题直接把 FSB 写在题名里，我一拿到题就直接跑去找能利用 FSB 的点了。 利用点在这里： 400881: 0f 1f 80 00 00 00 00 nopl 0x0(%rax) 400888: 4c 8b 05 f9 09 20 00 mov 0x2009f9(%rip),%r8 # 601288 &lt;stdin@@GLIBC_2.2.5&gt; 40088f: 48 8d 7c 24 50 lea 0x50(%rsp),%rdi 400894: ba 01 00 00 00 mov $0x1,%edx 400899: be 00 10 00 00 mov $0x1000,%esi 40089e: e8 fd fe ff ff callq 4007a0 &lt;__fread_chk@plt&gt; 4008a3: 48 39 44 24 08 cmp %rax,0x8(%rsp) 4008a8: 0f 85 81...">
+
+<meta name="keywords" content="Hack, CTF, Writeup, Exploitation, FSB">
+
+
+<!-- Twitter Cards -->
+<meta name="twitter:title" content="Writeup-Seccon CTF: FSB:TreeWalker">
+<meta name="twitter:description"
+   content="printf() 因为这题直接把 FSB 写在题名里，我一拿到题就直接跑去找能利用 FSB 的点了。 利用点在这里： 400881: 0f 1f 80 00 00 00 00 nopl 0x0(%rax) 400888: 4c 8b 05 f9 09 20 00 mov 0x2009f9(%rip),%r8 # 601288 &lt;stdin@@GLIBC_2.2.5&gt; 40088f: 48 8d 7c 24 50 lea 0x50(%rsp),%rdi 400894: ba 01 00 00 00 mov $0x1,%edx 400899: be 00 10 00 00 mov $0x1000,%esi 40089e: e8 fd fe ff ff callq 4007a0 &lt;__fread_chk@plt&gt; 4008a3: 48 39 44 24 08 cmp %rax,0x8(%rsp) 4008a8: 0f 85 81...">
+
+<meta name="twitter:site" content="@Cube_Lin">
+
+<meta name="twitter:creator" content="@Cube_Lin">
+
+<meta name="twitter:card" content="summary">
+<!--
+   -<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/cubarco/cubarco.github.io@2021-0521-092454-11212/images/">
+   -->
+
+<!-- Open Graph -->
+<meta property="og:locale" content="zh_CN">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Writeup-Seccon CTF: FSB:TreeWalker">
+<meta property="og:description"
+   content="printf() 因为这题直接把 FSB 写在题名里，我一拿到题就直接跑去找能利用 FSB 的点了。 利用点在这里： 400881: 0f 1f 80 00 00 00 00 nopl 0x0(%rax) 400888: 4c 8b 05 f9 09 20 00 mov 0x2009f9(%rip),%r8 # 601288 &lt;stdin@@GLIBC_2.2.5&gt; 40088f: 48 8d 7c 24 50 lea 0x50(%rsp),%rdi 400894: ba 01 00 00 00 mov $0x1,%edx 400899: be 00 10 00 00 mov $0x1000,%esi 40089e: e8 fd fe ff ff callq 4007a0 &lt;__fread_chk@plt&gt; 4008a3: 48 39 44 24 08 cmp %rax,0x8(%rsp) 4008a8: 0f 85 81...">
+<meta property="og:url" content="https://cubl.in/blog/2015/12/seccon-ctf-writeup-fsb-treewalker/">
+<meta property="og:site_name" content="/home/cubarco">
+
+
+
+
+
+<link rel="canonical" href="https://cubl.in/blog/2015/12/seccon-ctf-writeup-fsb-treewalker/">
+<link href="https://cubl.in/feed.xml" type="application/atom+xml" rel="alternate" title="/home/cubarco Feed">
+
+
+<!-- http://t.co/dKP3o1e -->
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/cubarco/cubarco.github.io@2021-0521-092454-11212/assets/css/main.css">
+
+<!--Webfonts-->
+<link href='//fonts.googleapis.com/css?family=Volkhov|Cabin' rel='stylesheet' type='text/css' media="none" onload="if(media!='all')media='all'">
+<meta http-equiv="cleartype" content="on">
+
+<!-- Global settings -->
+<script>
+    window.ghmirror = "https://cdn.jsdelivr.net/gh/cubarco/cubarco.github.io@2021-0521-092454-11212"
+    window.searchEnabled = "true" ? true : false
+</script>
+
+<!-- Modernizr -->
+<script src="https://cdn.jsdelivr.net/gh/cubarco/cubarco.github.io@2021-0521-092454-11212/assets/js/vendor/modernizr-2.7.1.custom.min.js" async></script>
+
+</head>
+
+<body id="post">
+
+  <div class="navigation-wrapper">
+	<nav role="navigation" id="site-nav" class="animated drop">
+		<ul>
+			
+			
+			<li><a href="https://cubl.in/blog/" >Latest</a></li>
+			
+			
+			<li><a href="https://cubl.in/blog/about/" >About</a></li>
+			
+			
+			<li><a href="https://cubl.in/blog/archives/" >Archives</a></li>
+			
+			
+			<li><a href="https://cubl.in/blog/tags/" >Tags</a></li>
+			
+			<li class="dosearch"><span><i class="fa fa-search"></i> Search</span></li>
+		</ul>
+	</nav>
+</div><!-- /.navigation-wrapper -->
+
+<div class="search-wrapper">
+  <div class="search-form">
+    <input type="text" class="search-field" placeholder="Search...">
+    <button class="close-btn"><i class="fa fa-times-circle fa-2x"></i></button>
+    <ul class="search-results post-list"></ul><!-- /.search-results -->
+  </div><!-- /.search-form -->
+</div><!-- ./search-wrapper -->
+
+<div class="js-menu-screen menu-screen"></div>
+
+
+  <div id="main" role="main">
+    <article class="hentry">
+      
+      <div class="entry-wrapper">
+        <header class="entry-header">
+          <span class="entry-tags"><a href="https://cubl.in/blog/tags/#Hack"
+              title="Pages tagged Hack">Hack</a>&nbsp;&bull;&nbsp;<a href="https://cubl.in/blog/tags/#CTF"
+              title="Pages tagged CTF">CTF</a>&nbsp;&bull;&nbsp;<a href="https://cubl.in/blog/tags/#Writeup"
+              title="Pages tagged Writeup">Writeup</a>&nbsp;&bull;&nbsp;<a href="https://cubl.in/blog/tags/#Exploitation"
+              title="Pages tagged Exploitation">Exploitation</a>&nbsp;&bull;&nbsp;<a href="https://cubl.in/blog/tags/#FSB"
+              title="Pages tagged FSB">FSB</a></span>
+          
+          <h1 class="entry-title">Writeup-Seccon CTF: FSB:TreeWalker</h1>
+          
+        </header>
+        <footer class="entry-meta">
+          
+          
+          <span class="author vcard">By <span class="fn">Cubarco</span></span>
+          <span class="entry-date date published"><time datetime="2015-12-07T00:00:00+00:00"><i
+                class="fa fa-calendar-o"></i> December 07, 2015</time></span>
+          <span class="entry-date date modified"><time datetime="2015-12-13"><i
+                class="fa fa-pencil"></i> December 13, 2015</time></span>
+          <span class="entry-comments"><i
+              class="fa fa-comment-o"></i> <a href="#disqus_thread">Comment</a></span>
+          <span class="social-share-twitter">
+  <a href="https://twitter.com/intent/tweet?hashtags=Hack,CTF,Writeup,Exploitation,FSB&amp;text=Writeup-Seccon%20CTF:%20FSB:TreeWalker&amp;url=https://cubl.in/blog/2015/12/seccon-ctf-writeup-fsb-treewalker/&amp;via=Cube_Lin"
+    title="Share on Twitter" itemprop="Twitter"><i class="fa fa-twitter-square"></i> Tweet</a>
+</span>
+<span class="social-share-facebook">
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https://cubl.in/blog/2015/12/seccon-ctf-writeup-fsb-treewalker/" title="Share on Facebook"
+    itemprop="Facebook"><i class="fa fa-facebook-square"></i> Like</a>
+</span>
+<!-- /.social-share -->
+          
+        </footer>
+        <div class="entry-content">
+          <h3 id="printf">printf()</h3>
+
+<p>因为这题直接把 FSB 写在题名里，我一拿到题就直接跑去找能利用 FSB 的点了。</p>
+
+<p>利用点在这里：</p>
+
+<figure class="highlight"><pre><code class="language-objdump" data-lang="objdump">400881:	0f 1f 80 00 00 00 00 	nopl   0x0(%rax)
+400888:	4c 8b 05 f9 09 20 00 	mov    0x2009f9(%rip),%r8        # 601288 &lt;stdin@@GLIBC_2.2.5&gt;
+40088f:	48 8d 7c 24 50       	lea    0x50(%rsp),%rdi
+400894:	ba 01 00 00 00       	mov    $0x1,%edx
+400899:	be 00 10 00 00       	mov    $0x1000,%esi
+40089e:	e8 fd fe ff ff       	callq  4007a0 &lt;__fread_chk@plt&gt;
+4008a3:	48 39 44 24 08       	cmp    %rax,0x8(%rsp)
+4008a8:	0f 85 81 00 00 00    	jne    40092f &lt;main+0x14f&gt;
+4008ae:	48 8d 74 24 50       	lea    0x50(%rsp),%rsi
+4008b3:	bf 01 00 00 00       	mov    $0x1,%edi
+4008b8:	31 c0                	xor    %eax,%eax
+4008ba:	e8 d1 fe ff ff       	callq  400790 &lt;__printf_chk@plt&gt;
+4008bf:	48 8b 0d c2 09 20 00 	mov    0x2009c2(%rip),%rcx        # 601288 &lt;stdin@@GLIBC_2.2.5&gt;
+4008c6:	48 8d 7c 24 08       	lea    0x8(%rsp),%rdi
+4008cb:	ba 01 00 00 00       	mov    $0x1,%edx
+4008d0:	be 08 00 00 00       	mov    $0x8,%esi
+4008d5:	e8 36 fe ff ff       	callq  400710 &lt;fread@plt&gt;
+4008da:	48 83 f8 01          	cmp    $0x1,%rax
+4008de:	75 1e                	jne    4008fe &lt;main+0x11e&gt;
+4008e0:	48 8b 4c 24 08       	mov    0x8(%rsp),%rcx
+4008e5:	48 81 f9 00 10 00 00 	cmp    $0x1000,%rcx
+4008ec:	77 10                	ja     4008fe &lt;main+0x11e&gt;
+4008ee:	48 85 c9             	test   %rcx,%rcx
+4008f1:	75 95                	jne    400888 &lt;main+0xa8&gt;</code></pre></figure>
+
+<p>在 0x4008ba 会有 printf 输出缓冲区，其内容来自用户输入，此处可以构造 format string 来 leak 内存或者是其他非法操作(利用%n)。</p>
+
+<p>这一部分的具体输入规则是，先输入<code class="highlighter-rouge">'\x00\x10\x00\x00'</code>，然后输入 0x1000 个字符(format string)… 两步循环。</p>
+
+<h3 id="wheres-the-flag">Where’s the flag?</h3>
+
+<p>一开始找到 FSB，我想可能很简单，直接打印栈中的 flag 就好了。但是有这样一段代码把 flag 给覆盖了：</p>
+
+<figure class="highlight"><pre><code class="language-objdump" data-lang="objdump">40084d:	48 b8 cc cc cc cc cc 	movabs $0xcccccccccccccccc,%rax
+400854:	cc cc cc
+400857:	48 89 44 24 10       	mov    %rax,0x10(%rsp)
+40085c:	48 89 44 24 18       	mov    %rax,0x18(%rsp)
+400861:	48 89 44 24 20       	mov    %rax,0x20(%rsp)
+400866:	48 89 44 24 28       	mov    %rax,0x28(%rsp)
+40086b:	48 89 44 24 30       	mov    %rax,0x30(%rsp)
+400870:	48 89 44 24 38       	mov    %rax,0x38(%rsp)
+400875:	48 89 44 24 40       	mov    %rax,0x40(%rsp)
+40087a:	48 89 44 24 48       	mov    %rax,0x48(%rsp)</code></pre></figure>
+
+<p>还是老老实实看 construct_tree() 吧。</p>
+
+<h3 id="construct_tree">construct_tree()</h3>
+
+<p>IDA decompile 的 C 代码:</p>
+
+<figure class="highlight"><pre><code class="language-c" data-lang="c"><span class="k">struct</span> <span class="n">s0</span> <span class="p">{</span>
+    <span class="kt">signed</span> <span class="kt">char</span> <span class="n">f0</span><span class="p">;</span>
+    <span class="kt">signed</span> <span class="kt">char</span><span class="p">[</span><span class="mi">7</span><span class="p">]</span> <span class="n">pad8</span><span class="p">;</span>
+    <span class="k">struct</span> <span class="n">s0</span><span class="o">*</span> <span class="n">f8</span><span class="p">;</span>
+    <span class="k">struct</span> <span class="n">s0</span><span class="o">*</span> <span class="n">f16</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="cm">/* .calloc */</span>
+<span class="k">struct</span> <span class="n">s0</span><span class="o">*</span> <span class="nf">calloc</span><span class="p">(</span><span class="kt">int64_t</span> <span class="n">rdi</span><span class="p">,</span> <span class="kt">int64_t</span> <span class="n">rsi</span><span class="p">);</span>
+
+<span class="cm">/* .strlen */</span>
+<span class="kt">uint64_t</span> <span class="nf">strlen</span><span class="p">(</span><span class="kt">signed</span> <span class="kt">char</span><span class="o">*</span> <span class="n">rdi</span><span class="p">,</span> <span class="kt">int64_t</span> <span class="n">rsi</span><span class="p">);</span>
+
+<span class="k">struct</span> <span class="n">s0</span><span class="o">*</span> <span class="nf">construct_tree</span><span class="p">(</span><span class="kt">signed</span> <span class="kt">char</span><span class="o">*</span> <span class="n">rdi</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kt">signed</span> <span class="kt">char</span><span class="o">*</span> <span class="n">r14_2</span><span class="p">;</span>
+    <span class="kt">uint64_t</span> <span class="n">r13_3</span><span class="p">;</span>
+    <span class="k">struct</span> <span class="n">s0</span><span class="o">*</span> <span class="n">rax4</span><span class="p">;</span>
+    <span class="k">struct</span> <span class="n">s0</span><span class="o">*</span> <span class="n">r15_5</span><span class="p">;</span>
+    <span class="k">struct</span> <span class="n">s0</span><span class="o">*</span> <span class="n">rbp6</span><span class="p">;</span>
+    <span class="kt">uint64_t</span> <span class="n">rax7</span><span class="p">;</span>
+    <span class="kt">uint32_t</span> <span class="n">r12d8</span><span class="p">;</span>
+    <span class="kt">int32_t</span> <span class="n">ebx9</span><span class="p">;</span>
+    <span class="k">struct</span> <span class="n">s0</span><span class="o">*</span> <span class="n">rax10</span><span class="p">;</span>
+    <span class="kt">uint64_t</span> <span class="n">rax11</span><span class="p">;</span>
+
+    <span class="n">r14_2</span> <span class="o">=</span> <span class="n">rdi</span><span class="p">;</span>
+    <span class="o">*</span><span class="p">(</span><span class="kt">int32_t</span><span class="o">*</span><span class="p">)</span><span class="o">&amp;</span><span class="n">r13_3</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="o">*</span><span class="p">((</span><span class="kt">int32_t</span><span class="o">*</span><span class="p">)</span><span class="o">&amp;</span><span class="n">r13_3</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="n">rax4</span> <span class="o">=</span> <span class="n">calloc</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">24</span><span class="p">);</span>
+    <span class="n">r15_5</span> <span class="o">=</span> <span class="n">rax4</span><span class="p">;</span>
+    <span class="n">rbp6</span> <span class="o">=</span> <span class="n">rax4</span><span class="p">;</span>
+    <span class="n">rax7</span> <span class="o">=</span> <span class="n">strlen</span><span class="p">(</span><span class="n">r14_2</span><span class="p">,</span> <span class="mi">24</span><span class="p">);</span>
+    <span class="k">if</span> <span class="p">(</span><span class="mi">0</span> <span class="o">&lt;</span> <span class="n">rax7</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">do</span> <span class="p">{</span>
+            <span class="n">r12d8</span> <span class="o">=</span> <span class="p">(</span><span class="kt">uint32_t</span><span class="p">)(</span><span class="kt">unsigned</span> <span class="kt">char</span><span class="p">)</span><span class="o">*</span><span class="n">r14_2</span><span class="p">;</span>
+            <span class="n">ebx9</span> <span class="o">=</span> <span class="mi">7</span><span class="p">;</span>
+            <span class="k">while</span> <span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+                <span class="n">rbp6</span><span class="o">-&gt;</span><span class="n">f0</span> <span class="o">=</span> <span class="mi">73</span><span class="p">;</span>
+                <span class="n">rax10</span> <span class="o">=</span> <span class="n">calloc</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">24</span><span class="p">);</span>
+                <span class="k">if</span> <span class="p">((</span><span class="n">int1_t</span><span class="p">)(</span><span class="n">r12d8</span> <span class="o">&gt;&gt;</span> <span class="n">ebx9</span><span class="p">))</span> <span class="p">{</span>
+                    <span class="o">--</span><span class="n">ebx9</span><span class="p">;</span>
+                    <span class="n">rbp6</span><span class="o">-&gt;</span><span class="n">f8</span> <span class="o">=</span> <span class="n">rax10</span><span class="p">;</span>
+                    <span class="n">rbp6</span> <span class="o">=</span> <span class="n">rax10</span><span class="p">;</span>
+                    <span class="k">if</span> <span class="p">(</span><span class="n">ebx9</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+                        <span class="k">break</span><span class="p">;</span>
+                <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+                    <span class="o">--</span><span class="n">ebx9</span><span class="p">;</span>
+                    <span class="n">rbp6</span><span class="o">-&gt;</span><span class="n">f16</span> <span class="o">=</span> <span class="n">rax10</span><span class="p">;</span>
+                    <span class="n">rbp6</span> <span class="o">=</span> <span class="n">rax10</span><span class="p">;</span>
+                    <span class="k">if</span> <span class="p">(</span><span class="n">ebx9</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+                        <span class="k">break</span><span class="p">;</span>
+                <span class="p">}</span>
+            <span class="p">}</span>
+            <span class="o">++</span><span class="n">r13_3</span><span class="p">;</span>
+            <span class="n">rax11</span> <span class="o">=</span> <span class="n">strlen</span><span class="p">(</span><span class="n">r14_2</span><span class="p">,</span> <span class="mi">24</span><span class="p">);</span>
+        <span class="p">}</span> <span class="k">while</span> <span class="p">(</span><span class="n">r13_3</span> <span class="o">&lt;</span> <span class="n">rax11</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="n">rbp6</span><span class="o">-&gt;</span><span class="n">f0</span> <span class="o">=</span> <span class="mi">76</span><span class="p">;</span>
+    <span class="k">return</span> <span class="n">r15_5</span><span class="p">;</span>
+<span class="p">}</span></code></pre></figure>
+
+<p>这段代码很简单，就是依据 flag 中各个字符每个 bit 的值构造一个二叉树。然后这个树的根的的地址会在 main 函数中打印出来。</p>
+
+<h3 id="exppy">exp.py</h3>
+
+<p>我在比赛中用的 leak 一次只能 leak 一个字符，赛后重写改进了一下，能 leak 4 个字符，稍微加快一点。</p>
+
+<div class="gist" data-gist="cubarco/a3ce8d93cb4860500090"><p>Gist: <a href="https://gist.github.com/cubarco/a3ce8d93cb4860500090">cubarco/a3ce8d93cb4860500090</a></p></div>
+
+<p>一开始我准备用<code class="highlighter-rouge">"%31$s"</code>直接 printf, 但是会报<code class="highlighter-rouge">*** invalid %N$ use detected ***</code>. 这是由于 Glibc 的 FORTIFY_SOURCE, 可以绕过，具体方法看<a href="http://phrack.org/issues/67/9.html">这篇文章</a>。</p>
+
+<h3 id="the-end">The end?</h3>
+
+<p>其实 FSB 最严重的问题是用类似<code class="highlighter-rouge">%N$n</code>的 format string 能够实现将任意值写入指定 offset 的栈中。但是 Glibc 的 FORTIFY_SOURCE 解决(?)了这个问题。但是<a href="http://phrack.org/issues/67/9.html">这篇文章</a>好像还是有办法绕过<del>虽然我还没成功</del>。</p>
+
+<h6 id="update-2015-12-13">Update 2015-12-13</h6>
+
+<p>phrack 上的那篇<a href="http://phrack.org/issues/67/9.html">文章</a>是 2010 年的，之后在 2012 年，glibc 打了一个 <a href="http://repo.or.cz/glibc.git/commit/7c1f4834d398163d1ac8101e35e9c36fc3176e6e">patch</a>, 用<code class="highlighter-rouge">width_arg</code>盖掉<code class="highlighter-rouge">stdout-&gt;_flags2</code>上<code class="highlighter-rouge">_IO_FLAGS2_FORTIFY</code>标志位的办法已经行不通了。</p>
+
+<h3 id="references">References</h3>
+<ol>
+  <li><a href="http://phrack.org/issues/67/9.html">A Eulogy for Format Strings</a></li>
+  <li><a href="http://repo.or.cz/glibc.git/commit/7c1f4834d398163d1ac8101e35e9c36fc3176e6e">glibc.git / commit / 7c1f4834d398163d1ac8101e35e9c36fc3176e6e</a></li>
+</ol>
+
+
+          <!--<div>
+            <span><a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/"><img
+                  alt="Creative Commons License" style="border-width:0"
+                  src="https://cdn.jsdelivr.net/gh/cubarco/cubarco.github.io@2021-0521-092454-11212/images/cc_by-nc_88x31.png" /></a></span>
+          </div>-->
+          <nav class="pagination" role="navigation">
+            
+            <a href="https://cubl.in/blog/2015/12/9477-calcpop-reloaded-writeup/" class="btn" title="Writeup-9447 CTF: calcpop-reloaded">Previous</a>
+            
+            
+            <a href="https://cubl.in/blog/2015/12/writeup-pwnable-tiny-and-tiny-easy/" class="btn" title="Writeup-Pwnable: tiny & tiny_easy">Next</a>
+            
+          </nav><!-- /.pagination -->
+          <div id="disqus_thread"></div>
+          <!-- /#disqus_thread -->
+        </div><!-- /.entry-content -->
+      </div><!-- /.entry-wrapper -->
+
+    </article>
+  </div><!-- /#main -->
+
+  <div class="footer-wrapper">
+    <footer role="contentinfo" class="entry-wrapper">
+      
+
+<span>
+	Powered by <a href="https://jekyllrb.com">Jekyll</a>, <a href="https://github.com/features/actions">Github Actions</a>, <a href="https://www.jsdelivr.com">jsDelivr</a> and <a href="https://fly.io">Fly.io</a>.
+	<br />
+	© 2014 - 2021 ❤ Cubl
+</span>
+<div class="social-icons">
+	<a href="https://twitter.com/Cube_Lin"
+		title="Cubarco on Twitter" target="_blank"><i class="fa fa-twitter-square fa-2x"></i></a>
+	
+	
+	
+	
+	
+	
+	<a href="https://github.com/cubarco"
+		title="Cubarco on Github" target="_blank"><i class="fa fa-github-square fa-2x"></i></a>
+	
+	<a href="https://cubl.in/feed.xml" title="Atom/RSS feed"><i class="fa fa-rss-square fa-2x"></i></a>
+</div><!-- /.social-icons -->
+
+    </footer>
+  </div><!-- /.footer-wrapper -->
+
+  <!-- <script src="https://cdn.jsdelivr.net/gh/cubarco/cubarco.github.io@2021-0521-092454-11212/assets/js/vendor/jquery-2.1.4.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/cubarco/cubarco.github.io@2021-0521-092454-11212/assets/js/gist-async.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/cubarco/cubarco.github.io@2021-0521-092454-11212/assets/js/scripts.min.js"></script> -->
+<script src="https://cdn.jsdelivr.net/combine/gh/cubarco/cubarco.github.io@2021-0521-092454-11212/assets/js/vendor/jquery-2.1.4.min.js,gh/cubarco/cubarco.github.io@2021-0521-092454-11212/assets/js/scripts.min.js" async></script>
+
+<!-- Check whether the page is a post -->
+
+
+<!-- Polyfill must be loaded before DisqusJS -->
+<!-- <script src="https://cdn.jsdelivr.net/gh/cubarco/cubarco.github.io@2021-0521-092454-11212/assets/js/vendor/polyfill.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/cubarco/cubarco.github.io@2021-0521-092454-11212/assets/js/vendor/fetch.umd.min.js"></script>
+<script id="dsqjs-script" src="https://cdn.jsdelivr.net/gh/cubarco/cubarco.github.io@2021-0521-092454-11212/assets/js/vendor/disqus.js"></script> -->
+<script>
+    window.disqus_shortname = 'cubarco';
+    window.disqus_siteName = '/home/cubarco';
+    window.disqus_api = 'https://cubl.in/disqus/';
+    window.disqus_apikey = [];
+    
+        window.disqus_apikey.push('Jw86RA4MHn7FOX9T3JdY2rdOwXIHztQXp1QGQzvEjil3rXPCOfIrn4yF53NEOcho');
+    
+        window.disqus_apikey.push('IDVVwMUDkvtvpwfL7KK9Yuqf0OHx0yCpEF3f3awBvWwg0RA2QMRSktMNiBOJs0am');
+    
+        window.disqus_apikey.push('ZOkyhwsK71f8GqNw5M9oCPEAyLXzA3IRqS76QXhJG29XvyjG3g7ocNoSA2PQCp1R');
+    
+    window.disqus_admin = 'cubarco';
+    window.disqus_adminLabel = 'Mod';
+</script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/cubarco/cubarco.github.io@2021-0521-092454-11212/assets/css/vendor/disqusjs.css" media="none" onload="if(media!='all')media='all'">
+<script src="https://cdn.jsdelivr.net/combine/gh/cubarco/cubarco.github.io@2021-0521-092454-11212/assets/js/vendor/polyfill.min.js,gh/cubarco/cubarco.github.io@2021-0521-092454-11212/assets/js/vendor/fetch.umd.min.js,gh/cubarco/cubarco.github.io@2021-0521-092454-11212/assets/js/vendor/disqus.js,gh/cubarco/cubarco.github.io@2021-0521-092454-11212/assets/js/vendor/disqus-settings.js" async></script>
+
+
+
+
+
+
+
+<script async defer data-website-id="e9fdcc32-0bfa-4de5-beb0-3bbf1e4638ab" src="https://umami.pwn.ooo/umami.js"></script>
+
+
+
+</body>
+
+</html>
