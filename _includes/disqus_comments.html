@@ -3,26 +3,17 @@
 <!-- <script src="{{ site.ghmirror }}/assets/js/vendor/polyfill.min.js"></script>
 <script src="{{ site.ghmirror }}/assets/js/vendor/fetch.umd.min.js"></script>
 <script id="dsqjs-script" src="{{ site.ghmirror }}/assets/js/vendor/disqus.js"></script> -->
-<script src="{{site.ghmirrorcombine}}{{site.ghmirrorpath}}/assets/js/vendor/polyfill.min.js,{{site.ghmirrorpath}}/assets/js/vendor/fetch.umd.min.js,{{site.ghmirrorpath}}/assets/js/vendor/disqus.js"></script>
-<link rel="stylesheet" href="{{ site.ghmirror }}/assets/css/vendor/disqusjs.css">
 <script>
-    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
-    var disqus_shortname = '{{ site.disqus.shortname }}';
-    var disqus_siteName = '{{ site.disqus.siteName }}';
-    var disqus_api = '{{ site.disqus.api }}';
-    var disqus_apikey = [];
+    window.disqus_shortname = '{{ site.disqus.shortname }}';
+    window.disqus_siteName = '{{ site.disqus.siteName }}';
+    window.disqus_api = '{{ site.disqus.api }}';
+    window.disqus_apikey = [];
     {% for apikey in site.disqus.apikey %}
-        disqus_apikey.push('{{ apikey }}');
+        window.disqus_apikey.push('{{ apikey }}');
     {% endfor %}
-    var disqus_admin = '{{ site.disqus.admin }}';
-    var disqus_adminLabel = '{{ site.disqus.adminLabel }}';
-    var dsqjs = new DisqusJS({
-        shortname: disqus_shortname,
-        siteName: disqus_siteName,
-        api: disqus_api,
-        apikey: disqus_apikey,
-        admin: disqus_admin,
-        adminLabel: disqus_adminLabel
-    });
+    window.disqus_admin = '{{ site.disqus.admin }}';
+    window.disqus_adminLabel = '{{ site.disqus.adminLabel }}';
 </script>
+<link rel="stylesheet" href="{{ site.ghmirror }}/assets/css/vendor/disqusjs.css">
+<script src="{{site.ghmirrorcombine}}{{site.ghmirrorpath}}/assets/js/vendor/polyfill.min.js,{{site.ghmirrorpath}}/assets/js/vendor/fetch.umd.min.js,{{site.ghmirrorpath}}/assets/js/vendor/disqus.js,{{site.ghmirrorpath}}/assets/js/vendor/disqus-settings.js" defer></script>
 {% endif %}
