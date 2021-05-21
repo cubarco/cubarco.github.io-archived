@@ -62,7 +62,8 @@ exclude:
     "purge-cache.sh",
     "build.sh",
     "README.md",
-    ".fly"
+    ".fly",
+    "package-lock.json",
   ]
 
 # Site owner
