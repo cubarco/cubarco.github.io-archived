@@ -41,7 +41,7 @@ jobs:
           #keep_history: true
           target_branch: "gh-pages"
           build_dir: /github/workspace/.fly/jekyll_build
-          purgecss: true
+          purgecss: false
 
       - name: Deploy to fly.io
         if: ${{ github.ref == 'refs/heads/source-gh-actions' }}
