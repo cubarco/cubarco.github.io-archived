@@ -30,10 +30,10 @@ remove:'index.html' | strip_slash }}{% endif %}{% endcapture %}
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <!-- For all browsers -->
-<link rel="stylesheet" href="{{ site.ghmirror }}/assets/css/main.css">
+<link rel="stylesheet" href="{{ site.ghmirror }}/assets/css/main.css" media="none" onload="if(media!='all')media='all'">
 
 <!--Webfonts-->
-<link href='//fonts.googleapis.com/css?family=Volkhov|Cabin' rel='stylesheet' type='text/css'>
+<link href='//fonts.googleapis.com/css?family=Volkhov|Cabin' rel='stylesheet' type='text/css' media="none" onload="if(media!='all')media='all'">
 <meta http-equiv="cleartype" content="on">
 
 <!-- Global settings -->

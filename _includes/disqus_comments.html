@@ -14,6 +14,6 @@
     window.disqus_admin = '{{ site.disqus.admin }}';
     window.disqus_adminLabel = '{{ site.disqus.adminLabel }}';
 </script>
-<link rel="stylesheet" href="{{ site.ghmirror }}/assets/css/vendor/disqusjs.css">
+<link rel="stylesheet" href="{{ site.ghmirror }}/assets/css/vendor/disqusjs.css" media="none" onload="if(media!='all')media='all'">
 <script src="{{site.ghmirrorcombine}}{{site.ghmirrorpath}}/assets/js/vendor/polyfill.min.js,{{site.ghmirrorpath}}/assets/js/vendor/fetch.umd.min.js,{{site.ghmirrorpath}}/assets/js/vendor/disqus.js,{{site.ghmirrorpath}}/assets/js/vendor/disqus-settings.js" async></script>
 {% endif %}
