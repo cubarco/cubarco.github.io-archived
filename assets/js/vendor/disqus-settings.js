@@ -8,4 +8,4 @@ setTimeout(function() {
         admin: window.disqus_admin,
         adminLabel: window.disqus_adminLabel
     });
-}, 0)
+}, 1000)
