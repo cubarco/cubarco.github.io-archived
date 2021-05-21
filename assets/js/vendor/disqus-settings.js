@@ -1,5 +1,5 @@
 // DisqusJS blocks gist-async
-setTimeout(function() {
+window.addEventListener("load", function() {
     var dsqjs = new DisqusJS({
         shortname: window.disqus_shortname,
         siteName: window.disqus_siteName,
@@ -8,4 +8,4 @@ setTimeout(function() {
         admin: window.disqus_admin,
         adminLabel: window.disqus_adminLabel
     });
-}, 1000)
+})
