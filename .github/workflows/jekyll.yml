@@ -17,18 +17,26 @@ jobs:
       - uses: actions/checkout@v2
 
       # Use GitHub Actions' cache to shorten build times and decrease load on servers
-      - uses: actions/cache@v2
+      - name: GEM cache
+        uses: actions/cache@v2
         with:
           path: vendor/bundle
           key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}
           restore-keys: |
             ${{ runner.os }}-gems-
 
+      - name: NPM cache
+        uses: actions/cache@v2
+        with:
+          path: vendor/bundle
+          key: ${{ runner.os }}-npm-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-npm-
+
       - uses: actions/setup-node@v2
         with:
           node-version: '14'
-
-      - run: npm install purgecss -g
+      - run: npm install
 
       - name: Build & deploy to github pages
         if: ${{ github.ref == 'refs/heads/source-gh-actions' }}

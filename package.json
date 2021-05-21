@@ -20,5 +20,8 @@
     "grunt-contrib-uglify": "~5.0.1",
     "grunt-contrib-watch": "~1.1.0",
     "grunt-svgmin": "~6.0.1"
+  },
+  "dependencies": {
+    "purgecss": "^4.0.3"
   }
 }
