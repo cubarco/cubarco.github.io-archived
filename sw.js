@@ -2,7 +2,7 @@
 ---
 var CDN_URL = "{{ site.ghmirror }}"
 
-var urlPrefix = "{{ site.url }}";
+var urlPrefix = self.registration.scope.replace(/\/$/, '');
 
 self.addEventListener("fetch", function (event) {
   if (
