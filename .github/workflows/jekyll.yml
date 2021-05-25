@@ -43,6 +43,13 @@ jobs:
           build_dir: /github/workspace/.fly/jekyll_build
           purgecss: false
 
+      - name: Purge Cloudflare cache
+        if: ${{ github.ref == 'refs/heads/source-gh-actions' }}
+        uses: jakejarvis/cloudflare-purge-action@master
+        env:
+          CLOUDFLARE_ZONE: ${{ secrets.CLOUDFLARE_ZONE }}
+          CLOUDFLARE_TOKEN: ${{ secrets.CLOUDFLARE_TOKEN }}
+
       # - name: Deploy to fly.io
       #   if: ${{ github.ref == 'refs/heads/source-gh-actions' }}
       #   uses: superfly/flyctl-actions@1.1
