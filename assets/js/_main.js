@@ -58,7 +58,7 @@ $(document).ready(function () {
 
 // SimpleJekyllSearch options
 if (window.searchEnabled) {
-    $(document).ready(function () {
+    $(window).load(function () {
       $(".search-field").jekyllSearch({
         jsonFile: window.ghmirror + "/search.json",
         searchResults: ".search-results",

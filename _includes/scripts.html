@@ -2,7 +2,6 @@
 <script src="{{ site.ghmirror }}/assets/js/gist-async.min.js"></script>
 <script src="{{ site.ghmirror }}/assets/js/scripts.min.js"></script> -->
 <script src="{{ site.ghmirrorcombine }}{{site.ghmirrorpath}}/assets/js/vendor/jquery-2.1.4.min.js,{{site.ghmirrorpath}}/assets/js/scripts.min.js" async></script>
-<script defer src="https://cdn.jsdelivr.net/npm/instant.page@5.1.0/instantpage.min.js"></script>
 
 {% include service-worker.html %}
 
@@ -32,3 +31,5 @@
 {% if site.owner.umami %}
 <script async defer data-website-id="{{ site.owner.umami.website-id }}" src="{{ site.owner.umami.src-url }}"></script>
 {% endif %}
+
+<script async defer src="https://cdn.jsdelivr.net/npm/instant.page@5.1.0/instantpage.min.js"></script>
