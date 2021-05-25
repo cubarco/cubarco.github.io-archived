@@ -46,18 +46,10 @@ jobs:
 
       - name: Purge Cloudflare cache
         if: ${{ github.ref == 'refs/heads/source-gh-actions' }}
-        uses: jakejarvis/cloudflare-purge-action@master
+        run: sh purge-cache.sh
         env:
           CLOUDFLARE_ZONE: ${{ secrets.CLOUDFLARE_ZONE }}
           CLOUDFLARE_TOKEN: ${{ secrets.CLOUDFLARE_TOKEN }}
-
-      # - name: Deploy to fly.io
-      #   if: ${{ github.ref == 'refs/heads/source-gh-actions' }}
-      #   uses: superfly/flyctl-actions@1.1
-      #   env:
-      #     FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
-      #   with:
-      #     args: "deploy"
 
       - name: Build only
         if: ${{ github.ref != 'refs/heads/source-gh-actions' }}
