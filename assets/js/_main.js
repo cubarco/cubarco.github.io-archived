@@ -93,3 +93,7 @@ if (window.searchEnabled) {
       });
     })(jQuery, window);
 }
+
+$(window).load(function () {
+    window.gistAsync()
+})
