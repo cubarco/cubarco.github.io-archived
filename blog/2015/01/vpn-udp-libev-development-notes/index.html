@@ -1,0 +1,272 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+<meta name="theme-color" content="#000000">
+<title>vpn-udp-libev 开发总结 &#8211; /home/cubarco</title>
+<meta name="description"
+  content="最近又在看 UNIX 网络编程那本书，写了个 vpn 练手，代码和简单的介绍在 Github 上(好像效率还不错的样子)。这里照例做一下总结，便于以后查阅。 关于recvfrom() /* recvfrom() 的声明 */ ssize_t recvfrom(int sockfd, void *buf, size_t len, int flags, struct sockaddr *src_addr, socklen_t *addrlen); 这个函数比较诡异的是它的最后一个参数addrlen. If src_addr is not NULL, and the underlying protocol provides the source address of the message, that source address is placed in the buffer pointed to by src_addr. In this case, addrlen is a value-result argument. Before the call, it should be initialized to the size of the...">
+
+<meta name="keywords" content="Network, VPN, Linux">
+
+
+<!-- Twitter Cards -->
+<meta name="twitter:title" content="vpn-udp-libev 开发总结">
+<meta name="twitter:description"
+   content="最近又在看 UNIX 网络编程那本书，写了个 vpn 练手，代码和简单的介绍在 Github 上(好像效率还不错的样子)。这里照例做一下总结，便于以后查阅。 关于recvfrom() /* recvfrom() 的声明 */ ssize_t recvfrom(int sockfd, void *buf, size_t len, int flags, struct sockaddr *src_addr, socklen_t *addrlen); 这个函数比较诡异的是它的最后一个参数addrlen. If src_addr is not NULL, and the underlying protocol provides the source address of the message, that source address is placed in the buffer pointed to by src_addr. In this case, addrlen is a value-result argument. Before the call, it should be initialized to the size of the...">
+
+<meta name="twitter:site" content="@Cube_Lin">
+
+<meta name="twitter:creator" content="@Cube_Lin">
+
+<meta name="twitter:card" content="summary">
+<!--
+   -<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/cubarco/cubarco.github.io@2021-0525-152552-29777/images/">
+   -->
+
+<!-- Open Graph -->
+<meta property="og:locale" content="zh_CN">
+<meta property="og:type" content="article">
+<meta property="og:title" content="vpn-udp-libev 开发总结">
+<meta property="og:description"
+   content="最近又在看 UNIX 网络编程那本书，写了个 vpn 练手，代码和简单的介绍在 Github 上(好像效率还不错的样子)。这里照例做一下总结，便于以后查阅。 关于recvfrom() /* recvfrom() 的声明 */ ssize_t recvfrom(int sockfd, void *buf, size_t len, int flags, struct sockaddr *src_addr, socklen_t *addrlen); 这个函数比较诡异的是它的最后一个参数addrlen. If src_addr is not NULL, and the underlying protocol provides the source address of the message, that source address is placed in the buffer pointed to by src_addr. In this case, addrlen is a value-result argument. Before the call, it should be initialized to the size of the...">
+<meta property="og:url" content="https://cubl.in/blog/2015/01/vpn-udp-libev-development-notes/">
+<meta property="og:site_name" content="/home/cubarco">
+
+
+
+
+
+<link rel="canonical" href="https://cubl.in/blog/2015/01/vpn-udp-libev-development-notes/">
+<link href="https://cubl.in/feed.xml" type="application/atom+xml" rel="alternate" title="/home/cubarco Feed">
+
+
+<!-- http://t.co/dKP3o1e -->
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/cubarco/cubarco.github.io@2021-0525-152552-29777/assets/css/main.css">
+
+<!--Webfonts-->
+<link href='//fonts.googleapis.com/css?family=Volkhov|Cabin' rel='stylesheet' type='text/css' media="none" onload="if(media!='all')media='all'">
+<meta http-equiv="cleartype" content="on">
+
+<!-- Global settings -->
+<script>
+    window.ghmirror = "https://cdn.jsdelivr.net/gh/cubarco/cubarco.github.io@2021-0525-152552-29777"
+    window.searchEnabled = "true" ? true : false
+</script>
+
+<!-- Modernizr -->
+<script src="https://cdn.jsdelivr.net/gh/cubarco/cubarco.github.io@2021-0525-152552-29777/assets/js/vendor/modernizr-2.7.1.custom.min.js" async></script>
+
+</head>
+
+<body id="post">
+
+  <div class="navigation-wrapper">
+	<nav role="navigation" id="site-nav" class="animated drop">
+		<ul>
+			
+			
+			<li><a href="https://cubl.in/blog/">Latest</a></li>
+			
+			
+			<li><a href="https://cubl.in/blog/about/">About</a></li>
+			
+			
+			<li><a href="https://cubl.in/blog/archives/">Archives</a></li>
+			
+			
+			<li><a href="https://cubl.in/blog/tags/">Tags</a></li>
+			
+			<li class="dosearch"><span><i class="fa fa-search"></i> Search</span></li>
+		</ul>
+	</nav>
+</div><!-- /.navigation-wrapper -->
+
+<div class="search-wrapper">
+  <div class="search-form">
+    <input type="text" class="search-field" placeholder="Search...">
+    <button class="close-btn"><i class="fa fa-times-circle fa-2x"></i></button>
+    <ul class="search-results post-list"></ul>
+<!-- /.search-results -->
+  </div>
+<!-- /.search-form -->
+</div><!-- ./search-wrapper -->
+
+<div class="js-menu-screen menu-screen"></div>
+
+
+  <div id="main" role="main">
+    <article class="hentry">
+      
+      <div class="entry-wrapper">
+        <header class="entry-header">
+          <span class="entry-tags"><a href="https://cubl.in/blog/tags/#Network" title="Pages tagged Network">Network</a> • <a href="https://cubl.in/blog/tags/#VPN" title="Pages tagged VPN">VPN</a> • <a href="https://cubl.in/blog/tags/#Linux" title="Pages tagged Linux">Linux</a></span>
+          
+          <h1 class="entry-title">vpn-udp-libev 开发总结</h1>
+          
+        </header>
+        <footer class="entry-meta">
+          
+          
+          <span class="author vcard">By <span class="fn">Cubarco</span></span>
+          <span class="entry-date date published"><time datetime="2015-01-09T00:00:00+00:00"><i class="fa fa-calendar-o"></i> January 09, 2015</time></span>
+          <span class="entry-date date modified"><time datetime="2015-01-10"><i class="fa fa-pencil"></i> January 10, 2015</time></span>
+          <span class="entry-comments"><i class="fa fa-comment-o"></i> <a href="#disqus_thread">Comment</a></span>
+          <span class="social-share-twitter">
+  <a href="https://twitter.com/intent/tweet?hashtags=Network,VPN,Linux&amp;text=vpn-udp-libev%20%E5%BC%80%E5%8F%91%E6%80%BB%E7%BB%93&amp;url=https://cubl.in/blog/2015/01/vpn-udp-libev-development-notes/&amp;via=Cube_Lin" title="Share on Twitter" itemprop="Twitter"><i class="fa fa-twitter-square"></i> Tweet</a>
+</span>
+<span class="social-share-facebook">
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https://cubl.in/blog/2015/01/vpn-udp-libev-development-notes/" title="Share on Facebook" itemprop="Facebook"><i class="fa fa-facebook-square"></i> Like</a>
+</span>
+<!-- /.social-share -->
+          
+        </footer>
+        <div class="entry-content">
+          <p>最近又在看 UNIX 网络编程那本书，写了个 vpn 练手，代码和简单的介绍在 <a href="https://github.com/cubarco/network-programming-exp/tree/master/vpn-udp-libev" title="cubarco/network-programming-exp/vpn-udp-libev">Github</a> 上<s>(好像效率还不错的样子)</s>。这里照例做一下总结，便于以后查阅。</p>
+
+<h4 id="关于recvfrom">关于<code class="highlighter-rouge">recvfrom()</code>
+</h4>
+
+<figure class="highlight"><pre><code class="language-c" data-lang="c"><span class="cm">/* recvfrom() 的声明 */</span>
+<span class="kt">ssize_t</span> <span class="nf">recvfrom</span><span class="p">(</span><span class="kt">int</span> <span class="n">sockfd</span><span class="p">,</span> <span class="kt">void</span> <span class="o">*</span><span class="n">buf</span><span class="p">,</span> <span class="kt">size_t</span> <span class="n">len</span><span class="p">,</span> <span class="kt">int</span> <span class="n">flags</span><span class="p">,</span>
+                 <span class="k">struct</span> <span class="n">sockaddr</span> <span class="o">*</span><span class="n">src_addr</span><span class="p">,</span> <span class="n">socklen_t</span> <span class="o">*</span><span class="n">addrlen</span><span class="p">);</span></code></pre></figure>
+
+<p>这个函数比较诡异的是它的最后一个参数<code class="highlighter-rouge">addrlen</code>.</p>
+
+<figure class="highlight"><pre><code class="language-console" data-lang="console"><span class="go">If  src_addr  is  not  NULL, and the underlying protocol provides the source
+address of the message, that source address is placed in the buffer  pointed
+to  by  src_addr.  In this case, addrlen is a value-result argument.  Before
+the call, it should be initialized to the size of the buffer associated with
+src_addr.  Upon return, addrlen is updated to contain the actual size of the
+source address.  The returned address is truncated if the buffer provided is
+</span><span class="gp">too  small;</span><span class="w">  </span><span class="k">in </span>this <span class="k">case</span>, addrlen will <span class="k">return </span>a value greater than was sup‐
+<span class="go">plied to the call.</span></code></pre></figure>
+
+<p>一开始用的时候没有仔细看 manpage，天真地以为既然传的是指针，它的用处应该就只储存返回值。但是昨天跟 <a href="https://github.com/hexchain" class="user-mention">@hexchain</a> juju讨论之后，发现这个函数还是会用到<code class="highlighter-rouge">addrlen</code>的初始值的,目的大概是为了防止给<code class="highlighter-rouge">src_addr</code>传值的时候溢出。以后用库函数还是先查清楚参数的具体用处再用吧…</p>
+
+<h4 id="同时兼容-ipv4-和-ipv6">同时兼容 IPv4 和 IPV6</h4>
+<p>服务器为了同时兼容两种协议，主要就是 addr 结构体的选择，<code class="highlighter-rouge">sockaddr_in</code>是为 IPv4 准备的，在我 x64 系统上它的结构体大小是 16B，而<code class="highlighter-rouge">sockaddr_in6</code>是为 IPv6 准备的，大小是28B，一开始我以为<code class="highlighter-rouge">sockaddr</code>是兼容二者的结构体，但是这货大小只有16B。在<a href="https://github.com/clowwindy/ShadowVPN" title="ShadowVPN">ShadowVPN</a>代码里找了找，发现<code class="highlighter-rouge">sockaddr_storage</code>这个结构体，据说是兼容了所有 addr 结构，包括最大的 UNIX 套接字，大小有 128B。然后具体到 IP 地址的转换，可以用<code class="highlighter-rouge">inet_pton()</code>这个兼容两种IP协议的函数。</p>
+
+<h4 id="关于-mtu">关于 MTU</h4>
+<p>之前对 MTU 一直是云里雾里的，这次算是对它有了一点了解。<a href="http://en.wikipedia.org/wiki/Maximum_transmission_unit">MTU(Maximum transmission unit)</a>指的就是通讯协议的<code class="highlighter-rouge">DATA</code>块的最大容量。一个 link 的 MTU 决定了通过它的 IP 包的最大体积。所以设置一个 tunnel 设备的 MTU 可以确保这些 IP 包在套上另一层 UDP + IP 的 header 之后不会被超出 MTU 被 fragment.</p>
+
+<h4 id="关于压缩">关于压缩</h4>
+<p>最大(无损)压缩比例决定于信息熵。所以用<code class="highlighter-rouge">dd if=/dev/urandom bs=1M count=100 | gzip - | wc -c</code>这种方式测试压缩比例的结果往往是压缩比例大于1…</p>
+
+<h4 id="more">More</h4>
+<p>想到再写</p>
+
+          <!--<div>
+            <span><a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/"><img
+                  alt="Creative Commons License" style="border-width:0"
+                  src="https://cdn.jsdelivr.net/gh/cubarco/cubarco.github.io@2021-0525-152552-29777/images/cc_by-nc_88x31.png" /></a></span>
+          </div>-->
+          <nav class="pagination" role="navigation">
+            
+            <a href="https://cubl.in/blog/2015/01/btrfs-sucks/" class="btn" title="对 btrfs 的吐槽">Previous</a>
+            
+            
+            <a href="https://cubl.in/blog/2015/01/vimscript-delpair/" class="btn" title="Vim 删除成对的字符">Next</a>
+            
+          </nav><!-- /.pagination -->
+          <div id="disqus_thread"></div>
+          <!-- /#disqus_thread -->
+        </div>
+<!-- /.entry-content -->
+      </div>
+<!-- /.entry-wrapper -->
+
+    </article>
+  </div><!-- /#main -->
+
+  <div class="footer-wrapper">
+    <footer role="contentinfo" class="entry-wrapper">
+      
+
+<span>
+	Powered by <a href="https://jekyllrb.com">Jekyll</a>, <a href="https://github.com/features/actions">Github Actions</a>, <a href="https://www.jsdelivr.com">jsDelivr</a> and <a href="https://cloudflare.com">Cloudflare</a>.
+	<br>
+	© 2014 - 2021 ❤ Cubl
+</span>
+<div class="social-icons">
+	<a href="https://twitter.com/Cube_Lin" title="Cubarco on Twitter" rel="noopener" target="_blank"><i class="fa fa-twitter-square fa-2x"></i></a>
+	
+	
+	
+	
+	
+	
+	<a href="https://github.com/cubarco" title="Cubarco on Github" rel="noopener" target="_blank"><i class="fa fa-github-square fa-2x"></i></a>
+	
+	<a href="https://cubl.in/feed.xml" title="Atom/RSS feed"><i class="fa fa-rss-square fa-2x"></i></a>
+</div>
+<!-- /.social-icons -->
+
+    </footer>
+  </div><!-- /.footer-wrapper -->
+
+  <!-- <script src="https://cdn.jsdelivr.net/gh/cubarco/cubarco.github.io@2021-0525-152552-29777/assets/js/vendor/jquery-2.1.4.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/cubarco/cubarco.github.io@2021-0525-152552-29777/assets/js/gist-async.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/cubarco/cubarco.github.io@2021-0525-152552-29777/assets/js/scripts.min.js"></script> -->
+<script src="https://cdn.jsdelivr.net/combine/gh/cubarco/cubarco.github.io@2021-0525-152552-29777/assets/js/vendor/jquery-2.1.4.min.js,gh/cubarco/cubarco.github.io@2021-0525-152552-29777/assets/js/scripts.min.js" async></script>
+
+<script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', function() {
+        navigator.serviceWorker.register('/sw.js').then(function(reg) {
+          console.log('ServiceWorker registration successful with scope: ', reg.scope);
+        }).catch(function(err) {
+          console.log('ServiceWorker registration failed: ', err);
+        });
+      });
+    }
+</script>
+
+
+
+<!-- Check whether the page is a post -->
+
+
+<!-- Polyfill must be loaded before DisqusJS -->
+<!-- <script src="https://cdn.jsdelivr.net/gh/cubarco/cubarco.github.io@2021-0525-152552-29777/assets/js/vendor/polyfill.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/cubarco/cubarco.github.io@2021-0525-152552-29777/assets/js/vendor/fetch.umd.min.js"></script>
+<script id="dsqjs-script" src="https://cdn.jsdelivr.net/gh/cubarco/cubarco.github.io@2021-0525-152552-29777/assets/js/vendor/disqus.js"></script> -->
+<script>
+    window.disqus_shortname = 'cubarco';
+    window.disqus_siteName = '/home/cubarco';
+    window.disqus_api = 'https://cubl.in/disqus/';
+    window.disqus_apikey = [];
+    
+        window.disqus_apikey.push('Jw86RA4MHn7FOX9T3JdY2rdOwXIHztQXp1QGQzvEjil3rXPCOfIrn4yF53NEOcho');
+    
+        window.disqus_apikey.push('IDVVwMUDkvtvpwfL7KK9Yuqf0OHx0yCpEF3f3awBvWwg0RA2QMRSktMNiBOJs0am');
+    
+        window.disqus_apikey.push('ZOkyhwsK71f8GqNw5M9oCPEAyLXzA3IRqS76QXhJG29XvyjG3g7ocNoSA2PQCp1R');
+    
+    window.disqus_admin = 'cubarco';
+    window.disqus_adminLabel = 'Mod';
+</script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/cubarco/cubarco.github.io@2021-0525-152552-29777/assets/css/vendor/disqusjs.css" media="none" onload="if(media!='all')media='all'">
+<script src="https://cdn.jsdelivr.net/combine/gh/cubarco/cubarco.github.io@2021-0525-152552-29777/assets/js/vendor/polyfill.min.js,gh/cubarco/cubarco.github.io@2021-0525-152552-29777/assets/js/vendor/fetch.umd.min.js,gh/cubarco/cubarco.github.io@2021-0525-152552-29777/assets/js/vendor/disqus.js,gh/cubarco/cubarco.github.io@2021-0525-152552-29777/assets/js/vendor/disqus-settings.min.js" async></script>
+
+
+
+
+
+
+
+<script async defer data-website-id="e9fdcc32-0bfa-4de5-beb0-3bbf1e4638ab" src="https://umami.pwn.ooo/umami.js"></script>
+
+
+<script async defer src="https://cdn.jsdelivr.net/npm/instant.page@5.1.0/instantpage.min.js"></script>
+
+
+</body>
+
+</html>
