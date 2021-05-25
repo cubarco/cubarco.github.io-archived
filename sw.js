@@ -8,6 +8,7 @@ workbox.setConfig({
 });
 
 
+const CDN_URL = "{{ site.ghmirror }}"
 const { core, precaching, routing, strategies, expiration, cacheableResponse, backgroundSync } = workbox;
 const { CacheFirst, NetworkFirst, NetworkOnly, StaleWhileRevalidate } = strategies;
 const { ExpirationPlugin } = expiration;
@@ -209,9 +210,8 @@ routing.registerRoute(
 );
 
 // Route index.html throw CDN.
-var CDN_URL = "{{ site.ghmirror }}"
-var urlPrefix = self.registration.scope.replace(/\/$/, '');
-var ruleRegex = new RegExp('^' + urlPrefix + '[^#]*/(#[^/]*)*$')
+const urlPrefix = self.registration.scope.replace(/\/$/, '');
+const ruleRegex = new RegExp('^' + urlPrefix + '[^#]*/(#[^/]*)*$')
 function cdnNetwork(req) {
     var cdnUrl = req.url.replace(urlPrefix, CDN_URL).split('#')[0] + 'index.html'
     return fetch(cdnUrl).then((response) => {
@@ -227,7 +227,7 @@ function cdnNetwork(req) {
         });
     });
 }
-registerRoute(
+routing.registerRoute(
     ruleRegex,
     ({event}) => event.respondWith(cdnNetwork(event.request))
 );
