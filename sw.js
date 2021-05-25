@@ -217,7 +217,7 @@ function cdnNetwork(event) {
     var cdnUrl = event.request.url.replace(urlPrefix, CDN_URL).split('#')[0] + 'index.html'
     return strategy.handle({event, request: cdnUrl}).then((response) => {
         if (!response.ok) {
-            return fetch('/404.html')
+            return fetch('/404')
         }
         var newHeaders = new Headers(response.headers);
         newHeaders.set("Content-Type", "text/html");
