@@ -7,6 +7,7 @@ logo: #site-logo.png
 search: true
 since: 2014
 url: https://cubl.in
+versiontag: COMMIT_TAG_NAME
 ghmirror: https://cdn.jsdelivr.net/gh/cubarco/cubarco.github.io@COMMIT_TAG_NAME
 ghmirrorpath: gh/cubarco/cubarco.github.io@COMMIT_TAG_NAME
 ghmirrorcombine: https://cdn.jsdelivr.net/combine/
