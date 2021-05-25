@@ -212,9 +212,10 @@ routing.registerRoute(
 // Route index.html throw CDN.
 const urlPrefix = self.registration.scope.replace(/\/$/, '');
 const ruleRegex = new RegExp('^' + urlPrefix + '[^#]*/(#[^/]*)*$')
-function cdnNetwork(req) {
-    var cdnUrl = req.url.replace(urlPrefix, CDN_URL).split('#')[0] + 'index.html'
-    return fetch(cdnUrl).then((response) => {
+function cdnNetwork(event) {
+    const strategy = new StaleWhileRevalidate({cacheName: 'static-immutable' + cacheSuffixVersion});
+    var cdnUrl = event.request.url.replace(urlPrefix, CDN_URL).split('#')[0] + 'index.html'
+    return strategy.handle({event, request: cdnUrl}).then((response) => {
         if (!response.ok) {
             return fetch('/404.html')
         }
@@ -229,7 +230,7 @@ function cdnNetwork(req) {
 }
 routing.registerRoute(
     ruleRegex,
-    ({event}) => event.respondWith(cdnNetwork(event.request))
+    ({event}) => event.respondWith(cdnNetwork(event))
 );
 
 
