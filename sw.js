@@ -47,7 +47,8 @@ precaching.cleanupOutdatedCaches();
 precaching.precacheAndRoute(
     [
         { url: CDN_URL + '/assets/css/main.css', revision: null },
-        { url: CDN_URL + '/assets/js/vendor/modernizr-2.7.1.custom.min.js', revision: null }
+        { url: CDN_URL + '/assets/js/vendor/modernizr-2.7.1.custom.min.js', revision: null },
+        { url: '/404', revision: null }
     ],
 );
 
