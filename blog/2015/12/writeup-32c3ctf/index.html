@@ -1,0 +1,291 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+<meta name="theme-color" content="#000000">
+<title>Writeup: 32c3ctf &#8211; /home/cubarco</title>
+<meta name="description"
+  content="forth forth 直接能跑system1。 S" sh" system gurke pickle 在 unpickle 的时候会执行对象的 __reduce__ 方法2。用 eval 把 __main__.flag.flag 打进 stderr 就行了。 Gist: cubarco/e46eb03e1cd06046d130 teufel 这题的 bin 不大，里面的 gadgets 很少，但是给了 libc. 思路就是先 leak 出保存在栈中的 rbp, 然后 offset 到 system。 这个 offset 要先在本机确定后三位(16 进制), 然后跑个脚本，用 0x1000 的步长去爆破服务器上的 offset. 我的办法是先找__stack_chk_fail, 原因是这个函数不需要参数就能输出。 offset.py Gist: cubarco/569fd814a29d8ef988e1 exp.py Gist: cubarco/569fd814a29d8ef988e1 吐槽 readme 的 flag 居然是文件名… 不过LIBC_FATAL_STDERR_这个环境变量确实是以前没见过的。 update 2016-01-24: 关于 readme 这道题，之前以为 flag 是文件名，做 ZCTF 的 guess 时3，回来看才发现原来是把argv[1]改掉了，蛮有意思。 @rickyz 的 sandbox 解法4蛮有意思，居然想到争抢修改系统调用参数。直接改/proc/self/mem来改变程序流也是第一次见。 References Execute...">
+
+<meta name="keywords" content="Hack, CTF, Writeup, Exploitation, PWN, MISC">
+
+
+<!-- Twitter Cards -->
+<meta name="twitter:title" content="Writeup: 32c3ctf">
+<meta name="twitter:description"
+   content="forth forth 直接能跑system1。 S" sh" system gurke pickle 在 unpickle 的时候会执行对象的 __reduce__ 方法2。用 eval 把 __main__.flag.flag 打进 stderr 就行了。 Gist: cubarco/e46eb03e1cd06046d130 teufel 这题的 bin 不大，里面的 gadgets 很少，但是给了 libc. 思路就是先 leak 出保存在栈中的 rbp, 然后 offset 到 system。 这个 offset 要先在本机确定后三位(16 进制), 然后跑个脚本，用 0x1000 的步长去爆破服务器上的 offset. 我的办法是先找__stack_chk_fail, 原因是这个函数不需要参数就能输出。 offset.py Gist: cubarco/569fd814a29d8ef988e1 exp.py Gist: cubarco/569fd814a29d8ef988e1 吐槽 readme 的 flag 居然是文件名… 不过LIBC_FATAL_STDERR_这个环境变量确实是以前没见过的。 update 2016-01-24: 关于 readme 这道题，之前以为 flag 是文件名，做 ZCTF 的 guess 时3，回来看才发现原来是把argv[1]改掉了，蛮有意思。 @rickyz 的 sandbox 解法4蛮有意思，居然想到争抢修改系统调用参数。直接改/proc/self/mem来改变程序流也是第一次见。 References Execute...">
+
+<meta name="twitter:site" content="@Cube_Lin">
+
+<meta name="twitter:creator" content="@Cube_Lin">
+
+<meta name="twitter:card" content="summary">
+<!--
+   -<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/cubarco/cubarco.github.io@2021-0525-155035-7577/images/">
+   -->
+
+<!-- Open Graph -->
+<meta property="og:locale" content="zh_CN">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Writeup: 32c3ctf">
+<meta property="og:description"
+   content="forth forth 直接能跑system1。 S" sh" system gurke pickle 在 unpickle 的时候会执行对象的 __reduce__ 方法2。用 eval 把 __main__.flag.flag 打进 stderr 就行了。 Gist: cubarco/e46eb03e1cd06046d130 teufel 这题的 bin 不大，里面的 gadgets 很少，但是给了 libc. 思路就是先 leak 出保存在栈中的 rbp, 然后 offset 到 system。 这个 offset 要先在本机确定后三位(16 进制), 然后跑个脚本，用 0x1000 的步长去爆破服务器上的 offset. 我的办法是先找__stack_chk_fail, 原因是这个函数不需要参数就能输出。 offset.py Gist: cubarco/569fd814a29d8ef988e1 exp.py Gist: cubarco/569fd814a29d8ef988e1 吐槽 readme 的 flag 居然是文件名… 不过LIBC_FATAL_STDERR_这个环境变量确实是以前没见过的。 update 2016-01-24: 关于 readme 这道题，之前以为 flag 是文件名，做 ZCTF 的 guess 时3，回来看才发现原来是把argv[1]改掉了，蛮有意思。 @rickyz 的 sandbox 解法4蛮有意思，居然想到争抢修改系统调用参数。直接改/proc/self/mem来改变程序流也是第一次见。 References Execute...">
+<meta property="og:url" content="https://cubl.in/blog/2015/12/writeup-32c3ctf/">
+<meta property="og:site_name" content="/home/cubarco">
+
+
+
+
+
+<link rel="canonical" href="https://cubl.in/blog/2015/12/writeup-32c3ctf/">
+<link href="https://cubl.in/feed.xml" type="application/atom+xml" rel="alternate" title="/home/cubarco Feed">
+
+
+<!-- http://t.co/dKP3o1e -->
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/cubarco/cubarco.github.io@2021-0525-155035-7577/assets/css/main.css">
+
+<!--Webfonts-->
+<link href='//fonts.googleapis.com/css?family=Volkhov|Cabin' rel='stylesheet' type='text/css' media="none" onload="if(media!='all')media='all'">
+<meta http-equiv="cleartype" content="on">
+
+<!-- Global settings -->
+<script>
+    window.ghmirror = "https://cdn.jsdelivr.net/gh/cubarco/cubarco.github.io@2021-0525-155035-7577"
+    window.searchEnabled = "true" ? true : false
+</script>
+
+<!-- Modernizr -->
+<script src="https://cdn.jsdelivr.net/gh/cubarco/cubarco.github.io@2021-0525-155035-7577/assets/js/vendor/modernizr-2.7.1.custom.min.js" async></script>
+
+</head>
+
+<body id="post">
+
+  <div class="navigation-wrapper">
+	<nav role="navigation" id="site-nav" class="animated drop">
+		<ul>
+			
+			
+			<li><a href="https://cubl.in/blog/">Latest</a></li>
+			
+			
+			<li><a href="https://cubl.in/blog/about/">About</a></li>
+			
+			
+			<li><a href="https://cubl.in/blog/archives/">Archives</a></li>
+			
+			
+			<li><a href="https://cubl.in/blog/tags/">Tags</a></li>
+			
+			<li class="dosearch"><span><i class="fa fa-search"></i> Search</span></li>
+		</ul>
+	</nav>
+</div><!-- /.navigation-wrapper -->
+
+<div class="search-wrapper">
+  <div class="search-form">
+    <input type="text" class="search-field" placeholder="Search...">
+    <button class="close-btn"><i class="fa fa-times-circle fa-2x"></i></button>
+    <ul class="search-results post-list"></ul>
+<!-- /.search-results -->
+  </div>
+<!-- /.search-form -->
+</div><!-- ./search-wrapper -->
+
+<div class="js-menu-screen menu-screen"></div>
+
+
+  <div id="main" role="main">
+    <article class="hentry">
+      
+      <div class="entry-wrapper">
+        <header class="entry-header">
+          <span class="entry-tags"><a href="https://cubl.in/blog/tags/#Hack" title="Pages tagged Hack">Hack</a> • <a href="https://cubl.in/blog/tags/#CTF" title="Pages tagged CTF">CTF</a> • <a href="https://cubl.in/blog/tags/#Writeup" title="Pages tagged Writeup">Writeup</a> • <a href="https://cubl.in/blog/tags/#Exploitation" title="Pages tagged Exploitation">Exploitation</a> • <a href="https://cubl.in/blog/tags/#PWN" title="Pages tagged PWN">PWN</a> • <a href="https://cubl.in/blog/tags/#MISC" title="Pages tagged MISC">MISC</a></span>
+          
+          <h1 class="entry-title">Writeup: 32c3ctf</h1>
+          
+        </header>
+        <footer class="entry-meta">
+          
+          
+          <span class="author vcard">By <span class="fn">Cubarco</span></span>
+          <span class="entry-date date published"><time datetime="2015-12-30T00:00:00+00:00"><i class="fa fa-calendar-o"></i> December 30, 2015</time></span>
+          <span class="entry-date date modified"><time datetime="2016-01-24"><i class="fa fa-pencil"></i> January 24, 2016</time></span>
+          <span class="entry-comments"><i class="fa fa-comment-o"></i> <a href="#disqus_thread">Comment</a></span>
+          <span class="social-share-twitter">
+  <a href="https://twitter.com/intent/tweet?hashtags=Hack,CTF,Writeup,Exploitation,PWN,MISC&amp;text=Writeup:%2032c3ctf&amp;url=https://cubl.in/blog/2015/12/writeup-32c3ctf/&amp;via=Cube_Lin" title="Share on Twitter" itemprop="Twitter"><i class="fa fa-twitter-square"></i> Tweet</a>
+</span>
+<span class="social-share-facebook">
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https://cubl.in/blog/2015/12/writeup-32c3ctf/" title="Share on Facebook" itemprop="Facebook"><i class="fa fa-facebook-square"></i> Like</a>
+</span>
+<!-- /.social-share -->
+          
+        </footer>
+        <div class="entry-content">
+          <h2 id="forth">forth</h2>
+
+<p>forth 直接能跑system<sup id="fnref:1" role="doc-noteref"><a href="#fn:1" class="footnote" rel="footnote">1</a></sup>。</p>
+
+<figure class="highlight"><pre><code class="language-text" data-lang="text">S" sh" system</code></pre></figure>
+
+<h2 id="gurke">gurke</h2>
+
+<p>pickle 在 unpickle 的时候会执行对象的 <code class="highlighter-rouge">__reduce__</code> 方法<sup id="fnref:2" role="doc-noteref"><a href="#fn:2" class="footnote" rel="footnote">2</a></sup>。用 eval 把 <code class="highlighter-rouge">__main__.flag.flag</code> 打进 stderr 就行了。</p>
+
+<div class="gist" data-gist="cubarco/e46eb03e1cd06046d130"><p>Gist: <a href="https://gist.github.com/cubarco/e46eb03e1cd06046d130">cubarco/e46eb03e1cd06046d130</a></p></div>
+
+<h2 id="teufel">teufel</h2>
+
+<p>这题的 bin 不大，里面的 gadgets 很少，但是给了 libc. 思路就是先 leak 出保存在栈中的 rbp, 然后 offset 到 system。</p>
+
+<p>这个 offset 要先在本机确定后三位(16 进制), 然后跑个脚本，用 0x1000 的步长去爆破服务器上的 offset. 我的办法是先找<code class="highlighter-rouge">__stack_chk_fail</code>, 原因是这个函数不需要参数就能输出。</p>
+
+<h6 id="offsetpy">offset.py</h6>
+
+<div class="gist" data-gist="cubarco/569fd814a29d8ef988e1" data-gist-file="32c3ctf-teufel-offset.py"><p>Gist: <a href="https://gist.github.com/cubarco/569fd814a29d8ef988e1">cubarco/569fd814a29d8ef988e1</a></p></div>
+
+<h6 id="exppy">exp.py</h6>
+
+<div class="gist" data-gist="cubarco/569fd814a29d8ef988e1" data-gist-file="32c3ctf-teufel-exp.py"><p>Gist: <a href="https://gist.github.com/cubarco/569fd814a29d8ef988e1">cubarco/569fd814a29d8ef988e1</a></p></div>
+
+<h2 id="吐槽"><del>吐槽</del></h2>
+
+<p><del>readme 的 flag 居然是文件名… </del>不过<code class="highlighter-rouge">LIBC_FATAL_STDERR_</code>这个环境变量确实是以前没见过的。</p>
+
+<p><strong>update 2016-01-24:</strong> 关于 readme 这道题，之前以为 flag 是文件名，做 ZCTF 的 guess 时<sup id="fnref:3" role="doc-noteref"><a href="#fn:3" class="footnote" rel="footnote">3</a></sup>，回来看才发现原来是把<code class="highlighter-rouge">argv[1]</code>改掉了，蛮有意思。</p>
+
+<p><a href="https://github.com/rickyz" class="user-mention">@rickyz</a> 的 sandbox 解法<sup id="fnref:4" role="doc-noteref"><a href="#fn:4" class="footnote" rel="footnote">4</a></sup>蛮有意思，居然想到争抢修改系统调用参数。直接改<code class="highlighter-rouge">/proc/self/mem</code>来改变程序流也是第一次见。</p>
+
+<h2 id="references">References</h2>
+
+<div class="footnotes" role="doc-endnotes">
+  <ol>
+    <li id="fn:1" role="doc-endnote">
+      <p><a href="http://rosettacode.org/wiki/Execute_a_system_command#Forth">Execute a system command#forth</a> <a href="#fnref:1" class="reversefootnote" role="doc-backlink">↩</a></p>
+    </li>
+    <li id="fn:2" role="doc-endnote">
+      <p><a href="https://docs.python.org/2/library/pickle.html#object.__reduce__">Pickling and unpickling extension types</a> <a href="#fnref:2" class="reversefootnote" role="doc-backlink">↩</a></p>
+    </li>
+    <li id="fn:3" role="doc-endnote">
+      <p><a href="https://cubl.in/blog/2016/01/writeup-zctf/">Writeup: ZCTF</a> <a href="#fnref:3" class="reversefootnote" role="doc-backlink">↩</a></p>
+    </li>
+    <li id="fn:4" role="doc-endnote">
+      <p><a href="https://rzhou.org/~ricky/32c3/sandbox/">Index of /~ricky/32c3/sandbox/</a> <a href="#fnref:4" class="reversefootnote" role="doc-backlink">↩</a></p>
+    </li>
+  </ol>
+</div>
+
+          <!--<div>
+            <span><a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/"><img
+                  alt="Creative Commons License" style="border-width:0"
+                  src="https://cdn.jsdelivr.net/gh/cubarco/cubarco.github.io@2021-0525-155035-7577/images/cc_by-nc_88x31.png" /></a></span>
+          </div>-->
+          <nav class="pagination" role="navigation">
+            
+            <a href="https://cubl.in/blog/2015/12/writeup-pwnable-unexploitable/" class="btn" title="Writeup-Pwnable: unexploitable">Previous</a>
+            
+            
+            <a href="https://cubl.in/blog/2016/01/writeup-zctf/" class="btn" title="Writeup: ZCTF">Next</a>
+            
+          </nav><!-- /.pagination -->
+          <div id="disqus_thread"></div>
+          <!-- /#disqus_thread -->
+        </div>
+<!-- /.entry-content -->
+      </div>
+<!-- /.entry-wrapper -->
+
+    </article>
+  </div><!-- /#main -->
+
+  <div class="footer-wrapper">
+    <footer role="contentinfo" class="entry-wrapper">
+      
+
+<span>
+	Powered by <a href="https://jekyllrb.com">Jekyll</a>, <a href="https://github.com/features/actions">Github Actions</a>, <a href="https://www.jsdelivr.com">jsDelivr</a> and <a href="https://cloudflare.com">Cloudflare</a>.
+	<br>
+	© 2014 - 2021 ❤ Cubl
+</span>
+<div class="social-icons">
+	<a href="https://twitter.com/Cube_Lin" title="Cubarco on Twitter" rel="noopener" target="_blank"><i class="fa fa-twitter-square fa-2x"></i></a>
+	
+	
+	
+	
+	
+	
+	<a href="https://github.com/cubarco" title="Cubarco on Github" rel="noopener" target="_blank"><i class="fa fa-github-square fa-2x"></i></a>
+	
+	<a href="https://cubl.in/feed.xml" title="Atom/RSS feed"><i class="fa fa-rss-square fa-2x"></i></a>
+</div>
+<!-- /.social-icons -->
+
+    </footer>
+  </div><!-- /.footer-wrapper -->
+
+  <!-- <script src="https://cdn.jsdelivr.net/gh/cubarco/cubarco.github.io@2021-0525-155035-7577/assets/js/vendor/jquery-2.1.4.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/cubarco/cubarco.github.io@2021-0525-155035-7577/assets/js/gist-async.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/cubarco/cubarco.github.io@2021-0525-155035-7577/assets/js/scripts.min.js"></script> -->
+<script src="https://cdn.jsdelivr.net/combine/gh/cubarco/cubarco.github.io@2021-0525-155035-7577/assets/js/vendor/jquery-2.1.4.min.js,gh/cubarco/cubarco.github.io@2021-0525-155035-7577/assets/js/scripts.min.js" async></script>
+
+<script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', function() {
+        navigator.serviceWorker.register('/sw.js').then(function(reg) {
+          console.log('ServiceWorker registration successful with scope: ', reg.scope);
+        }).catch(function(err) {
+          console.log('ServiceWorker registration failed: ', err);
+        });
+      });
+    }
+</script>
+
+
+
+<!-- Check whether the page is a post -->
+
+
+<!-- Polyfill must be loaded before DisqusJS -->
+<!-- <script src="https://cdn.jsdelivr.net/gh/cubarco/cubarco.github.io@2021-0525-155035-7577/assets/js/vendor/polyfill.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/cubarco/cubarco.github.io@2021-0525-155035-7577/assets/js/vendor/fetch.umd.min.js"></script>
+<script id="dsqjs-script" src="https://cdn.jsdelivr.net/gh/cubarco/cubarco.github.io@2021-0525-155035-7577/assets/js/vendor/disqus.js"></script> -->
+<script>
+    window.disqus_shortname = 'cubarco';
+    window.disqus_siteName = '/home/cubarco';
+    window.disqus_api = 'https://cubl.in/disqus/';
+    window.disqus_apikey = [];
+    
+        window.disqus_apikey.push('Jw86RA4MHn7FOX9T3JdY2rdOwXIHztQXp1QGQzvEjil3rXPCOfIrn4yF53NEOcho');
+    
+        window.disqus_apikey.push('IDVVwMUDkvtvpwfL7KK9Yuqf0OHx0yCpEF3f3awBvWwg0RA2QMRSktMNiBOJs0am');
+    
+        window.disqus_apikey.push('ZOkyhwsK71f8GqNw5M9oCPEAyLXzA3IRqS76QXhJG29XvyjG3g7ocNoSA2PQCp1R');
+    
+    window.disqus_admin = 'cubarco';
+    window.disqus_adminLabel = 'Mod';
+</script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/cubarco/cubarco.github.io@2021-0525-155035-7577/assets/css/vendor/disqusjs.css" media="none" onload="if(media!='all')media='all'">
+<script src="https://cdn.jsdelivr.net/combine/gh/cubarco/cubarco.github.io@2021-0525-155035-7577/assets/js/vendor/polyfill.min.js,gh/cubarco/cubarco.github.io@2021-0525-155035-7577/assets/js/vendor/fetch.umd.min.js,gh/cubarco/cubarco.github.io@2021-0525-155035-7577/assets/js/vendor/disqus.js,gh/cubarco/cubarco.github.io@2021-0525-155035-7577/assets/js/vendor/disqus-settings.min.js" async></script>
+
+
+
+
+
+
+
+<script async defer data-website-id="e9fdcc32-0bfa-4de5-beb0-3bbf1e4638ab" src="https://umami.pwn.ooo/umami.js"></script>
+
+
+<script async defer src="https://cdn.jsdelivr.net/npm/instant.page@5.1.0/instantpage.min.js"></script>
+
+
+</body>
+
+</html>
