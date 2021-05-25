@@ -1,0 +1,54 @@
+{
+    auto_https off
+    servers :80 {
+        protocol {
+            allow_h2c
+        }
+    }
+}
+
+:80
+
+encode gzip
+
+header Access-Control-Allow-Origin "*"
+header Access-Control-Expose-Headers "*"
+header Link "<https://cdn.jsdelivr.net>; rel=\"preconnect\", <https://fonts.googleapis.com>; rel=\"preconnect\", <https://fonts.gstatic.com>; rel=\"preconnect\", <https://cubarco.disqus.com>; rel=\"preconnect\", <https://github.githubassets.com>; rel=\"preconnect\""
+
+@fly_http_matcher {
+    header Fly-Forwarded-Ssl off
+}
+
+route * {
+    handle @fly_http_matcher {
+        redir https://{host}{uri} permanent
+    }
+
+    handle_path /gist/* {
+        reverse_proxy * https://13.229.188.59 https://13.250.177.223 https://52.74.223.119 {
+            header_up Host gist.github.com
+            transport http {
+                tls_server_name gist.github.com
+            }
+        }
+    }
+
+    handle_path /disqus/* {
+        rewrite * /api{uri}
+        reverse_proxy * https://151.101.192.134 https://151.101.64.134 https://151.101.128.134 https://151.101.0.134 {
+            header_up Host disqus.com
+            transport http {
+                tls_server_name disqus.com
+            }
+        }
+    }
+}
+
+root * /srv
+file_server {
+    hide 404.html
+}
+handle_errors {
+	  rewrite * /404.html
+	  file_server
+}
