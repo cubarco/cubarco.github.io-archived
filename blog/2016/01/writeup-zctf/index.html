@@ -1,0 +1,286 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+<meta name="theme-color" content="#000000">
+<title>Writeup: ZCTF &#8211; /home/cubarco</title>
+<meta name="description"
+  content="2016 年第一篇 blog! 这次只做出两道 pwn, 好忧伤… guess 在最近的 32c3ctf 中出现过一道类似的 readme1. 就是把argv[1]改成目的字符串位置，可以在 libc 打出错误信息的时候，被当作文件名打印出来。 Gist: cubarco/cbbd4ab5462c2f0f287b note1 这题的 note 是以链表形式储存的，堆溢出（edit 存在溢出漏洞）之后可以覆盖地址更改链表结构。我的 exp 思路就是先把一个 note 指向setvbuf()的 got, 然后用 show 把地址 leak 出来，这样可以 offset 到system(). 然后再将另一个 note 地址改到strcmp()的 got, 通过 edit 把内容改成system()的地址。最后调用strcmp(), title 填/bin/sh就可以了。 Gist: cubarco/30a44a61252f448964c4 note2 这题在赛时没找到漏洞，赛后看了 FlappyPig 的 Writeup2, 只是简单的 fastbin, 感觉好可惜… 360 安全播报给的代码没缩进根本不能看，自己重新写了个。 Gist: cubarco/9752fbbe78a071b04b37 note3 这题同样是没有在赛时做出来，但是与 note2 相反，这题我是找到了两个可以利用的漏洞的(一个是 integer overflow, 另一个是可以增加第八个 note), 但是不知道如何利用。我在比赛的时候一直想着怎么 fastbin, 因为我觉得 unlink 这么古老的 exp 肯定已经不能用了… 没想到这题的环境刚好适合 unlink, 有点可惜。赛后看了 FlappyPig...">
+
+<meta name="keywords" content="Hack, CTF, Writeup, Exploitation, PWN">
+
+
+<!-- Twitter Cards -->
+<meta name="twitter:title" content="Writeup: ZCTF">
+<meta name="twitter:description"
+   content="2016 年第一篇 blog! 这次只做出两道 pwn, 好忧伤… guess 在最近的 32c3ctf 中出现过一道类似的 readme1. 就是把argv[1]改成目的字符串位置，可以在 libc 打出错误信息的时候，被当作文件名打印出来。 Gist: cubarco/cbbd4ab5462c2f0f287b note1 这题的 note 是以链表形式储存的，堆溢出（edit 存在溢出漏洞）之后可以覆盖地址更改链表结构。我的 exp 思路就是先把一个 note 指向setvbuf()的 got, 然后用 show 把地址 leak 出来，这样可以 offset 到system(). 然后再将另一个 note 地址改到strcmp()的 got, 通过 edit 把内容改成system()的地址。最后调用strcmp(), title 填/bin/sh就可以了。 Gist: cubarco/30a44a61252f448964c4 note2 这题在赛时没找到漏洞，赛后看了 FlappyPig 的 Writeup2, 只是简单的 fastbin, 感觉好可惜… 360 安全播报给的代码没缩进根本不能看，自己重新写了个。 Gist: cubarco/9752fbbe78a071b04b37 note3 这题同样是没有在赛时做出来，但是与 note2 相反，这题我是找到了两个可以利用的漏洞的(一个是 integer overflow, 另一个是可以增加第八个 note), 但是不知道如何利用。我在比赛的时候一直想着怎么 fastbin, 因为我觉得 unlink 这么古老的 exp 肯定已经不能用了… 没想到这题的环境刚好适合 unlink, 有点可惜。赛后看了 FlappyPig...">
+
+<meta name="twitter:site" content="@Cube_Lin">
+
+<meta name="twitter:creator" content="@Cube_Lin">
+
+<meta name="twitter:card" content="summary">
+<!--
+   -<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/cubarco/cubarco.github.io@2021-0525-082310-12431/images/">
+   -->
+
+<!-- Open Graph -->
+<meta property="og:locale" content="zh_CN">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Writeup: ZCTF">
+<meta property="og:description"
+   content="2016 年第一篇 blog! 这次只做出两道 pwn, 好忧伤… guess 在最近的 32c3ctf 中出现过一道类似的 readme1. 就是把argv[1]改成目的字符串位置，可以在 libc 打出错误信息的时候，被当作文件名打印出来。 Gist: cubarco/cbbd4ab5462c2f0f287b note1 这题的 note 是以链表形式储存的，堆溢出（edit 存在溢出漏洞）之后可以覆盖地址更改链表结构。我的 exp 思路就是先把一个 note 指向setvbuf()的 got, 然后用 show 把地址 leak 出来，这样可以 offset 到system(). 然后再将另一个 note 地址改到strcmp()的 got, 通过 edit 把内容改成system()的地址。最后调用strcmp(), title 填/bin/sh就可以了。 Gist: cubarco/30a44a61252f448964c4 note2 这题在赛时没找到漏洞，赛后看了 FlappyPig 的 Writeup2, 只是简单的 fastbin, 感觉好可惜… 360 安全播报给的代码没缩进根本不能看，自己重新写了个。 Gist: cubarco/9752fbbe78a071b04b37 note3 这题同样是没有在赛时做出来，但是与 note2 相反，这题我是找到了两个可以利用的漏洞的(一个是 integer overflow, 另一个是可以增加第八个 note), 但是不知道如何利用。我在比赛的时候一直想着怎么 fastbin, 因为我觉得 unlink 这么古老的 exp 肯定已经不能用了… 没想到这题的环境刚好适合 unlink, 有点可惜。赛后看了 FlappyPig...">
+<meta property="og:url" content="https://cubl.in/blog/2016/01/writeup-zctf/">
+<meta property="og:site_name" content="/home/cubarco">
+
+
+
+
+
+<link rel="canonical" href="https://cubl.in/blog/2016/01/writeup-zctf/">
+<link href="https://cubl.in/feed.xml" type="application/atom+xml" rel="alternate" title="/home/cubarco Feed">
+
+
+<!-- http://t.co/dKP3o1e -->
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/cubarco/cubarco.github.io@2021-0525-082310-12431/assets/css/main.css">
+
+<!--Webfonts-->
+<link href='//fonts.googleapis.com/css?family=Volkhov|Cabin' rel='stylesheet' type='text/css' media="none" onload="if(media!='all')media='all'">
+<meta http-equiv="cleartype" content="on">
+
+<!-- Global settings -->
+<script>
+    window.ghmirror = "https://cdn.jsdelivr.net/gh/cubarco/cubarco.github.io@2021-0525-082310-12431"
+    window.searchEnabled = "true" ? true : false
+</script>
+
+<!-- Modernizr -->
+<script src="https://cdn.jsdelivr.net/gh/cubarco/cubarco.github.io@2021-0525-082310-12431/assets/js/vendor/modernizr-2.7.1.custom.min.js" async></script>
+
+</head>
+
+<body id="post">
+
+  <div class="navigation-wrapper">
+	<nav role="navigation" id="site-nav" class="animated drop">
+		<ul>
+			
+			
+			<li><a href="https://cubl.in/blog/" >Latest</a></li>
+			
+			
+			<li><a href="https://cubl.in/blog/about/" >About</a></li>
+			
+			
+			<li><a href="https://cubl.in/blog/archives/" >Archives</a></li>
+			
+			
+			<li><a href="https://cubl.in/blog/tags/" >Tags</a></li>
+			
+			<li class="dosearch"><span><i class="fa fa-search"></i> Search</span></li>
+		</ul>
+	</nav>
+</div><!-- /.navigation-wrapper -->
+
+<div class="search-wrapper">
+  <div class="search-form">
+    <input type="text" class="search-field" placeholder="Search...">
+    <button class="close-btn"><i class="fa fa-times-circle fa-2x"></i></button>
+    <ul class="search-results post-list"></ul><!-- /.search-results -->
+  </div><!-- /.search-form -->
+</div><!-- ./search-wrapper -->
+
+<div class="js-menu-screen menu-screen"></div>
+
+
+  <div id="main" role="main">
+    <article class="hentry">
+      
+      <div class="entry-wrapper">
+        <header class="entry-header">
+          <span class="entry-tags"><a href="https://cubl.in/blog/tags/#Hack"
+              title="Pages tagged Hack">Hack</a>&nbsp;&bull;&nbsp;<a href="https://cubl.in/blog/tags/#CTF"
+              title="Pages tagged CTF">CTF</a>&nbsp;&bull;&nbsp;<a href="https://cubl.in/blog/tags/#Writeup"
+              title="Pages tagged Writeup">Writeup</a>&nbsp;&bull;&nbsp;<a href="https://cubl.in/blog/tags/#Exploitation"
+              title="Pages tagged Exploitation">Exploitation</a>&nbsp;&bull;&nbsp;<a href="https://cubl.in/blog/tags/#PWN"
+              title="Pages tagged PWN">PWN</a></span>
+          
+          <h1 class="entry-title">Writeup: ZCTF</h1>
+          
+        </header>
+        <footer class="entry-meta">
+          
+          
+          <span class="author vcard">By <span class="fn">Cubarco</span></span>
+          <span class="entry-date date published"><time datetime="2016-01-24T00:00:00+00:00"><i
+                class="fa fa-calendar-o"></i> January 24, 2016</time></span>
+          <span class="entry-date date modified"><time datetime="2016-01-28"><i
+                class="fa fa-pencil"></i> January 28, 2016</time></span>
+          <span class="entry-comments"><i
+              class="fa fa-comment-o"></i> <a href="#disqus_thread">Comment</a></span>
+          <span class="social-share-twitter">
+  <a href="https://twitter.com/intent/tweet?hashtags=Hack,CTF,Writeup,Exploitation,PWN&amp;text=Writeup:%20ZCTF&amp;url=https://cubl.in/blog/2016/01/writeup-zctf/&amp;via=Cube_Lin"
+    title="Share on Twitter" itemprop="Twitter"><i class="fa fa-twitter-square"></i> Tweet</a>
+</span>
+<span class="social-share-facebook">
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https://cubl.in/blog/2016/01/writeup-zctf/" title="Share on Facebook"
+    itemprop="Facebook"><i class="fa fa-facebook-square"></i> Like</a>
+</span>
+<!-- /.social-share -->
+          
+        </footer>
+        <div class="entry-content">
+          <blockquote>
+  <p>2016 年第一篇 blog!</p>
+</blockquote>
+
+<p>这次只做出两道 pwn, 好忧伤…</p>
+
+<h2 id="guess">guess</h2>
+
+<p>在最近的 32c3ctf 中出现过一道类似的 readme<sup id="fnref:1" role="doc-noteref"><a href="#fn:1" class="footnote" rel="footnote">1</a></sup>. 就是把<code class="highlighter-rouge">argv[1]</code>改成目的字符串位置，可以在 libc 打出错误信息的时候，被当作文件名打印出来。</p>
+
+<div class="gist" data-gist="cubarco/cbbd4ab5462c2f0f287b"><p>Gist: <a href="https://gist.github.com/cubarco/cbbd4ab5462c2f0f287b">cubarco/cbbd4ab5462c2f0f287b</a></p></div>
+
+<h2 id="note1">note1</h2>
+
+<p>这题的 note 是以链表形式储存的，堆溢出（edit 存在溢出漏洞）之后可以覆盖地址更改链表结构。我的 exp 思路就是先把一个 note 指向<code class="highlighter-rouge">setvbuf()</code>的 got, 然后用 show 把地址 leak 出来，这样可以 offset 到<code class="highlighter-rouge">system()</code>. 然后再将另一个 note 地址改到<code class="highlighter-rouge">strcmp()</code>的 got, 通过 edit 把内容改成<code class="highlighter-rouge">system()</code>的地址。最后调用<code class="highlighter-rouge">strcmp()</code>, title 填<code class="highlighter-rouge">/bin/sh</code>就可以了。</p>
+
+<div class="gist" data-gist="cubarco/30a44a61252f448964c4"><p>Gist: <a href="https://gist.github.com/cubarco/30a44a61252f448964c4">cubarco/30a44a61252f448964c4</a></p></div>
+
+<h2 id="note2"><del>note2</del></h2>
+
+<p>这题在赛时没找到漏洞，赛后看了 FlappyPig 的 Writeup<sup id="fnref:2" role="doc-noteref"><a href="#fn:2" class="footnote" rel="footnote">2</a></sup>, 只是简单的 fastbin, 感觉好可惜… 360 安全播报给的代码没缩进根本不能看，自己重新写了个。</p>
+
+<div class="gist" data-gist="cubarco/9752fbbe78a071b04b37"><p>Gist: <a href="https://gist.github.com/cubarco/9752fbbe78a071b04b37">cubarco/9752fbbe78a071b04b37</a></p></div>
+
+<h2 id="note3"><del>note3</del></h2>
+
+<p>这题同样是没有在赛时做出来，但是与 note2 相反，这题我是找到了两个可以利用的漏洞的(一个是 integer overflow, 另一个是可以增加第八个 note), 但是不知道如何利用。我在比赛的时候一直想着怎么 fastbin, 因为我觉得 unlink 这么古老的 exp 肯定已经不能用了… 没想到这题的环境刚好适合 unlink, 有点可惜。赛后看了 FlappyPig 的 Writeup<sup id="fnref:2:1" role="doc-noteref"><a href="#fn:2" class="footnote" rel="footnote">2</a></sup>, 自己重新写了个 exp, 也算是复习一下 unlink.</p>
+
+<div class="gist" data-gist="cubarco/ababdac123a4762c0180"><p>Gist: <a href="https://gist.github.com/cubarco/ababdac123a4762c0180">cubarco/ababdac123a4762c0180</a></p></div>
+
+<h2 id="references">References</h2>
+
+<div class="footnotes" role="doc-endnotes">
+  <ol>
+    <li id="fn:1" role="doc-endnote">
+      <p><a href="https://github.com/ctfs/write-ups-2015/tree/master/32c3-ctf-2015/pwn/readme-200">write-ups-2015/32c3-ctf-2015/pwn/readme-200/ @ GitHub</a> <a href="#fnref:1" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:2" role="doc-endnote">
+      <p><a href="http://bobao.360.cn/ctf/detail/158.html">ZCTF Writeup @ 360 安全播报</a> <a href="#fnref:2" class="reversefootnote" role="doc-backlink">&#8617;</a> <a href="#fnref:2:1" class="reversefootnote" role="doc-backlink">&#8617;<sup>2</sup></a></p>
+    </li>
+  </ol>
+</div>
+
+          <!--<div>
+            <span><a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/"><img
+                  alt="Creative Commons License" style="border-width:0"
+                  src="https://cdn.jsdelivr.net/gh/cubarco/cubarco.github.io@2021-0525-082310-12431/images/cc_by-nc_88x31.png" /></a></span>
+          </div>-->
+          <nav class="pagination" role="navigation">
+            
+            <a href="https://cubl.in/blog/2015/12/writeup-32c3ctf/" class="btn" title="Writeup: 32c3ctf">Previous</a>
+            
+            
+            <a href="https://cubl.in/blog/2016/03/avoid-dns-hijacking-with-non-standard-port-dns/" class="btn" title="利用非标准端口 DNS 服务器避免 DNS 劫持">Next</a>
+            
+          </nav><!-- /.pagination -->
+          <div id="disqus_thread"></div>
+          <!-- /#disqus_thread -->
+        </div><!-- /.entry-content -->
+      </div><!-- /.entry-wrapper -->
+
+    </article>
+  </div><!-- /#main -->
+
+  <div class="footer-wrapper">
+    <footer role="contentinfo" class="entry-wrapper">
+      
+
+<span>
+	Powered by <a href="https://jekyllrb.com">Jekyll</a>, <a href="https://github.com/features/actions">Github Actions</a>, <a href="https://www.jsdelivr.com">jsDelivr</a> and <a href="https://cloudflare.com">Cloudflare</a>.
+	<br />
+	© 2014 - 2021 ❤ Cubl
+</span>
+<div class="social-icons">
+	<a href="https://twitter.com/Cube_Lin"
+		title="Cubarco on Twitter" target="_blank"><i class="fa fa-twitter-square fa-2x"></i></a>
+	
+	
+	
+	
+	
+	
+	<a href="https://github.com/cubarco"
+		title="Cubarco on Github" target="_blank"><i class="fa fa-github-square fa-2x"></i></a>
+	
+	<a href="https://cubl.in/feed.xml" title="Atom/RSS feed"><i class="fa fa-rss-square fa-2x"></i></a>
+</div><!-- /.social-icons -->
+
+    </footer>
+  </div><!-- /.footer-wrapper -->
+
+  <!-- <script src="https://cdn.jsdelivr.net/gh/cubarco/cubarco.github.io@2021-0525-082310-12431/assets/js/vendor/jquery-2.1.4.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/cubarco/cubarco.github.io@2021-0525-082310-12431/assets/js/gist-async.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/cubarco/cubarco.github.io@2021-0525-082310-12431/assets/js/scripts.min.js"></script> -->
+<script src="https://cdn.jsdelivr.net/combine/gh/cubarco/cubarco.github.io@2021-0525-082310-12431/assets/js/vendor/jquery-2.1.4.min.js,gh/cubarco/cubarco.github.io@2021-0525-082310-12431/assets/js/scripts.min.js" async></script>
+
+<script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', function() {
+        navigator.serviceWorker.register('/sw.js').then(function(reg) {
+          console.log('ServiceWorker registration successful with scope: ', reg.scope);
+        }).catch(function(err) {
+          console.log('ServiceWorker registration failed: ', err);
+        });
+      });
+    }
+</script>
+
+
+
+<!-- Check whether the page is a post -->
+
+
+<!-- Polyfill must be loaded before DisqusJS -->
+<!-- <script src="https://cdn.jsdelivr.net/gh/cubarco/cubarco.github.io@2021-0525-082310-12431/assets/js/vendor/polyfill.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/cubarco/cubarco.github.io@2021-0525-082310-12431/assets/js/vendor/fetch.umd.min.js"></script>
+<script id="dsqjs-script" src="https://cdn.jsdelivr.net/gh/cubarco/cubarco.github.io@2021-0525-082310-12431/assets/js/vendor/disqus.js"></script> -->
+<script>
+    window.disqus_shortname = 'cubarco';
+    window.disqus_siteName = '/home/cubarco';
+    window.disqus_api = 'https://cubl.in/disqus/';
+    window.disqus_apikey = [];
+    
+        window.disqus_apikey.push('Jw86RA4MHn7FOX9T3JdY2rdOwXIHztQXp1QGQzvEjil3rXPCOfIrn4yF53NEOcho');
+    
+        window.disqus_apikey.push('IDVVwMUDkvtvpwfL7KK9Yuqf0OHx0yCpEF3f3awBvWwg0RA2QMRSktMNiBOJs0am');
+    
+        window.disqus_apikey.push('ZOkyhwsK71f8GqNw5M9oCPEAyLXzA3IRqS76QXhJG29XvyjG3g7ocNoSA2PQCp1R');
+    
+    window.disqus_admin = 'cubarco';
+    window.disqus_adminLabel = 'Mod';
+</script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/cubarco/cubarco.github.io@2021-0525-082310-12431/assets/css/vendor/disqusjs.css" media="none" onload="if(media!='all')media='all'">
+<script src="https://cdn.jsdelivr.net/combine/gh/cubarco/cubarco.github.io@2021-0525-082310-12431/assets/js/vendor/polyfill.min.js,gh/cubarco/cubarco.github.io@2021-0525-082310-12431/assets/js/vendor/fetch.umd.min.js,gh/cubarco/cubarco.github.io@2021-0525-082310-12431/assets/js/vendor/disqus.js,gh/cubarco/cubarco.github.io@2021-0525-082310-12431/assets/js/vendor/disqus-settings.min.js" async></script>
+
+
+
+
+
+
+
+<script async defer data-website-id="e9fdcc32-0bfa-4de5-beb0-3bbf1e4638ab" src="https://umami.pwn.ooo/umami.js"></script>
+
+
+
+</body>
+
+</html>
