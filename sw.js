@@ -234,6 +234,11 @@ routing.registerRoute(
     ({event}) => event.respondWith(cdnNetwork(event))
 );
 
+// Umami collect api
+routing.registerRoute(
+    '/api/collect',
+    new NetworkOnly()
+);
 
 /*
  * Default - Serve as it is
