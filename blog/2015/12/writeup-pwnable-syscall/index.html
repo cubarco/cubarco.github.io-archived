@@ -1,0 +1,330 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+<meta name="theme-color" content="#000000">
+<title>Writeup-Pwnable: syscall &#8211; /home/cubarco</title>
+<meta name="description"
+  content="// adding a new system call : sys_upper #include &lt;linux/module.h&gt; #include &lt;linux/kernel.h&gt; #include &lt;linux/slab.h&gt; #include &lt;linux/vmalloc.h&gt; #include &lt;linux/mm.h&gt; #include &lt;asm/unistd.h&gt; #include &lt;asm/page.h&gt; #include &lt;linux/syscalls.h&gt; #define SYS_CALL_TABLE 0x8000e348 // manually configure this address!! #define NR_SYS_UNUSED 223 //Pointers to re-mapped writable pages unsigned int** sct; asmlinkage long sys_upper(char *in, char* out){ int len = strlen(in); int i; for(i=0; i&lt;len; i++){ if(in[i]&gt;=0x61 &amp;&amp; in[i]&lt;=0x7a){ out[i] = in[i] - 0x20; } else{ out[i] = in[i]; } } return 0;...">
+
+<meta name="keywords" content="Hack, CTF, Writeup, Exploitation, ARM">
+
+
+<!-- Twitter Cards -->
+<meta name="twitter:title" content="Writeup-Pwnable: syscall">
+<meta name="twitter:description"
+   content="// adding a new system call : sys_upper #include &lt;linux/module.h&gt; #include &lt;linux/kernel.h&gt; #include &lt;linux/slab.h&gt; #include &lt;linux/vmalloc.h&gt; #include &lt;linux/mm.h&gt; #include &lt;asm/unistd.h&gt; #include &lt;asm/page.h&gt; #include &lt;linux/syscalls.h&gt; #define SYS_CALL_TABLE 0x8000e348 // manually configure this address!! #define NR_SYS_UNUSED 223 //Pointers to re-mapped writable pages unsigned int** sct; asmlinkage long sys_upper(char *in, char* out){ int len = strlen(in); int i; for(i=0; i&lt;len; i++){ if(in[i]&gt;=0x61 &amp;&amp; in[i]&lt;=0x7a){ out[i] = in[i] - 0x20; } else{ out[i] = in[i]; } } return 0;...">
+
+<meta name="twitter:site" content="@Cube_Lin">
+
+<meta name="twitter:creator" content="@Cube_Lin">
+
+<meta name="twitter:card" content="summary">
+<!--
+   -<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/cubarco/cubarco.github.io@2021-0526-173238-13396/images/">
+   -->
+
+<!-- Open Graph -->
+<meta property="og:locale" content="zh_CN">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Writeup-Pwnable: syscall">
+<meta property="og:description"
+   content="// adding a new system call : sys_upper #include &lt;linux/module.h&gt; #include &lt;linux/kernel.h&gt; #include &lt;linux/slab.h&gt; #include &lt;linux/vmalloc.h&gt; #include &lt;linux/mm.h&gt; #include &lt;asm/unistd.h&gt; #include &lt;asm/page.h&gt; #include &lt;linux/syscalls.h&gt; #define SYS_CALL_TABLE 0x8000e348 // manually configure this address!! #define NR_SYS_UNUSED 223 //Pointers to re-mapped writable pages unsigned int** sct; asmlinkage long sys_upper(char *in, char* out){ int len = strlen(in); int i; for(i=0; i&lt;len; i++){ if(in[i]&gt;=0x61 &amp;&amp; in[i]&lt;=0x7a){ out[i] = in[i] - 0x20; } else{ out[i] = in[i]; } } return 0;...">
+<meta property="og:url" content="https://cubl.in/blog/2015/12/writeup-pwnable-syscall/">
+<meta property="og:site_name" content="/home/cubarco">
+
+
+
+
+
+<link rel="canonical" href="https://cubl.in/blog/2015/12/writeup-pwnable-syscall/">
+<link href="https://cubl.in/feed.xml" type="application/atom+xml" rel="alternate" title="/home/cubarco Feed">
+
+
+<!-- http://t.co/dKP3o1e -->
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/cubarco/cubarco.github.io@2021-0526-173238-13396/assets/css/main.css">
+
+<!--Webfonts-->
+<link href='//fonts.googleapis.com/css?family=Volkhov|Cabin' rel='stylesheet' type='text/css' media="none" onload="if(media!='all')media='all'">
+<meta http-equiv="cleartype" content="on">
+
+<!-- Global settings -->
+<script>
+    window.ghmirror = "https://cdn.jsdelivr.net/gh/cubarco/cubarco.github.io@2021-0526-173238-13396"
+    window.searchEnabled = "true" ? true : false
+</script>
+
+<!-- Modernizr -->
+<script src="https://cdn.jsdelivr.net/gh/cubarco/cubarco.github.io@2021-0526-173238-13396/assets/js/vendor/modernizr-2.7.1.custom.min.js" async></script>
+
+</head>
+
+<body id="post">
+
+  <div class="navigation-wrapper">
+	<nav role="navigation" id="site-nav" class="animated drop">
+		<ul>
+			
+			
+			<li><a href="https://cubl.in/blog/">Latest</a></li>
+			
+			
+			<li><a href="https://cubl.in/blog/about/">About</a></li>
+			
+			
+			<li><a href="https://cubl.in/blog/archives/">Archives</a></li>
+			
+			
+			<li><a href="https://cubl.in/blog/tags/">Tags</a></li>
+			
+			<li class="dosearch"><span><i class="fa fa-search"></i> Search</span></li>
+		</ul>
+	</nav>
+</div><!-- /.navigation-wrapper -->
+
+<div class="search-wrapper">
+  <div class="search-form">
+    <input type="text" class="search-field" placeholder="Search...">
+    <button class="close-btn"><i class="fa fa-times-circle fa-2x"></i></button>
+    <ul class="search-results post-list"></ul>
+<!-- /.search-results -->
+  </div>
+<!-- /.search-form -->
+</div><!-- ./search-wrapper -->
+
+<div class="js-menu-screen menu-screen"></div>
+
+
+  <div id="main" role="main">
+    <article class="hentry">
+      
+      <div class="entry-wrapper">
+        <header class="entry-header">
+          <span class="entry-tags"><a href="/blog/tags/#Hack" title="Pages tagged Hack">Hack</a> • <a href="/blog/tags/#CTF" title="Pages tagged CTF">CTF</a> • <a href="/blog/tags/#Writeup" title="Pages tagged Writeup">Writeup</a> • <a href="/blog/tags/#Exploitation" title="Pages tagged Exploitation">Exploitation</a> • <a href="/blog/tags/#ARM" title="Pages tagged ARM">ARM</a></span>
+          
+          <h1 class="entry-title">Writeup-Pwnable: syscall</h1>
+          
+        </header>
+        <footer class="entry-meta">
+          
+          
+          <span class="author vcard">By <span class="fn">Cubarco</span></span>
+          <span class="entry-date date published"><time datetime="2015-12-16T00:00:00+00:00"><i class="fa fa-calendar-o"></i> December 16, 2015</time></span>
+          
+          <span class="entry-comments"><i class="fa fa-comment-o"></i> <a href="#disqus_thread">Comment</a></span>
+          <span class="social-share-twitter">
+  <a href="https://twitter.com/intent/tweet?hashtags=Hack,CTF,Writeup,Exploitation,ARM&amp;text=Writeup-Pwnable:%20syscall&amp;url=https://cubl.in/blog/2015/12/writeup-pwnable-syscall/&amp;via=Cube_Lin" title="Share on Twitter" itemprop="Twitter"><i class="fa fa-twitter-square"></i> Tweet</a>
+</span>
+<span class="social-share-facebook">
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https://cubl.in/blog/2015/12/writeup-pwnable-syscall/" title="Share on Facebook" itemprop="Facebook"><i class="fa fa-facebook-square"></i> Like</a>
+</span>
+<!-- /.social-share -->
+          
+        </footer>
+        <div class="entry-content">
+          
+<figure class="highlight"><pre><code class="language-c" data-lang="c"><span class="c1">// adding a new system call : sys_upper</span>
+
+<span class="cp">#include &lt;linux/module.h&gt;
+#include &lt;linux/kernel.h&gt;
+#include &lt;linux/slab.h&gt;
+#include &lt;linux/vmalloc.h&gt;
+#include &lt;linux/mm.h&gt;
+#include &lt;asm/unistd.h&gt;
+#include &lt;asm/page.h&gt;
+#include &lt;linux/syscalls.h&gt;
+</span>
+<span class="cp">#define SYS_CALL_TABLE		0x8000e348		// manually configure this address!!
+#define NR_SYS_UNUSED		223
+</span>
+<span class="c1">//Pointers to re-mapped writable pages</span>
+<span class="kt">unsigned</span> <span class="kt">int</span><span class="o">**</span> <span class="n">sct</span><span class="p">;</span>
+
+<span class="n">asmlinkage</span> <span class="kt">long</span> <span class="nf">sys_upper</span><span class="p">(</span><span class="kt">char</span> <span class="o">*</span><span class="n">in</span><span class="p">,</span> <span class="kt">char</span><span class="o">*</span> <span class="n">out</span><span class="p">){</span>
+	<span class="kt">int</span> <span class="n">len</span> <span class="o">=</span> <span class="n">strlen</span><span class="p">(</span><span class="n">in</span><span class="p">);</span>
+	<span class="kt">int</span> <span class="n">i</span><span class="p">;</span>
+	<span class="k">for</span><span class="p">(</span><span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">len</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">){</span>
+		<span class="k">if</span><span class="p">(</span><span class="n">in</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">&gt;=</span><span class="mh">0x61</span> <span class="o">&amp;&amp;</span> <span class="n">in</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">&lt;=</span><span class="mh">0x7a</span><span class="p">){</span>
+			<span class="n">out</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">in</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="mh">0x20</span><span class="p">;</span>
+		<span class="p">}</span>
+		<span class="k">else</span><span class="p">{</span>
+			<span class="n">out</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">in</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+		<span class="p">}</span>
+	<span class="p">}</span>
+	<span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">static</span> <span class="kt">int</span> <span class="n">__init</span> <span class="nf">initmodule</span><span class="p">(</span><span class="kt">void</span> <span class="p">){</span>
+	<span class="n">sct</span> <span class="o">=</span> <span class="p">(</span><span class="kt">unsigned</span> <span class="kt">int</span><span class="o">**</span><span class="p">)</span><span class="n">SYS_CALL_TABLE</span><span class="p">;</span>
+	<span class="n">sct</span><span class="p">[</span><span class="n">NR_SYS_UNUSED</span><span class="p">]</span> <span class="o">=</span> <span class="n">sys_upper</span><span class="p">;</span>
+	<span class="n">printk</span><span class="p">(</span><span class="s">"sys_upper(number : 223) is added</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+	<span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">static</span> <span class="kt">void</span> <span class="n">__exit</span> <span class="nf">exitmodule</span><span class="p">(</span><span class="kt">void</span> <span class="p">){</span>
+	<span class="k">return</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="n">module_init</span><span class="p">(</span> <span class="n">initmodule</span> <span class="p">);</span>
+<span class="n">module_exit</span><span class="p">(</span> <span class="n">exitmodule</span> <span class="p">);</span></code></pre></figure>
+
+<p>这题就是提供了一个可以<code class="language-plaintext highlighter-rouge">write-anything-anywhere</code>的系统调用(也不算anything，有点限制)，系统调用的地址存在<code class="language-plaintext highlighter-rouge">0x8000e348+223 = 0x8000e6c4</code>, flag在<code class="language-plaintext highlighter-rouge">/root/flag</code>.</p>
+
+<p>按理说应该不难，但是我做了很久。后来想了一下，主要是内联汇编不熟(没有写好 clobbers 导致各种崩)。再就是没有深入理解 Linux 的权限控制机制，一开始想当然的觉得 kernel space 就肯定有 root 权限，后来发现就算用了系统调用，跑到奇怪的地址上执行，uid 还是这个进程的 uid<sup id="fnref:1" role="doc-noteref"><a href="#fn:1" class="footnote" rel="footnote">1</a></sup>. 所以尝试的 <code class="language-plaintext highlighter-rouge">open-read-write</code>, <code class="language-plaintext highlighter-rouge">chown()</code>各种都已失败告终，权限不够。直接在 kernel space <code class="language-plaintext highlighter-rouge">execve()</code>的我也是想多了。</p>
+
+<p>其实思路还是挺简单的，首先修改 223 号系统调用的内容，然后调用这个修改过的 223 号系统调用，在 kernel space 把 uid 改掉，之后在 user space <code class="language-plaintext highlighter-rouge">execve()</code>就好了。</p>
+
+<p>在现在版本的 Linux 内核修改 uid，需要通过<code class="language-plaintext highlighter-rouge">prepare_creds()</code>和<code class="language-plaintext highlighter-rouge">commit_creds()</code>两步<sup id="fnref:2" role="doc-noteref"><a href="#fn:2" class="footnote" rel="footnote">2</a></sup>。这两个函数的地址存在<code class="language-plaintext highlighter-rouge">/proc/kallsyms</code>:</p>
+
+<figure class="highlight"><pre><code class="language-console" data-lang="console"><span class="gp">$</span><span class="w"> </span><span class="nb">cat</span> /proc/kallsyms | <span class="nb">grep</span> <span class="s1">'prepare_creds\|commit_creds'</span>
+<span class="go">8003f44c T prepare_creds
+8003f56c T commit_creds
+</span><span class="c">...</span></code></pre></figure>
+
+<p>我参考 <a href="https://github.com/acama" class="user-mention">@acama</a> 的版本<sup id="fnref:3" role="doc-noteref"><a href="#fn:3" class="footnote" rel="footnote">3</a></sup>写了一个( <a href="https://github.com/acama" class="user-mention">@acama</a> 的版本<code class="language-plaintext highlighter-rouge">prepare_creds()</code>之后直接就<code class="language-plaintext highlighter-rouge">commit_creds()</code>, 这估计只在老版本可以).<code class="language-plaintext highlighter-rouge">prepare_creds()</code>返回的结构体定义可以看参考<sup id="fnref:4" role="doc-noteref"><a href="#fn:4" class="footnote" rel="footnote">4</a></sup>.</p>
+
+<div class="gist" data-gist="cubarco/f582d787f04eca93f8eb" data-gist-file="cred.s"><p>Gist: <a href="https://gist.github.com/cubarco/f582d787f04eca93f8eb">cubarco/f582d787f04eca93f8eb</a></p></div>
+
+<p>这个生成的指令是不能用原先的 223 号系统调用直接写进内存的，所以我准备了一个真正的<code class="language-plaintext highlighter-rouge">write-anything-anywhere</code>的跳板:</p>
+
+<div class="gist" data-gist="cubarco/f582d787f04eca93f8eb" data-gist-file="waa.s"><p>Gist: <a href="https://gist.github.com/cubarco/f582d787f04eca93f8eb">cubarco/f582d787f04eca93f8eb</a></p></div>
+
+<p>先把 waa 写进内存，然后把 cred 写进内存。至于写到哪里，我随手写了两个地址: 0x83f5cafe, 0x83f6beee.</p>
+
+<h3 id="expc">exp.c</h3>
+
+<div class="gist" data-gist="cubarco/f582d787f04eca93f8eb" data-gist-file="1-pwnable-rookiss-syscall.c"><p>Gist: <a href="https://gist.github.com/cubarco/f582d787f04eca93f8eb">cubarco/f582d787f04eca93f8eb</a></p></div>
+
+<h3 id="references">References</h3>
+
+<div class="footnotes" role="doc-endnotes">
+  <ol>
+    <li id="fn:1" role="doc-endnote">
+      <p><a href="http://unix.stackexchange.com/questions/121715/what-is-the-relationship-between-root-and-kernel">What is the relationship between root and kernel?</a> <a href="#fnref:1" class="reversefootnote" role="doc-backlink">↩</a></p>
+    </li>
+    <li id="fn:2" role="doc-endnote">
+      <p><a href="https://memset.wordpress.com/2010/12/28/syscall-hijacking-simple-rootkit-kernel-2-6-x/">Syscall Hijacking: Simple Rootkit (kernel 2.6.x)</a> <a href="#fnref:2" class="reversefootnote" role="doc-backlink">↩</a></p>
+    </li>
+    <li id="fn:3" role="doc-endnote">
+      <p><a href="https://github.com/acama/arm-evt/blob/master/local_example/exploit/backdoor.asm">arm-evt/local_example/exploit/backdoor.asm</a> <a href="#fnref:3" class="reversefootnote" role="doc-backlink">↩</a></p>
+    </li>
+    <li id="fn:4" role="doc-endnote">
+      <p><a href="http://lxr.free-electrons.com/source/include/linux/cred.h?v=3.11#L102">Linux/include/linux/cred.h</a> <a href="#fnref:4" class="reversefootnote" role="doc-backlink">↩</a></p>
+    </li>
+  </ol>
+</div>
+
+          <!--<div>
+            <span><a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/"><img
+                  alt="Creative Commons License" style="border-width:0"
+                  src="https://cdn.jsdelivr.net/gh/cubarco/cubarco.github.io@2021-0526-173238-13396/images/cc_by-nc_88x31.png" /></a></span>
+          </div>-->
+          <nav class="pagination" role="navigation">
+            
+            <a href="/blog/2015/12/writeup-pwnable-tiny-and-tiny-easy/" class="btn" title="Writeup-Pwnable: tiny &amp; tiny_easy">Previous</a>
+            
+            
+            <a href="/blog/2015/12/writeup-pwnable-unexploitable/" class="btn" title="Writeup-Pwnable: unexploitable">Next</a>
+            
+          </nav><!-- /.pagination -->
+          <div id="disqus_thread"></div>
+          <!-- /#disqus_thread -->
+        </div>
+<!-- /.entry-content -->
+      </div>
+<!-- /.entry-wrapper -->
+
+    </article>
+  </div><!-- /#main -->
+
+  <div class="footer-wrapper">
+    <footer role="contentinfo" class="entry-wrapper">
+      
+
+<span>
+	Powered by <a href="https://jekyllrb.com">Jekyll</a>, <a href="https://github.com/features/actions">Github Actions</a>, <a href="https://www.jsdelivr.com">jsDelivr</a> and <a href="https://cloudflare.com">Cloudflare</a>.
+	<br>
+	© 2014 - 2021 ❤ Cubl
+</span>
+<div class="social-icons">
+	<a href="https://twitter.com/Cube_Lin" title="Cubarco on Twitter" rel="noopener" target="_blank"><i class="fa fa-twitter-square fa-2x"></i></a>
+	
+	
+	
+	
+	
+	
+	<a href="https://github.com/cubarco" title="Cubarco on Github" rel="noopener" target="_blank"><i class="fa fa-github-square fa-2x"></i></a>
+	
+	<a href="https://cubl.in/feed.xml" title="Atom/RSS feed"><i class="fa fa-rss-square fa-2x"></i></a>
+</div>
+<!-- /.social-icons -->
+
+    </footer>
+  </div><!-- /.footer-wrapper -->
+
+  <!-- <script src="https://cdn.jsdelivr.net/gh/cubarco/cubarco.github.io@2021-0526-173238-13396/assets/js/vendor/jquery-2.1.4.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/cubarco/cubarco.github.io@2021-0526-173238-13396/assets/js/gist-async.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/cubarco/cubarco.github.io@2021-0526-173238-13396/assets/js/scripts.min.js"></script> -->
+<script src="https://cdn.jsdelivr.net/combine/gh/cubarco/cubarco.github.io@2021-0526-173238-13396/assets/js/vendor/jquery-2.1.4.min.js,gh/cubarco/cubarco.github.io@2021-0526-173238-13396/assets/js/scripts.min.js" async></script>
+
+<script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', function() {
+        navigator.serviceWorker.register('/sw.js').then(function(reg) {
+          console.log('ServiceWorker registration successful with scope: ', reg.scope);
+        }).catch(function(err) {
+          console.log('ServiceWorker registration failed: ', err);
+        });
+      });
+    }
+</script>
+
+
+
+<!-- Check whether the page is a post -->
+
+
+<!-- Polyfill must be loaded before DisqusJS -->
+<!-- <script src="https://cdn.jsdelivr.net/gh/cubarco/cubarco.github.io@2021-0526-173238-13396/assets/js/vendor/polyfill.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/cubarco/cubarco.github.io@2021-0526-173238-13396/assets/js/vendor/fetch.umd.min.js"></script>
+<script id="dsqjs-script" src="https://cdn.jsdelivr.net/gh/cubarco/cubarco.github.io@2021-0526-173238-13396/assets/js/vendor/disqus.js"></script> -->
+<script>
+    window.disqus_shortname = 'cubarco';
+    window.disqus_siteName = '/home/cubarco';
+    window.disqus_api = 'https://cubl.in/disqus/';
+    window.disqus_apikey = [];
+    
+        window.disqus_apikey.push('Jw86RA4MHn7FOX9T3JdY2rdOwXIHztQXp1QGQzvEjil3rXPCOfIrn4yF53NEOcho');
+    
+        window.disqus_apikey.push('IDVVwMUDkvtvpwfL7KK9Yuqf0OHx0yCpEF3f3awBvWwg0RA2QMRSktMNiBOJs0am');
+    
+        window.disqus_apikey.push('ZOkyhwsK71f8GqNw5M9oCPEAyLXzA3IRqS76QXhJG29XvyjG3g7ocNoSA2PQCp1R');
+    
+    window.disqus_admin = 'cubarco';
+    window.disqus_adminLabel = 'Mod';
+</script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/cubarco/cubarco.github.io@2021-0526-173238-13396/assets/css/vendor/disqusjs.css" media="none" onload="if(media!='all')media='all'">
+<script src="https://cdn.jsdelivr.net/combine/gh/cubarco/cubarco.github.io@2021-0526-173238-13396/assets/js/vendor/polyfill.min.js,gh/cubarco/cubarco.github.io@2021-0526-173238-13396/assets/js/vendor/fetch.umd.min.js,gh/cubarco/cubarco.github.io@2021-0526-173238-13396/assets/js/vendor/disqus.js,gh/cubarco/cubarco.github.io@2021-0526-173238-13396/assets/js/vendor/disqus-settings.min.js" async></script>
+
+
+
+
+
+
+
+<script async defer data-website-id="e9fdcc32-0bfa-4de5-beb0-3bbf1e4638ab" src="https://umami.pwn.ooo/umami.js"></script>
+
+
+<script async defer src="https://cdn.jsdelivr.net/npm/instant.page@5.1.0/instantpage.min.js"></script>
+
+
+</body>
+
+</html>
