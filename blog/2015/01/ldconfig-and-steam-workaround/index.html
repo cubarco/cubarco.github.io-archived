@@ -1,0 +1,298 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+<meta name="theme-color" content="#000000">
+<title>解决用 ldconfig 指定 libgl 库时 Steam 的异常 &#8211; /home/cubarco</title>
+<meta name="description"
+  content="刚考完试，有点无聊，开 Steam 准备玩点游戏，结果发现之前的一个脚本不能用了。我的机器的情况是 Intel 集显 + NVIDIA 独显。两个显卡的切换一直是件很蛋疼的事情，optirun什么的性能实在太差，如果一直独显直出，耗电也是个大问题。这个学期初和 @hyrathb juju 一起研究了一下，用 ldconfig 尽可能减少切换显卡带来的麻烦(就是先关X, 然后跑个脚本开独显直出的X, 如果需要这个解决方案我可以单独po文). Steam 的坑 Steam 为了Need to add /usr/lib32 to the library path to pick up libvdpau_nvidia.so on Ubuntu 12.04把/usr/lib32加进了LD_LIBRARY_PATH变量，结果虽然在 ldconfig 中本来是 NVIDIA 的 libgl 库优先，但是/usr/lib32里面默认 mesa 的 libgl 库的链接却被优先加载了。导致 Steam 启动时会报Not direct rendering之类的错误。 之前的解决办法 这个学期初是顺便解决了这个问题的，当时就是把 steam.sh 里面如下这行注释掉。 export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/usr/lib32" 但是 Steam 会在启动时检查文件完整性，第一次检查是检查大小，所以把文件删掉一个字节就好了。不过要在启动 Steam 后换回原文件，因为 Steam 会第二次检查文件完整性，这次大概是检查哈希值。我是写了个脚本，准备两个文件，原文件和修改后的文件，cp 两次。不过最近升级后，第一次检查的好像也是哈希值了。检查的那些步骤估计都是写进二进制的，想绕过也比较麻烦，这脚本就没救了。 新发现 这次仔细读了一下 steam.sh, 这一块代码还是可以好好利用一下的: # and launch steam STEAM_DEBUGGER=$DEBUGGER unset DEBUGGER # Don't use...">
+
+<meta name="keywords" content="Linux, ldconfig, Steam, Graphics Card">
+
+
+<!-- Twitter Cards -->
+<meta name="twitter:title" content="解决用 ldconfig 指定 libgl 库时 Steam 的异常">
+<meta name="twitter:description"
+   content="刚考完试，有点无聊，开 Steam 准备玩点游戏，结果发现之前的一个脚本不能用了。我的机器的情况是 Intel 集显 + NVIDIA 独显。两个显卡的切换一直是件很蛋疼的事情，optirun什么的性能实在太差，如果一直独显直出，耗电也是个大问题。这个学期初和 @hyrathb juju 一起研究了一下，用 ldconfig 尽可能减少切换显卡带来的麻烦(就是先关X, 然后跑个脚本开独显直出的X, 如果需要这个解决方案我可以单独po文). Steam 的坑 Steam 为了Need to add /usr/lib32 to the library path to pick up libvdpau_nvidia.so on Ubuntu 12.04把/usr/lib32加进了LD_LIBRARY_PATH变量，结果虽然在 ldconfig 中本来是 NVIDIA 的 libgl 库优先，但是/usr/lib32里面默认 mesa 的 libgl 库的链接却被优先加载了。导致 Steam 启动时会报Not direct rendering之类的错误。 之前的解决办法 这个学期初是顺便解决了这个问题的，当时就是把 steam.sh 里面如下这行注释掉。 export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/usr/lib32" 但是 Steam 会在启动时检查文件完整性，第一次检查是检查大小，所以把文件删掉一个字节就好了。不过要在启动 Steam 后换回原文件，因为 Steam 会第二次检查文件完整性，这次大概是检查哈希值。我是写了个脚本，准备两个文件，原文件和修改后的文件，cp 两次。不过最近升级后，第一次检查的好像也是哈希值了。检查的那些步骤估计都是写进二进制的，想绕过也比较麻烦，这脚本就没救了。 新发现 这次仔细读了一下 steam.sh, 这一块代码还是可以好好利用一下的: # and launch steam STEAM_DEBUGGER=$DEBUGGER unset DEBUGGER # Don't use...">
+
+<meta name="twitter:site" content="@Cube_Lin">
+
+<meta name="twitter:creator" content="@Cube_Lin">
+
+<meta name="twitter:card" content="summary">
+<!--
+   -<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/cubarco/cubarco.github.io@2021-0526-130348-26973/images/">
+   -->
+
+<!-- Open Graph -->
+<meta property="og:locale" content="zh_CN">
+<meta property="og:type" content="article">
+<meta property="og:title" content="解决用 ldconfig 指定 libgl 库时 Steam 的异常">
+<meta property="og:description"
+   content="刚考完试，有点无聊，开 Steam 准备玩点游戏，结果发现之前的一个脚本不能用了。我的机器的情况是 Intel 集显 + NVIDIA 独显。两个显卡的切换一直是件很蛋疼的事情，optirun什么的性能实在太差，如果一直独显直出，耗电也是个大问题。这个学期初和 @hyrathb juju 一起研究了一下，用 ldconfig 尽可能减少切换显卡带来的麻烦(就是先关X, 然后跑个脚本开独显直出的X, 如果需要这个解决方案我可以单独po文). Steam 的坑 Steam 为了Need to add /usr/lib32 to the library path to pick up libvdpau_nvidia.so on Ubuntu 12.04把/usr/lib32加进了LD_LIBRARY_PATH变量，结果虽然在 ldconfig 中本来是 NVIDIA 的 libgl 库优先，但是/usr/lib32里面默认 mesa 的 libgl 库的链接却被优先加载了。导致 Steam 启动时会报Not direct rendering之类的错误。 之前的解决办法 这个学期初是顺便解决了这个问题的，当时就是把 steam.sh 里面如下这行注释掉。 export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/usr/lib32" 但是 Steam 会在启动时检查文件完整性，第一次检查是检查大小，所以把文件删掉一个字节就好了。不过要在启动 Steam 后换回原文件，因为 Steam 会第二次检查文件完整性，这次大概是检查哈希值。我是写了个脚本，准备两个文件，原文件和修改后的文件，cp 两次。不过最近升级后，第一次检查的好像也是哈希值了。检查的那些步骤估计都是写进二进制的，想绕过也比较麻烦，这脚本就没救了。 新发现 这次仔细读了一下 steam.sh, 这一块代码还是可以好好利用一下的: # and launch steam STEAM_DEBUGGER=$DEBUGGER unset DEBUGGER # Don't use...">
+<meta property="og:url" content="https://cubl.in/blog/2015/01/ldconfig-and-steam-workaround/">
+<meta property="og:site_name" content="/home/cubarco">
+
+
+
+
+
+<link rel="canonical" href="https://cubl.in/blog/2015/01/ldconfig-and-steam-workaround/">
+<link href="https://cubl.in/feed.xml" type="application/atom+xml" rel="alternate" title="/home/cubarco Feed">
+
+
+<!-- http://t.co/dKP3o1e -->
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/cubarco/cubarco.github.io@2021-0526-130348-26973/assets/css/main.css">
+
+<!--Webfonts-->
+<link href='//fonts.googleapis.com/css?family=Volkhov|Cabin' rel='stylesheet' type='text/css' media="none" onload="if(media!='all')media='all'">
+<meta http-equiv="cleartype" content="on">
+
+<!-- Global settings -->
+<script>
+    window.ghmirror = "https://cdn.jsdelivr.net/gh/cubarco/cubarco.github.io@2021-0526-130348-26973"
+    window.searchEnabled = "true" ? true : false
+</script>
+
+<!-- Modernizr -->
+<script src="https://cdn.jsdelivr.net/gh/cubarco/cubarco.github.io@2021-0526-130348-26973/assets/js/vendor/modernizr-2.7.1.custom.min.js" async></script>
+
+</head>
+
+<body id="post">
+
+  <div class="navigation-wrapper">
+	<nav role="navigation" id="site-nav" class="animated drop">
+		<ul>
+			
+			
+			<li><a href="https://cubl.in/blog/">Latest</a></li>
+			
+			
+			<li><a href="https://cubl.in/blog/about/">About</a></li>
+			
+			
+			<li><a href="https://cubl.in/blog/archives/">Archives</a></li>
+			
+			
+			<li><a href="https://cubl.in/blog/tags/">Tags</a></li>
+			
+			<li class="dosearch"><span><i class="fa fa-search"></i> Search</span></li>
+		</ul>
+	</nav>
+</div><!-- /.navigation-wrapper -->
+
+<div class="search-wrapper">
+  <div class="search-form">
+    <input type="text" class="search-field" placeholder="Search...">
+    <button class="close-btn"><i class="fa fa-times-circle fa-2x"></i></button>
+    <ul class="search-results post-list"></ul>
+<!-- /.search-results -->
+  </div>
+<!-- /.search-form -->
+</div><!-- ./search-wrapper -->
+
+<div class="js-menu-screen menu-screen"></div>
+
+
+  <div id="main" role="main">
+    <article class="hentry">
+      
+      <div class="entry-wrapper">
+        <header class="entry-header">
+          <span class="entry-tags"><a href="https://cubl.in/blog/tags/#Linux" title="Pages tagged Linux">Linux</a> • <a href="https://cubl.in/blog/tags/#ldconfig" title="Pages tagged ldconfig">ldconfig</a> • <a href="https://cubl.in/blog/tags/#Steam" title="Pages tagged Steam">Steam</a> • <a href="https://cubl.in/blog/tags/#Graphics%20Card" title="Pages tagged Graphics Card">Graphics Card</a></span>
+          
+          <h1 class="entry-title">解决用 ldconfig 指定 libgl 库时 Steam 的异常</h1>
+          
+        </header>
+        <footer class="entry-meta">
+          
+          
+          <span class="author vcard">By <span class="fn">Cubarco</span></span>
+          <span class="entry-date date published"><time datetime="2015-01-28T00:00:00+00:00"><i class="fa fa-calendar-o"></i> January 28, 2015</time></span>
+          <span class="entry-date date modified"><time datetime="2015-03-07"><i class="fa fa-pencil"></i> March 07, 2015</time></span>
+          <span class="entry-comments"><i class="fa fa-comment-o"></i> <a href="#disqus_thread">Comment</a></span>
+          <span class="social-share-twitter">
+  <a href="https://twitter.com/intent/tweet?hashtags=Linux,ldconfig,Steam,GraphicsCard&amp;text=%E8%A7%A3%E5%86%B3%E7%94%A8%20ldconfig%20%E6%8C%87%E5%AE%9A%20libgl%20%E5%BA%93%E6%97%B6%20Steam%20%E7%9A%84%E5%BC%82%E5%B8%B8&amp;url=https://cubl.in/blog/2015/01/ldconfig-and-steam-workaround/&amp;via=Cube_Lin" title="Share on Twitter" itemprop="Twitter"><i class="fa fa-twitter-square"></i> Tweet</a>
+</span>
+<span class="social-share-facebook">
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https://cubl.in/blog/2015/01/ldconfig-and-steam-workaround/" title="Share on Facebook" itemprop="Facebook"><i class="fa fa-facebook-square"></i> Like</a>
+</span>
+<!-- /.social-share -->
+          
+        </footer>
+        <div class="entry-content">
+          <p>刚考完试，有点无聊，开 Steam 准备玩点游戏，结果发现之前的一个脚本不能用了。我的机器的情况是 Intel 集显 + NVIDIA 独显。两个显卡的切换一直是件很蛋疼的事情，optirun什么的性能实在太差，如果一直独显直出，耗电也是个大问题。这个学期初和 <a href="https://github.com/hyrathb" class="user-mention">@hyrathb</a> juju 一起研究了一下，用 ldconfig 尽可能减少切换显卡带来的麻烦(就是先关X, 然后跑个脚本开独显直出的X, 如果需要这个解决方案我可以单独po文).</p>
+
+<h4 id="steam-的坑">Steam 的坑</h4>
+<p>Steam 为了<code class="language-plaintext highlighter-rouge">Need to add /usr/lib32 to the library path to pick up libvdpau_nvidia.so on Ubuntu 12.04</code>把<code class="language-plaintext highlighter-rouge">/usr/lib32</code>加进了<code class="language-plaintext highlighter-rouge">LD_LIBRARY_PATH</code>变量，结果虽然在 ldconfig 中本来是 NVIDIA 的 libgl 库优先，但是<code class="language-plaintext highlighter-rouge">/usr/lib32</code>里面默认 mesa 的 libgl 库的链接却被优先加载了。导致 Steam 启动时会报<code class="language-plaintext highlighter-rouge">Not direct rendering</code>之类的错误。</p>
+
+<h4 id="之前的解决办法">之前的解决办法</h4>
+<p>这个学期初是顺便解决了这个问题的，当时就是把 steam.sh 里面如下这行注释掉。</p>
+
+<figure class="highlight"><pre><code class="language-sh" data-lang="sh"><span class="nb">export </span><span class="nv">LD_LIBRARY_PATH</span><span class="o">=</span><span class="s2">"</span><span class="nv">$LD_LIBRARY_PATH</span><span class="s2">:/usr/lib32"</span></code></pre></figure>
+
+<p>但是 Steam 会在启动时检查文件完整性，第一次检查是检查大小，所以把文件删掉一个字节就好了。不过要在启动 Steam 后换回原文件，因为 Steam 会第二次检查文件完整性，这次大概是检查哈希值。我是写了个脚本，准备两个文件，原文件和修改后的文件，cp 两次。不过最近升级后，第一次检查的好像也是哈希值了。检查的那些步骤估计都是写进二进制的，想绕过也比较麻烦，这脚本就没救了。</p>
+
+<h4 id="新发现">新发现</h4>
+<p>这次仔细读了一下 steam.sh, 这一块代码还是可以好好利用一下的:</p>
+
+<figure class="highlight"><pre><code class="language-sh" data-lang="sh"><span class="c"># and launch steam</span>
+<span class="nv">STEAM_DEBUGGER</span><span class="o">=</span><span class="nv">$DEBUGGER</span>
+<span class="nb">unset </span>DEBUGGER <span class="c"># Don't use debugger if Steam launches itself recursively</span>
+<span class="k">if</span> <span class="o">[</span> <span class="s2">"</span><span class="nv">$STEAM_DEBUGGER</span><span class="s2">"</span> <span class="o">==</span> <span class="s2">"gdb"</span> <span class="o">]</span> <span class="o">||</span> <span class="o">[</span> <span class="s2">"</span><span class="nv">$STEAM_DEBUGGER</span><span class="s2">"</span> <span class="o">==</span> <span class="s2">"cgdb"</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
+
+
+    <span class="c"># Set the LD_PRELOAD varname in the debugger, and unset the global version.</span>
+    <span class="k">if</span> <span class="o">[</span> <span class="s2">"</span><span class="nv">$LD_PRELOAD</span><span class="s2">"</span> <span class="o">]</span><span class="p">;</span> <span class="k">then
+        </span><span class="nb">echo set env </span><span class="nv">LD_PRELOAD</span><span class="o">=</span><span class="nv">$LD_PRELOAD</span> <span class="o">&gt;&gt;</span> <span class="s2">"</span><span class="nv">$ARGSFILE</span><span class="s2">"</span>
+        <span class="nb">echo </span>show <span class="nb">env </span>LD_PRELOAD <span class="o">&gt;&gt;</span> <span class="s2">"</span><span class="nv">$ARGSFILE</span><span class="s2">"</span>
+        <span class="nb">unset </span>LD_PRELOAD
+    <span class="k">fi</span>
+
+    <span class="nv">$STEAM_DEBUGGER</span> <span class="nt">-x</span> <span class="s2">"</span><span class="nv">$ARGSFILE</span><span class="s2">"</span> <span class="nt">--args</span> <span class="s2">"</span><span class="nv">$STEAMROOT</span><span class="s2">/</span><span class="nv">$STEAMEXEPATH</span><span class="s2">"</span> <span class="s2">"</span><span class="nv">$@</span><span class="s2">"</span>
+    <span class="nb">rm</span> <span class="s2">"</span><span class="nv">$ARGSFILE</span><span class="s2">"</span>
+<span class="k">elif</span> <span class="o">[</span> <span class="s2">"</span><span class="nv">$STEAM_DEBUGGER</span><span class="s2">"</span> <span class="o">==</span> <span class="s2">"valgrind"</span> <span class="o">]</span><span class="p">;</span> <span class="k">then
+    </span><span class="nv">DONT_BREAK_ON_ASSERT</span><span class="o">=</span>1 <span class="nv">G_SLICE</span><span class="o">=</span>always-malloc <span class="nv">G_DEBUG</span><span class="o">=</span>gc-friendly valgrind <span class="nt">--error-limit</span><span class="o">=</span>no <span class="nt">--undef-value-errors</span><span class="o">=</span>no <span class="nt">--suppressions</span><span class="o">=</span><span class="nv">$PLATFORM</span>/steam.supp <span class="nv">$STEAM_VALGRIND</span> <span class="s2">"</span><span class="nv">$STEAMROOT</span><span class="s2">/</span><span class="nv">$STEAMEXEPATH</span><span class="s2">"</span> <span class="s2">"</span><span class="nv">$@</span><span class="s2">"</span> 2&gt;&amp;1 | <span class="nb">tee </span>steam_valgrind.txt
+<span class="k">elif</span> <span class="o">[</span> <span class="s2">"</span><span class="nv">$STEAM_DEBUGGER</span><span class="s2">"</span> <span class="o">==</span> <span class="s2">"callgrind"</span> <span class="o">]</span><span class="p">;</span> <span class="k">then
+    </span>valgrind <span class="nt">--tool</span><span class="o">=</span>callgrind <span class="nt">--instr-atstart</span><span class="o">=</span>no <span class="s2">"</span><span class="nv">$STEAMROOT</span><span class="s2">/</span><span class="nv">$STEAMEXEPATH</span><span class="s2">"</span> <span class="s2">"</span><span class="nv">$@</span><span class="s2">"</span>
+<span class="k">elif</span> <span class="o">[</span> <span class="s2">"</span><span class="nv">$STEAM_DEBUGGER</span><span class="s2">"</span> <span class="o">==</span> <span class="s2">"strace"</span> <span class="o">]</span><span class="p">;</span> <span class="k">then
+    </span>strace <span class="nt">-osteam</span>.strace <span class="s2">"</span><span class="nv">$STEAMROOT</span><span class="s2">/</span><span class="nv">$STEAMEXEPATH</span><span class="s2">"</span> <span class="s2">"</span><span class="nv">$@</span><span class="s2">"</span>
+<span class="k">else</span>
+    <span class="nv">$STEAM_DEBUGGER</span> <span class="s2">"</span><span class="nv">$STEAMROOT</span><span class="s2">/</span><span class="nv">$STEAMEXEPATH</span><span class="s2">"</span> <span class="s2">"</span><span class="nv">$@</span><span class="s2">"</span>
+<span class="k">fi</span></code></pre></figure>
+
+<p>只要<code class="language-plaintext highlighter-rouge">DEBUGGER</code>环境变量不匹配给定的字符串，最后 Steam 就会以下述方式执行:</p>
+
+<figure class="highlight"><pre><code class="language-sh" data-lang="sh"><span class="nv">$STEAM_DEBUGGER</span> <span class="s2">"</span><span class="nv">$STEAMROOT</span><span class="s2">/</span><span class="nv">$STEAMEXEPATH</span><span class="s2">"</span> <span class="s2">"</span><span class="nv">$@</span><span class="s2">"</span></code></pre></figure>
+
+<h4 id="新的解决办法">新的解决办法</h4>
+<p>随便创建个文件，只要名字不是gdb, cgdb, valgrind, strace. 内容是:</p>
+
+<figure class="highlight"><pre><code class="language-sh" data-lang="sh"><span class="c">#!/bin/bash</span>
+
+<span class="nb">export </span><span class="nv">LD_LIBRARY_PATH</span><span class="o">=</span><span class="sb">`</span><span class="nb">echo</span> <span class="nv">$LD_LIBRARY_PATH</span> | <span class="nb">sed</span> <span class="s2">"s/:</span><span class="se">\/</span><span class="s2">usr</span><span class="se">\/</span><span class="s2">lib32//"</span><span class="sb">`</span>
+<span class="nb">exec</span> <span class="s2">"</span><span class="nv">$@</span><span class="s2">"</span></code></pre></figure>
+
+<p>给执行权限。</p>
+
+<p>然后这样启动 Steam 就行了。</p>
+
+<figure class="highlight"><pre><code class="language-sh" data-lang="sh"><span class="c"># For example: env DEBUGGER=/usr/bin/STEAM_DEBUGGER steam</span>
+<span class="nb">env </span><span class="nv">DEBUGGER</span><span class="o">=</span>/path/to/script steam</code></pre></figure>
+
+
+          <!--<div>
+            <span><a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/"><img
+                  alt="Creative Commons License" style="border-width:0"
+                  src="https://cdn.jsdelivr.net/gh/cubarco/cubarco.github.io@2021-0526-130348-26973/images/cc_by-nc_88x31.png" /></a></span>
+          </div>-->
+          <nav class="pagination" role="navigation">
+            
+            <a href="https://cubl.in/blog/2015/01/post-github-commits-to-social-platforms/" class="btn" title="在社交平台上发布匹配一定规则的 Github commit message">Previous</a>
+            
+            
+            <a href="https://cubl.in/blog/2015/05/c-programming-tricks/" class="btn" title="C Programming Tricks">Next</a>
+            
+          </nav><!-- /.pagination -->
+          <div id="disqus_thread"></div>
+          <!-- /#disqus_thread -->
+        </div>
+<!-- /.entry-content -->
+      </div>
+<!-- /.entry-wrapper -->
+
+    </article>
+  </div><!-- /#main -->
+
+  <div class="footer-wrapper">
+    <footer role="contentinfo" class="entry-wrapper">
+      
+
+<span>
+	Powered by <a href="https://jekyllrb.com">Jekyll</a>, <a href="https://github.com/features/actions">Github Actions</a>, <a href="https://www.jsdelivr.com">jsDelivr</a> and <a href="https://cloudflare.com">Cloudflare</a>.
+	<br>
+	© 2014 - 2021 ❤ Cubl
+</span>
+<div class="social-icons">
+	<a href="https://twitter.com/Cube_Lin" title="Cubarco on Twitter" rel="noopener" target="_blank"><i class="fa fa-twitter-square fa-2x"></i></a>
+	
+	
+	
+	
+	
+	
+	<a href="https://github.com/cubarco" title="Cubarco on Github" rel="noopener" target="_blank"><i class="fa fa-github-square fa-2x"></i></a>
+	
+	<a href="https://cubl.in/feed.xml" title="Atom/RSS feed"><i class="fa fa-rss-square fa-2x"></i></a>
+</div>
+<!-- /.social-icons -->
+
+    </footer>
+  </div><!-- /.footer-wrapper -->
+
+  <!-- <script src="https://cdn.jsdelivr.net/gh/cubarco/cubarco.github.io@2021-0526-130348-26973/assets/js/vendor/jquery-2.1.4.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/cubarco/cubarco.github.io@2021-0526-130348-26973/assets/js/gist-async.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/cubarco/cubarco.github.io@2021-0526-130348-26973/assets/js/scripts.min.js"></script> -->
+<script src="https://cdn.jsdelivr.net/combine/gh/cubarco/cubarco.github.io@2021-0526-130348-26973/assets/js/vendor/jquery-2.1.4.min.js,gh/cubarco/cubarco.github.io@2021-0526-130348-26973/assets/js/scripts.min.js" async></script>
+
+<script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', function() {
+        navigator.serviceWorker.register('/sw.js').then(function(reg) {
+          console.log('ServiceWorker registration successful with scope: ', reg.scope);
+        }).catch(function(err) {
+          console.log('ServiceWorker registration failed: ', err);
+        });
+      });
+    }
+</script>
+
+
+
+<!-- Check whether the page is a post -->
+
+
+<!-- Polyfill must be loaded before DisqusJS -->
+<!-- <script src="https://cdn.jsdelivr.net/gh/cubarco/cubarco.github.io@2021-0526-130348-26973/assets/js/vendor/polyfill.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/cubarco/cubarco.github.io@2021-0526-130348-26973/assets/js/vendor/fetch.umd.min.js"></script>
+<script id="dsqjs-script" src="https://cdn.jsdelivr.net/gh/cubarco/cubarco.github.io@2021-0526-130348-26973/assets/js/vendor/disqus.js"></script> -->
+<script>
+    window.disqus_shortname = 'cubarco';
+    window.disqus_siteName = '/home/cubarco';
+    window.disqus_api = 'https://cubl.in/disqus/';
+    window.disqus_apikey = [];
+    
+        window.disqus_apikey.push('Jw86RA4MHn7FOX9T3JdY2rdOwXIHztQXp1QGQzvEjil3rXPCOfIrn4yF53NEOcho');
+    
+        window.disqus_apikey.push('IDVVwMUDkvtvpwfL7KK9Yuqf0OHx0yCpEF3f3awBvWwg0RA2QMRSktMNiBOJs0am');
+    
+        window.disqus_apikey.push('ZOkyhwsK71f8GqNw5M9oCPEAyLXzA3IRqS76QXhJG29XvyjG3g7ocNoSA2PQCp1R');
+    
+    window.disqus_admin = 'cubarco';
+    window.disqus_adminLabel = 'Mod';
+</script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/cubarco/cubarco.github.io@2021-0526-130348-26973/assets/css/vendor/disqusjs.css" media="none" onload="if(media!='all')media='all'">
+<script src="https://cdn.jsdelivr.net/combine/gh/cubarco/cubarco.github.io@2021-0526-130348-26973/assets/js/vendor/polyfill.min.js,gh/cubarco/cubarco.github.io@2021-0526-130348-26973/assets/js/vendor/fetch.umd.min.js,gh/cubarco/cubarco.github.io@2021-0526-130348-26973/assets/js/vendor/disqus.js,gh/cubarco/cubarco.github.io@2021-0526-130348-26973/assets/js/vendor/disqus-settings.min.js" async></script>
+
+
+
+
+
+
+
+<script async defer data-website-id="e9fdcc32-0bfa-4de5-beb0-3bbf1e4638ab" src="https://umami.pwn.ooo/umami.js"></script>
+
+
+<script async defer src="https://cdn.jsdelivr.net/npm/instant.page@5.1.0/instantpage.min.js"></script>
+
+
+</body>
+
+</html>
