@@ -236,7 +236,7 @@ routing.registerRoute(
 
 // Umami collect api
 routing.registerRoute(
-    '/api/collect',
+    new RegExp('.*/api/collect'),
     new NetworkOnly()
 );
 
