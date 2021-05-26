@@ -17,7 +17,7 @@
           page.image.credit }}</a>{% endif %}{% endif %}
       <div class="entry-wrapper">
         <header class="entry-header">
-          <span class="entry-tags">{% for tag in page.tags %}<a href="{{ site.url }}/blog/tags/#{{ tag }}"
+          <span class="entry-tags">{% for tag in page.tags %}<a href="/blog/tags/#{{ tag }}"
               title="Pages tagged {{ tag }}">{{ tag }}</a>{% unless forloop.last %}&nbsp;&bull;&nbsp;{% endunless %}{%
             endfor %}</span>
           {% if page.link %}
@@ -59,10 +59,10 @@
           </div>-->
           <nav class="pagination" role="navigation">
             {% if page.previous %}
-            <a href="{{ site.url }}{{ page.previous.url }}" class="btn" title="{{ page.previous.title }}">Previous</a>
+            <a href="{{ page.previous.url }}" class="btn" title="{{ page.previous.title }}">Previous</a>
             {% endif %}
             {% if page.next %}
-            <a href="{{ site.url }}{{ page.next.url }}" class="btn" title="{{ page.next.title }}">Next</a>
+            <a href="{{ page.next.url }}" class="btn" title="{{ page.next.title }}">Next</a>
             {% endif %}
           </nav><!-- /.pagination -->
           {% if site.owner.disqus-shortname and page.comments != false %}<div id="disqus_thread"></div>
