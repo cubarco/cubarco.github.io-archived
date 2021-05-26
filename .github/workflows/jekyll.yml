@@ -47,5 +47,5 @@ jobs:
       - name: Build only
         if: ${{ github.ref != 'refs/heads/source-gh-actions' }}
         run: bash build.sh
-        with:
+        env:
           BUILD_ONLY: true
