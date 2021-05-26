@@ -6,9 +6,6 @@ on:
       - source-gh-actions
   pull_request:
 
-env:
-  FLY_PROJECT_PATH: /github/workspace/.fly
-
 jobs:
   jekyll:
     runs-on: ubuntu-18.04
@@ -35,18 +32,14 @@ jobs:
 
       - name: Build & deploy to github pages
         if: ${{ github.ref == 'refs/heads/source-gh-actions' }}
-        uses: cubarco/jekyll-action@master
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          use_tag: true
-          #keep_history: true
-          target_branch: "gh-pages"
-          build_dir: /github/workspace/.fly/jekyll_build
-          purgecss: false
+        run: bash build.sh
+        env:
+          TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          USE_TAG: true
 
       - name: Purge Cloudflare cache
         if: ${{ github.ref == 'refs/heads/source-gh-actions' }}
-        run: sh purge-cache.sh
+        run: bash purge-cache.sh
         env:
           CLOUDFLARE_ZONE: ${{ secrets.CLOUDFLARE_ZONE }}
           CLOUDFLARE_TOKEN: ${{ secrets.CLOUDFLARE_TOKEN }}
