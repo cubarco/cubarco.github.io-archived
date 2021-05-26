@@ -46,6 +46,6 @@ jobs:
 
       - name: Build only
         if: ${{ github.ref != 'refs/heads/source-gh-actions' }}
-        uses: cubarco/jekyll-action@master
+        run: bash build.sh
         with:
-          build_only: true
+          BUILD_ONLY: true
